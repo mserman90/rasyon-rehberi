@@ -107,5 +107,64 @@
       "Kuru dönemde tuz ve minerali aksatma.",
       "Doğum sonrası ilk 2 hafta ketozis belirtilerini izle."
     ]
+  },
+  "kuzu_ustasi": {
+    "app": {
+      "title": "Kuzu Ustası — Sürü Rehberim",
+      "subtitle": "Kuzularının yem tarifini 4 dakikada hazırlıyorum.",
+      "start_button": "Hadi Başlayalım",
+      "resume_title": "Yarıda Bıraktığın Bir Kuzu/Koyun Tarifi Var!",
+      "resume_button": "Kaldığın Yerden Devam Et",
+      "restart_button": "Sıfırdan Başla",
+      "loading_title": "Kuzular yem yiyor... 🐑🌾",
+      "loading_subtitle": "Kuzularının yem tarifi hazırlanıyor...",
+      "loading_micro": [
+        "Enerji hesaplanıyor...",
+        "Protein dengeleniyor...",
+        "Bakır kontrol ediliyor..."
+      ],
+      "price_date_note": "Fiyatlar 12.10.2026 tarihine aittir."
+    },
+    "guides": {
+      "welcome": "Merhaba bereketli olsun! Ben Çoban Dede. Kuzularını idrar taşı ve bakır zehirlenmesinden koruyarak, en hızlı ve en ucuza nasıl besiye alacağını birlikte hazırlayacağız.",
+      "tip": "Hangi hayvanları besiye alacaksın? Kuzuda protein yüksek, tokluda dengeli, şişekte daha ekonomik yem kullanılır.",
+      "anac_donem": "Anaç koyunlarda gebeliğin son 2 ayı ve emzirme dönemi çok kritiktir; kuzular içeride hızla büyürken koyunu aç bırakmamalıyız.",
+      "anac_kuzu_sayisi": "İkiz veya üçüz kuzu bekleyen ya da emziren koyunların enerji ve protein ihtiyacı tek kuzuluya göre çok daha yüksektir.",
+      "kilo": "Kuzuların ortalama kilosunu kaydırıcıyla seç. Hepsi aynı boyda değilse sürü ortalamasını girmen yeterli.",
+      "cinsiyet_yas": "Erkek kuzularda kesif yem ağırlıklı beslemede idrar taşı riski yüksektir; motorumuz erkek kuzular için tuzu, kalsiyumu ve koruyucu amonyum klorürü otomatik ayarlar.",
+      "suru_sayisi": "Sürüde kaç kuzu varsa gir; yem tablosunu 1 kuzu için verirken maliyeti ve kazancı tüm sürü için de hesaplayacağım.",
+      "hedef_sure": "Kuzular kaç günde satışa hazır olsun? 90 günlük normal besi hem işkembeyi yormaz hem de en dengeli kazancı sağlar.",
+      "hedef_kilo": "Satışta kaç kilo olmasını istiyorsun? Seçtiğin kiloya göre günlük kaç gram alması gerektiğini hemen altında gösteriyorum.",
+      "kaba_yem": "Ağılda hangi kaba yemler (yonca, saman, kuru ot, silaj) varsa seç. Kaba yem kuzunun geviş getirmesini sağlar.",
+      "kesif_yem": "Arpa, mısır, küspe veya fabrika kuzu yemi kuzulara asıl kiloyu aldıran yemlerdir. Pamuk küspesini kuzularda sınırlı kullanırız.",
+      "katki": "DİKKAT: Koyunlarda asla sığır premiksi kullanılmaz (bakır zehirler)! Erkek kuzularda Tuz ve Amonyum Klorür idrar taşını önler.",
+      "fiyat_serbest": "Yem fiyatlarını biliyorsan düzeltebilirsin. Kuzular sığır gibi tek seferde büyük öğün yiyemez, yemliğin dolu olması (serbest yemleme) çok faydalıdır.",
+      "saglik_ortam_asi": "Kuzularda idrar yapamama, ishal veya öksürük varsa işaretle. Ayrıca enterotoksemi (çelerme) aşısı yapılmadıysa ani ölüm riskine karşı uyarı ekleyeceğim."
+    },
+    "did_you_know": {
+      "fact1": "💡 Biliyor muydun? Koyunlar günde 8 saat geviş getirir, bu onların en sevdiği iştir! Geviş durursa işkembe asitlenmiş demektir.",
+      "fact2": "💡 Biliyor muydun? Koyunlar bakır mineraline sığırlardan 10 kat daha duyarlıdır. Sığır premiksi koyunu 2 haftada zehirleyebilir!",
+      "fact3": "💡 Biliyor muydun? Erkek kuzularda kaya tuzu ve temiz su eksik olursa idrar yolunda taş oluşur; bol su ve tuz kuzunun hayatını kurtarır!",
+      "fact4": "💡 Biliyor muydun? Hızlı büyüyen besi kuzularında aşırı tahıl (arpa/mısır) çelerme (enterotoksemi) hastalığını tetikler; karma aşı şarttır!"
+    },
+    "terms": {
+      "kuzu": "Kuzu (0–6 aylık, en hızlı büyüyen ve en hassas genç koyun)",
+      "toklu": "Toklu (6–12 aylık genç besi koyunu)",
+      "sisek": "Şişek (1–2 yaşındaki genç koyun)",
+      "kuru_madde": "Kuru Madde (yemdeki suyu çıkardığımızda kalan net besin kısmı; kuzu canlı ağırlığının ~%4'ü kadar yer)",
+      "me": "Besi Enerjisi - ME (kuzunun günlük gram almasını ve ısınmasını sağlayan güç)",
+      "hp": "Ham Protein - HP (kuzunun kas, et ve kemik çatısını büyüten besin)",
+      "ndf": "Geviş Lifi - NDF (kuzunun geviş getirmesini sağlayan, işkembe ekşimesini önleyen lif)",
+      "ca_p": "Kalsiyum / Fosfor Dengesi (erkek kuzularda idrar taşı oluşmaması için en az 2:1 olması gereken mineral oranı)",
+      "bakir": "Bakır Güvenliği - Cu (koyunlarda 15 mg/kg KM sınırını asla geçmemesi gereken iz mineral)"
+    },
+    "poster_reminders": [
+      "Su her zaman önünde olsun, kuzu günde 5 litre içer.",
+      "Tuzu ve minerali aksatma — idrar taşı ve hastalık önler.",
+      "Sığır premiksi KULLANMA — koyunu zehirler.",
+      "Yemi 7–10 günde alıştır, ani değiştirme.",
+      "Erkek kuzularda idrar yapıp yapmadığını her gün kontrol et.",
+      "Enterotoksemi aşısı yaptır, ani ölümleri engeller."
+    ]
   }
 }

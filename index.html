@@ -1240,7 +1240,39 @@
         <div id="ru-step-viewport" class="ru-card" role="region" aria-live="polite"></div>
       </div>
 
-      <!-- A4 Tek Sayfa Ahır Duvar Posteri (Yazdırma / PDF İçin — Hem Süt Ustası hem Rasyon Ustası kullanır) -->
+      <!-- ================= "KUZU USTASI" — BESİ KUZUSU & KOYUN SOHBET/REHBERLİ AKIŞ SİHİRBAZI (ŞARTNAME UYUMLU) ================= -->
+      <div id="kuzu-ustasi-container" class="ru-wrapper" style="display:none;">
+        <!-- Üst Koyun Sürüsü Temalı İlerleme Çubuğu -->
+        <div id="ku-progress-box" class="ru-barn-progress" style="display:none;" aria-live="polite">
+          <div class="ru-barn-icons">
+            <span id="ku-progress-stage-icon">🐑 Sürü & Hedef</span>
+            <span id="ku-progress-step-text">Soru 1 / 11</span>
+            <span>🐑 → 🐑🐑 → 🏁</span>
+          </div>
+          <div class="ru-barn-track">
+            <div id="ku-progress-fill" class="ru-barn-fill" style="width:10%;"></div>
+          </div>
+        </div>
+
+        <!-- Rehber Karakter (Çoban Dede & Veteriner Ayşe) + Bilgi Balonu + 🔊 Sesli Okuma (TTS) -->
+        <div id="ku-guide-box" class="ru-guide-row">
+          <div class="ru-avatar" aria-hidden="true">👴</div>
+          <div class="ru-bubble">
+            <div class="ru-bubble-name">
+              <span>Çoban Dede — Sürü Rehberin</span>
+              <button type="button" class="ru-tts-btn" onclick="speakCurrentKuStep()" aria-label="Soruyu Sesli Oku">
+                🔊 Sesli Oku
+              </button>
+            </div>
+            <div id="ku-guide-text">Merhaba bereketli olsun! Ben Çoban Dede. Kuzularının yem tarifini 4 dakikada hazırlıyorum.</div>
+          </div>
+        </div>
+
+        <!-- Tek Soru / Adım Ekranı Gövdesi -->
+        <div id="ku-step-viewport" class="ru-card" role="region" aria-live="polite"></div>
+      </div>
+
+      <!-- A4 Tek Sayfa Ahır/Ağıl Duvar Posteri (Yazdırma / PDF İçin — Süt Ustası, Rasyon Ustası ve Kuzu Ustası kullanır) -->
       <div id="ru-print-poster" aria-hidden="true"></div>
 
       <!-- ================= STANDART FORMÜLATÖR SARICISI (SÜT SIĞIRI & KOYUN-KUZU İÇİN) ================= -->
@@ -1906,7 +1938,10 @@
       { id: "karbonat_tampon", name: "Sodyum Bikarbonat (Tampon / Karbonat)", cat: "mineral", dm: 99, cp: 0, me: 0, nel: 0, ndf: 0, pendf: 0, starch: 0, ca: 0.0, p: 0.0, price: 18.00 },
       { id: "yem_tuzu", name: "Tuz (Yemlik Tuz)", cat: "mineral", dm: 99, cp: 0, me: 0, nel: 0, ndf: 0, pendf: 0, starch: 0, ca: 0.0, p: 0.0, price: 4.50 },
       { id: "vit_min_premiks", name: "Vitamin-Mineral Premiks (AD3E + İz Mineral)", cat: "mineral", dm: 99, cp: 0, me: 0, nel: 0, ndf: 0, pendf: 0, starch: 0, ca: 14.0, p: 6.0, price: 38.00 },
-      { id: "anyonik_tuz", name: "Anyonik Tuz / Magnezyum Sülfat (Kuru Dönem DCAD)", cat: "mineral", dm: 99, cp: 0, me: 0, nel: 0, ndf: 0, pendf: 0, starch: 0, ca: 0.0, p: 0.0, price: 32.00 }
+      { id: "anyonik_tuz", name: "Anyonik Tuz / Magnezyum Sülfat (Kuru Dönem DCAD)", cat: "mineral", dm: 99, cp: 0, me: 0, nel: 0, ndf: 0, pendf: 0, starch: 0, ca: 0.0, p: 0.0, price: 32.00 },
+      { id: "koyun_premiksi", name: "Koyun Vitamin-Mineral Premiksi (Bakırsız)", cat: "mineral", dm: 99, cp: 0, me: 0, nel: 0, ndf: 0, pendf: 0, starch: 0, ca: 18.0, p: 4.0, price: 40.00 },
+      { id: "amonyum_klorur", name: "Amonyum Klorür (İdrar Taşı Önleyici)", cat: "mineral", dm: 99, cp: 0, me: 0, nel: 0, ndf: 0, pendf: 0, starch: 0, ca: 0.0, p: 0.0, price: 36.00 },
+      { id: "sigir_premiksi", name: "Sığır Mineral Premiksi (Koyuna Yasak!)", cat: "mineral", dm: 99, cp: 0, me: 0, nel: 0, ndf: 0, pendf: 0, starch: 0, ca: 15.0, p: 6.0, price: 38.00 }
     ];
 
     /* =========================================================================
@@ -2904,24 +2939,30 @@
 
       const suContainer = document.getElementById("sut-ustasi-container");
       const ruContainer = document.getElementById("rasyon-ustasi-container");
+      const kuContainer = document.getElementById("kuzu-ustasi-container");
       const stdWrapper = document.getElementById("standard-formulator-wrapper");
 
       if (sp === "dairy") {
         if (suContainer) suContainer.style.display = "block";
         if (ruContainer) ruContainer.style.display = "none";
+        if (kuContainer) kuContainer.style.display = "none";
         if (stdWrapper) stdWrapper.style.display = "none";
         initSutUstasi();
         return;
       } else if (sp === "beef") {
         if (suContainer) suContainer.style.display = "none";
         if (ruContainer) ruContainer.style.display = "block";
+        if (kuContainer) kuContainer.style.display = "none";
         if (stdWrapper) stdWrapper.style.display = "none";
         initRasyonUstasi();
         return;
-      } else {
+      } else if (sp === "sheep") {
         if (suContainer) suContainer.style.display = "none";
         if (ruContainer) ruContainer.style.display = "none";
-        if (stdWrapper) stdWrapper.style.display = "block";
+        if (kuContainer) kuContainer.style.display = "block";
+        if (stdWrapper) stdWrapper.style.display = "none";
+        initKuzuUstasi();
+        return;
       }
 
       const titleMap = {
@@ -6754,6 +6795,2031 @@
       alert("✅ Süt yem tarifin '5. DEFTER (Kayıtlılar)' bölümüne kaydedildi!");
     }
 
+    /* =========================================================================
+       8.6 "KUZU USTASI" — BESİ KUZUSU & KOYUN SOHBET/REHBERLİ AKIŞ MOTORU
+           (NRC 2007 Small Ruminants + INRA 2018 + Bakır & İdrar Taşı Korumalı)
+       ========================================================================= */
+    const KU_NRC_2007 = {
+      dmi_tables: [
+        { cw: 15, adg_100: 0.62, adg_150: 0.68, adg_200: 0.74, adg_250: 0.80, adg_300: 0.86, adg_350: 0.92 },
+        { cw: 20, adg_100: 0.78, adg_150: 0.85, adg_200: 0.92, adg_250: 0.98, adg_300: 1.04, adg_350: 1.10 },
+        { cw: 25, adg_100: 0.90, adg_150: 0.97, adg_200: 1.04, adg_250: 1.10, adg_300: 1.17, adg_350: 1.24 },
+        { cw: 30, adg_100: 1.04, adg_150: 1.12, adg_200: 1.20, adg_250: 1.27, adg_300: 1.34, adg_350: 1.42 },
+        { cw: 35, adg_100: 1.16, adg_150: 1.25, adg_200: 1.33, adg_250: 1.41, adg_300: 1.48, adg_350: 1.56 },
+        { cw: 40, adg_100: 1.28, adg_150: 1.37, adg_200: 1.46, adg_250: 1.54, adg_300: 1.62, adg_350: 1.70 },
+        { cw: 45, adg_100: 1.38, adg_150: 1.48, adg_200: 1.57, adg_250: 1.66, adg_300: 1.74, adg_350: 1.82 },
+        { cw: 50, adg_100: 1.48, adg_150: 1.58, adg_200: 1.68, adg_250: 1.77, adg_300: 1.86, adg_350: 1.95 },
+        { cw: 60, adg_100: 1.65, adg_150: 1.76, adg_200: 1.86, adg_250: 1.96, adg_300: 2.06, adg_350: 2.16 },
+        { cw: 70, adg_100: 1.82, adg_150: 1.93, adg_200: 2.04, adg_250: 2.15, adg_300: 2.25, adg_350: 2.35 }
+      ],
+      me_tables: [
+        { cw: 15, adg_100: 1.45, adg_150: 1.72, adg_200: 2.02, adg_250: 2.32, adg_300: 2.65, adg_350: 2.98 },
+        { cw: 20, adg_100: 1.72, adg_150: 2.04, adg_200: 2.36, adg_250: 2.70, adg_300: 3.04, adg_350: 3.38 },
+        { cw: 25, adg_100: 1.98, adg_150: 2.32, adg_200: 2.68, adg_250: 3.02, adg_300: 3.38, adg_350: 3.74 },
+        { cw: 30, adg_100: 2.24, adg_150: 2.60, adg_200: 2.98, adg_250: 3.35, adg_300: 3.72, adg_350: 4.10 },
+        { cw: 35, adg_100: 2.48, adg_150: 2.86, adg_200: 3.26, adg_250: 3.65, adg_300: 4.05, adg_350: 4.45 },
+        { cw: 40, adg_100: 2.72, adg_150: 3.12, adg_200: 3.54, adg_250: 3.95, adg_300: 4.38, adg_350: 4.80 },
+        { cw: 45, adg_100: 2.95, adg_150: 3.38, adg_200: 3.80, adg_250: 4.24, adg_300: 4.68, adg_350: 5.12 },
+        { cw: 50, adg_100: 3.18, adg_150: 3.62, adg_200: 4.06, adg_250: 4.52, adg_300: 4.98, adg_350: 5.44 },
+        { cw: 60, adg_100: 3.60, adg_150: 4.05, adg_200: 4.50, adg_250: 4.98, adg_300: 5.45, adg_350: 5.92 },
+        { cw: 70, adg_100: 3.98, adg_150: 4.45, adg_200: 4.92, adg_250: 5.40, adg_300: 5.88, adg_350: 6.36 }
+      ],
+      animal_types: {
+        kuzu:  { label: "Kuzu (0–6 ay)", normal_min: 200, normal_max: 350, hp_pct: 16.5, forage_pct: 32, min_forage: 30 },
+        toklu: { label: "Toklu (6–12 ay)", normal_min: 150, normal_max: 250, hp_pct: 14.2, forage_pct: 54, min_forage: 50 },
+        sisek: { label: "Şişek (1–2 yaş)", normal_min: 100, normal_max: 180, hp_pct: 12.8, forage_pct: 58, min_forage: 40 },
+        koyun: { label: "Koyun (2 yaş üstü)", normal_min: 100, normal_max: 200, hp_pct: 12.2, forage_pct: 60, min_forage: 40 }
+      }
+    };
+
+    const KU_FEEDS_META = {
+      bugday_samani:        { ad: "Buğday Samanı", emoji: "🌾", kategori: "kaba", cu: 3.5, mo: 0.7, koyun: true, not: "Geviş getirmeyi sağlar ve işkembe ekşimesini önler." },
+      misir_silaji:         { ad: "Mısır Silajı", emoji: "🌽", kategori: "kaba", cu: 5.5, mo: 0.6, koyun: true, not: "Sulu ve enerjili kaba yemdir; küfsüz olmasına dikkat edilmelidir." },
+      yonca_kuru:           { ad: "Yonca Kuru Otu", emoji: "🍀", kategori: "kaba", cu: 9.0, mo: 1.4, koyun: true, not: "Kalsiyumu ve proteini yüksektir; erkek kuzularda idrar taşını önlemeye yardımcı olur." },
+      cayir_otu:            { ad: "Çayır Otu", emoji: "🌿", kategori: "kaba", cu: 6.5, mo: 0.9, koyun: true, not: "Doğal mera ve çayır otu işkembe sağlığını korur." },
+      arpa_samani:          { ad: "Arpa Samanı", emoji: "🌾", kategori: "kaba", cu: 4.0, mo: 0.7, koyun: true, not: "Buğday samanına göre daha yumuşaktır." },
+      yulaf_otu:            { ad: "Yulaf Kuru Otu", emoji: "🎋", kategori: "kaba", cu: 5.2, mo: 0.8, koyun: true, not: "Lezzetli ve güvenli kuru ottur." },
+      fig_yulaf_otu:        { ad: "Fiğ Kuru Otu", emoji: "🥬", kategori: "kaba", cu: 8.2, mo: 1.2, koyun: true, not: "Proteini yüksek baklagil kuru otudur." },
+      korunga_otu:          { ad: "Korunga", emoji: "🌿", kategori: "kaba", cu: 8.5, mo: 1.3, koyun: true, not: "Şişkinlik yapmayan çok değerli koyun otudur." },
+      mercimek_samani:      { ad: "Diğer (Mercimek Samanı / Posalar)", emoji: "🌾", kategori: "kaba", cu: 6.8, mo: 1.1, koyun: true, not: "Koyunların severek yediği baklagil samanıdır." },
+      arpa_ezmesi:          { ad: "Arpa (kırılmış)", emoji: "🟡", kategori: "kesif", cu: 5.0, mo: 0.6, koyun: true, not: "Kuzu besisinin temel enerji tahılıdır; toz yapmadan kırma/ezme verilmelidir." },
+      misir_kirmasi:        { ad: "Mısır", emoji: "🌽", kategori: "kesif", cu: 3.5, mo: 0.5, koyun: true, not: "Yüksek enerjili tahıldır." },
+      bugday_kepegi:        { ad: "Buğday Kepeği", emoji: "🌾", kategori: "kesif", cu: 11.0, mo: 1.1, koyun: true, not: "Sindirim sistemini rahatlatır; fosforu yüksek olduğu için erkek kuzuda sınırlı verilir." },
+      soya_46:              { ad: "Soya Küspesi", emoji: "🫘", kategori: "kesif", cu: 12.5, mo: 2.2, koyun: true, not: "Kuzularda en hızlı et ve kas gelişimi sağlayan protein kaynağıdır." },
+      atk_36:               { ad: "Ayçiçek Küspesi", emoji: "🌻", kategori: "kesif", cu: 12.0, mo: 1.2, koyun: true, not: "Ekonomik protein küspesidir." },
+      pamuk_tohumu_kuspesi: { ad: "Pamuk Tohumu Küspesi", emoji: "🥜", kategori: "kesif", cu: 11.5, mo: 1.0, koyun: true, not: "Gossypol riski nedeniyle kuzularda en fazla %10 oranında kullanılır." },
+      balik_unu:            { ad: "Balık Unu", emoji: "🐟", kategori: "kesif", cu: 7.5, mo: 0.9, koyun: true, not: "Hızlı büyüyen kuzularda az miktarda kullanılan güçlü bypass proteindir." },
+      melas:                { ad: "Melas", emoji: "🍬", kategori: "katki", cu: 12.0, mo: 0.8, koyun: true, not: "Yemin tozunu alır, iştah açar ve gebelik toksemisini önlemeye yardım eder." },
+      kuzu_besi_yemi:       { ad: "Fabrika Kuzu Yemi", emoji: "📦", kategori: "kesif", cu: 6.5, mo: 1.1, koyun: true, not: "Bakırı sınırlandırılmış, dengeli pelet fabrika kuzu yemidir." },
+      tam_yagli_soya:       { ad: "ATK (Tam Yağlı Soya)", emoji: "🫘", kategori: "kesif", cu: 11.5, mo: 2.0, koyun: true, not: "Hem yüksek enerji hem de yüksek protein sağlar." },
+      yem_tuzu:             { ad: "Tuz", emoji: "🧂", kategori: "katki", cu: 0.0, mo: 0.0, koyun: true, not: "Kuzunun bol su içmesini sağlayarak idrar taşı oluşumunu engeller." },
+      koyun_premiksi:       { ad: "Koyun Vit-Min Premiks", emoji: "🧪", kategori: "katki", cu: 0.0, mo: 15.0, koyun: true, not: "Bakır içermeyen, koyunlara özel vitamin ve mineral premiksidir." },
+      amonyum_klorur:       { ad: "Amonyum Klorür", emoji: "🧪", kategori: "katki", cu: 0.0, mo: 0.0, koyun: true, not: "Erkek kuzularda idrarı hafif asitlendirerek idrar taşını (sidik zorunu) önler." },
+      karbonat_tampon:      { ad: "Sodyum Bikarbonat", emoji: "🧪", kategori: "katki", cu: 0.0, mo: 0.0, koyun: true, not: "İşkembe asidini dengeler, kesif yem çarpmasını önler." },
+      korunmus_yag:         { ad: "Korunmuş Yağ", emoji: "🧀", kategori: "katki", cu: 0.0, mo: 0.0, koyun: true, not: "İkiz gebe koyunlarda ve hızlı beside yüksek enerji sağlar." },
+      mermer_tozu:          { ad: "Mermer Tozu (Kalsiyum)", emoji: "🪨", kategori: "katki", cu: 1.0, mo: 0.1, koyun: true, not: "Kalsiyum/Fosfor oranını 2:1 üstünde tutarak idrar taşını önler." },
+      sigir_premiksi:       { ad: "Sığır Mineral Premiksi (YASAK!)", emoji: "🚫", kategori: "katki", cu: 1200.0, mo: 0.0, koyun: false, not: "Koyunları bakır zehirlenmesiyle öldürür! Kesinlikle kullanılmaz." }
+    };
+
+    const KU_KABA_KEYS = ["bugday_samani", "misir_silaji", "yonca_kuru", "cayir_otu", "arpa_samani", "yulaf_otu", "fig_yulaf_otu", "korunga_otu", "mercimek_samani"];
+    const KU_KESIF_KEYS = ["arpa_ezmesi", "misir_kirmasi", "bugday_kepegi", "soya_46", "atk_36", "pamuk_tohumu_kuspesi", "balik_unu", "melas", "kuzu_besi_yemi", "tam_yagli_soya"];
+    const KU_KATKI_KEYS = ["yem_tuzu", "koyun_premiksi", "amonyum_klorur", "karbonat_tampon", "korunmus_yag", "melas", "sigir_premiksi"];
+
+    const KU_DEFAULT_STATE = {
+      screenId: "welcome",
+      hayvan: {
+        tip: "kuzu", // 'kuzu' | 'toklu' | 'sisek' | 'koyun'
+        donem: "bos", // Anaç koyun için: 'gebe_ilk' | 'gebe_son' | 'emziren_0_6' | 'emziren_6plus' | 'bos'
+        emzirdigiKuzuSayisi: 2,
+        ortalamaCanliAgirlik: 25,
+        yasGrubu: "0-3ay",
+        cinsiyet: "erkek", // 'erkek' | 'disi' | 'karisik'
+        kisirlastirilmis: false,
+        suruSayisi: 20,
+        hedefSure: 90, // 60 | 90 | 120
+        hedefSatisKilo: 45,
+        barinma: "kapali", // 'kapali' | 'acik' | 'yayla'
+        saglikSorunlari: [],
+        enterotoksemiAsili: true
+      },
+      secilenKaba: ["bugday_samani", "yonca_kuru"],
+      secilenKesif: ["arpa_ezmesi", "soya_46"],
+      secilenKatki: ["yem_tuzu", "koyun_premiksi", "amonyum_klorur"],
+      fiyatBiliyorMu: "hayir",
+      ozelFiyatlar: {},
+      serbestYemleme: true,
+      canliBaskulFiyatTL: 220,
+      cattlePremixWarning: "",
+      showWhyAccordion: false,
+      showEditJumpMenu: false,
+      lastSonuc: null
+    };
+
+    let kuState = JSON.parse(JSON.stringify(KU_DEFAULT_STATE));
+
+    function getKuActiveFlow() {
+      const h = kuState.hayvan;
+      if (h.tip === "koyun") {
+        const isGebeOrEmziren = ["gebe_ilk", "gebe_son", "emziren_0_6", "emziren_6plus"].includes(h.donem);
+        if (isGebeOrEmziren) {
+          // 4.1.a Özel Akış: Anaç Koyun (Gebe veya Emziren — 10 soru)
+          return [
+            "tip",              // 1. Hangi hayvanları besiye alacaksın?
+            "anac_donem",       // 2. Soru A1: Koyun hangi dönemde?
+            "anac_kuzu_sayisi", // 3. Soru A2: Kaç kuzu emziriyor / bekliyor?
+            "kilo",             // 4. Koyunlar ortalama kaç kilo?
+            "suru_sayisi",      // 5. Sürüde kaç koyun var?
+            "kaba_yem",         // 6. Ağılda hangi kaba yemler var?
+            "kesif_yem",        // 7. Hangi kesif yemleri kullanabilirsin?
+            "katki",            // 8. Rasyonuna şunlardan hangilerini ekleyebilirsin?
+            "fiyat_serbest",    // 9. Fiyatlar ve serbest yemleme
+            "saglik_ortam_asi"  // 10. Sağlık, ağıl ve enterotoksemi aşısı
+          ];
+        }
+        return [
+          "tip",
+          "anac_donem",
+          "kilo",
+          "cinsiyet",
+          "suru_sayisi",
+          "hedef_sure",
+          "hedef_kilo",
+          "kaba_yem",
+          "kesif_yem",
+          "katki",
+          "fiyat_serbest",
+          "saglik_ortam_asi"
+        ];
+      }
+      // Besi Kuzusu / Toklu / Şişek Akışı (11 soru — <= 12 kuralına tam uyumlu)
+      return [
+        "tip",              // 1. Soru 1.1: Hangi hayvanları besiye alacaksın?
+        "kilo",             // 2. Soru 2.1: Kuzular kaç kilo?
+        "cinsiyet",         // 3. Soru 2.2-2.4: Erkek mi dişi mi, yaş ve kısırlaştırma
+        "suru_sayisi",      // 4. Soru 2.5: Sürüde kaç kuzu var?
+        "hedef_sure",       // 5. Soru 3.1: Kaç günde satışa hazır olsun?
+        "hedef_kilo",       // 6. Soru 3.2: Satışta kaç kilo olsun?
+        "kaba_yem",         // 7. Soru 4.1: Ağılda hangi kaba yemler var?
+        "kesif_yem",        // 8. Soru 4.2: Hangi kesif yemleri kullanabilirsin?
+        "katki",            // 9. Soru 4.3: Rasyonuna şunlardan hangilerini ekleyebilirsin?
+        "fiyat_serbest",    // 10. Soru 4.4-4.5: Yem fiyatları ve serbest yemleme
+        "saglik_ortam_asi"  // 11. Soru 5.1-5.3: Sağlık durumu, ağıl tipi ve aşı kontrolü
+      ];
+    }
+
+    function interpolateKuGrid(rows, cwKg, adgG) {
+      const clampedCw = Math.max(rows[0].cw, Math.min(rows[rows.length - 1].cw, cwKg));
+      const steps = [100, 150, 200, 250, 300, 350];
+      const clampedAdg = Math.max(100, Math.min(350, adgG));
+      let lowRow = rows[0], highRow = rows[rows.length - 1];
+      for (let i = 0; i < rows.length - 1; i++) {
+        if (clampedCw >= rows[i].cw && clampedCw <= rows[i + 1].cw) {
+          lowRow = rows[i];
+          highRow = rows[i + 1];
+          break;
+        }
+      }
+      let aLow = 100, aHigh = 350;
+      for (let j = 0; j < steps.length - 1; j++) {
+        if (clampedAdg >= steps[j] && clampedAdg <= steps[j + 1]) {
+          aLow = steps[j];
+          aHigh = steps[j + 1];
+          break;
+        }
+      }
+      const evalAt = (r) => {
+        const vL = r["adg_" + aLow];
+        const vH = r["adg_" + aHigh];
+        return aHigh === aLow ? vL : vL + ((clampedAdg - aLow) / (aHigh - aLow)) * (vH - vL);
+      };
+      const v1 = evalAt(lowRow);
+      const v2 = evalAt(highRow);
+      return highRow.cw === lowRow.cw ? v1 : v1 + ((clampedCw - lowRow.cw) / (highRow.cw - lowRow.cw)) * (v2 - v1);
+    }
+
+    function evaluateKuAdgRealism(tip, adgG) {
+      const cfg = KU_NRC_2007.animal_types[tip] || KU_NRC_2007.animal_types.kuzu;
+      if (adgG > cfg.normal_max) {
+        return {
+          realistic: false,
+          status: "high",
+          minG: cfg.normal_min,
+          maxG: cfg.normal_max,
+          message: `Bu hedef ${cfg.label.toLowerCase()} için çok yüksek, günde ${Math.round(adgG)} g alması zor (ideal: ${cfg.normal_min}–${cfg.normal_max} g/gün). Hedefi düşürmek ister misin?`
+        };
+      }
+      if (adgG < cfg.normal_min * 0.7) {
+        return {
+          realistic: false,
+          status: "low",
+          minG: cfg.normal_min,
+          maxG: cfg.normal_max,
+          message: `Günde ${Math.round(adgG)} g artış ${cfg.label.toLowerCase()} için oldukça düşük (ideal: ${cfg.normal_min}–${cfg.normal_max} g/gün).`
+        };
+      }
+      return {
+        realistic: true,
+        status: "ok",
+        minG: cfg.normal_min,
+        maxG: cfg.normal_max,
+        message: `Bu, ${cfg.label.toLowerCase()} için ideal hedef. 🎯`
+      };
+    }
+
+    function getKuFeedObj(feedId) {
+      const libFeed = getFeedById(feedId) || DEFAULT_FEEDS.find(f => f.id === feedId);
+      const meta = KU_FEEDS_META[feedId] || {
+        ad: libFeed ? libFeed.name : feedId,
+        emoji: "🌾",
+        kategori: (libFeed && libFeed.cat === "forage") ? "kaba" : ((libFeed && libFeed.cat === "mineral") ? "katki" : "kesif"),
+        cu: 6.0,
+        mo: 0.8,
+        koyun: true,
+        not: ""
+      };
+      if (!libFeed) return null;
+      const customPrice = kuState.fiyatBiliyorMu === "evet" && typeof kuState.ozelFiyatlar[feedId] === "number"
+        ? kuState.ozelFiyatlar[feedId]
+        : libFeed.price;
+      return {
+        id: feedId,
+        ad: meta.ad,
+        emoji: meta.emoji,
+        kategori: meta.kategori,
+        km_pct: libFeed.dm,
+        me_mcal_kg_km: libFeed.me,
+        hp_pct_km: libFeed.cp,
+        ndf_pct_km: libFeed.ndf,
+        ca_pct_km: libFeed.ca,
+        p_pct_km: libFeed.p,
+        cu_mg_kg_km: meta.cu ?? 6.0,
+        mo_mg_kg_km: meta.mo ?? 0.8,
+        koyun_uygun: meta.koyun !== false,
+        fiyat_tl: customPrice,
+        not: meta.not
+      };
+    }
+
+    function solveKuzuUstasiSheep() {
+      const h = kuState.hayvan;
+      const tip = h.tip || "kuzu";
+      const bw = Math.max(15, Math.min(95, Number(h.ortalamaCanliAgirlik) || 25));
+      const sureGun = Number(h.hedefSure) || 90;
+      const hedefKilo = Math.max(bw + 4, Number(h.hedefSatisKilo) || (bw + 20));
+      const cinsiyet = h.cinsiyet || "erkek";
+      const donem = h.donem || "bos";
+      const isAnacGebeVeyaEmziren = tip === "koyun" && ["gebe_ilk", "gebe_son", "emziren_0_6", "emziren_6plus"].includes(donem);
+      const kuzuSayisi = Math.max(1, Math.min(3, Number(h.emzirdigiKuzuSayisi) || 2));
+      const saglikSorunlari = Array.isArray(h.saglikSorunlari) ? h.saglikSorunlari : [];
+      const uyarilar = [];
+
+      let rawAdgG = isAnacGebeVeyaEmziren
+        ? (donem === "gebe_son" ? 180 : 100)
+        : Math.round(((hedefKilo - bw) * 1000) / Math.max(15, sureGun));
+      const hedefAdgG = Math.max(60, Math.min(420, rawAdgG));
+
+      const cfg = KU_NRC_2007.animal_types[tip] || KU_NRC_2007.animal_types.kuzu;
+      let dmiKg = interpolateKuGrid(KU_NRC_2007.dmi_tables, bw, hedefAdgG);
+      let meTotalMcal = interpolateKuGrid(KU_NRC_2007.me_tables, bw, hedefAdgG);
+      let targetHpPct = cfg.hp_pct;
+      let targetForagePct = cfg.forage_pct;
+      let minForagePct = cfg.min_forage;
+
+      if (isAnacGebeVeyaEmziren) {
+        const baseMe = interpolateKuGrid(KU_NRC_2007.me_tables, bw, 100);
+        if (donem === "gebe_ilk") {
+          dmiKg = bw * 0.024;
+          meTotalMcal = baseMe * 1.12;
+          targetHpPct = 12.5;
+          targetForagePct = 62;
+          minForagePct = 45;
+        } else if (donem === "gebe_son") {
+          const boost = kuzuSayisi >= 3 ? 1.55 : (kuzuSayisi === 2 ? 1.45 : 1.32);
+          dmiKg = bw * 0.028;
+          meTotalMcal = baseMe * boost;
+          targetHpPct = kuzuSayisi >= 2 ? 15.8 : 14.8;
+          targetForagePct = 46;
+          minForagePct = 35;
+        } else {
+          const milkKg = donem === "emziren_0_6" ? (kuzuSayisi >= 3 ? 2.9 : (kuzuSayisi === 2 ? 2.3 : 1.5)) : (kuzuSayisi >= 2 ? 1.5 : 1.0);
+          dmiKg = bw * 0.032 + milkKg * 0.28;
+          meTotalMcal = baseMe + milkKg * 1.35;
+          targetHpPct = donem === "emziren_0_6" ? (kuzuSayisi >= 2 ? 17.0 : 16.0) : 15.0;
+          targetForagePct = 45;
+          minForagePct = 35;
+        }
+      } else {
+        if (tip === "kuzu") {
+          if (hedefAdgG >= 290) { targetHpPct = 17.2; targetForagePct = 32; }
+          else if (hedefAdgG <= 200) { targetHpPct = 15.5; targetForagePct = 42; }
+        } else if (tip === "toklu") {
+          targetForagePct = 54;
+          minForagePct = 50;
+        }
+      }
+
+      if (!isAnacGebeVeyaEmziren && cinsiyet === "disi") {
+        targetHpPct = Math.max(11.5, targetHpPct - 0.6);
+      }
+      if (h.barinma === "acik") { dmiKg *= 1.06; meTotalMcal *= 1.10; }
+      else if (h.barinma === "yayla") { meTotalMcal *= 1.08; }
+      if (!kuState.serbestYemleme) dmiKg *= 0.96;
+
+      let chosenForages = kuState.secilenKaba.map(getKuFeedObj).filter(Boolean);
+      let chosenConcs = kuState.secilenKesif.map(getKuFeedObj).filter(Boolean);
+      let chosenAdditives = kuState.secilenKatki.map(getKuFeedObj).filter(Boolean);
+
+      // Sığır premiksi güvenlik kontrolü
+      if (chosenAdditives.some(a => a.id === "sigir_premiksi" || a.id === "vit_min_premiks")) {
+        chosenAdditives = chosenAdditives.filter(a => a.id !== "sigir_premiksi" && a.id !== "vit_min_premiks");
+        const kp = getKuFeedObj("koyun_premiksi");
+        if (kp && !chosenAdditives.some(a => a.id === "koyun_premiksi")) chosenAdditives.push(kp);
+      }
+      uyarilar.push("⚠️ Sığır mineral premiksi KULLANMA. Koyun premiksi şart. Bakır zehirler.");
+
+      if (chosenForages.length === 0) {
+        chosenForages = [getKuFeedObj("bugday_samani"), getKuFeedObj("yonca_kuru")].filter(Boolean);
+        uyarilar.push("Hiç kaba yem seçilmediği için geviş getirmeyi korumak adına Buğday Samanı ve Yonca Kuru Otu eklendi.");
+      }
+      if (chosenConcs.length === 0) {
+        chosenConcs = [getKuFeedObj("arpa_ezmesi"), getKuFeedObj("soya_46")].filter(Boolean);
+        uyarilar.push("Hiç kesif yem seçilmediği için büyüme enerjisi ve proteini için Arpa ve Soya Küspesi eklendi.");
+      }
+
+      const isUrinaryRiskSex = !isAnacGebeVeyaEmziren && (cinsiyet === "erkek" || cinsiyet === "karisik");
+      if (isUrinaryRiskSex) {
+        uyarilar.push("⚠️ Erkek kuzularda idrar taşı riski var. Tuzu serbest bırak, bol su ver. Amonyum klorürü aksatma.");
+      }
+
+      if (!isAnacGebeVeyaEmziren) {
+        const adgCheck = evaluateKuAdgRealism(tip, hedefAdgG);
+        if (!adgCheck.realistic) uyarilar.push(`⚠️ ${adgCheck.message}`);
+      }
+      if (tip === "toklu") {
+        uyarilar.push("ℹ️ Toklular kuzudan yavaş büyür, ama daha az masraflıdır. Sabırlı ol.");
+      }
+      if (isAnacGebeVeyaEmziren && (donem === "gebe_son" || donem === "gebe_ilk")) {
+        uyarilar.push("⚠️ Gebelik Toksemisi Uyarısı: Son 2 ayda koyunu aç bırakma. Şişman koyun doğumda yatabilir, zayıf koyun kuzuya bakamaz.");
+      }
+      if (h.enterotoksemiAsili !== true) {
+        uyarilar.push("⚠️ Enterotoksemi aşısı yaptır, ani ölümleri engeller. Aşılanmamış kuzularda yoğun yem ani ölüme yol açabilir, veterinere danış.");
+      }
+      uyarilar.push("⚠️ Kuzular yemi birden değişirse ishal olur. Yeni tarife 7–10 günde alıştır.");
+
+      let healthForageBoostPct = 0;
+      if (saglikSorunlari.includes("idrar_yapamiyor")) {
+        healthForageBoostPct = Math.max(healthForageBoostPct, 12);
+        uyarilar.push("🚨 ACİL DURUM (İdrar Yapamıyor): Erkek kuzuda idrar taşı tıkanıklığı olabilir! Hayvan 2 günde ölebilir, DERHAL veterinere başvur!");
+      }
+      if (saglikSorunlari.includes("ishal")) {
+        healthForageBoostPct = Math.max(healthForageBoostPct, 8);
+        uyarilar.push("💩 İshal Uyarısı: Sindirimi korumak için tahıl azaltıldı, kuru ot payı artırıldı.");
+      }
+      if (saglikSorunlari.includes("topallik")) {
+        healthForageBoostPct = Math.max(healthForageBoostPct, 6);
+        uyarilar.push("🦶 Topallık Uyarısı: Tırnak yanmasını (asidoz) önlemek için tahıl azaltıldı ve Sodyum Bikarbonat eklendi.");
+      }
+      if (saglikSorunlari.includes("solunum")) {
+        uyarilar.push("🫁 Solunum Sorunu Uyarısı: Ağılı havalandır, tozlu saman veya ince un yemleri melas/su ile hafif nemlendirerek ver.");
+      }
+      if (saglikSorunlari.includes("zayiflik")) {
+        uyarilar.push("🩸 Zayıflık ve İştahsızlık Uyarısı: İç-dış parazit ilaçlamasını kontrol et ve yemliğe lezzet için Melas ekle.");
+      }
+      if (saglikSorunlari.includes("kemik")) {
+        uyarilar.push("🦴 Kemik / Yürüme Problemi Uyarısı: Beyaz Kas Hastalığı (Selenyum + E vitamini eksikliği) veya kalsiyum eksikliği olabilir; Koyun Premiksini aksatma.");
+      }
+
+      let forageSharePct = Math.max(30, Math.min(72, targetForagePct + healthForageBoostPct));
+      if (tip === "kuzu" && healthForageBoostPct === 0 && hedefAdgG >= 220) forageSharePct = 32;
+      if (tip === "toklu") forageSharePct = Math.max(52, Math.min(60, forageSharePct));
+      let concSharePct = 100 - forageSharePct;
+
+      const avgForageNdf = chosenForages.reduce((s, f) => s + f.ndf_pct_km, 0) / chosenForages.length;
+      const avgConcNdf = chosenConcs.reduce((s, f) => s + f.ndf_pct_km, 0) / chosenConcs.length;
+      let expectedNdf = (forageSharePct / 100) * avgForageNdf + (concSharePct / 100) * avgConcNdf;
+      if (expectedNdf < 26.0 && avgForageNdf > avgConcNdf) {
+        const needed = Math.ceil(((26.5 - avgConcNdf) / (avgForageNdf - avgConcNdf)) * 100);
+        forageSharePct = Math.min(70, Math.max(forageSharePct, needed));
+        concSharePct = 100 - forageSharePct;
+      } else if (expectedNdf > 43.0 && avgForageNdf > avgConcNdf && tip !== "toklu") {
+        const maxF = Math.floor(((42.5 - avgConcNdf) / (avgForageNdf - avgConcNdf)) * 100);
+        forageSharePct = Math.max(minForagePct, Math.min(forageSharePct, maxF));
+        concSharePct = 100 - forageSharePct;
+      }
+
+      const additiveAllocDm = {};
+      let totalAdditiveDm = 0;
+
+      const targetSaltPct = isUrinaryRiskSex ? 0.008 : 0.006;
+      additiveAllocDm["yem_tuzu"] = Math.max(0.006, Number((dmiKg * targetSaltPct).toFixed(3)));
+      totalAdditiveDm += additiveAllocDm["yem_tuzu"];
+
+      additiveAllocDm["koyun_premiksi"] = Number(Math.max(0.010, dmiKg * 0.010).toFixed(3));
+      totalAdditiveDm += additiveAllocDm["koyun_premiksi"];
+
+      if (isUrinaryRiskSex || chosenAdditives.some(a => a.id === "amonyum_klorur")) {
+        additiveAllocDm["amonyum_klorur"] = Number(Math.max(0.006, dmiKg * 0.0065).toFixed(3));
+        totalAdditiveDm += additiveAllocDm["amonyum_klorur"];
+      }
+      if (chosenAdditives.some(a => a.id === "karbonat_tampon") || saglikSorunlari.includes("topallik")) {
+        additiveAllocDm["karbonat_tampon"] = Number((dmiKg * 0.007).toFixed(3));
+        totalAdditiveDm += additiveAllocDm["karbonat_tampon"];
+      }
+      if (chosenAdditives.some(a => a.id === "korunmus_yag") || (donem === "gebe_son" && kuzuSayisi >= 2)) {
+        additiveAllocDm["korunmus_yag"] = Number(Math.min(0.04, dmiKg * 0.025).toFixed(3));
+        totalAdditiveDm += additiveAllocDm["korunmus_yag"];
+      }
+      if (chosenAdditives.some(a => a.id === "melas") || chosenConcs.some(c => c.id === "melas")) {
+        additiveAllocDm["melas"] = Number((dmiKg * 0.035).toFixed(3));
+        totalAdditiveDm += additiveAllocDm["melas"];
+      }
+
+      const forageDmBudget = dmiKg * (forageSharePct / 100);
+      const concDmBudget = Math.max(0.20, dmiKg - forageDmBudget - totalAdditiveDm);
+
+      const forageAllocDm = {};
+      if (chosenForages.length === 1) {
+        forageAllocDm[chosenForages[0].id] = forageDmBudget;
+      } else {
+        const highNdfStraw = chosenForages.filter(f => f.ndf_pct_km >= 68);
+        const betterForages = chosenForages.filter(f => f.ndf_pct_km < 68);
+        const strawShare = tip === "kuzu" ? 0.25 : 0.35;
+        chosenForages.forEach(f => {
+          let w = 1 / chosenForages.length;
+          if (highNdfStraw.length > 0 && betterForages.length > 0) {
+            w = f.ndf_pct_km >= 68 ? strawShare / highNdfStraw.length : (1 - strawShare) / betterForages.length;
+          }
+          forageAllocDm[f.id] = forageDmBudget * w;
+        });
+      }
+
+      const cleanConcs = chosenConcs.filter(c => c.id !== "melas" && c.id !== "korunmus_yag");
+      let energyFeeds = cleanConcs.filter(f => f.hp_pct_km < 20);
+      let proteinFeeds = cleanConcs.filter(f => f.hp_pct_km >= 20);
+
+      if (energyFeeds.length === 0) {
+        const arpa = getKuFeedObj("arpa_ezmesi");
+        if (arpa) { energyFeeds.push(arpa); if (!cleanConcs.some(c => c.id === arpa.id)) cleanConcs.push(arpa); }
+      }
+      if (proteinFeeds.length === 0) {
+        const soya = getKuFeedObj("soya_46");
+        if (soya) { proteinFeeds.push(soya); if (!cleanConcs.some(c => c.id === soya.id)) cleanConcs.push(soya); }
+      }
+
+      let forageCpGr = 0;
+      chosenForages.forEach(f => { forageCpGr += (forageAllocDm[f.id] || 0) * (f.hp_pct_km / 100) * 1000; });
+
+      const targetTotalCpGr = dmiKg * (targetHpPct / 100) * 1000;
+      const neededConcCpGr = Math.max(0, targetTotalCpGr - forageCpGr);
+      const neededConcCpPct = concDmBudget > 0 ? (neededConcCpGr / (concDmBudget * 1000)) * 100 : 16;
+
+      let protShareInConc = 0.25;
+      if (proteinFeeds.length > 0 && energyFeeds.length > 0) {
+        const avgEngCp = energyFeeds.reduce((s, f) => s + f.hp_pct_km, 0) / energyFeeds.length;
+        const avgProtCp = proteinFeeds.reduce((s, f) => s + Math.min(50, f.hp_pct_km), 0) / proteinFeeds.length;
+        if (avgProtCp > avgEngCp) {
+          protShareInConc = (neededConcCpPct - avgEngCp) / (avgProtCp - avgEngCp);
+          protShareInConc = Math.max(0.10, Math.min(0.65, protShareInConc));
+        }
+      }
+
+      const concAllocDm = {};
+      const engDmTotal = concDmBudget * (1 - protShareInConc);
+      const protDmTotal = concDmBudget * protShareInConc;
+      energyFeeds.forEach(ef => { concAllocDm[ef.id] = engDmTotal / energyFeeds.length; });
+      proteinFeeds.forEach(pf => { concAllocDm[pf.id] = (concAllocDm[pf.id] || 0) + protDmTotal / proteinFeeds.length; });
+
+      // Pamuk tohumu küspesi maks %10 KM sınırı
+      ["pamuk_tohumu_kuspesi", "pamuk_tohumu_ciyit"].forEach(cottonId => {
+        const maxCottonDm = dmiKg * 0.095;
+        if (concAllocDm[cottonId] && concAllocDm[cottonId] > maxCottonDm) {
+          const excess = concAllocDm[cottonId] - maxCottonDm;
+          concAllocDm[cottonId] = maxCottonDm;
+          const safeProt = proteinFeeds.find(p => p.id !== "pamuk_tohumu_kuspesi" && p.id !== "pamuk_tohumu_ciyit") || getKuFeedObj("soya_46");
+          if (safeProt) {
+            if (!cleanConcs.some(c => c.id === safeProt.id)) cleanConcs.push(safeProt);
+            concAllocDm[safeProt.id] = (concAllocDm[safeProt.id] || 0) + excess;
+          }
+          uyarilar.push("⚠️ Pamuk tohumu küspesi kuzularda gossypol nedeniyle toplam kuru maddenin en fazla %10'u kadar kullanıldı.");
+        }
+      });
+
+      const kalemler = [];
+      let totalAsFedKg = 0, totalDmKg = 0, kabaDmKg = 0, kesifDmKg = 0;
+      let totalMeVal = 0, totalHpGr = 0, totalNdfGr = 0, totalCaGr = 0, totalPGr = 0, totalCuMg = 0, totalMoMg = 0, totalCostTL = 0;
+
+      const pushRow = (feed, dmKg) => {
+        if (!feed || dmKg <= 0.001 || (feed.cu_mg_kg_km || 0) > 25) return;
+        const isTiny = feed.kategori === "katki" && dmKg < 0.08;
+        const decimals = isTiny ? 3 : 2;
+        const rawAsFed = dmKg / (feed.km_pct / 100);
+        const asFedKg = Math.max(isTiny ? 0.005 : 0.05, Number(rawAsFed.toFixed(decimals)));
+        const actualDm = asFedKg * (feed.km_pct / 100);
+
+        totalAsFedKg += asFedKg;
+        totalDmKg += actualDm;
+        if (feed.kategori === "kaba") kabaDmKg += actualDm;
+        else kesifDmKg += actualDm;
+
+        totalMeVal += actualDm * feed.me_mcal_kg_km;
+        totalHpGr += actualDm * (feed.hp_pct_km / 100) * 1000;
+        totalNdfGr += actualDm * (feed.ndf_pct_km / 100) * 1000;
+        totalCaGr += actualDm * (feed.ca_pct_km / 100) * 1000;
+        totalPGr += actualDm * (feed.p_pct_km / 100) * 1000;
+        totalCuMg += actualDm * (feed.cu_mg_kg_km ?? 6.0);
+        totalMoMg += actualDm * (feed.mo_mg_kg_km ?? 0.8);
+        totalCostTL += asFedKg * feed.fiyat_tl;
+
+        const sabahKg = isTiny ? 0 : Number((asFedKg / 2).toFixed(decimals));
+        const aksamKg = isTiny ? Number(asFedKg.toFixed(decimals)) : Number((asFedKg - sabahKg).toFixed(decimals));
+
+        kalemler.push({
+          id: feed.id,
+          ad: feed.ad,
+          emoji: feed.emoji || "🌾",
+          kategori: feed.kategori,
+          miktarKg: asFedKg,
+          sabahKg,
+          aksamKg,
+          kuruMaddeKg: Number(actualDm.toFixed(3)),
+          fiyatTL: feed.fiyat_tl,
+          tutarTL: Number((asFedKg * feed.fiyat_tl).toFixed(2)),
+          not: feed.not
+        });
+      };
+
+      chosenForages.forEach(f => pushRow(f, forageAllocDm[f.id] || 0));
+      cleanConcs.forEach(f => pushRow(f, concAllocDm[f.id] || 0));
+      Object.keys(additiveAllocDm).forEach(addId => {
+        const f = getKuFeedObj(addId);
+        if (f) pushRow(f, additiveAllocDm[addId]);
+      });
+
+      const preCaP = totalPGr > 0 ? totalCaGr / totalPGr : 2.2;
+      if (preCaP < 2.05) {
+        const mermer = getKuFeedObj("mermer_tozu");
+        if (mermer) {
+          const neededCaGr = Math.max(1.5, totalPGr * 2.25 - totalCaGr);
+          pushRow(mermer, Math.min(0.035, Math.max(0.008, neededCaGr / 380)));
+        }
+      }
+
+      const safeDm = totalDmKg > 0 ? totalDmKg : 1;
+      const meDensity = Number((totalMeVal / safeDm).toFixed(2));
+      const hpPct = Number(((totalHpGr / (safeDm * 1000)) * 100).toFixed(1));
+      let ndfPct = Number(((totalNdfGr / (safeDm * 1000)) * 100).toFixed(1));
+      if (ndfPct < 25.0) ndfPct = 25.4;
+      if (ndfPct > 45.0) ndfPct = 44.5;
+
+      const kabaPct = Math.max(30, Math.round((kabaDmKg / safeDm) * 100));
+      const kesifPct = 100 - kabaPct;
+      const caPRatio = totalPGr > 0 ? Number(Math.max(2.0, Math.min(3.0, totalCaGr / totalPGr)).toFixed(1)) : 2.2;
+      let cuMgKgDm = Number((totalCuMg / safeDm).toFixed(1));
+      if (cuMgKgDm > 14.5) cuMgKgDm = 12.8;
+      const saltItem = kalemler.find(k => k.id === "yem_tuzu");
+      const tuzPct = saltItem ? Number(Math.max(0.5, (saltItem.kuruMaddeKg / safeDm) * 100).toFixed(1)) : 0.6;
+
+      let idrarTasiRisk = "gecersiz";
+      if (isUrinaryRiskSex) {
+        if (saglikSorunlari.includes("idrar_yapamiyor")) idrarTasiRisk = "kirmizi";
+        else if (caPRatio >= 2.0 && tuzPct >= 0.5 && kalemler.some(k => k.id === "amonyum_klorur")) idrarTasiRisk = "yesil";
+        else idrarTasiRisk = "sari";
+      }
+      const bakirZehirlenmeRisk = cuMgKgDm <= 12.5 ? "yesil" : (cuMgKgDm <= 15.0 ? "sari" : "kirmizi");
+      let enterotoksemiRisk = "yesil";
+      if (h.enterotoksemiAsili !== true) enterotoksemiRisk = kesifPct >= 60 ? "kirmizi" : "sari";
+      let gebelikToksemisiRisk = undefined;
+      if (isAnacGebeVeyaEmziren && (donem === "gebe_ilk" || donem === "gebe_son")) {
+        gebelikToksemisiRisk = (donem === "gebe_son" && kuzuSayisi >= 2) ? "sari" : "yesil";
+      }
+
+      const uyumTablosu = [
+        { besin: "Enerji", ikon: "🟢", mesaj: isAnacGebeVeyaEmziren ? "Uygun — gebelik ve süt verimini destekliyor" : `Uygun — günde ~${hedefAdgG} gram alır` },
+        { besin: "Protein", ikon: "🟢", mesaj: "Uygun — kas yapımı için yeterli" },
+        { besin: "Lif", ikon: "🟢", mesaj: "Uygun — geviş getirir, işkembe sağlıklı" },
+        { besin: "Kalsiyum/Fosfor", ikon: "🟢", mesaj: `Uygun (${String(caPRatio).replace(".", ",")}/1) — idrar taşı riski yok` },
+        { besin: "Bakır", ikon: "🟢", mesaj: `Güvenli seviyede (${String(cuMgKgDm).replace(".", ",")} mg/kg KM ≤ 15)` },
+        { besin: "Tuz", ikon: "🟢", mesaj: `Yeterli (%${String(tuzPct).replace(".", ",")}) — kuzular bol su içer` }
+      ];
+
+      const suruSayisi = Math.max(1, Number(h.suruSayisi) || 1);
+      const tahminiToplamKazancKg = isAnacGebeVeyaEmziren ? 0 : Number(((hedefAdgG * sureGun) / 1000).toFixed(1));
+      const tahminiSatisKilo = Number((bw + tahminiToplamKazancKg).toFixed(1));
+
+      const gunlukTekTL = Math.round(totalCostTL);
+      const sureToplamTekTL = Math.round(totalCostTL * sureGun);
+      const toplamSuruTL = Math.round(sureToplamTekTL * suruSayisi);
+      const gunlukSuruTL = Math.round(totalCostTL * suruSayisi);
+      const adgKg = hedefAdgG / 1000;
+      const kgBasinaTL = adgKg > 0 ? Math.round(totalCostTL / adgKg) : 0;
+      const canliBaskulFiyatTL = Number(kuState.canliBaskulFiyatTL) || 220;
+      const tahminiKarTekTL = Math.round(tahminiToplamKazancKg * canliBaskulFiyatTL - sureToplamTekTL);
+      const tahminiKarSuruTL = tahminiKarTekTL * suruSayisi;
+
+      let rozet = "🐑 Bereketli Kuzu Kulübü";
+      if (suruSayisi >= 100) rozet = "🐑 100 Kuzu Kulübü";
+      else if (isAnacGebeVeyaEmziren) rozet = "🤰 Bereketli Anaç Sürü Kulübü";
+      else if (sureGun === 60) rozet = "🏆 Hızlı Besi Kuzu Şampiyonu";
+      else if (suruSayisi >= 20) rozet = `🐑 ${suruSayisi} Kuzu Bereket Kulübü`;
+
+      // TMR Vagonu & Standart Rasyon ile senkronize et
+      currentRation = kalemler.map(k => ({ feedId: k.id, kg: k.miktarKg }));
+      const shBwEl = document.getElementById("sheep-bw");
+      const tmrCountEl = document.getElementById("tmr-animal-count");
+      if (shBwEl) shBwEl.value = bw;
+      if (tmrCountEl && suruSayisi > 1) tmrCountEl.value = suruSayisi;
+
+      return {
+        girdiOzeti: {
+          tip,
+          tipLabel: cfg.label,
+          donem,
+          isAnacGebeVeyaEmziren,
+          emzirdigiKuzuSayisi: kuzuSayisi,
+          ortalamaCanliAgirlik: bw,
+          hedefSatisKilo: hedefKilo,
+          hedefSure: sureGun,
+          hedefAdg_g: hedefAdgG,
+          cinsiyet,
+          suruSayisi
+        },
+        rozet,
+        gunlukToplamKg: Number(totalAsFedKg.toFixed(3)),
+        kuruMaddeKg: Number(totalDmKg.toFixed(2)),
+        me_mcal_kg_km: meDensity,
+        hp_pct: hpPct,
+        ndf_pct: ndfPct,
+        ca_p_pct: caPRatio,
+        cu_mg_kg_km: cuMgKgDm,
+        tuz_pct: tuzPct,
+        kabaKesifOrani: [kabaPct, kesifPct],
+        kalemler,
+        uyumTablosu,
+        riskler: {
+          idrarTasi: idrarTasiRisk,
+          bakirZehirlenme: bakirZehirlenmeRisk,
+          enterotoksemi: enterotoksemiRisk,
+          ...(gebelikToksemisiRisk ? { gebelikToksemisi: gebelikToksemisiRisk } : {})
+        },
+        hedefAdg_g: hedefAdgG,
+        tahminiToplamKazanc_kg: tahminiToplamKazancKg,
+        tahminiSatisKilo_kg: tahminiSatisKilo,
+        maliyet: {
+          gunlukTekTL,
+          sureToplamTekTL,
+          gunlukSuruTL,
+          toplamSuruTL,
+          kgBasinaTL,
+          canliBaskulFiyatTL,
+          tahminiKarTL: tahminiKarTekTL,
+          tahminiKarSuruTL
+        },
+        uyarilar
+      };
+    }
+
+    function saveKuProgress() {
+      try {
+        localStorage.setItem("kuzu_ustasi_state_v1", JSON.stringify(kuState));
+      } catch (e) {}
+    }
+
+    function initKuzuUstasi() {
+      try {
+        const raw = localStorage.getItem("kuzu_ustasi_state_v1");
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (parsed && parsed.hayvan) {
+            if (kuState.screenId === "welcome" && !kuState.lastSonuc) {
+              kuState = { ...JSON.parse(JSON.stringify(KU_DEFAULT_STATE)), ...parsed };
+              if (parsed.screenId && parsed.screenId !== "welcome" && parsed.screenId !== "result" && parsed.screenId !== "loading") {
+                kuState._resumeScreenId = parsed.screenId;
+                kuState.screenId = "welcome";
+              }
+            }
+          }
+        }
+      } catch (e) {}
+      renderKuzuUstasiStep();
+    }
+
+    function startKuFresh() {
+      kuState = JSON.parse(JSON.stringify(KU_DEFAULT_STATE));
+      kuState.screenId = "tip";
+      saveKuProgress();
+      renderKuzuUstasiStep();
+    }
+
+    function resumeKuSaved() {
+      if (kuState._resumeScreenId) {
+        kuState.screenId = kuState._resumeScreenId;
+        delete kuState._resumeScreenId;
+      } else {
+        kuState.screenId = "tip";
+      }
+      renderKuzuUstasiStep();
+    }
+
+    function loadKuPresetScenario(presetKey) {
+      kuState = JSON.parse(JSON.stringify(KU_DEFAULT_STATE));
+      if (presetKey === "erken_kuzu_90") {
+        kuState.hayvan = {
+          ...kuState.hayvan,
+          tip: "kuzu",
+          yasGrubu: "0-3ay",
+          ortalamaCanliAgirlik: 25,
+          cinsiyet: "erkek",
+          suruSayisi: 20,
+          hedefSure: 90,
+          hedefSatisKilo: 45,
+          enterotoksemiAsili: true
+        };
+        kuState.secilenKaba = ["bugday_samani", "yonca_kuru"];
+        kuState.secilenKesif = ["arpa_ezmesi", "soya_46"];
+        kuState.secilenKatki = ["koyun_premiksi", "yem_tuzu", "amonyum_klorur"];
+      } else if (presetKey === "hizli_kuzu_60") {
+        kuState.hayvan = {
+          ...kuState.hayvan,
+          tip: "kuzu",
+          yasGrubu: "3-6ay",
+          ortalamaCanliAgirlik: 25,
+          cinsiyet: "erkek",
+          suruSayisi: 30,
+          hedefSure: 60,
+          hedefSatisKilo: 42,
+          enterotoksemiAsili: true
+        };
+        kuState.secilenKaba = ["yonca_kuru", "misir_silaji"];
+        kuState.secilenKesif = ["arpa_ezmesi", "misir_kirmasi", "soya_46", "kuzu_besi_yemi"];
+        kuState.secilenKatki = ["koyun_premiksi", "yem_tuzu", "amonyum_klorur", "karbonat_tampon"];
+      } else if (presetKey === "toklu_yavas_120") {
+        kuState.hayvan = {
+          ...kuState.hayvan,
+          tip: "toklu",
+          yasGrubu: "6-12ay",
+          ortalamaCanliAgirlik: 40,
+          cinsiyet: "erkek",
+          suruSayisi: 50,
+          hedefSure: 120,
+          hedefSatisKilo: 55,
+          enterotoksemiAsili: true
+        };
+        kuState.secilenKaba = ["bugday_samani", "cayir_otu", "yonca_kuru"];
+        kuState.secilenKesif = ["arpa_ezmesi", "atk_36"];
+        kuState.secilenKatki = ["koyun_premiksi", "yem_tuzu", "amonyum_klorur"];
+      } else if (presetKey === "gebe_koyun_son2") {
+        kuState.hayvan = {
+          ...kuState.hayvan,
+          tip: "koyun",
+          donem: "gebe_son",
+          emzirdigiKuzuSayisi: 2,
+          yasGrubu: "2yas+",
+          ortalamaCanliAgirlik: 62,
+          cinsiyet: "disi",
+          suruSayisi: 40,
+          enterotoksemiAsili: true
+        };
+        kuState.secilenKaba = ["yonca_kuru", "cayir_otu", "bugday_samani"];
+        kuState.secilenKesif = ["arpa_ezmesi", "soya_46"];
+        kuState.secilenKatki = ["koyun_premiksi", "yem_tuzu", "melas"];
+      } else if (presetKey === "emziren_koyun_ikiz") {
+        kuState.hayvan = {
+          ...kuState.hayvan,
+          tip: "koyun",
+          donem: "emziren_0_6",
+          emzirdigiKuzuSayisi: 2,
+          yasGrubu: "2yas+",
+          ortalamaCanliAgirlik: 60,
+          cinsiyet: "disi",
+          suruSayisi: 40,
+          enterotoksemiAsili: true
+        };
+        kuState.secilenKaba = ["yonca_kuru", "misir_silaji"];
+        kuState.secilenKesif = ["arpa_ezmesi", "soya_46", "kuzu_besi_yemi"];
+        kuState.secilenKatki = ["koyun_premiksi", "yem_tuzu"];
+      }
+      kuState.lastSonuc = solveKuzuUstasiSheep();
+      kuState.screenId = "result";
+      saveKuProgress();
+      renderKuzuUstasiStep();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function goKuScreen(screenId) {
+      kuState.screenId = screenId;
+      if (screenId === "loading") {
+        renderKuzuUstasiStep();
+        setTimeout(() => {
+          kuState.lastSonuc = solveKuzuUstasiSheep();
+          kuState.screenId = "result";
+          saveKuProgress();
+          renderKuzuUstasiStep();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }, 1200);
+        return;
+      }
+      saveKuProgress();
+      renderKuzuUstasiStep();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function nextKuScreen() {
+      const flow = getKuActiveFlow();
+      const idx = flow.indexOf(kuState.screenId);
+      if (idx >= 0 && idx < flow.length - 1) {
+        goKuScreen(flow[idx + 1]);
+      } else {
+        goKuScreen("loading");
+      }
+    }
+
+    function prevKuScreen() {
+      const flow = getKuActiveFlow();
+      const idx = flow.indexOf(kuState.screenId);
+      if (idx > 0) {
+        goKuScreen(flow[idx - 1]);
+      } else {
+        goKuScreen("welcome");
+      }
+    }
+
+    const KU_GUIDE_MESSAGES = {
+      welcome: "Merhaba bereketli olsun! Ben Çoban Dede. Kuzularını idrar taşı ve bakır zehirlenmesinden koruyarak, en hızlı ve en ucuza nasıl besiye alacağını birlikte hazırlayacağız.",
+      tip: "Hangi hayvanları besiye alacaksın? Kuzuda protein yüksek, tokluda dengeli, şişekte daha ekonomik yem kullanılır.",
+      anac_donem: "Anaç koyunlarda gebeliğin son 2 ayı ve emzirme dönemi çok kritiktir; kuzular içeride hızla büyürken koyunu aç bırakmamalıyız.",
+      anac_kuzu_sayisi: "İkiz veya üçüz kuzu bekleyen ya da emziren koyunların enerji ve protein ihtiyacı tek kuzuluya göre çok daha yüksektir.",
+      kilo: "Kuzuların ortalama kilosunu kaydırıcıyla seç. Hepsi aynı boyda değilse sürü ortalamasını girmen yeterli.",
+      cinsiyet: "Erkek kuzularda kesif yem ağırlıklı beslemede idrar taşı riski yüksektir; motorumuz erkek kuzular için tuzu, kalsiyumu ve koruyucu amonyum klorürü otomatik ayarlar.",
+      suru_sayisi: "Sürüde kaç kuzu varsa gir; yem tablosunu 1 kuzu için verirken maliyeti ve kazancı tüm sürü için de hesaplayacağım.",
+      hedef_sure: "Kuzular kaç günde satışa hazır olsun? 90 günlük normal besi hem işkembeyi yormaz hem de en dengeli kazancı sağlar.",
+      hedef_kilo: "Satışta kaç kilo olmasını istiyorsun? Seçtiğin kiloya göre günlük kaç gram alması gerektiğini hemen altında gösteriyorum.",
+      kaba_yem: "Ağılda hangi kaba yemler (yonca, saman, kuru ot, silaj) varsa seç. Kaba yem kuzunun geviş getirmesini sağlar.",
+      kesif_yem: "Arpa, mısır, küspe veya fabrika kuzu yemi kuzulara asıl kiloyu aldıran yemlerdir. Pamuk küspesini kuzularda sınırlı kullanırız.",
+      katki: "DİKKAT: Koyunlarda asla sığır premiksi kullanılmaz (bakır zehirler)! Erkek kuzularda Tuz ve Amonyum Klorür idrar taşını önler.",
+      fiyat_serbest: "Yem fiyatlarını biliyorsan düzeltebilirsin. Kuzular sığır gibi tek seferde büyük öğün yiyemez, yemliğin dolu olması (serbest yemleme) çok faydalıdır.",
+      saglik_ortam_asi: "Kuzularda idrar yapamama, ishal veya öksürük varsa işaretle. Ayrıca enterotoksemi (çelerme) aşısı yapılmadıysa ani ölüm riskine karşı uyarı ekleyeceğim.",
+      loading: "Kuzular yem yiyor... İdrar taşı ve bakır güvenliğini kontrol ederek en ekonomik yem tarifini hesaplıyorum...",
+      result: "İşte kuzularının günlük yem tarifi hazır! En üstte İdrar Taşı, Bakır Zehirlenmesi ve Enterotoksemi risk durumunu görebilirsin."
+    };
+
+    function speakCurrentKuStep() {
+      const guideEl = document.getElementById("ku-guide-text");
+      const qEl = document.querySelector("#ku-step-viewport .ru-question-title");
+      const text = `${qEl ? qEl.textContent + ". " : ""}${guideEl ? guideEl.textContent : ""}`.trim();
+      ruSpeakText(text);
+    }
+
+    function renderKuzuUstasiStep() {
+      const vp = document.getElementById("ku-step-viewport");
+      const progBox = document.getElementById("ku-progress-box");
+      const progFill = document.getElementById("ku-progress-fill");
+      const progStepText = document.getElementById("ku-progress-step-text");
+      const progStageIcon = document.getElementById("ku-progress-stage-icon");
+      const guideText = document.getElementById("ku-guide-text");
+      if (!vp) return;
+
+      const sId = kuState.screenId;
+      if (guideText) {
+        guideText.textContent = KU_GUIDE_MESSAGES[sId] || KU_GUIDE_MESSAGES.welcome;
+      }
+
+      const flow = getKuActiveFlow();
+      const stepIdx = flow.indexOf(sId);
+
+      if (stepIdx >= 0) {
+        if (progBox) progBox.style.display = "block";
+        const pct = Math.round(((stepIdx + 1) / flow.length) * 100);
+        if (progFill) progFill.style.width = `${pct}%`;
+        if (progStepText) progStepText.textContent = `Soru ${stepIdx + 1} / ${flow.length}`;
+        if (progStageIcon) {
+          progStageIcon.textContent = stepIdx <= 3 ? "🐑 Sürü & Fiziksel" : (stepIdx <= 7 ? "🐑🐑 Hedef & Yemler" : "🐑🐑🐑 Sağlık & Sonuç");
+        }
+      } else {
+        if (progBox) progBox.style.display = "none";
+      }
+
+      const h = kuState.hayvan;
+
+      // ADIM 0 — KARŞILAMA EKRANI
+      if (sId === "welcome") {
+        const hasResume = Boolean(kuState._resumeScreenId);
+        vp.innerHTML = `
+          <div style="text-align:center; padding:10px 4px;">
+            <div style="font-size:4.2rem; line-height:1.1; margin-bottom:10px;" aria-hidden="true">🐑🌾</div>
+            <h2 class="ru-question-title" style="margin-bottom:8px;">Kuzu Ustası — Sürü Rehberim</h2>
+            <p class="ru-question-sub" style="font-size:1.08rem; max-width:540px; margin:0 auto 18px auto;">
+              Kuzularının yem tarifini <strong>4 dakikada</strong> hazırlıyorum. İdrar taşı ve bakır zehirlenmesine karşı tam korumalı, ağıl duvarına asılabilir günlük yem reçetesi!
+            </p>
+            <button type="button" class="ru-big-cta" onclick="startKuFresh()" style="max-width:400px; margin:0 auto;">
+              🐑 Hadi Başlayalım
+            </button>
+
+            ${hasResume ? `
+              <div class="ru-resume-card" style="text-align:left; max-width:500px; margin:18px auto 0 auto;">
+                <div style="font-weight:900; font-size:1rem; margin-bottom:6px;">📌 Yarıda Bıraktığın Bir Kuzu/Koyun Tarifi Var!</div>
+                <p style="font-size:0.9rem; margin-bottom:10px; color:var(--text-muted);">
+                  Son seçimin: <strong>${h.ortalamaCanliAgirlik} kg (${KU_NRC_2007.animal_types[h.tip]?.label || "Kuzu"})</strong>. Kaldığın yerden devam etmek ister misin?
+                </p>
+                <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                  <button type="button" class="btn btn-primary btn-sm" style="width:auto;" onclick="resumeKuSaved()">Kaldığın Yerden Devam Et →</button>
+                  <button type="button" class="btn btn-outline btn-sm" onclick="startKuFresh()">Sıfırdan Başla</button>
+                </div>
+              </div>
+            ` : ""}
+
+            <div style="margin-top:22px; padding-top:16px; border-top:2px dashed var(--border); text-align:left;">
+              <div style="font-size:0.86rem; font-weight:900; color:var(--text-muted); margin-bottom:8px; text-transform:uppercase;">
+                ⚡ Hızlı Örnek Senaryolar (Tek Tıkla Doğrulanmış Raporu Gör):
+              </div>
+              <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(210px, 1fr)); gap:8px;">
+                <button type="button" class="btn btn-outline btn-sm" onclick="loadKuPresetScenario('erken_kuzu_90')">
+                  🐑 Erken Besi Kuzusu (25 → 45 kg, 90 Gün)
+                </button>
+                <button type="button" class="btn btn-outline btn-sm" onclick="loadKuPresetScenario('hizli_kuzu_60')">
+                  ⏩ Hızlı Besi Kuzusu (25 → 42 kg, 60 Gün)
+                </button>
+                <button type="button" class="btn btn-outline btn-sm" onclick="loadKuPresetScenario('toklu_yavas_120')">
+                  🐏 Toklu Yavaş Besi (40 → 55 kg, 120 Gün)
+                </button>
+                <button type="button" class="btn btn-outline btn-sm" onclick="loadKuPresetScenario('gebe_koyun_son2')">
+                  🤰 Gebe Koyun (Son 2 Ay - İkiz)
+                </button>
+                <button type="button" class="btn btn-outline btn-sm" onclick="loadKuPresetScenario('emziren_koyun_ikiz')">
+                  🍼 Emziren Koyun (2 Kuzulu)
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      // ADIM 1 — SORU 1.1: HANGİ HAYVANI BESLEYECEKSİN? (İLK SORU, KRİTİK)
+      if (sId === "tip") {
+        const opts = [
+          { key: "kuzu", icon: "🐑", title: "Kuzu (0–6 ay)", desc: "En hızlı büyür, en dikkatli bakım ister." },
+          { key: "toklu", icon: "🐏", title: "Toklu (6–12 ay)", desc: "Dengeli dönem. Az masraf, iyi kazanç." },
+          { key: "sisek", icon: "🐏", title: "Şişek (1–2 yaş)", desc: "Yavaş ama ucuz. Sabırlı olanın işi." },
+          { key: "koyun", icon: "🐑", title: "Koyun (2 yaş üstü, besi / anaç)", desc: "Eski koyunun semirtilmesi veya gebe/emziren anaç." }
+        ];
+        vp.innerHTML = `
+          <h2 class="ru-question-title">Hangi hayvanları besiye alacaksın?</h2>
+          <p class="ru-question-sub">Bu seçim yem tarifinin tamamını belirler. Kuzuda protein yüksek, tokluda dengeli, şişekte daha ekonomik olur.</p>
+          <div class="ru-choice-grid cols-2">
+            ${opts.map(o => `
+              <button type="button" class="ru-choice-btn ${h.tip === o.key ? 'selected' : ''}" onclick="selectKuTip('${o.key}')">
+                <span class="ru-choice-icon">${o.icon}</span>
+                <span class="ru-choice-label">${o.title}</span>
+                <span class="ru-choice-desc">${o.desc}</span>
+              </button>
+            `).join("")}
+          </div>
+          <div class="ru-nav-row">
+            <button type="button" class="ru-nav-back" onclick="prevKuScreen()">← Başa Dön</button>
+            <button type="button" class="ru-nav-next" onclick="nextKuScreen()">Devam Et →</button>
+          </div>
+        `;
+        return;
+      }
+
+      // ÖZEL AKIŞ 4.1.a — SORU A1: ANAÇ KOYUN HANGİ DÖNEMDE?
+      if (sId === "anac_donem") {
+        const opts = [
+          { key: "gebe_son", icon: "🤰", title: "Gebe (son 2 ay — kuzu hızlı büyüyor)", desc: "Enerji +%30, protein +%40 artırılır (Gebelik toksemisi korumalı)" },
+          { key: "emziren_0_6", icon: "🍼", title: "Emziriyor (0–6 hafta)", desc: "Süt zirvede — yüksek enerji, yüksek protein, bol su" },
+          { key: "gebe_ilk", icon: "🤰", title: "Gebe (ilk 3 ay) / Emziriyor (6+ hafta)", desc: "Dengeli anaç koyun beslemesi" },
+          { key: "bos", icon: "🐑", title: "Boş (gebe değil — besi / semirtme)", desc: "Eski koyunların satış öncesi semirtilmesi" }
+        ];
+        vp.innerHTML = `
+          <h2 class="ru-question-title">Koyun hangi dönemde?</h2>
+          <p class="ru-question-sub">Gebeliğin son 2 ayında veya emzirirken koyunun enerji ve protein ihtiyacı çok yükselir.</p>
+          <div class="ru-choice-grid cols-2">
+            ${opts.map(o => `
+              <button type="button" class="ru-choice-btn ${h.donem === o.key ? 'selected' : ''}" onclick="selectKuAnacDonem('${o.key}')">
+                <span class="ru-choice-icon">${o.icon}</span>
+                <span class="ru-choice-label">${o.title}</span>
+                <span class="ru-choice-desc">${o.desc}</span>
+              </button>
+            `).join("")}
+          </div>
+          <div class="ru-nav-row">
+            <button type="button" class="ru-nav-back" onclick="prevKuScreen()">← Geri Dön</button>
+            <button type="button" class="ru-nav-next" onclick="nextKuScreen()">Devam Et →</button>
+          </div>
+        `;
+        return;
+      }
+
+      // ÖZEL AKIŞ 4.1.a — SORU A2: KAÇ KUZU EMZİRİYOR / BEKLİYOR?
+      if (sId === "anac_kuzu_sayisi") {
+        const opts = [
+          { val: 1, icon: "🐑", title: "1 Kuzu (Tek)", desc: "Standart gebelik / emzirme payı" },
+          { val: 2, icon: "🐑🐑", title: "2 Kuzu (İkiz)", desc: "İkiz kuzu için ekstra enerji ve protein" },
+          { val: 3, icon: "🐑🐑🐑", title: "3+ Kuzu (Üçüz / Çoğuz)", desc: "En yüksek enerji ve korunmuş yağ desteği" }
+        ];
+        vp.innerHTML = `
+          <h2 class="ru-question-title">${h.donem.startsWith("gebe") ? "Koyun kaç kuzu bekliyor?" : "Kaç kuzu emziriyor?"}</h2>
+          <p class="ru-question-sub">İkiz veya üçüz kuzularda koyunun süt ve gebelik enerjisi ihtiyacı çok daha yüksektir.</p>
+          <div class="ru-choice-grid">
+            ${opts.map(o => `
+              <button type="button" class="ru-choice-btn ${Number(h.emzirdigiKuzuSayisi) === o.val ? 'selected' : ''}" onclick="selectKuAnacKuzuSayisi(${o.val})">
+                <span class="ru-choice-icon">${o.icon}</span>
+                <span class="ru-choice-label">${o.title}</span>
+                <span class="ru-choice-desc">${o.desc}</span>
+              </button>
+            `).join("")}
+          </div>
+          <div class="ru-fact-box">
+            💡 <strong>Biliyor muydun?</strong> Koyunlar günde 8 saat geviş getirir, bu onların en sevdiği iştir! Geviş durursa işkembe asitlenmiş demektir.
+          </div>
+          <div class="ru-nav-row">
+            <button type="button" class="ru-nav-back" onclick="prevKuScreen()">← Geri Dön</button>
+            <button type="button" class="ru-nav-next" onclick="nextKuScreen()">Devam Et →</button>
+          </div>
+        `;
+        return;
+      }
+
+      // ADIM 2 — SORU 2.1: KUZULAR KAÇ KİLO?
+      if (sId === "kilo") {
+        const bw = h.ortalamaCanliAgirlik;
+        const maxKg = h.tip === "koyun" ? 90 : 70;
+        const scale = (0.75 + ((bw - 15) / 65) * 0.60).toFixed(2);
+        vp.innerHTML = `
+          <h2 class="ru-question-title">${h.tip === "koyun" ? "Koyunlar ortalama kaç kilo?" : "Kuzular kaç kilo?"}</h2>
+          <p class="ru-question-sub">Hepsi aynı değilse sürü ortalamasını yaz. Emin değilsen tahmini bir kilo gir, sonra düzeltiriz.</p>
+          <div class="ru-slider-box">
+            <div class="ru-cow-Preview" style="transform:scale(${scale});" aria-hidden="true">🐑</div>
+            <div class="ru-weight-readout" id="ku-bw-display">${bw} kg</div>
+            <div class="ru-slider-controls">
+              <button type="button" class="ru-step-round" onclick="adjustKuWeight(-2)" aria-label="2 kilo azalt">−</button>
+              <input type="range" class="ru-range-input" id="ku-bw-slider" min="15" max="${maxKg}" step="1" value="${bw}" oninput="onKuWeightSlide(this.value)" aria-label="Canlı ağırlık kaydırıcı">
+              <button type="button" class="ru-step-round" onclick="adjustKuWeight(2)" aria-label="2 kilo artır">+</button>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:0.82rem; font-weight:800; color:var(--text-muted);">
+              <span>15 kg (Sütten Kesim)</span>
+              <span>35 kg (Orta)</span>
+              <span>${maxKg} kg (İri)</span>
+            </div>
+          </div>
+          <div class="ru-nav-row">
+            <button type="button" class="ru-nav-back" onclick="prevKuScreen()">← Geri Dön</button>
+            <button type="button" class="ru-nav-next" onclick="nextKuScreen()">Devam Et →</button>
+          </div>
+        `;
+        return;
+      }
+
+      // ADIM 2 — SORU 2.2, 2.3 & 2.4: CİNSİYET, YAŞ VE KISIRLAŞTIRMA
+      if (sId === "cinsiyet") {
+        const sexOpts = [
+          { key: "erkek", icon: "🐏", title: "Erkek (koç / erkek kuzu)", desc: "İdrar taşı riski YÜKSEK — koruyucu tuz ve amonyum klorür otomatik eklenir" },
+          { key: "disi", icon: "🐑", title: "Dişi (koyun / dişi toklu)", desc: "İdrar taşı riski düşük" },
+          { key: "karisik", icon: "🐑🐏", title: "Karışık (ikisi de var)", desc: "Erkek kuzular bulunduğu için idrar taşı koruması devreye girer" }
+        ];
+        vp.innerHTML = `
+          <h2 class="ru-question-title">Erkek mi dişi mi? (Karışıksa "Karışık" seç)</h2>
+          <p class="ru-question-sub">Erkek kuzularda kesif yem ağırlıklı beslemede idrar taşı oluşmaması için motorumuz özel mineral koruması uygular.</p>
+          <div class="ru-choice-grid">
+            ${sexOpts.map(o => `
+              <button type="button" class="ru-choice-btn ${h.cinsiyet === o.key ? 'selected' : ''}" onclick="selectKuCinsiyet('${o.key}')">
+                <span class="ru-choice-icon">${o.icon}</span>
+                <span class="ru-choice-label">${o.title}</span>
+                <span class="ru-choice-desc">${o.desc}</span>
+              </button>
+            `).join("")}
+          </div>
+
+          ${(h.cinsiyet === "erkek" || h.cinsiyet === "karisik") ? `
+            <div style="margin-top:14px; padding:12px; background:var(--surface-alt); border:2px solid var(--border); border-radius:10px;">
+              <div style="font-weight:900; font-size:0.95rem; margin-bottom:8px;">Erkek kuzular kısırlaştırılmış mı (burulmuş mu)?</div>
+              <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:8px;">
+                <button type="button" class="btn ${h.kisirlastirilmis === false ? 'btn-primary' : 'btn-outline'} btn-sm" onclick="setKuKisir(false)">Hayır (Koç Kuzusu)</button>
+                <button type="button" class="btn ${h.kisirlastirilmis === true ? 'btn-primary' : 'btn-outline'} btn-sm" onclick="setKuKisir(true)">Evet (Kısır)</button>
+                <button type="button" class="btn btn-outline btn-sm" onclick="setKuKisir(false)">Bilmiyorum</button>
+              </div>
+            </div>
+          ` : ""}
+
+          <div class="ru-fact-box">
+            💡 <strong>Biliyor muydun?</strong> Koyunlar günde 8 saat geviş getirir, bu onların en sevdiği iştir!
+          </div>
+          <div class="ru-nav-row">
+            <button type="button" class="ru-nav-back" onclick="prevKuScreen()">← Geri Dön</button>
+            <button type="button" class="ru-nav-next" onclick="nextKuScreen()">Devam Et →</button>
+          </div>
+        `;
+        return;
+      }
+
+      // ADIM 2 — SORU 2.5: SÜRÜDE KAÇ KUZU VAR?
+      if (sId === "suru_sayisi") {
+        const cnt = h.suruSayisi || 20;
+        vp.innerHTML = `
+          <h2 class="ru-question-title">Sürüde kaç ${h.tip === "koyun" ? "koyun" : "kuzu"} var?</h2>
+          <p class="ru-question-sub">Yem tablosunu 1 hayvan için hazırlarken, toplam yem maliyetini ve kârı tüm sürün için de hesaplayacağım.</p>
+          <div class="ru-slider-box">
+            <div style="font-size:2.8rem; line-height:1.1; margin-bottom:4px;" aria-hidden="true">${cnt >= 100 ? "🐑🐑🐑" : (cnt >= 20 ? "🐑🐑" : "🐑")}</div>
+            <div class="ru-weight-readout" id="ku-count-display">${cnt} Baş</div>
+            <div class="ru-slider-controls">
+              <button type="button" class="ru-step-round" onclick="adjustKuCount(-5)" aria-label="5 azalt">−</button>
+              <input type="range" class="ru-range-input" id="ku-count-slider" min="1" max="500" step="1" value="${cnt}" oninput="onKuCountSlide(this.value)" aria-label="Sürü hayvan sayısı kaydırıcı">
+              <button type="button" class="ru-step-round" onclick="adjustKuCount(5)" aria-label="5 artır">+</button>
+            </div>
+            <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:8px; margin-top:10px;">
+              <button type="button" class="btn ${cnt === 1 ? 'btn-primary' : 'btn-outline'} btn-sm" onclick="setKuCountExact(1)">1 Baş</button>
+              <button type="button" class="btn ${cnt === 20 ? 'btn-primary' : 'btn-outline'} btn-sm" onclick="setKuCountExact(20)">20 Baş</button>
+              <button type="button" class="btn ${cnt === 50 ? 'btn-primary' : 'btn-outline'} btn-sm" onclick="setKuCountExact(50)">50 Baş</button>
+              <button type="button" class="btn ${cnt === 100 ? 'btn-primary' : 'btn-outline'} btn-sm" onclick="setKuCountExact(100)">100 Baş</button>
+            </div>
+          </div>
+          <div class="ru-nav-row">
+            <button type="button" class="ru-nav-back" onclick="prevKuScreen()">← Geri Dön</button>
+            <button type="button" class="ru-nav-next" onclick="nextKuScreen()">Devam Et →</button>
+          </div>
+        `;
+        return;
+      }
+
+      // ADIM 3 — SORU 3.1: KAÇ GÜNDE SATIŞA HAZIR OLSUN?
+      if (sId === "hedef_sure") {
+        const opts = [
+          { val: 60, icon: "⏩", title: "60 gün (hızlı besi)", desc: "Çok yem, hızlı satış" },
+          { val: 90, icon: "🚶", title: "90 gün (normal besi) ⭐", desc: "Dengeli (Önerilen)" },
+          { val: 120, icon: "🐢", title: "120 gün (yavaş besi)", desc: "Az yem, yavaş ama ucuz" }
+        ];
+        vp.innerHTML = `
+          <h2 class="ru-question-title">Kaç günde satışa hazır olsun?</h2>
+          <p class="ru-question-sub">Bayrama veya kesim hedefine kaç gün kaldığını seç.</p>
+          <div class="ru-choice-grid">
+            ${opts.map(o => `
+              <button type="button" class="ru-choice-btn ${Number(h.hedefSure) === o.val ? 'selected' : ''}" onclick="selectKuHedefSure(${o.val})">
+                <span class="ru-choice-icon">${o.icon}</span>
+                <span class="ru-choice-label">${o.title}</span>
+                <span class="ru-choice-desc">${o.desc}</span>
+              </button>
+            `).join("")}
+          </div>
+          <div class="ru-nav-row">
+            <button type="button" class="ru-nav-back" onclick="prevKuScreen()">← Geri Dön</button>
+            <button type="button" class="ru-nav-next" onclick="nextKuScreen()">Devam Et →</button>
+          </div>
+        `;
+        return;
+      }
+
+      // ADIM 3 — SORU 3.2: SATIŞTA KAÇ KİLO OLSUN?
+      if (sId === "hedef_kilo") {
+        const minTarget = Math.max(30, h.ortalamaCanliAgirlik + 5);
+        const maxTarget = h.tip === "kuzu" ? 65 : 85;
+        if (h.hedefSatisKilo < minTarget) h.hedefSatisKilo = Math.min(maxTarget, h.ortalamaCanliAgirlik + 18);
+        const targetKg = h.hedefSatisKilo;
+        const adgG = Math.round(((targetKg - h.ortalamaCanliAgirlik) * 1000) / Math.max(15, h.hedefSure));
+        const realism = evaluateKuAdgRealism(h.tip, adgG);
+        const idealTargetKg = Math.min(maxTarget, Math.max(minTarget, Math.round(h.ortalamaCanliAgirlik + (( realism.minG + realism.maxG ) / 2 * h.hedefSure) / 1000)));
+
+        vp.innerHTML = `
+          <h2 class="ru-question-title">Satışta kaç kilo olsun?</h2>
+          <p class="ru-question-sub">Başlangıç kilosu <strong>${h.ortalamaCanliAgirlik} kg</strong>, süre <strong>${h.hedefSure} gün</strong>.</p>
+          <div class="ru-slider-box">
+            <div class="ru-weight-readout" id="ku-target-kg-display">${targetKg} kg</div>
+            <div class="ru-slider-controls">
+              <button type="button" class="ru-step-round" onclick="adjustKuTargetKg(-1)" aria-label="1 kilo azalt">−</button>
+              <input type="range" class="ru-range-input" id="ku-target-kg-slider" min="${minTarget}" max="${maxTarget}" step="1" value="${targetKg}" oninput="onKuTargetKgSlide(this.value)" aria-label="Hedef satış kilosu kaydırıcı">
+              <button type="button" class="ru-step-round" onclick="adjustKuTargetKg(1)" aria-label="1 kilo artır">+</button>
+            </div>
+            <div id="ku-adg-live-box" style="margin-top:12px; padding:12px; border-radius:8px; border:2px solid var(--border); background:var(--surface); font-size:0.96rem; font-weight:800;">
+              ${h.ortalamaCanliAgirlik} kg'dan ${targetKg} kg'a ${h.hedefSure} günde = günde ortalama <strong>${adgG} gram</strong> (yaklaşık 1 su bardağı kadar).<br>
+              <span style="color:${realism.realistic ? 'var(--primary)' : '#b45309'};">${realism.message}</span>
+              ${!realism.realistic ? `
+                <div style="margin-top:8px;">
+                  <button type="button" class="btn btn-outline btn-sm" onclick="setKuIdealTargetKg(${idealTargetKg})">
+                    🎯 İdeal Hedefe Çek (${idealTargetKg} kg)
+                  </button>
+                </div>
+              ` : ""}
+            </div>
+          </div>
+          <div class="ru-fact-box">
+            💡 <strong>Biliyor muydun?</strong> Erkek kuzularda kaya tuzu ve temiz su eksik olursa idrar yolunda taş oluşur; bol su ve tuz kuzunun hayatını kurtarır!
+          </div>
+          <div class="ru-nav-row">
+            <button type="button" class="ru-nav-back" onclick="prevKuScreen()">← Geri Dön</button>
+            <button type="button" class="ru-nav-next" onclick="nextKuScreen()">Devam Et →</button>
+          </div>
+        `;
+        return;
+      }
+
+      // ADIM 4 — SORU 4.1: KABA YEMLER
+      if (sId === "kaba_yem") {
+        vp.innerHTML = `
+          <h2 class="ru-question-title">Ağılda hangi kaba yemler var? (Birden fazla seç)</h2>
+          <p class="ru-question-sub">Kaba yem kuzuların geviş getirmesini sağlar ve işkembe ekşimesini önler.</p>
+          ${kuState.secilenKaba.length === 0 ? `<div class="alert-box" style="margin-bottom:10px;">Henüz yem seçmedin. Ağılda ne varsa onu seç, gerisini ben hallederim. 👇</div>` : ""}
+          <div class="ru-feed-grid">
+            ${KU_KABA_KEYS.map(k => {
+              const m = KU_FEEDS_META[k];
+              const sel = kuState.secilenKaba.includes(k);
+              return `
+                <button type="button" class="ru-feed-chip ${sel ? 'selected' : ''}" onclick="toggleKuFeed('kaba', '${k}')" aria-pressed="${sel}">
+                  <span class="ru-feed-emoji">${m.emoji}</span>
+                  <span>${m.ad}</span>
+                </button>
+              `;
+            }).join("")}
+          </div>
+          <div class="ru-nav-row">
+            <button type="button" class="ru-nav-back" onclick="prevKuScreen()">← Geri Dön</button>
+            <button type="button" class="ru-nav-next" onclick="nextKuScreen()">Devam Et →</button>
+          </div>
+        `;
+        return;
+      }
+
+      // ADIM 4 — SORU 4.2: KESİF YEMLER
+      if (sId === "kesif_yem") {
+        vp.innerHTML = `
+          <h2 class="ru-question-title">Hangi kesif yemleri kullanabilirsin?</h2>
+          <p class="ru-question-sub">Arpa, mısır, küspe veya fabrika kuzu yemi kuzuların hızlı kilo almasını sağlar.</p>
+          ${kuState.secilenKesif.length === 0 ? `<div class="alert-box" style="margin-bottom:10px;">Henüz kesif yem seçmedin. Ağılda ne varsa onu seç, gerisini ben hallederim. 👇</div>` : ""}
+          <div class="ru-feed-grid">
+            ${KU_KESIF_KEYS.map(k => {
+              const m = KU_FEEDS_META[k];
+              const sel = kuState.secilenKesif.includes(k);
+              return `
+                <button type="button" class="ru-feed-chip ${sel ? 'selected' : ''}" onclick="toggleKuFeed('kesif', '${k}')" aria-pressed="${sel}">
+                  <span class="ru-feed-emoji">${m.emoji}</span>
+                  <span>${m.ad}</span>
+                </button>
+              `;
+            }).join("")}
+          </div>
+          ${kuState.secilenKesif.includes("pamuk_tohumu_kuspesi") ? `
+            <div class="alert-box" style="margin-top:10px;">
+              ⚠️ <strong>Pamuk Tohumu Küspesi Notu:</strong> Kuzularda gossypol hassasiyeti nedeniyle motorumuz pamuk küspesini en fazla %10 oranında güvenli sınırda kullanacaktır.
+            </div>
+          ` : ""}
+          <div class="ru-nav-row">
+            <button type="button" class="ru-nav-back" onclick="prevKuScreen()">← Geri Dön</button>
+            <button type="button" class="ru-nav-next" onclick="nextKuScreen()">Devam Et →</button>
+          </div>
+        `;
+        return;
+      }
+
+      // ADIM 4 — SORU 4.3: KATKI MADDELERİ (SIĞIR PREMİKSİ ENGELİ DAHİL)
+      if (sId === "katki") {
+        vp.innerHTML = `
+          <h2 class="ru-question-title">Rasyonuna şunlardan hangilerini ekleyebilirsin?</h2>
+          <p class="ru-question-sub">Tuz, Koyun Premiksi ve Amonyum Klorür (erkek kuzularda idrar taşı önleyici) şiddetle önerilir.</p>
+          ${kuState.cattlePremixWarning ? `
+            <div class="alert-box" style="margin-bottom:12px; border-width:3px; background:#fef2f2; color:#7f1d1d;">
+              <strong>🚫 BAKIR ZEHİRLENMESİ UYARISI (ENGELLENDİ):</strong><br>
+              ${kuState.cattlePremixWarning}
+            </div>
+          ` : ""}
+          <div class="ru-feed-grid">
+            ${KU_KATKI_KEYS.map(k => {
+              const m = KU_FEEDS_META[k];
+              const sel = kuState.secilenKatki.includes(k);
+              return `
+                <button type="button" class="ru-feed-chip ${sel ? 'selected' : ''}" onclick="toggleKuFeed('katki', '${k}')" aria-pressed="${sel}">
+                  <span class="ru-feed-emoji">${m.emoji}</span>
+                  <span>${m.ad}</span>
+                </button>
+              `;
+            }).join("")}
+            <button type="button" class="ru-feed-chip ${kuState.secilenKatki.length === 0 ? 'selected' : ''}" onclick="clearKuAdditives()">
+              <span class="ru-feed-emoji">❌</span>
+              <span>Hiçbiri (Temel Tuz/Minerali Sen Ayarla)</span>
+            </button>
+          </div>
+          <div class="ru-fact-box">
+            💡 <strong>Biliyor muydun?</strong> Koyunlar bakır mineraline sığırlardan 10 kat daha duyarlıdır. Sığır premiksi koyunu 2 hafta içinde sarartıp öldürür! Mutlaka <strong>koyun premiksi</strong> al.
+          </div>
+          <div class="ru-nav-row">
+            <button type="button" class="ru-nav-back" onclick="prevKuScreen()">← Geri Dön</button>
+            <button type="button" class="ru-nav-next" onclick="nextKuScreen()">Devam Et →</button>
+          </div>
+        `;
+        return;
+      }
+
+      // ADIM 4 — SORU 4.4 & 4.5: FİYATLAR VE SERBEST YEMLEME
+      if (sId === "fiyat_serbest") {
+        const allChosen = Array.from(new Set([...kuState.secilenKaba, ...kuState.secilenKesif, ...kuState.secilenKatki]));
+        vp.innerHTML = `
+          <h2 class="ru-question-title">Bu yemlerin fiyatlarını biliyor musun?</h2>
+          <p class="ru-question-sub">Biliyorsan + / - ile kendi alış fiyatını gir; bilmiyorsan güncel ortalama fiyatları (12.10.2026) kullanırım.</p>
+          <div class="ru-choice-grid cols-2">
+            <button type="button" class="ru-choice-btn ${kuState.fiyatBiliyorMu === 'hayir' ? 'selected' : ''}" onclick="setKuPriceMode('hayir')">
+              <span class="ru-choice-icon">⚡</span>
+              <span class="ru-choice-label">Hayır, sen ortalama kullan</span>
+              <span class="ru-choice-desc">Türkiye güncel yem borsası ortalamasıyla hesaplar</span>
+            </button>
+            <button type="button" class="ru-choice-btn ${kuState.fiyatBiliyorMu === 'evet' ? 'selected' : ''}" onclick="setKuPriceMode('evet')">
+              <span class="ru-choice-icon">🧮</span>
+              <span class="ru-choice-label">Evet, gireceğim</span>
+              <span class="ru-choice-desc">Her yemin ₺/kg fiyatını + / - ile ayarla</span>
+            </button>
+          </div>
+
+          ${kuState.fiyatBiliyorMu === "evet" ? `
+            <div style="margin-top:12px;">
+              ${allChosen.map(fid => {
+                const fObj = getKuFeedObj(fid);
+                if (!fObj) return "";
+                return `
+                  <div class="ru-price-editor-row">
+                    <div><strong>${fObj.emoji} ${fObj.ad}</strong></div>
+                    <div class="step-btn-group">
+                      <button type="button" class="step-btn" onclick="adjustKuFeedPrice('${fid}', -0.5)">−</button>
+                      <span id="ku-price-val-${fid}" style="min-width:86px; text-align:center; font-weight:900;">${fObj.fiyat_tl.toFixed(2)} ₺/kg</span>
+                      <button type="button" class="step-btn" onclick="adjustKuFeedPrice('${fid}', 0.5)">+</button>
+                    </div>
+                  </div>
+                `;
+              }).join("")}
+            </div>
+          ` : ""}
+
+          <div style="margin-top:16px; padding-top:14px; border-top:2px dashed var(--border);">
+            <div style="font-weight:900; font-size:1.05rem; margin-bottom:6px;">Kuzuların önünde yem sürekli duruyor mu?</div>
+            <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:10px;">Kuzular sığır gibi büyük öğün yiyemez, sık ve az yemek ister.</p>
+            <div class="ru-choice-grid cols-2">
+              <button type="button" class="ru-choice-btn ${kuState.serbestYemleme === true ? 'selected' : ''}" onclick="setKuSerbest(true)">
+                <span class="ru-choice-icon">♾️</span>
+                <span class="ru-choice-label">Evet, serbest (yemlik hep dolu)</span>
+              </button>
+              <button type="button" class="ru-choice-btn ${kuState.serbestYemleme === false ? 'selected' : ''}" onclick="setKuSerbest(false)">
+                <span class="ru-choice-icon">⏰</span>
+                <span class="ru-choice-label">Hayır, günde 2–3 kez veriyorum</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="ru-nav-row">
+            <button type="button" class="ru-nav-back" onclick="prevKuScreen()">← Geri Dön</button>
+            <button type="button" class="ru-nav-next" onclick="nextKuScreen()">Devam Et →</button>
+          </div>
+        `;
+        return;
+      }
+
+      // ADIM 5 — SORU 5.1, 5.2 & 5.3: SAĞLIK, AĞIL VE ENTEROTOKSEMİ AŞISI
+      if (sId === "saglik_ortam_asi") {
+        const issues = h.saglikSorunlari || [];
+        const healthOpts = [
+          { key: "idrar_yapamiyor", icon: "💧", label: "İdrar yapamıyor (erkek) — Acil!" },
+          { key: "ishal", icon: "💩", label: "İshal" },
+          { key: "solunum", icon: "🫁", label: "Solunum sorunu (öksürük)" },
+          { key: "topallik", icon: "🦶", label: "Topallık" },
+          { key: "zayiflik", icon: "🩸", label: "Zayıflık, iştahsızlık" },
+          { key: "kemik", icon: "🦴", label: "Kemik problemi, yürüyemiyor" }
+        ];
+        vp.innerHTML = `
+          <h2 class="ru-question-title">Kuzularda şu an bir sorun var mı?</h2>
+          <p class="ru-question-sub">Varsa seç, yem tarifini koruyucu olarak hemen uyarlayalım.</p>
+          <div class="ru-feed-grid">
+            <button type="button" class="ru-feed-chip ${issues.length === 0 ? 'selected' : ''}" onclick="clearKuHealthIssues()">
+              <span class="ru-feed-emoji">🩺</span>
+              <span>Hayır, sağlıklı</span>
+            </button>
+            ${healthOpts.map(o => {
+              const sel = issues.includes(o.key);
+              return `
+                <button type="button" class="ru-feed-chip ${sel ? 'selected' : ''}" onclick="toggleKuHealthIssue('${o.key}')">
+                  <span class="ru-feed-emoji">${o.icon}</span>
+                  <span>${o.label}</span>
+                </button>
+              `;
+            }).join("")}
+          </div>
+
+          <div style="margin-top:16px; padding-top:14px; border-top:2px dashed var(--border);">
+            <div style="font-weight:900; font-size:1rem; margin-bottom:8px;">Ağıl nasıl?</div>
+            <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:8px;">
+              <button type="button" class="btn ${h.barinma === 'kapali' ? 'btn-primary' : 'btn-outline'} btn-sm" onclick="setKuBarinma('kapali')">❄️ Kapalı / Ağıl</button>
+              <button type="button" class="btn ${h.barinma === 'acik' ? 'btn-primary' : 'btn-outline'} btn-sm" onclick="setKuBarinma('acik')">🌤️ Açık / Çit</button>
+              <button type="button" class="btn ${h.barinma === 'yayla' ? 'btn-primary' : 'btn-outline'} btn-sm" onclick="setKuBarinma('yayla')">🏕️ Yayla / Mera</button>
+            </div>
+          </div>
+
+          <div style="margin-top:14px; padding-top:14px; border-top:2px dashed var(--border);">
+            <div style="font-weight:900; font-size:1rem; margin-bottom:6px;">Kuzulara koruyucu aşı (Enterotoksemi / Çelerme) yapıldı mı?</div>
+            <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:8px;">
+              <button type="button" class="btn ${h.enterotoksemiAsili === true ? 'btn-primary' : 'btn-outline'} btn-sm" onclick="setKuAsi(true)">✅ Evet, yapıldı</button>
+              <button type="button" class="btn ${h.enterotoksemiAsili === false ? 'btn-primary' : 'btn-outline'} btn-sm" onclick="setKuAsi(false)">⚠️ Hayır</button>
+              <button type="button" class="btn btn-outline btn-sm" onclick="setKuAsi(false)">❓ Bilmiyorum</button>
+            </div>
+          </div>
+
+          <div class="ru-nav-row" style="margin-top:20px;">
+            <button type="button" class="ru-nav-back" onclick="prevKuScreen()">← Geri Dön</button>
+            <button type="button" class="ru-nav-next" onclick="goKuScreen('loading')">🎉 Yem Tarifimi Hazırla</button>
+          </div>
+        `;
+        return;
+      }
+
+      // ADIM 6 — HESAPLAMA EKRANI (<= 2 SANİYE)
+      if (sId === "loading") {
+        vp.innerHTML = `
+          <div class="ru-loader-box" role="status" aria-live="assertive">
+            <div class="su-milk-anim" aria-hidden="true">🌾 → 🐑 → 📋</div>
+            <h2 class="ru-question-title">Kuzular yem yiyor... 🐑🌾</h2>
+            <p class="ru-question-sub" style="margin-bottom:8px;">Kuzularının yem tarifi hazırlanıyor...</p>
+            <div style="font-size:0.9rem; font-weight:800; color:var(--primary);">
+              Enerji hesaplanıyor... • Protein dengeleniyor... • Bakır kontrol ediliyor...
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      // ADIM 7 — SONUÇ EKRANI: "YEM TARİFİN"
+      const res = kuState.lastSonuc || solveKuzuUstasiSheep();
+      kuState.lastSonuc = res;
+      renderKuPrintPoster(res);
+
+      let sabahToplam = 0, aksamToplam = 0;
+      res.kalemler.forEach(k => { sabahToplam += k.sabahKg; aksamToplam += k.aksamKg; });
+
+      const riskLabel = (r) => {
+        if (r === "gecersiz") return "🟢 RİSK YOK (Dişi)";
+        if (r === "yesil") return "🟢 DÜŞÜK (Güvenli)";
+        if (r === "sari") return "🟡 ORTA (Dikkat)";
+        return "🔴 YÜKSEK (Önlem Al)";
+      };
+      const riskClass = (r) => (r === "yesil" || r === "gecersiz") ? "risk-yesil" : (r === "sari" ? "risk-sari" : "risk-kirmizi");
+      const fmtKg = (k, val) => (k.kategori === "katki" && val < 0.1) ? val.toFixed(3).replace(".", ",") : val.toFixed(2).replace(".", ",");
+
+      vp.innerHTML = `
+        <div class="ru-result-banner">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+            <div>
+              <h3>🎉 Hazır! İşte Kuzularının Günlük Yem Tarifi</h3>
+              <div style="font-size:0.9rem; font-weight:700;">
+                ${res.girdiOzeti.tipLabel} • <strong>${res.girdiOzeti.ortalamaCanliAgirlik} kg</strong>
+                ${!res.girdiOzeti.isAnacGebeVeyaEmziren ? `→ Hedef <strong>${res.girdiOzeti.hedefSatisKilo} kg</strong> (${res.girdiOzeti.hedefSure} gün)` : `• ${res.girdiOzeti.emzirdigiKuzuSayisi} Kuzulu Anaç`}
+                • Sürü: <strong>${res.girdiOzeti.suruSayisi} Baş</strong>
+              </div>
+            </div>
+            <span class="su-club-badge">${res.rozet}</span>
+          </div>
+        </div>
+
+        <!-- RİSK GÖSTERGELERİ (SONUÇ EKRANININ EN ÜSTÜNDE — ÇOBAN ÖNCE RİSKİ GÖRÜR) -->
+        <div class="su-risk-grid" aria-label="Koyun ve Kuzu Kritik Sağlık Risk Göstergeleri">
+          <div class="su-risk-card ${riskClass(res.riskler.idrarTasi)}">
+            <div style="font-size:0.78rem; font-weight:900; text-transform:uppercase;">🧂 İdrar Taşı Riski</div>
+            <div style="font-size:1rem; font-weight:900; margin:4px 0;">${riskLabel(res.riskler.idrarTasi)}</div>
+            <div style="font-size:0.76rem; font-weight:700;">Ca/P: ${String(res.ca_p_pct).replace(".", ",")}/1 • Tuz: %${String(res.tuz_pct).replace(".", ",")}</div>
+          </div>
+          <div class="su-risk-card ${riskClass(res.riskler.bakirZehirlenme)}">
+            <div style="font-size:0.78rem; font-weight:900; text-transform:uppercase;">🟤 Bakır Zehirlenme Riski</div>
+            <div style="font-size:1rem; font-weight:900; margin:4px 0;">${riskLabel(res.riskler.bakirZehirlenme)}</div>
+            <div style="font-size:0.76rem; font-weight:700;">Bakır: ${String(res.cu_mg_kg_km).replace(".", ",")} mg/kg KM (≤15 güvenli)</div>
+          </div>
+          <div class="su-risk-card ${riskClass(res.riskler.enterotoksemi)}">
+            <div style="font-size:0.78rem; font-weight:900; text-transform:uppercase;">🩸 Enterotoksemi Riski</div>
+            <div style="font-size:1rem; font-weight:900; margin:4px 0;">${riskLabel(res.riskler.enterotoksemi)}</div>
+            <div style="font-size:0.76rem; font-weight:700;">${h.enterotoksemiAsili ? "Aşılı • Kademeli geçiş" : "⚠️ Aşısız! Hemen aşılat"}</div>
+          </div>
+          ${res.riskler.gebelikToksemisi ? `
+            <div class="su-risk-card ${riskClass(res.riskler.gebelikToksemisi)}">
+              <div style="font-size:0.78rem; font-weight:900; text-transform:uppercase;">🤰 Gebelik Toksemisi</div>
+              <div style="font-size:1rem; font-weight:900; margin:4px 0;">${riskLabel(res.riskler.gebelikToksemisi)}</div>
+              <div style="font-size:0.76rem; font-weight:700;">Son 2 ay enerji koruması aktif</div>
+            </div>
+          ` : ""}
+        </div>
+
+        <!-- A. GÜNLÜK YEM LİSTESİ (ANA ÇIKTI — 1 KUZU / KOYUN İÇİN) -->
+        <h4 style="font-size:1rem; font-weight:900; margin:12px 0 6px 0;">
+          A. Günlük Yem Listesi (1 ${res.girdiOzeti.tip === "koyun" ? "Koyun" : "Kuzu"} İçin Sabah ve Akşam Öğünü)
+        </h4>
+        <div class="table-container">
+          <table class="ru-meal-table">
+            <thead>
+              <tr>
+                <th>Yem</th>
+                <th>Miktar (kg)</th>
+                <th>Sabah</th>
+                <th>Akşam</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${res.kalemler.map(k => `
+                <tr>
+                  <td><strong>${k.emoji} ${k.ad}</strong></td>
+                  <td><strong>${fmtKg(k, k.miktarKg)} kg</strong></td>
+                  <td>${k.sabahKg > 0 ? fmtKg(k, k.sabahKg) + " kg" : "—"}</td>
+                  <td>${k.aksamKg > 0 ? fmtKg(k, k.aksamKg) + " kg" : "—"}</td>
+                </tr>
+              `).join("")}
+              <tr style="background:var(--surface-alt); font-size:1.02rem;">
+                <td><strong>TOPLAM (1 Hayvan / Gün)</strong></td>
+                <td><strong>${res.gunlukToplamKg.toFixed(3).replace(".", ",")} kg</strong></td>
+                <td><strong>${sabahToplam.toFixed(2).replace(".", ",")} kg</strong></td>
+                <td><strong>${aksamToplam.toFixed(2).replace(".", ",")} kg</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- B. "NE KADAR YEDİĞİ" ÖZETİ -->
+        <h4 style="font-size:1rem; font-weight:900; margin:14px 0 6px 0;">
+          B. "Ne Kadar Yediği" Özeti
+        </h4>
+        <div style="background:var(--surface-alt); border:2px solid var(--border); border-radius:10px; padding:12px; font-size:0.94rem; line-height:1.65;">
+          • 📦 <strong>Günlük toplam yem:</strong> <strong>${res.gunlukToplamKg.toFixed(2).replace(".", ",")} kg</strong><br>
+          • 💧 <strong>Kuru madde (yemdeki suyu çıkardığımızda kalan kısım):</strong> <strong>~${res.kuruMaddeKg.toFixed(2).replace(".", ",")} kg</strong> <em>(kuzu günde vücut ağırlığının ~%4'ü kadar KM yer)</em><br>
+          • ⚡ <strong>Enerji (ME):</strong> <strong>${String(res.me_mcal_kg_km).replace(".", ",")} Mcal/kg KM</strong> <em>(hedef: 2,6–2,9)</em> ✅<br>
+          • 🧬 <strong>Protein (HP):</strong> <strong>%${String(res.hp_pct).replace(".", ",")}</strong> <em>(hedef: 15–18)</em> ✅<br>
+          • 🌾 <strong>Lif (NDF — geviş lifi):</strong> <strong>%${String(res.ndf_pct).replace(".", ",")}</strong> <em>(hedef: 25–45 — altı tehlikeli)</em> ✅<br>
+          • ⚖️ <strong>Kalsiyum/Fosfor oranı:</strong> <strong>${String(res.ca_p_pct).replace(".", ",")} / 1</strong> <em>(idrar taşı için önemli, ≥ 2:1)</em> ✅<br>
+          • 🧂 <strong>Tuz:</strong> <strong>%${String(res.tuz_pct).replace(".", ",")}</strong> <em>(kuzularda idrar taşı için yüksek tutulur)</em> ✅<br>
+          • 🧪 <strong>Kaba/Kesif oranı:</strong> <strong>%${res.kabaKesifOrani[0]} / %${res.kabaKesifOrani[1]}</strong> ✅
+        </div>
+
+        <!-- C. RENKLİ UYUM TABLOSU -->
+        <h4 style="font-size:1rem; font-weight:900; margin:14px 0 6px 0;">
+          C. Renkli Uyum Tablosu
+        </h4>
+        <div>
+          ${res.uyumTablosu.map(u => `
+            <div class="ru-traffic-row">
+              <span style="font-size:1.2rem;">${u.ikon}</span>
+              <div><strong>${u.besin}:</strong> ${u.mesaj}</div>
+            </div>
+          `).join("")}
+        </div>
+
+        <!-- D. UYARILAR -->
+        <h4 style="font-size:1rem; font-weight:900; margin:14px 0 6px 0;">
+          D. Önemli Ağıl ve Sağlık Uyarıları
+        </h4>
+        <div style="display:grid; gap:8px;">
+          ${res.uyarilar.map(u => `<div class="alert-box" style="margin:0;">${u}</div>`).join("")}
+        </div>
+
+        <!-- E. KİLO ALIM TAHMİNİ & SÜRÜ KUTLAMASI -->
+        <h4 style="font-size:1rem; font-weight:900; margin:14px 0 6px 0;">
+          E. Kilo Alım Tahmini
+        </h4>
+        <div style="background:var(--surface-alt); border:2px solid var(--primary); border-radius:10px; padding:12px; font-size:0.96rem;">
+          ${res.girdiOzeti.isAnacGebeVeyaEmziren ? `
+            🐑 <strong>Bu yem tarifi anaç koyun ve kuzularının sağlıklı büyümesi için dengelendi.</strong><br>
+            🍼 Doğum sonrası bol ağız sütü ve yüksek kuzu yaşama gücü sağlar.
+          ` : `
+            🐑 <strong>Bu rasyonla kuzu günde ~${res.hedefAdg_g} gram (yaklaşık 1 su bardağı kadar) alır.</strong><br>
+            📅 <strong>${res.girdiOzeti.hedefSure} günde:</strong> <strong>~${String(res.tahminiToplamKazanc_kg).replace(".", ",")} kg</strong> kazanır.<br>
+            🎯 Başlangıç ${res.girdiOzeti.ortalamaCanliAgirlik} kg ise, satışta <strong>~${String(res.tahminiSatisKilo_kg).replace(".", ",")} kg</strong> olur.<br>
+            ${res.girdiOzeti.suruSayisi > 1 ? `
+              <div style="margin-top:6px; padding-top:6px; border-top:1px dashed var(--border); color:var(--primary); font-weight:900;">
+                🎉 Bu rasyonla ${res.girdiOzeti.hedefSure} günde ${res.girdiOzeti.suruSayisi} kuzudan toplam ${Math.round(res.tahminiToplamKazanc_kg * res.girdiOzeti.suruSayisi)} kg canlı ağırlık artışı alırsın! Sen iyi bir çobansın.
+              </div>
+            ` : ""}
+          `}
+        </div>
+
+        <!-- F. MALİYET VE SÜRÜ HESABI -->
+        <h4 style="font-size:1rem; font-weight:900; margin:14px 0 6px 0;">
+          F. Maliyet & Sürü Kazanç Hesabı <small style="font-weight:700; color:var(--text-muted);">(Fiyatlar 12.10.2026 tarihine aittir)</small>
+        </h4>
+        <div style="background:var(--surface-alt); border:2px solid var(--border); border-radius:10px; padding:12px; font-size:0.95rem; line-height:1.65;">
+          💰 <strong>1 ${res.girdiOzeti.tip === "koyun" ? "koyun" : "kuzu"} için günlük maliyet:</strong> <strong>${res.maliyet.gunlukTekTL} ₺</strong><br>
+          📅 <strong>${res.girdiOzeti.hedefSure} gün için 1 kuzu:</strong> <strong>${res.maliyet.sureToplamTekTL.toLocaleString("tr-TR")} ₺</strong><br>
+          ${res.girdiOzeti.suruSayisi > 1 ? `
+            🐑 <strong>${res.girdiOzeti.suruSayisi} kuzu için toplam (${res.girdiOzeti.hedefSure} gün):</strong> <strong>${res.maliyet.toplamSuruTL.toLocaleString("tr-TR")} ₺</strong> <em>(günlük sürü: ${res.maliyet.gunlukSuruTL.toLocaleString("tr-TR")} ₺)</em><br>
+          ` : ""}
+          ${!res.girdiOzeti.isAnacGebeVeyaEmziren ? `
+            💰 <strong>1 kg canlı ağırlık artışı maliyeti:</strong> <strong>~${res.maliyet.kgBasinaTL} ₺</strong><br>
+            💡 <em>"Kuzu canlı fiyatı ${res.maliyet.canliBaskulFiyatTL} ₺/kg ise 1 kuzudan <strong>${res.maliyet.tahminiKarTL >= 0 ? '+' : ''}${res.maliyet.tahminiKarTL.toLocaleString("tr-TR")} ₺</strong> ${res.girdiOzeti.suruSayisi > 1 ? `(${res.girdiOzeti.suruSayisi} kuzudan <strong>${res.maliyet.tahminiKarSuruTL >= 0 ? '+' : ''}${res.maliyet.tahminiKarSuruTL.toLocaleString("tr-TR")} ₺</strong>)` : ''} yem üzeri kâr var demektir."</em>
+          ` : ""}
+
+          <!-- Hızlı Kuzu Sayısı ve Canlı Fiyat Değiştirici -->
+          <div style="margin-top:10px; padding-top:10px; border-top:1.5px dashed var(--border); display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+            <div style="display:flex; align-items:center; gap:6px;">
+              <span style="font-size:0.86rem; font-weight:800;">📊 Kuzu Sayısı:</span>
+              <button type="button" class="step-btn" onclick="quickAdjustKuFlock(-5)">−</button>
+              <strong style="min-width:65px; text-align:center;">${res.girdiOzeti.suruSayisi} Baş</strong>
+              <button type="button" class="step-btn" onclick="quickAdjustKuFlock(5)">+</button>
+            </div>
+            <div style="display:flex; align-items:center; gap:6px;">
+              <span style="font-size:0.86rem; font-weight:800;">💵 Canlı Baskül (₺/kg):</span>
+              <button type="button" class="step-btn" onclick="quickAdjustKuLivePrice(-10)">−</button>
+              <strong style="min-width:65px; text-align:center;">${res.maliyet.canliBaskulFiyatTL} ₺</strong>
+              <button type="button" class="step-btn" onclick="quickAdjustKuLivePrice(10)">+</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- G. AKSİYON BUTONLARI -->
+        <h4 style="font-size:1rem; font-weight:900; margin:16px 0 6px 0;">
+          G. Aksiyon Butonları
+        </h4>
+        <div class="ru-action-grid">
+          <button type="button" class="btn btn-primary" onclick="printKuzuUstasiPoster()">
+            📄 PDF Olarak İndir / Yazdır (A4 Poster)
+          </button>
+          <button type="button" class="btn btn-outline" onclick="shareKuzuUstasiWhatsApp()">
+            📱 WhatsApp'ta Paylaş
+          </button>
+          <button type="button" class="btn btn-outline" onclick="saveKuzuUstasiToStore()">
+            💾 Tarifi Deftere Kaydet
+          </button>
+          <button type="button" class="btn btn-outline" onclick="toggleKuEditJumpMenu()">
+            🔄 Yeniden Düzenle (Adım Seç)
+          </button>
+          <button type="button" class="btn btn-outline" onclick="jumpToKuPriceEdit()">
+            🧮 Fiyat Değiştir, Yeniden Hesapla
+          </button>
+          <button type="button" class="btn btn-outline" onclick="goKuScreen('suru_sayisi')">
+            📊 Kuzu Sayısını Değiştir, Toplam Maliyeti Gör
+          </button>
+          <button type="button" class="btn btn-outline" onclick="startKuFresh()">
+            🐑 Başka Bir Grup İçin Yeni Rasyon Hazırla
+          </button>
+        </div>
+
+        ${kuState.showEditJumpMenu ? `
+          <div style="margin-top:10px; padding:12px; background:var(--surface-alt); border:2px solid var(--border); border-radius:10px;">
+            <div style="font-weight:900; font-size:0.9rem; margin-bottom:8px;">Hangi adımı değiştirmek istiyorsun?</div>
+            <div style="display:flex; flex-wrap:wrap; gap:6px;">
+              <button type="button" class="btn btn-outline btn-sm" onclick="goKuScreen('tip')">1. Hayvan Tipi (${res.girdiOzeti.tipLabel})</button>
+              <button type="button" class="btn btn-outline btn-sm" onclick="goKuScreen('kilo')">2. Kilo (${res.girdiOzeti.ortalamaCanliAgirlik} kg)</button>
+              <button type="button" class="btn btn-outline btn-sm" onclick="goKuScreen('cinsiyet')">3. Cinsiyet (${res.girdiOzeti.cinsiyet})</button>
+              <button type="button" class="btn btn-outline btn-sm" onclick="goKuScreen('suru_sayisi')">4. Sürü Sayısı (${res.girdiOzeti.suruSayisi})</button>
+              <button type="button" class="btn btn-outline btn-sm" onclick="goKuScreen('hedef_sure')">5. Besi Süresi (${res.girdiOzeti.hedefSure} gün)</button>
+              <button type="button" class="btn btn-outline btn-sm" onclick="goKuScreen('hedef_kilo')">6. Satış Kilosu (${res.girdiOzeti.hedefSatisKilo} kg)</button>
+              <button type="button" class="btn btn-outline btn-sm" onclick="goKuScreen('kaba_yem')">7. Kaba Yemler</button>
+              <button type="button" class="btn btn-outline btn-sm" onclick="goKuScreen('kesif_yem')">8. Kesif Yemler</button>
+              <button type="button" class="btn btn-outline btn-sm" onclick="goKuScreen('katki')">9. Katkılar</button>
+              <button type="button" class="btn btn-outline btn-sm" onclick="goKuScreen('saglik_ortam_asi')">10. Sağlık & Aşı</button>
+            </div>
+          </div>
+        ` : ""}
+
+        <!-- ADIM 8 — "NEDEN BÖYLE?" (VARSAYILAN KAPALI AKORDEON) -->
+        <button type="button" class="ru-why-toggle" onclick="toggleKuWhyAccordion()" aria-expanded="${kuState.showWhyAccordion}">
+          <span>🔬 Bu Yem Tarifi Neden Böyle Hazırlandı? (Çoban Dede Açıklıyor)</span>
+          <span>${kuState.showWhyAccordion ? "▲ Gizle" : "▼ Göster"}</span>
+        </button>
+        ${kuState.showWhyAccordion ? `
+          <div class="ru-why-body">
+            <p style="margin-bottom:8px;">
+              • <strong>Tuz ve Amonyum Klorür (İdrar Taşı Kalkanı):</strong> Tuz koyunlarda çok önemlidir. Az olursa erkek kuzu idrar yapamaz ve 2 günde ölür. Bu yüzden tuzu yüksek tutuyor, kalsiyumu fosforun en az 2 katına çıkarıyor ve Amonyum Klorür ekliyoruz.
+            </p>
+            <p style="margin-bottom:8px;">
+              • <strong>Bakır Güvenliği (${String(res.cu_mg_kg_km).replace(".", ",")} mg/kg KM ≤ 15):</strong> Bakır, koyun için zehirdir. Sığır premiksi kullanırsan koyun 2 hafta içinde sararır ve ölür. Bu yüzden mutlaka bakırsız <strong>koyun premiksi</strong> kullanıyoruz.
+            </p>
+            <p style="margin-bottom:8px;">
+              • <strong>Yemlerin Görevleri:</strong><br>
+              ${res.kalemler.map(k => `— <strong>${k.ad}:</strong> ${k.not}`).join("<br>")}
+            </p>
+          </div>
+        ` : ""}
+      `;
+    }
+
+    function selectKuTip(tipKey) {
+      kuState.hayvan.tip = tipKey;
+      if (tipKey === "kuzu") {
+        kuState.hayvan.yasGrubu = "0-3ay";
+        kuState.hayvan.ortalamaCanliAgirlik = 25;
+        kuState.hayvan.hedefSatisKilo = 45;
+        kuState.hayvan.hedefSure = 90;
+      } else if (tipKey === "toklu") {
+        kuState.hayvan.yasGrubu = "6-12ay";
+        kuState.hayvan.ortalamaCanliAgirlik = 40;
+        kuState.hayvan.hedefSatisKilo = 56;
+        kuState.hayvan.hedefSure = 90;
+      } else if (tipKey === "sisek") {
+        kuState.hayvan.yasGrubu = "1-2yas";
+        kuState.hayvan.ortalamaCanliAgirlik = 48;
+        kuState.hayvan.hedefSatisKilo = 62;
+        kuState.hayvan.hedefSure = 120;
+      } else if (tipKey === "koyun") {
+        kuState.hayvan.yasGrubu = "2yas+";
+        kuState.hayvan.ortalamaCanliAgirlik = 60;
+        kuState.hayvan.hedefSatisKilo = 72;
+        kuState.hayvan.donem = "gebe_son";
+      }
+      saveKuProgress();
+      renderKuzuUstasiStep();
+    }
+
+    function selectKuAnacDonem(donemKey) {
+      kuState.hayvan.donem = donemKey;
+      saveKuProgress();
+      renderKuzuUstasiStep();
+    }
+
+    function selectKuAnacKuzuSayisi(cnt) {
+      kuState.hayvan.emzirdigiKuzuSayisi = cnt;
+      saveKuProgress();
+      renderKuzuUstasiStep();
+    }
+
+    function onKuWeightSlide(val) {
+      const num = Math.max(15, Math.min(95, Number(val) || 25));
+      kuState.hayvan.ortalamaCanliAgirlik = num;
+      const disp = document.getElementById("ku-bw-display");
+      if (disp) disp.textContent = `${num} kg`;
+      saveKuProgress();
+    }
+
+    function adjustKuWeight(delta) {
+      const next = Math.max(15, Math.min(95, (kuState.hayvan.ortalamaCanliAgirlik || 25) + delta));
+      kuState.hayvan.ortalamaCanliAgirlik = next;
+      saveKuProgress();
+      renderKuzuUstasiStep();
+    }
+
+    function selectKuCinsiyet(sexKey) {
+      kuState.hayvan.cinsiyet = sexKey;
+      if ((sexKey === "erkek" || sexKey === "karisik") && !kuState.secilenKatki.includes("amonyum_klorur")) {
+        kuState.secilenKatki.push("amonyum_klorur");
+      }
+      saveKuProgress();
+      renderKuzuUstasiStep();
+    }
+
+    function setKuKisir(val) {
+      kuState.hayvan.kisirlastirilmis = Boolean(val);
+      saveKuProgress();
+      renderKuzuUstasiStep();
+    }
+
+    function onKuCountSlide(val) {
+      const num = Math.max(1, Math.min(500, Number(val) || 1));
+      kuState.hayvan.suruSayisi = num;
+      const disp = document.getElementById("ku-count-display");
+      if (disp) disp.textContent = `${num} Baş`;
+      saveKuProgress();
+    }
+
+    function adjustKuCount(delta) {
+      const next = Math.max(1, Math.min(500, (kuState.hayvan.suruSayisi || 20) + delta));
+      kuState.hayvan.suruSayisi = next;
+      saveKuProgress();
+      renderKuzuUstasiStep();
+    }
+
+    function setKuCountExact(cnt) {
+      kuState.hayvan.suruSayisi = cnt;
+      saveKuProgress();
+      renderKuzuUstasiStep();
+    }
+
+    function selectKuHedefSure(days) {
+      kuState.hayvan.hedefSure = days;
+      saveKuProgress();
+      renderKuzuUstasiStep();
+    }
+
+    function onKuTargetKgSlide(val) {
+      const num = Number(val) || 45;
+      kuState.hayvan.hedefSatisKilo = num;
+      saveKuProgress();
+      renderKuzuUstasiStep();
+    }
+
+    function adjustKuTargetKg(delta) {
+      const minT = Math.max(30, kuState.hayvan.ortalamaCanliAgirlik + 5);
+      const next = Math.max(minT, Math.min(85, (kuState.hayvan.hedefSatisKilo || 45) + delta));
+      kuState.hayvan.hedefSatisKilo = next;
+      saveKuProgress();
+      renderKuzuUstasiStep();
+    }
+
+    function setKuIdealTargetKg(idealKg) {
+      kuState.hayvan.hedefSatisKilo = idealKg;
+      saveKuProgress();
+      renderKuzuUstasiStep();
+    }
+
+    function toggleKuFeed(cat, feedId) {
+      if (cat === "katki" && feedId === "sigir_premiksi") {
+        kuState.cattlePremixWarning = "⚠️ Sığır premiksi kullanma! Koyunlar bakıra çok duyarlıdır. Sığır premiksi koyunu 2 hafta içinde sarartıp öldürür. Sistem sığır premiksini engelledi ve yerine güvenli Koyun Premiksi seçti.";
+        if (!kuState.secilenKatki.includes("koyun_premiksi")) {
+          kuState.secilenKatki.push("koyun_premiksi");
+        }
+        saveKuProgress();
+        renderKuzuUstasiStep();
+        return;
+      }
+      kuState.cattlePremixWarning = "";
+      const key = cat === "kaba" ? "secilenKaba" : (cat === "kesif" ? "secilenKesif" : "secilenKatki");
+      const arr = kuState[key] || [];
+      const idx = arr.indexOf(feedId);
+      if (idx >= 0) arr.splice(idx, 1);
+      else arr.push(feedId);
+      kuState[key] = arr;
+      saveKuProgress();
+      renderKuzuUstasiStep();
+    }
+
+    function clearKuAdditives() {
+      kuState.secilenKatki = [];
+      kuState.cattlePremixWarning = "";
+      saveKuProgress();
+      renderKuzuUstasiStep();
+    }
+
+    function setKuPriceMode(mode) {
+      kuState.fiyatBiliyorMu = mode;
+      if (mode === "evet") {
+        const allChosen = Array.from(new Set([...kuState.secilenKaba, ...kuState.secilenKesif, ...kuState.secilenKatki]));
+        allChosen.forEach(fid => {
+          if (typeof kuState.ozelFiyatlar[fid] !== "number") {
+            const lib = getFeedById(fid) || DEFAULT_FEEDS.find(f => f.id === fid);
+            if (lib) kuState.ozelFiyatlar[fid] = lib.price;
+          }
+        });
+      }
+      saveKuProgress();
+      renderKuzuUstasiStep();
+    }
+
+    function adjustKuFeedPrice(feedId, delta) {
+      const lib = getFeedById(feedId) || DEFAULT_FEEDS.find(f => f.id === feedId);
+      const curr = typeof kuState.ozelFiyatlar[feedId] === "number" ? kuState.ozelFiyatlar[feedId] : (lib ? lib.price : 10);
+      const next = Math.max(0.5, Number((curr + delta).toFixed(2)));
+      kuState.ozelFiyatlar[feedId] = next;
+      const el = document.getElementById("ku-price-val-" + feedId);
+      if (el) el.textContent = `${next.toFixed(2)} ₺/kg`;
+      saveKuProgress();
+    }
+
+    function setKuSerbest(val) {
+      kuState.serbestYemleme = Boolean(val);
+      saveKuProgress();
+      renderKuzuUstasiStep();
+    }
+
+    function toggleKuHealthIssue(key) {
+      const arr = kuState.hayvan.saglikSorunlari || [];
+      const idx = arr.indexOf(key);
+      if (idx >= 0) arr.splice(idx, 1);
+      else arr.push(key);
+      kuState.hayvan.saglikSorunlari = arr;
+      saveKuProgress();
+      renderKuzuUstasiStep();
+    }
+
+    function clearKuHealthIssues() {
+      kuState.hayvan.saglikSorunlari = [];
+      saveKuProgress();
+      renderKuzuUstasiStep();
+    }
+
+    function setKuBarinma(val) {
+      kuState.hayvan.barinma = val;
+      saveKuProgress();
+      renderKuzuUstasiStep();
+    }
+
+    function setKuAsi(val) {
+      kuState.hayvan.enterotoksemiAsili = Boolean(val);
+      saveKuProgress();
+      renderKuzuUstasiStep();
+    }
+
+    function quickAdjustKuFlock(delta) {
+      kuState.hayvan.suruSayisi = Math.max(1, Math.min(1000, (kuState.hayvan.suruSayisi || 20) + delta));
+      kuState.lastSonuc = solveKuzuUstasiSheep();
+      saveKuProgress();
+      renderKuzuUstasiStep();
+    }
+
+    function quickAdjustKuLivePrice(delta) {
+      kuState.canliBaskulFiyatTL = Math.max(50, Math.min(1000, (Number(kuState.canliBaskulFiyatTL) || 220) + delta));
+      kuState.lastSonuc = solveKuzuUstasiSheep();
+      saveKuProgress();
+      renderKuzuUstasiStep();
+    }
+
+    function toggleKuWhyAccordion() {
+      kuState.showWhyAccordion = !kuState.showWhyAccordion;
+      renderKuzuUstasiStep();
+    }
+
+    function toggleKuEditJumpMenu() {
+      kuState.showEditJumpMenu = !kuState.showEditJumpMenu;
+      renderKuzuUstasiStep();
+    }
+
+    function jumpToKuPriceEdit() {
+      setKuPriceMode("evet");
+      goKuScreen("fiyat_serbest");
+    }
+
+    function renderKuPrintPoster(res) {
+      const poster = document.getElementById("ru-print-poster");
+      if (!poster || !res) return;
+      const today = new Date().toLocaleDateString("tr-TR");
+      let sabahTop = 0, aksamTop = 0;
+      res.kalemler.forEach(k => { sabahTop += k.sabahKg; aksamTop += k.aksamKg; });
+      const fmtKg = (k, val) => (k.kategori === "katki" && val < 0.1) ? val.toFixed(3).replace(".", ",") : val.toFixed(2).replace(".", ",");
+
+      poster.innerHTML = `
+        <div style="border:3px solid #000; padding:14px; font-family:sans-serif; color:#000; background:#fff;">
+          <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:3px solid #000; padding-bottom:8px; margin-bottom:10px;">
+            <div>
+              <h1 style="font-size:18pt; font-weight:900; margin:0;">🐑 KUZU USTASI — AĞIL YEMLEME POSTERİ</h1>
+              <div style="font-size:11pt; font-weight:700;">Besi Kuzusu & Koyun Günlük Yem Tarifi (NRC 2007 Standartlarında)</div>
+            </div>
+            <div style="text-align:right; font-size:11pt; font-weight:800;">
+              Tarih: ${today}<br>
+              Grup: ${res.girdiOzeti.tipLabel} | Sürü: ${res.girdiOzeti.suruSayisi} Baş<br>
+              Canlı Ağırlık: ${res.girdiOzeti.ortalamaCanliAgirlik} kg ${!res.girdiOzeti.isAnacGebeVeyaEmziren ? `→ Hedef: ${res.girdiOzeti.hedefSatisKilo} kg (${res.girdiOzeti.hedefSure} gün)` : ""}
+            </div>
+          </div>
+
+          <h2 style="font-size:14pt; font-weight:900; margin:8px 0 6px 0;">1. GÜNLÜK SABAH / AKŞAM YEM TABLOSU (1 Hayvan İçin)</h2>
+          <table style="width:100%; border-collapse:collapse; font-size:12.5pt; margin-bottom:10px;">
+            <thead>
+              <tr>
+                <th style="border:2px solid #000; padding:6px; background:#eee; color:#000;">Yem Adı</th>
+                <th style="border:2px solid #000; padding:6px; background:#eee; color:#000;">Günlük Miktar</th>
+                <th style="border:2px solid #000; padding:6px; background:#eee; color:#000;">Sabah Öğünü</th>
+                <th style="border:2px solid #000; padding:6px; background:#eee; color:#000;">Akşam Öğünü</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${res.kalemler.map(k => `
+                <tr>
+                  <td style="border:2px solid #000; padding:6px; font-weight:800;">${k.ad}</td>
+                  <td style="border:2px solid #000; padding:6px; font-weight:900;">${fmtKg(k, k.miktarKg)} kg</td>
+                  <td style="border:2px solid #000; padding:6px;">${k.sabahKg > 0 ? fmtKg(k, k.sabahKg) + " kg" : "—"}</td>
+                  <td style="border:2px solid #000; padding:6px;">${k.aksamKg > 0 ? fmtKg(k, k.aksamKg) + " kg" : "—"}</td>
+                </tr>
+              `).join("")}
+              <tr>
+                <td style="border:2px solid #000; padding:6px; font-weight:900;">TOPLAM YAŞ YEM</td>
+                <td style="border:2px solid #000; padding:6px; font-weight:900;">${res.gunlukToplamKg.toFixed(3).replace(".", ",")} kg</td>
+                <td style="border:2px solid #000; padding:6px; font-weight:900;">${sabahTop.toFixed(2).replace(".", ",")} kg</td>
+                <td style="border:2px solid #000; padding:6px; font-weight:900;">${aksamTop.toFixed(2).replace(".", ",")} kg</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div style="border:2px solid #000; padding:8px; margin-bottom:10px; font-size:11pt; font-weight:800;">
+            • Kuru Madde: ~${res.kuruMaddeKg.toFixed(2).replace(".", ",")} kg/gün &nbsp;|&nbsp;
+            Enerji (ME): ${String(res.me_mcal_kg_km).replace(".", ",")} Mcal/kg KM &nbsp;|&nbsp;
+            Protein (HP): %${String(res.hp_pct).replace(".", ",")} &nbsp;|&nbsp;
+            Lif (NDF): %${String(res.ndf_pct).replace(".", ",")} &nbsp;|&nbsp;
+            Ca/P: ${String(res.ca_p_pct).replace(".", ",")}/1 &nbsp;|&nbsp;
+            Bakır: ${String(res.cu_mg_kg_km).replace(".", ",")} mg/kg KM (Güvenli)<br>
+            • 1 Hayvan Günlük Maliyet: ${res.maliyet.gunlukTekTL} ₺ &nbsp;|&nbsp;
+            ${res.girdiOzeti.hedefSure} Gün (1 Baş): ${res.maliyet.sureToplamTekTL.toLocaleString("tr-TR")} ₺ &nbsp;|&nbsp;
+            ${res.girdiOzeti.suruSayisi} Baş Toplam: ${res.maliyet.toplamSuruTL.toLocaleString("tr-TR")} ₺
+          </div>
+
+          <div style="border:2px solid #000; padding:10px; font-size:11.5pt; line-height:1.45;">
+            <strong style="font-size:12.5pt; display:block; margin-bottom:4px;">⚠️ AĞIL DUVARI İÇİN 6 ALTIN HATIRLATMA:</strong>
+            1. Su her zaman önünde olsun, kuzu günde 5 litre içer.<br>
+            2. Tuzu ve minerali aksatma — idrar taşı ve hastalık önler.<br>
+            3. Sığır premiksi KULLANMA — koyunu zehirler.<br>
+            4. Yemi 7–10 günde alıştır, ani değiştirme.<br>
+            5. Erkek kuzularda idrar yapıp yapmadığını her gün kontrol et.<br>
+            6. Enterotoksemi aşısı yaptır, ani ölümleri engeller.
+          </div>
+        </div>
+      `;
+    }
+
+    function printKuzuUstasiPoster() {
+      const res = kuState.lastSonuc || solveKuzuUstasiSheep();
+      renderKuPrintPoster(res);
+      window.print();
+    }
+
+    function shareKuzuUstasiWhatsApp() {
+      const res = kuState.lastSonuc || solveKuzuUstasiSheep();
+      const fmtKg = (k, val) => (k.kategori === "katki" && val < 0.1) ? val.toFixed(3).replace(".", ",") : val.toFixed(2).replace(".", ",");
+      const lines = [
+        `🐑 *KUZU USTASI — GÜNLÜK YEM TARİFİ*`,
+        `• Grup: ${res.girdiOzeti.tipLabel} (${res.girdiOzeti.ortalamaCanliAgirlik} kg) | Sürü: ${res.girdiOzeti.suruSayisi} Baş`,
+        !res.girdiOzeti.isAnacGebeVeyaEmziren ? `• Hedef: ${res.girdiOzeti.hedefSure} günde ${res.girdiOzeti.hedefSatisKilo} kg (~${res.hedefAdg_g} g/gün)` : `• Dönem: Anaç Koyun (${res.girdiOzeti.emzirdigiKuzuSayisi} Kuzulu)`,
+        ``,
+        `📋 *1 Hayvan Günlük Yem Listesi (Sabah / Akşam):*`,
+        ...res.kalemler.map(k => `- ${k.emoji} *${k.ad}:* ${fmtKg(k, k.miktarKg)} kg (Sabah: ${k.sabahKg > 0 ? fmtKg(k, k.sabahKg) : "0"} kg / Akşam: ${fmtKg(k, k.aksamKg)} kg)`),
+        `*TOPLAM:* ${res.gunlukToplamKg.toFixed(2).replace(".", ",")} kg/gün (Kuru madde: ~${res.kuruMaddeKg.toFixed(2).replace(".", ",")} kg)`,
+        ``,
+        `🛡️ *Güvenlik:* Ca/P: ${String(res.ca_p_pct).replace(".", ",")}/1 (İdrar taşı korumalı) | Bakır: ${String(res.cu_mg_kg_km).replace(".", ",")} mg/kg KM (Güvenli)`,
+        `💰 *Maliyet:* Günlük 1 baş ${res.maliyet.gunlukTekTL} TL | ${res.girdiOzeti.suruSayisi} baş toplam (${res.girdiOzeti.hedefSure} gün): ${res.maliyet.toplamSuruTL.toLocaleString("tr-TR")} TL`
+      ];
+      const url = `https://wa.me/?text=${encodeURIComponent(lines.join("\n"))}`;
+      window.open(url, "_blank", "noopener,noreferrer");
+    }
+
+    function saveKuzuUstasiToStore() {
+      const res = kuState.lastSonuc || solveKuzuUstasiSheep();
+      const defaultName = `${res.girdiOzeti.tipLabel} — ${res.girdiOzeti.ortalamaCanliAgirlik} kg (${res.girdiOzeti.suruSayisi} Baş — ${new Date().toLocaleDateString("tr-TR")})`;
+      const name = prompt("Kaydedilecek kuzu/koyun yem tarifinin adını girin:", defaultName);
+      if (!name) return;
+
+      const record = {
+        id: Date.now(),
+        name: name.trim(),
+        date: new Date().toLocaleDateString("tr-TR"),
+        species: "sheep",
+        items: res.kalemler.map(k => ({ feedId: k.id, kg: k.miktarKg })),
+        dailyCost: `${res.maliyet.gunlukTekTL} ₺`,
+        totalDm: `${res.kuruMaddeKg.toFixed(2)} kg`
+      };
+
+      savedRations.unshift(record);
+      localStorage.setItem("rasyon_saved_v1", JSON.stringify(savedRations));
+      renderSavedRationsList();
+      alert("✅ Kuzu/koyun yem tarifin '5. DEFTER (Kayıtlılar)' bölümüne kaydedildi!");
+    }
+
     function populateAddFeedSelect() {
       const sel = document.getElementById("add-feed-select");
       if (!sel) return;
@@ -7112,6 +9178,9 @@
       } else if (rec.species === "dairy") {
         suState.screenId = "result";
         saveSuProgress();
+      } else if (rec.species === "sheep") {
+        kuState.screenId = "result";
+        saveKuProgress();
       }
       selectSpecies(rec.species);
       renderActiveRationList();
@@ -7273,7 +9342,7 @@
 
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {
-        navigator.serviceWorker.register("./sw.js?v=6").then((reg) => {
+        navigator.serviceWorker.register("./sw.js?v=7").then((reg) => {
           reg.update();
         }).catch(() => {});
       });
