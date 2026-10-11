@@ -589,7 +589,7 @@
       background: #4ade80;
     }
 
-    /* Rehber Karakter (Veteriner Ayşe) + Konuşma Balonu + Sesli Okuma */
+    /* Rehber Karakter (Veteriner Ayşe) + Konuşma Balonu */
     .ru-guide-row {
       display: flex;
       align-items: flex-start;
@@ -629,24 +629,6 @@
       align-items: center;
       flex-wrap: wrap;
       gap: 6px;
-    }
-    .ru-tts-btn {
-      background: var(--bg);
-      color: var(--text);
-      border: 2px solid var(--border);
-      border-radius: 8px;
-      padding: 6px 12px;
-      font-size: 0.86rem;
-      font-weight: 900;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      min-height: 40px;
-      touch-action: manipulation;
-    }
-    .ru-tts-btn:active {
-      transform: scale(0.97);
     }
 
     /* Tek Soru Başlığı */
@@ -1199,15 +1181,12 @@
           </div>
         </div>
 
-        <!-- Rehber Karakter (Veteriner Ayşe) + Bilgi Balonu + 🔊 Sesli Okuma (TTS) -->
+        <!-- Rehber Karakter (Veteriner Ayşe) + Bilgi Balonu -->
         <div id="su-guide-box" class="ru-guide-row">
           <div class="ru-avatar" aria-hidden="true">👩‍⚕️</div>
           <div class="ru-bubble">
             <div class="ru-bubble-name">
               <span>Veteriner Ayşe — Sağmal Rehberin</span>
-              <button type="button" class="ru-tts-btn" onclick="speakCurrentSuStep()" aria-label="Soruyu Sesli Oku">
-                🔊 Sesli Oku
-              </button>
             </div>
             <div id="su-guide-text">Merhaba bereketli olsun! Ben Veteriner Ayşe. İneğinin sütüne ve dönemine göre yem tarifini 5 dakikada hazırlıyorum.</div>
           </div>
@@ -1231,15 +1210,12 @@
           </div>
         </div>
 
-        <!-- Rehber Karakter (Veteriner Ayşe) + Bilgi Balonu + 🔊 Sesli Okuma (TTS) -->
+        <!-- Rehber Karakter (Veteriner Ayşe) + Bilgi Balonu -->
         <div id="ru-guide-box" class="ru-guide-row">
           <div class="ru-avatar" aria-hidden="true">👩‍⚕️</div>
           <div class="ru-bubble">
             <div class="ru-bubble-name">
               <span>Veteriner Ayşe — Besi Rehberin</span>
-              <button type="button" class="ru-tts-btn" onclick="speakCurrentRuStep()" aria-label="Soruyu Sesli Oku">
-                🔊 Sesli Oku
-              </button>
             </div>
             <div id="ru-guide-text">Merhaba bereketli olsun! Ben Veteriner Ayşe. Sana soracağım birkaç basit soruyla hayvanına özel yem tarifini hazırlayacağım.</div>
           </div>
@@ -1263,15 +1239,12 @@
           </div>
         </div>
 
-        <!-- Rehber Karakter (Çoban Dede & Veteriner Ayşe) + Bilgi Balonu + 🔊 Sesli Okuma (TTS) -->
+        <!-- Rehber Karakter (Çoban Dede & Veteriner Ayşe) + Bilgi Balonu -->
         <div id="ku-guide-box" class="ru-guide-row">
           <div class="ru-avatar" aria-hidden="true">👴</div>
           <div class="ru-bubble">
             <div class="ru-bubble-name">
               <span>Çoban Dede — Sürü Rehberin</span>
-              <button type="button" class="ru-tts-btn" onclick="speakCurrentKuStep()" aria-label="Soruyu Sesli Oku">
-                🔊 Sesli Oku
-              </button>
             </div>
             <div id="ku-guide-text">Merhaba bereketli olsun! Ben Çoban Dede. Kuzularının yem tarifini 4 dakikada hazırlıyorum.</div>
           </div>
@@ -1295,15 +1268,12 @@
           </div>
         </div>
 
-        <!-- Rehber Karakter (Çoban Dede & Veteriner Ayşe Kızım) + Bilgi Balonu + 🔊 Sesli Okuma (TTS) -->
+        <!-- Rehber Karakter (Çoban Dede & Veteriner Ayşe Kızım) + Bilgi Balonu -->
         <div id="sk-guide-box" class="ru-guide-row">
           <div class="ru-avatar" aria-hidden="true">👴👩‍⚕️</div>
           <div class="ru-bubble">
             <div class="ru-bubble-name">
               <span>Çoban Dede & Veteriner Ayşe — Süt Koyunu Rehberin</span>
-              <button type="button" class="ru-tts-btn" onclick="speakCurrentSkStep()" aria-label="Soruyu Sesli Oku">
-                🔊 Sesli Oku
-              </button>
             </div>
             <div id="sk-guide-text">Merhaba bereketli olsun! Sağmal koyunlarının yem tarifini 5 dakikada hazırlıyorum.</div>
           </div>
@@ -3630,21 +3600,6 @@
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
-    function speakCurrentRuStep() {
-      if (!("speechSynthesis" in window)) {
-        alert("Tarayıcınız sesli okuma özelliğini desteklemiyor.");
-        return;
-      }
-      window.speechSynthesis.cancel();
-      const guideText = document.getElementById("ru-guide-text")?.textContent || "";
-      const qTitle = document.querySelector("#ru-step-viewport .ru-q-title")?.textContent || "";
-      const textToRead = qTitle ? `${qTitle}. ${guideText}` : guideText;
-      const utter = new SpeechSynthesisUtterance(textToRead);
-      utter.lang = "tr-TR";
-      utter.rate = 0.96;
-      window.speechSynthesis.speak(utter);
-    }
-
     function renderRasyonUstasiStep() {
       const s = ruState.step;
       const progBox = document.getElementById("ru-progress-box");
@@ -5551,13 +5506,6 @@
       loading: "Süt sağılıyor... İneğinin süt yağını ve sağlığını koruyan en ekonomik yem tarifini hesaplıyorum...",
       result: "İşte ineğinin günlük yem tarifi hazır! En üstte Süt Yağı, Süt Humması ve Ketozis risk durumunu görebilirsin."
     };
-
-    function speakCurrentSuStep() {
-      const guideEl = document.getElementById("su-guide-text");
-      const qEl = document.querySelector("#su-step-viewport .ru-question-title");
-      const text = `${qEl ? qEl.textContent + ". " : ""}${guideEl ? guideEl.textContent : ""}`.trim();
-      ruSpeakText(text);
-    }
 
     function renderSutUstasiStep() {
       const vp = document.getElementById("su-step-viewport");
@@ -7698,13 +7646,6 @@
       result: "İşte kuzularının günlük yem tarifi hazır! En üstte İdrar Taşı, Bakır Zehirlenmesi ve Enterotoksemi risk durumunu görebilirsin."
     };
 
-    function speakCurrentKuStep() {
-      const guideEl = document.getElementById("ku-guide-text");
-      const qEl = document.querySelector("#ku-step-viewport .ru-question-title");
-      const text = `${qEl ? qEl.textContent + ". " : ""}${guideEl ? guideEl.textContent : ""}`.trim();
-      ruSpeakText(text);
-    }
-
     function renderKuzuUstasiStep() {
       const vp = document.getElementById("ku-step-viewport");
       const progBox = document.getElementById("ku-progress-box");
@@ -9105,19 +9046,6 @@
       saveSkProgress();
       renderSagmalKoyunUstasiStep();
       window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-
-    function speakCurrentSkStep() {
-      if (!("speechSynthesis" in window)) {
-        alert("Tarayıcınız sesli okuma özelliğini desteklemiyor.");
-        return;
-      }
-      window.speechSynthesis.cancel();
-      const guideText = document.getElementById("sk-guide-text")?.textContent || "";
-      const utter = new SpeechSynthesisUtterance(guideText);
-      utter.lang = "tr-TR";
-      utter.rate = 0.96;
-      window.speechSynthesis.speak(utter);
     }
 
     function calculateSkCheeseYield(milkL, fatPct, protPct, suruSayisi) {
