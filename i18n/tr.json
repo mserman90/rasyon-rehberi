@@ -1,0 +1,51 @@
+{
+  "app": {
+    "title": "Rasyon Ustası — Besi Rehberim",
+    "subtitle": "5 dakikada hayvanına özel, bilimsel ve ekonomik yem tarifini hazırlıyorum.",
+    "start_button": "Hadi Başlayalım",
+    "resume_title": "Yarıda Bıraktığın Bir Yem Tarifi Var!",
+    "resume_button": "Kaldığın Yerden Devam Et",
+    "restart_button": "Sıfırdan Başla",
+    "tts_Read": "🔊 Soruyu Sesli Oku",
+    "back_button": "← Geri Dön",
+    "next_button": "Devam Et →",
+    "calculate_button": "🎉 Yem Tarifimi Hazırla",
+    "loading_title": "Yem karıştırılıyor... 🌾",
+    "loading_subtitle": "Hayvanına özel yem tarifin hazırlanıyor..."
+  },
+  "guides": {
+    "step0": "Merhaba bereketli olsun! Ben Veteriner Ayşe. Hiçbir karmaşık hesapla uğraşmadan, sana soracağım birkaç basit soruyla dananın en hızlı ve en ucuza nasıl kilo alacağını birlikte bulacağız.",
+    "step1": "Dananın kilosunu göz kararı da olsa seçebilirsin. Kaydırıcıyı sağa sola çekmen veya + / - tuşlarına dokunman yeterli.",
+    "step2": "Genç danalar boy ve kemik uzatmak için daha çok proteine ihtiyaç duyar; iri danalar ise et doldurmak için enerji ister.",
+    "step3": "Çoğu besicimiz günlük 1,2 kilo artışı seçiyor; hem işkembeyi yormaz hem de cebini korur.",
+    "step4": "Erkek danalar ve tosunlar yemi kasa daha hızlı çevirir, düveler ise biraz daha erken yağlanır.",
+    "step5": "Kaba yem (ot, saman, silaj) hayvanın geviş getirmesini sağlar ve işkembe ekşimesini önler. Ahırında hangileri varsa işaretle.",
+    "step6": "Kesif yemler (arpa, mısır, küspe, fabrika yemi) hayvana asıl kiloyu aldıran güç kaynaklarıdır.",
+    "step7": "Yem fiyatlarını biliyorsan + / - tuşlarıyla düzeltebilirsin. Bilmiyorsan hiç dert etme, güncel piyasa ortalamasını kullanırım.",
+    "step8": "Önünde sürekli yem duran hayvanlar gün boyu azar azar yer, işkembesi daha rahat çalışır.",
+    "step9": "İshal, topallık veya ateş varsa önce tedavi gerekir; yüksek enerjili besi yemi hasta hayvanı yorabilir.",
+    "step10": "Açıkta veya soğuk sundurmada kalan hayvanlar vücutlarını ısıtmak için biraz daha fazla enerji harcar."
+  },
+  "did_you_know": {
+    "fact1": "💡 Biliyor muydun? Sığırlar günde yaklaşık 8 saat geviş getirir ve işkembeyi asitten koruyan 150 litre doğal karbonatlı tükürük üretir!",
+    "fact2": "💡 Biliyor muydun? Arpayı bütün vermek yerine ezme veya kırma olarak vermek sindirimi %15 artırır; ama un gibi toz yaparsan işkembeyi ekşitir!",
+    "fact3": "💡 Biliyor muydun? Suyu eksik içen bir besi danası yem yemeyi hemen azaltır; 1 kilo kuru yem için hayvanın 4-5 litre temiz suya ihtiyacı vardır!"
+  },
+  "terms": {
+    "kuru_madde": "Kuru Madde (yemdeki suyu çıkardığımızda kalan kısım)",
+    "enerji": "Besi Enerjisi (hayvanın kilo almasını ve ısınmasını sağlayan güç)",
+    "protein": "Protein (et, kas ve kemik çatısını büyüten besin)",
+    "lif": "Lif / Kaba Yem (geviş getirmeyi sağlayan ve işkembe ekşimesini önleyen kalkan)",
+    "kalsiyum_fosfor": "Kalsiyum ve Fosfor (kemikleri güçlendiren ve erkek danada idrar taşını önleyen mineral dengesi)"
+  },
+  "warnings": {
+    "gradual_transition": "⚠️ Yemi bir günde değiştirme! Yeni tarife 7 günde alıştır: ilk gün %20 yeni, son gün %100 yeni.",
+    "sick_animal": "⚠️ Önce veterinere danışmanı öneririm, bu tarif hasta hayvanlar için değil.",
+    "empty_feed": "Henüz yem seçmedin. Endişelenme, ahırında ne varsa onu seç, gerisini ben hallederim. 👇",
+    "poster_reminders": [
+      "1. Temiz ve serin su her zaman hayvanın önünde bulunsun.",
+      "2. Yemi aniden değiştirme; yeni tarife 7 günde azar azar alıştır.",
+      "3. Kaya tuzu, mermer tozu ve vitamin-mineral premiksini asla ihmal etme."
+    ]
+  }
+}

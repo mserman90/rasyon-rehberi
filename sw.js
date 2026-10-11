@@ -1,4 +1,4 @@
-const CACHE_NAME = 'rasyonsys-offline-v4';
+const CACHE_NAME = 'rasyonsys-offline-v5';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -12,7 +12,12 @@ const ASSETS_TO_CACHE = [
   './favicon-32x32.png',
   './og-image.png',
   './KULLANIM_KILAVUZU.md',
-  './README.md'
+  './README.md',
+  './i18n/tr.json',
+  './lib/ration-engine/nrc-2016-tables.json',
+  './lib/ration-engine/feeds-db.json',
+  './lib/ration-engine/beef-engine.js',
+  './lib/ration-engine/README.md'
 ];
 
 self.addEventListener('install', (event) => {
