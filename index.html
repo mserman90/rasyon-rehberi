@@ -529,6 +529,118 @@
       font-weight: 700;
     }
 
+    /* Besi Rasyon Sihirbazı (Step-by-Step Wizard) */
+    .wiz-box {
+      border: 2.5px solid var(--border);
+      border-radius: 8px;
+      padding: 14px;
+      background: var(--surface-alt);
+      margin-bottom: 14px;
+    }
+    .wiz-step-bar {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+    @media (min-width: 640px) {
+      .wiz-step-bar {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+    .wiz-step-pill {
+      background: var(--bg);
+      color: var(--text);
+      border: 2px solid var(--border);
+      border-radius: 6px;
+      padding: 8px 6px;
+      font-size: 0.78rem;
+      font-weight: 900;
+      text-align: center;
+      cursor: pointer;
+      touch-action: manipulation;
+      line-height: 1.25;
+    }
+    .wiz-step-pill.active {
+      background: var(--border);
+      color: var(--bg);
+    }
+    .wiz-panel {
+      display: none;
+      background: var(--bg);
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .wiz-panel.active {
+      display: block;
+    }
+    .wiz-question-title {
+      font-size: 0.96rem;
+      font-weight: 900;
+      margin-bottom: 4px;
+      border-bottom: 1.5px solid var(--border);
+      padding-bottom: 6px;
+    }
+    .wiz-question-sub {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+    .wiz-feed-cat-title {
+      font-size: 0.82rem;
+      font-weight: 900;
+      margin: 10px 0 6px 0;
+      padding: 4px 8px;
+      background: var(--surface-alt);
+      border-left: 4px solid var(--border);
+    }
+    .wiz-feed-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+    @media (min-width: 560px) {
+      .wiz-feed-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    .wiz-feed-chip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border: 2px solid var(--border);
+      border-radius: 6px;
+      padding: 8px 10px;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 0.8rem;
+      font-weight: 800;
+      cursor: pointer;
+      user-select: none;
+      touch-action: manipulation;
+    }
+    .wiz-feed-chip input[type="checkbox"] {
+      width: 18px !important;
+      height: 18px !important;
+      min-height: 18px !important;
+      margin: 0 !important;
+      accent-color: #000000;
+      flex-shrink: 0;
+    }
+    .wiz-nav-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1.5px dashed var(--border);
+      flex-wrap: wrap;
+    }
+
     /* Alt Gezinme Çubuğu (Bottom Navigation) */
     nav.bottom-nav {
       position: fixed;
@@ -716,36 +828,241 @@
           </div>
         </div>
 
-        <!-- BESİ SIĞIRI GİRİŞLERİ -->
+        <!-- BESİ SIĞIRI GİRİŞLERİ: ADIM ADIM BESİ RASYON SİHİRBAZI -->
         <div id="inputs-beef" style="display:none;">
-          <div class="grid-2">
-            <div>
-              <label for="beef-stage">Besi Dönemi / Grubu:</label>
-              <select id="beef-stage" onchange="onAnimalProfileChange()">
-                <option value="arrival">Yeni Gelen Dana Alıştırma (İlk 21 Gün - Yüksek Ot)</option>
-                <option value="grower">Besi Geliştirme Dönemi (200 - 350 kg Kemik/Kas)</option>
-                <option value="finisher" selected>Besibitirme / Semirtme Dönemi (350 - 650+ kg Yoğun Besi)</option>
-              </select>
+
+          <div class="wiz-box" id="beef-wizard-box">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px;">
+              <div>
+                <strong style="font-size:0.98rem; font-weight:900;">Adım Adım Besi Rasyonu Sihirbazı</strong>
+                <div style="font-size:0.78rem; font-weight:700; color:var(--text-muted);">Soruları sırayla cevaplayın; dananızın ırkına, yaşına, kilosuna ve elinizdeki yemlere göre en uygun rasyonu otomatik kuralım.</div>
+              </div>
+              <button type="button" class="btn btn-outline btn-sm" onclick="toggleBeefManualMode()" id="beef-manual-toggle-btn">Gelişmiş / Manuel Ayarları Göster</button>
             </div>
-            <div>
-              <label for="beef-bw">Canlı Ağırlık (kg):</label>
-              <input type="number" id="beef-bw" value="420" min="120" max="850" step="10" oninput="onAnimalProfileChange()">
+
+            <!-- Sihirbaz Adım Çubuğu -->
+            <div class="wiz-step-bar" role="tablist" aria-label="Besi Sihirbazı Adımları">
+              <button type="button" class="wiz-step-pill active" id="wiz-pill-1" onclick="switchBeefWizStep(1)">1. Irk, Cinsiyet & Yaş</button>
+              <button type="button" class="wiz-step-pill" id="wiz-pill-2" onclick="switchBeefWizStep(2)">2. Başlangıç & Güncel Kilo</button>
+              <button type="button" class="wiz-step-pill" id="wiz-pill-3" onclick="switchBeefWizStep(3)">3. Elinizdeki Yemler</button>
+              <button type="button" class="wiz-step-pill" id="wiz-pill-4" onclick="switchBeefWizStep(4)">4. Besi Planı & Oluştur</button>
+            </div>
+
+            <!-- SİHİRBAZ ADIM 1: IRK, CİNSİYET VE AYLIK YAŞ -->
+            <div class="wiz-panel active" id="wiz-panel-1">
+              <div class="wiz-question-title">Soru 1: Besiye Aldığınız Hayvanın Irkı, Cinsiyeti ve Yaşı Nedir?</div>
+              <div class="wiz-question-sub">Hayvanın ırkı ve aylık yaşı; günlük kaç kilo alabileceğini, ne zaman yağlanacağını ve karkas et randımanını doğrudan belirler.</div>
+
+              <div class="grid-3" style="margin-bottom:8px;">
+                <div>
+                  <label for="wiz-beef-breed">1. Hayvanın Irkı / Çerçeve Yapısı:</label>
+                  <select id="wiz-beef-breed" onchange="onBeefWizardInputUpdate()">
+                    <option value="etci" selected>Kültür / Etçi Irk (Simental, Şarole, Limuzin, Angus)</option>
+                    <option value="melez">Kombine / Kültür Melezi (Montofon/Esmer, Simental Melezi)</option>
+                    <option value="holstein">Sütçü Irk Erkek Danası (Holstein / Siyah-Alaca)</option>
+                    <option value="yerli">Yerli Irk / Yerli Melezi (Yerli Kara, DAK, Boz Irk)</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="wiz-beef-sex">2. Hayvanın Cinsiyeti:</label>
+                  <select id="wiz-beef-sex" onchange="onBeefWizardInputUpdate()">
+                    <option value="male" selected>Erkek Dana / Tosun (Yüksek Kas & Hızlı Artış)</option>
+                    <option value="heifer">Besi Düvesi - Dişi (Erken Yağlanma Eğilimli)</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="wiz-beef-age">3. Hayvanın Aylık Yaşı (Ay):</label>
+                  <select id="wiz-beef-age" onchange="onBeefWizardInputUpdate()">
+                    <option value="7">6 - 8 Aylık (Genç Dana - Boy & İskelet Büyütme)</option>
+                    <option value="10">9 - 11 Aylık (Büyütme & Kas Geliştirme Dönemi)</option>
+                    <option value="13" selected>12 - 15 Aylık (Yoğun Besi / Et Doldurma Dönemi)</option>
+                    <option value="17">16 - 20+ Aylık (İri Dana - Besibitirme / Kapak Atma)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div id="wiz-breed-age-hint" style="font-size:0.79rem; font-weight:700; padding:8px 10px; border:1.5px solid var(--border); border-radius:6px; background:var(--surface-alt);">
+                <strong>Irk & Yaş Değerlendirmesi:</strong> Kültür/Etçi ırk erkek danalar yüksek enerji ve proteini yağa değil doğrudan kasa çevirir (%58-60 karkas randımanı).
+              </div>
+
+              <div class="wiz-nav-row">
+                <span style="font-size:0.76rem; font-weight:800;">Adım 1 / 4</span>
+                <button type="button" class="btn btn-primary btn-sm" style="width:auto;" onclick="switchBeefWizStep(2)">Sonraki Soru: Başlangıç & Güncel Kilo →</button>
+              </div>
+            </div>
+
+            <!-- SİHİRBAZ ADIM 2: BAŞLANGIÇ KİLOSU, GÜNCEL KİLO, HEDEF KESİM VE AHIR DURUMU -->
+            <div class="wiz-panel" id="wiz-panel-2">
+              <div class="wiz-question-title">Soru 2: Besiye Başlangıç, Şu Anki ve Hedef Kesim Kilosu Nedir?</div>
+              <div class="wiz-question-sub">Eğer hayvanları besiye yeni aldıysanız "Başlangıç" ve "Şu Anki" kiloyu aynı girebilirsiniz. Program kesime kaç gün kaldığını da hesaplayacaktır.</div>
+
+              <div class="grid-3">
+                <div>
+                  <label for="wiz-beef-start-bw">1. Besiye Başlangıç Canlı Ağırlığı (kg):</label>
+                  <input type="number" id="wiz-beef-start-bw" value="260" min="100" max="750" step="10" oninput="onBeefWizardInputUpdate()">
+                </div>
+                <div>
+                  <label for="wiz-beef-curr-bw">2. Şu Anki Güncel Canlı Ağırlığı (kg):</label>
+                  <input type="number" id="wiz-beef-curr-bw" value="400" min="120" max="850" step="10" oninput="onBeefWizardInputUpdate()">
+                </div>
+                <div>
+                  <label for="wiz-beef-target-bw">3. Hedeflenen Kesim Canlı Ağırlığı (kg):</label>
+                  <input type="number" id="wiz-beef-target-bw" value="600" min="300" max="950" step="10" oninput="onBeefWizardInputUpdate()">
+                </div>
+              </div>
+
+              <div class="grid-2" style="margin-bottom:4px;">
+                <div>
+                  <label for="wiz-beef-arrival">4. Hayvanlar Çiftliğe Yeni mi Geldi?</label>
+                  <select id="wiz-beef-arrival" onchange="onBeefWizardInputUpdate()">
+                    <option value="no" selected>Hayır, ahıra ve yeme alışkınlar (Normal Besi)</option>
+                    <option value="yes">Evet, kamyondan yeni indi / İlk 21 gün içinde (Alıştırma Rasyonu)</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="wiz-beef-climate">5. Ahır Sıcaklığı & Zemin Durumu:</label>
+                  <select id="wiz-beef-climate" onchange="onBeefWizardInputUpdate()">
+                    <option value="normal" selected>Normal Ahır / Kuru Padok (5°C ile 25°C arası)</option>
+                    <option value="cold">Soğuk Kış / Çamurlu Padok (0°C altı - +%10 Ek Enerji Gerekir)</option>
+                    <option value="hot">Sıcak Yaz Stresi (30°C üstü - İştah Düşer, Soda Artırılır)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="wiz-nav-row">
+                <button type="button" class="btn btn-outline btn-sm" onclick="switchBeefWizStep(1)">← Önceki Soru</button>
+                <span style="font-size:0.76rem; font-weight:800;">Adım 2 / 4</span>
+                <button type="button" class="btn btn-primary btn-sm" style="width:auto;" onclick="switchBeefWizStep(3)">Sonraki Soru: Kullanılacak Yemler →</button>
+              </div>
+            </div>
+
+            <!-- SİHİRBAZ ADIM 3: KULLANILACAK YEMLER (ELDEKİ YEM SEÇİMİ) -->
+            <div class="wiz-panel" id="wiz-panel-3">
+              <div class="wiz-question-title">Soru 3: Elinizde (Deponuzda) Hangi Yemler Var?</div>
+              <div class="wiz-question-sub">Kullanmak istediğiniz yemlerin kutucuğunu işaretleyin. Sihirbaz sadece işaretlediğiniz yemleri kullanarak rasyonu kuracaktır.</div>
+
+              <div class="wiz-feed-cat-title">A) Kaba Yemler (Ot, Silaj, Saman — En az 1 tane seçin)</div>
+              <div class="wiz-feed-grid">
+                <label class="wiz-feed-chip"><input type="checkbox" class="wiz-feed-cb" value="bugday_samani" checked> Buğday Samanı</label>
+                <label class="wiz-feed-chip"><input type="checkbox" class="wiz-feed-cb" value="misir_silaji" checked> Mısır Silajı (%32 KM)</label>
+                <label class="wiz-feed-chip"><input type="checkbox" class="wiz-feed-cb" value="yonca_kuru" checked> Yonca Kuru Otu</label>
+                <label class="wiz-feed-chip"><input type="checkbox" class="wiz-feed-cb" value="cayir_otu"> Çayır / Mera Kuru Otu</label>
+                <label class="wiz-feed-chip"><input type="checkbox" class="wiz-feed-cb" value="fig_yulaf_otu"> Fiğ - Yulaf Kuru Otu</label>
+                <label class="wiz-feed-chip"><input type="checkbox" class="wiz-feed-cb" value="reygras_silaji"> İtalyan Çimi (Reygras) Silajı</label>
+                <label class="wiz-feed-chip"><input type="checkbox" class="wiz-feed-cb" value="yas_pancar_posasi"> Yaş Şeker Pancarı Posası</label>
+              </div>
+
+              <div class="wiz-feed-cat-title">B) Enerji Yemleri, Tahıllar & Fabrika Yemi (En az 1 tane seçin)</div>
+              <div class="wiz-feed-grid">
+                <label class="wiz-feed-chip"><input type="checkbox" class="wiz-feed-cb" value="arpa_ezmesi" checked> Arpa Ezmesi / Kırması</label>
+                <label class="wiz-feed-chip"><input type="checkbox" class="wiz-feed-cb" value="misir_kirmasi"> Mısır Kırması / Flake</label>
+                <label class="wiz-feed-chip"><input type="checkbox" class="wiz-feed-cb" value="besi_yemi_14" checked> Fabrika Besi Yemi (14-15 HP)</label>
+                <label class="wiz-feed-chip"><input type="checkbox" class="wiz-feed-cb" value="bugday_kepegi"> Buğday Kepeği / Razmol</label>
+                <label class="wiz-feed-chip"><input type="checkbox" class="wiz-feed-cb" value="kuru_pancar_posasi"> Kuru Pancar Posası (Pelet)</label>
+                <label class="wiz-feed-chip"><input type="checkbox" class="wiz-feed-cb" value="melas"> Şeker Pancarı Melası</label>
+              </div>
+
+              <div class="wiz-feed-cat-title">C) Protein Küspeleri (Boy, Kas ve Çatı Gelişimi İçin)</div>
+              <div class="wiz-feed-grid">
+                <label class="wiz-feed-chip"><input type="checkbox" class="wiz-feed-cb" value="atk_36" checked> Ayçiçek Küspesi (ATK %36 HP)</label>
+                <label class="wiz-feed-chip"><input type="checkbox" class="wiz-feed-cb" value="pamuk_tohumu_kuspesi"> Pamuk Küspesi (PTK %32 HP)</label>
+                <label class="wiz-feed-chip"><input type="checkbox" class="wiz-feed-cb" value="soya_46"> Soya Küspesi (SFK %46 HP)</label>
+                <label class="wiz-feed-chip"><input type="checkbox" class="wiz-feed-cb" value="ddgs_misir"> Mısır DDGS (%28 HP)</label>
+                <label class="wiz-feed-chip"><input type="checkbox" class="wiz-feed-cb" value="kanola_kuspesi"> Kanola Küspesi (%36 HP)</label>
+                <label class="wiz-feed-chip"><input type="checkbox" class="wiz-feed-cb" value="atk_28"> Ayçiçek Küspesi (Kabuklu %28 HP)</label>
+              </div>
+
+              <div class="wiz-feed-cat-title">D) İşkembe Koruyucu & İdrar Taşı Önleyici Katkılar (Önerilen)</div>
+              <div class="wiz-feed-grid">
+                <label class="wiz-feed-chip"><input type="checkbox" class="wiz-feed-cb" value="mermer_tozu" checked> Mermer Tozu (Sidik Zoru / İdrar Taşı Önleyici)</label>
+                <label class="wiz-feed-chip"><input type="checkbox" class="wiz-feed-cb" value="karbonat_tampon" checked> Yemlik Karbonat / Soda (Asidoz Önleyici)</label>
+                <label class="wiz-feed-chip"><input type="checkbox" class="wiz-feed-cb" value="vit_min_premiks" checked> Besi Vitamin & Mineral Premiksi</label>
+                <label class="wiz-feed-chip"><input type="checkbox" class="wiz-feed-cb" value="yem_tuzu" checked> Yemlik Tuz</label>
+              </div>
+
+              <div class="wiz-nav-row">
+                <button type="button" class="btn btn-outline btn-sm" onclick="switchBeefWizStep(2)">← Önceki Soru</button>
+                <span style="font-size:0.76rem; font-weight:800;">Adım 3 / 4</span>
+                <button type="button" class="btn btn-primary btn-sm" style="width:auto;" onclick="switchBeefWizStep(4)">Sonraki Soru: Besi Planı & Oluştur →</button>
+              </div>
+            </div>
+
+            <!-- SİHİRBAZ ADIM 4: YEMLEME ŞEKLİ, DANA SAYISI VE OLUŞTURMA -->
+            <div class="wiz-panel" id="wiz-panel-4">
+              <div class="wiz-question-title">Soru 4: Besleme Şekliniz, Dana Sayınız ve Hedefiniz Nedir?</div>
+              <div class="wiz-question-sub">Son bilgileri kontrol edip aşağıdaki butona bastığınızda dananıza özel rasyon ve kesim yol haritası anında hazırlanır.</div>
+
+              <div class="grid-3">
+                <div>
+                  <label for="wiz-beef-goal">1. Besi Stratejiniz / Hedefiniz:</label>
+                  <select id="wiz-beef-goal">
+                    <option value="balanced" selected>Dengeli & Ekonomik Besi (En Düşük Maliyetle Güvenli Artış)</option>
+                    <option value="fast">Maksimum Hızlı Kilo Alımı (Yoğun Enerji / Erken Kesim)</option>
+                    <option value="safe">Yüksek Kaba Yemli Güvenli Besi (Ayak & İşkembe Korumalı)</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="wiz-beef-herd-size">2. Bu Gruptaki Dana Sayısı (Baş):</label>
+                  <input type="number" id="wiz-beef-herd-size" value="30" min="1" max="5000" step="1">
+                </div>
+                <div>
+                  <label for="wiz-beef-meals">3. Günde Kaç Öğün Yem Veriyorsunuz?</label>
+                  <select id="wiz-beef-meals">
+                    <option value="2" selected>Günde 2 Öğün (Sabah - Akşam)</option>
+                    <option value="1">Günde 1 Öğün (Tam Gün Serbest)</option>
+                    <option value="3">Günde 3 Öğün (Sabah - Öğle - Akşam)</option>
+                  </select>
+                </div>
+              </div>
+
+              <button type="button" class="btn btn-primary" style="font-size:0.96rem; min-height:50px; margin-top:4px;" onclick="runBeefRationWizard()">
+                ⚡ SİHİRBAZ İLE BANA ÖZEL BESİ RASYONUNU VE KESİM PLANINI OLUŞTUR
+              </button>
+
+              <div class="wiz-nav-row">
+                <button type="button" class="btn btn-outline btn-sm" onclick="switchBeefWizStep(3)">← Yem Seçimine Dön</button>
+                <span style="font-size:0.76rem; font-weight:800;">Adım 4 / 4 — Hazır!</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- SİHİRBAZ SONUÇ RAPORU: KESİM PROJEKSİYONU VE AŞAMALI BESİ YOL HARİTASI -->
+          <div id="beef-wizard-report" style="display:none; border:2.5px solid var(--border); border-radius:8px; padding:12px 14px; margin-bottom:14px; background:var(--bg);"></div>
+
+          <!-- GELİŞMİŞ / MANUEL HIZLI GİRİŞ ALANI (Sihirbazla Senkronize Çalışır) -->
+          <div id="beef-manual-inputs" style="display:none; border:1.5px dashed var(--border); border-radius:8px; padding:12px; margin-bottom:10px;">
+            <div style="font-size:0.8rem; font-weight:900; margin-bottom:8px;">MANUEL HIZLI PARAMETRELER (Sihirbaz Otomatik Doldurur, İsterseniz Elle Değiştirebilirsiniz):</div>
+            <div class="grid-2">
+              <div>
+                <label for="beef-stage">Besi Dönemi / Grubu:</label>
+                <select id="beef-stage" onchange="onAnimalProfileChange()">
+                  <option value="arrival">Yeni Gelen Dana Alıştırma (İlk 21 Gün - Yüksek Ot)</option>
+                  <option value="grower">Besi Geliştirme Dönemi (200 - 350 kg Kemik/Kas)</option>
+                  <option value="finisher" selected>Besibitirme / Semirtme Dönemi (350 - 650+ kg Yoğun Besi)</option>
+                </select>
+              </div>
+              <div>
+                <label for="beef-bw">Canlı Ağırlık (kg):</label>
+                <input type="number" id="beef-bw" value="420" min="120" max="850" step="10" oninput="onAnimalProfileChange()">
+              </div>
+            </div>
+            <div class="grid-3">
+              <div>
+                <label for="beef-adg">Hedef Günlük Kilo Alımı (kg/gün):</label>
+                <input type="number" id="beef-adg" value="1.40" min="0.3" max="2.2" step="0.05" oninput="onAnimalProfileChange()">
+              </div>
+              <div>
+                <label for="beef-yield">Karkas Et Randımanı (%):</label>
+                <input type="number" id="beef-yield" value="58" min="45" max="68" step="1" oninput="onAnimalProfileChange()">
+              </div>
+              <div>
+                <label for="beef-meat-price">Karkas Et Kesim Fiyatı (₺/kg):</label>
+                <input type="number" id="beef-meat-price" value="380" min="50" max="2000" step="5" oninput="onAnimalProfileChange()">
+              </div>
             </div>
           </div>
-          <div class="grid-3">
-            <div>
-              <label for="beef-adg">Hedef Günlük Kilo Alımı (kg/gün):</label>
-              <input type="number" id="beef-adg" value="1.40" min="0.3" max="2.2" step="0.05" oninput="onAnimalProfileChange()">
-            </div>
-            <div>
-              <label for="beef-yield">Karkas Et Randımanı (%):</label>
-              <input type="number" id="beef-yield" value="58" min="45" max="68" step="1" oninput="onAnimalProfileChange()">
-            </div>
-            <div>
-              <label for="beef-meat-price">Karkas Et Kesim Fiyatı (₺/kg):</label>
-              <input type="number" id="beef-meat-price" value="380" min="50" max="2000" step="5" oninput="onAnimalProfileChange()">
-            </div>
-          </div>
+
         </div>
 
         <!-- KOYUN & KUZU GİRİŞLERİ -->
@@ -1590,24 +1907,49 @@
         const stage = document.getElementById("beef-stage").value;
         const bw = parseFloat(document.getElementById("beef-bw").value) || 420;
         const adg = parseFloat(document.getElementById("beef-adg").value) || 1.35;
+        const breed = (document.getElementById("wiz-beef-breed") && document.getElementById("wiz-beef-breed").value) || "etci";
+        const sex = (document.getElementById("wiz-beef-sex") && document.getElementById("wiz-beef-sex").value) || "male";
+        const climate = (document.getElementById("wiz-beef-climate") && document.getElementById("wiz-beef-climate").value) || "normal";
+        const goal = (document.getElementById("wiz-beef-goal") && document.getElementById("wiz-beef-goal").value) || "balanced";
 
-        // NASEM Beef Cattle DMI & ME
-        let dmiFactor = stage === "arrival" ? 0.022 : (stage === "grower" ? 0.025 : 0.0235);
+        // NASEM Beef Cattle DMI & ME (Irk, Cinsiyet ve İklim Düzeltmeli)
+        let dmiFactor = stage === "arrival" ? 0.022 : (stage === "grower" ? 0.0245 : 0.023);
+        if (breed === "holstein") dmiFactor *= 1.07; // Sütçü ırk erkek danaların kuru madde iştahı +%7 yüksektir
+        if (breed === "yerli") dmiFactor *= 0.94;
+        if (climate === "hot") dmiFactor *= 0.93; // Sıcak stresinde iştah düşer
+        if (climate === "cold") dmiFactor *= 1.04;
+
         const dmiTarget = bw * dmiFactor;
-        const meMaint = 0.115 * Math.pow(bw, 0.75);
-        const meGain = adg * (2.6 + (bw / 180));
+
+        let maintCoeff = 0.115;
+        if (breed === "holstein") maintCoeff = 0.126; // Holstein yaşama payı enerjisi +%10 daha yüksektir
+        if (climate === "cold") maintCoeff *= 1.10; // Soğuk/çamur stresinde ısınma enerjisi
+
+        const meMaint = maintCoeff * Math.pow(bw, 0.75);
+        let gainFactor = 2.6 + (bw / 180);
+        if (sex === "heifer" || breed === "yerli") gainFactor *= 1.06; // Erken yağlanma enerji yoğunluğu
+        const meGain = adg * gainFactor;
         const meTargetMcal = meMaint + meGain;
 
-        let cpTargetPct = stage === "grower" ? 14.5 : (stage === "arrival" ? 13.8 : 13.0);
-        if (bw < 300 && adg > 1.3) cpTargetPct = 15.2;
+        let cpTargetPct = stage === "grower" ? 14.6 : (stage === "arrival" ? 13.8 : 13.0);
+        if (bw < 320 && adg >= 1.3) cpTargetPct = 15.2;
+        if (breed === "etci" && stage === "grower") cpTargetPct = Math.max(cpTargetPct, 15.0);
+        if (sex === "heifer" && stage === "finisher") cpTargetPct = 12.5;
 
-        const pendfMinPct = stage === "finisher" ? 13 : (stage === "grower" ? 18 : 26);
-        const starchMaxPct = stage === "finisher" ? 42 : (stage === "grower" ? 32 : 22);
+        let pendfMinPct = stage === "finisher" ? 13 : (stage === "grower" ? 18 : 26);
+        let starchMaxPct = stage === "finisher" ? 42 : (stage === "grower" ? 32 : 22);
+        if (goal === "safe" || breed === "holstein") {
+          pendfMinPct = Math.max(pendfMinPct, 16);
+          starchMaxPct = Math.min(starchMaxPct, 38);
+        }
+
         const caTargetGr = 18 + (adg * 26);
         const pTargetGr = 12 + (adg * 12);
 
+        const breedNames = { etci: "Etçi Irk", melez: "Kombine Melez", holstein: "Holstein", yerli: "Yerli/Melez" };
+
         return {
-          speciesLabel: "Besi Sığırı (NASEM Beef)",
+          speciesLabel: `Besi Sığırı (${breedNames[breed] || "NASEM Beef"})`,
           dmiTarget: dmiTarget,
           cpTargetPct: cpTargetPct,
           cpTargetGr: dmiTarget * (cpTargetPct / 100) * 1000,
@@ -1618,7 +1960,7 @@
           starchMaxPct: starchMaxPct,
           caTargetGr: caTargetGr,
           pTargetGr: pTargetGr,
-          minForagePct: stage === "finisher" ? 15 : 30
+          minForagePct: stage === "finisher" ? (goal === "safe" ? 20 : 15) : 30
         };
       }
 
@@ -2275,12 +2617,12 @@
 
       const titleMap = {
         dairy: "Adım 1: Süt İneği Bilgileri & Hedef Süt Verimi",
-        beef: "Adım 1: Besi Danası Bilgileri & Hedef Günlük Kilo Alımı",
+        beef: "Adım 1: Besi Rasyonu Sihirbazı (Irk, Yaş, Kilo & Kullanılacak Yemler)",
         sheep: "Adım 1: Koyun / Kuzu Bilgileri & Üretim Dönemi"
       };
       const badgeMap = {
         dairy: "Standart: NASEM 2021 / CNCPS",
-        beef: "Standart: NASEM Beef Cattle",
+        beef: "Standart: NASEM Beef Sihirbazı",
         sheep: "Standart: NRC Small Ruminants"
       };
       document.getElementById("profile-card-title").textContent = titleMap[sp];
@@ -2288,6 +2630,9 @@
 
       populatePresetSelect();
       applySelectedPreset();
+      if (sp === "beef") {
+        onBeefWizardInputUpdate();
+      }
     }
 
     function populatePresetSelect() {
@@ -2325,6 +2670,252 @@
 
     function onAnimalProfileChange() {
       analyzeCurrentRation();
+    }
+
+    /* =========================================================================
+       8B. ADIM ADIM BESİ RASYONU SİHİRBAZI MOTORU
+       ========================================================================= */
+    function switchBeefWizStep(stepNum) {
+      for (let i = 1; i <= 4; i++) {
+        const pill = document.getElementById("wiz-pill-" + i);
+        const panel = document.getElementById("wiz-panel-" + i);
+        if (pill) pill.classList.toggle("active", i === stepNum);
+        if (panel) panel.classList.toggle("active", i === stepNum);
+      }
+      onBeefWizardInputUpdate();
+    }
+
+    function toggleBeefManualMode() {
+      const box = document.getElementById("beef-manual-inputs");
+      const btn = document.getElementById("beef-manual-toggle-btn");
+      if (!box) return;
+      const isHidden = box.style.display === "none";
+      box.style.display = isHidden ? "block" : "none";
+      if (btn) btn.textContent = isHidden ? "Gelişmiş / Manuel Ayarları Gizle" : "Gelişmiş / Manuel Ayarları Göster";
+    }
+
+    function onBeefWizardInputUpdate() {
+      const breedEl = document.getElementById("wiz-beef-breed");
+      const sexEl = document.getElementById("wiz-beef-sex");
+      const ageEl = document.getElementById("wiz-beef-age");
+      const hintBox = document.getElementById("wiz-breed-age-hint");
+      if (!breedEl || !sexEl || !ageEl || !hintBox) return;
+
+      const breed = breedEl.value;
+      const sex = sexEl.value;
+      const age = parseInt(ageEl.value) || 12;
+
+      const breedHints = {
+        etci: "Kültür/Etçi ırklar (Simental, Şarole, Limuzin, Angus) yüksek enerji ve proteini yağa değil doğrudan kasa çevirir (%58-61 karkas randımanı, +1.45 - 1.65 kg/gün artış potansiyeli).",
+        melez: "Kombine ve Kültür Melezleri (Montofon, Simental Melezi) hem kaba yemi iyi değerlendirir hem de dengeli et tutar (%56-58 karkas randımanı, +1.30 - 1.45 kg/gün artış).",
+        holstein: "Sütçü ırk (Holstein) erkek danalarının iştahı yüksektir ancak aşırı arpa/nişasta yüklemesinde işkembe ekşimesi (asidoz) ve ayak vurmasına hassastır (%53-55 randıman).",
+        yerli: "Yerli ırk ve melezleri (Yerli Kara, DAK) küçük çerçevelidir; çok yüksek enerjili rasyon verildiğinde büyümek yerine erken iç yağ bağlar (%54-56 randıman, +1.05 - 1.20 kg/gün artış)."
+      };
+
+      const ageNote = age <= 8
+        ? "Genç danalarda (6-8 ay) işkembe ve iskelet çatısını büyütmek için protein (%15+ HP) ve kaliteli kuru ot yüksek tutulmalıdır."
+        : (age <= 11
+          ? "Büyütme dönemindeki danalarda (9-11 ay) boy uzaması ve kas gelişimi için dengeli protein (%14.5 HP) ve enerji verilir."
+          : (age <= 15
+            ? "Yoğun besi döneminde (12-15 ay) kas dokusu hızla dolar; tahıl/enerji oranı kademeli artırılır."
+            : "İri danalarda (16+ ay) mermerleşme ve karkas randımanını artırmak için yüksek enerjili besibitirme rasyonu uygulanır."));
+
+      const sexNote = sex === "heifer"
+        ? " Besi düveleri erkek danalara göre daha erken yağlandığından aşırı nişastadan kaçınılmalıdır."
+        : " Erkek tosunlarda idrar taşı (sidik zoru) oluşmaması için rasyonda mutlaka Mermer Tozu bulunmalıdır.";
+
+      hintBox.innerHTML = `<strong>Irk & Yaş Değerlendirmesi:</strong> ${breedHints[breed] || ""} ${ageNote}${sexNote}`;
+    }
+
+    function runBeefRationWizard() {
+      const breed = document.getElementById("wiz-beef-breed").value;
+      const sex = document.getElementById("wiz-beef-sex").value;
+      const ageMonths = parseInt(document.getElementById("wiz-beef-age").value) || 13;
+      const startBw = parseFloat(document.getElementById("wiz-beef-start-bw").value) || 260;
+      const currBw = parseFloat(document.getElementById("wiz-beef-curr-bw").value) || 400;
+      const targetBw = Math.max(currBw + 30, parseFloat(document.getElementById("wiz-beef-target-bw").value) || 600);
+      const isArrival = document.getElementById("wiz-beef-arrival").value === "yes";
+      const climate = document.getElementById("wiz-beef-climate").value;
+      const goal = document.getElementById("wiz-beef-goal").value;
+      const herdSize = parseInt(document.getElementById("wiz-beef-herd-size").value) || 30;
+      const meals = parseInt(document.getElementById("wiz-beef-meals").value) || 2;
+
+      // 1. Besi Dönemini (Stage), Gerçekçi Günlük Artışı (ADG) ve Karkas Randımanını Belirle
+      let stage = "finisher";
+      if (isArrival) {
+        stage = "arrival";
+      } else if (currBw < 350 || ageMonths <= 10) {
+        stage = "grower";
+      } else {
+        stage = "finisher";
+      }
+
+      const baseParams = {
+        etci:     { growerAdg: 1.40, finisherAdg: 1.55, yieldPct: 59 },
+        melez:    { growerAdg: 1.30, finisherAdg: 1.42, yieldPct: 57 },
+        holstein: { growerAdg: 1.25, finisherAdg: 1.35, yieldPct: 54 },
+        yerli:    { growerAdg: 1.05, finisherAdg: 1.15, yieldPct: 55 }
+      };
+      const bp = baseParams[breed] || baseParams.etci;
+
+      let targetAdg = isArrival ? 0.85 : (stage === "grower" ? bp.growerAdg : bp.finisherAdg);
+      let yieldPct = bp.yieldPct;
+
+      if (sex === "heifer") {
+        targetAdg *= 0.88;
+        yieldPct -= 1;
+      }
+      if (goal === "fast" && !isArrival) targetAdg *= 1.07;
+      if (goal === "safe" && !isArrival) targetAdg *= 0.94;
+      if (climate === "hot") targetAdg *= 0.93;
+
+      targetAdg = parseFloat(targetAdg.toFixed(2));
+
+      // Manuel alanları ve TMR vagon alanlarını senkronize et
+      document.getElementById("beef-stage").value = stage;
+      document.getElementById("beef-bw").value = Math.round(currBw);
+      document.getElementById("beef-adg").value = targetAdg;
+      document.getElementById("beef-yield").value = yieldPct;
+      const tmrCountEl = document.getElementById("tmr-animal-count");
+      const tmrMealsEl = document.getElementById("tmr-meals-per-day");
+      if (tmrCountEl) tmrCountEl.value = herdSize;
+      if (tmrMealsEl) tmrMealsEl.value = meals;
+
+      // 2. Seçilen Yemleri Al
+      const checkedBoxes = Array.from(document.querySelectorAll(".wiz-feed-cb:checked"));
+      const selectedIds = checkedBoxes.map(cb => cb.value);
+
+      const selectedForages = selectedIds.filter(id => { const f = getFeedById(id); return f && f.cat === "forage"; });
+      const selectedEnergy = selectedIds.filter(id => { const f = getFeedById(id); return f && f.cat === "energy"; });
+      const selectedProtein = selectedIds.filter(id => { const f = getFeedById(id); return f && f.cat === "protein"; });
+      const selectedMinerals = selectedIds.filter(id => { const f = getFeedById(id); return f && f.cat === "mineral"; });
+
+      // Güvenlik yedekleri: Hiç kaba yem veya hiç enerji yemi seçilmemişse varsayılan ekle
+      if (selectedForages.length === 0) selectedForages.push("bugday_samani");
+      if (selectedEnergy.length === 0) selectedEnergy.push("arpa_ezmesi");
+
+      const req = calculateNutrientRequirements();
+      const targetForageDm = req.dmiTarget * (stage === "arrival" ? 0.58 : (stage === "grower" ? 0.36 : (goal === "safe" ? 0.25 : 0.18)));
+      const targetConcDm = Math.max(1.0, req.dmiTarget - targetForageDm - 0.25);
+
+      const newRation = [];
+
+      // Kaba yemleri dağıt (Silaj varsa KM'nin %55'i silaja, kalanı kuru ot/samana)
+      const hasSilage = selectedForages.includes("misir_silaji") || selectedForages.includes("reygras_silaji");
+      selectedForages.forEach(fid => {
+        const f = getFeedById(fid);
+        if (!f) return;
+        let share = 1 / selectedForages.length;
+        if (hasSilage && selectedForages.length > 1) {
+          if (fid === "misir_silaji" || fid === "reygras_silaji") share = 0.55 / selectedForages.filter(x => x.includes("silaj")).length;
+          else share = 0.45 / selectedForages.filter(x => !x.includes("silaj")).length;
+        }
+        const dmAlloc = targetForageDm * share;
+        const asFedKg = dmAlloc / (f.dm / 100);
+        newRation.push({ feedId: fid, kg: parseFloat(asFedKg.toFixed(1)) });
+      });
+
+      // Protein ve Enerji yemlerini dağıt
+      const protShareTotal = selectedProtein.length > 0 ? (stage === "grower" ? 0.24 : 0.16) : 0;
+      const engShareTotal = 1 - protShareTotal;
+
+      selectedEnergy.forEach(fid => {
+        const f = getFeedById(fid);
+        if (!f) return;
+        const dmAlloc = (targetConcDm * engShareTotal) / selectedEnergy.length;
+        const asFedKg = dmAlloc / (f.dm / 100);
+        newRation.push({ feedId: fid, kg: parseFloat(asFedKg.toFixed(1)) });
+      });
+
+      selectedProtein.forEach(fid => {
+        const f = getFeedById(fid);
+        if (!f) return;
+        const dmAlloc = (targetConcDm * protShareTotal) / selectedProtein.length;
+        const asFedKg = dmAlloc / (f.dm / 100);
+        newRation.push({ feedId: fid, kg: parseFloat(asFedKg.toFixed(1)) });
+      });
+
+      // Mineralleri ekle
+      if (selectedMinerals.includes("mermer_tozu") || sex === "male") {
+        newRation.push({ feedId: "mermer_tozu", kg: stage === "finisher" ? 0.14 : 0.10 });
+      }
+      if (selectedMinerals.includes("karbonat_tampon") || stage === "finisher" || climate === "hot") {
+        newRation.push({ feedId: "karbonat_tampon", kg: climate === "hot" ? 0.10 : 0.08 });
+      }
+      if (selectedMinerals.includes("vit_min_premiks")) {
+        newRation.push({ feedId: "vit_min_premiks", kg: 0.08 });
+      }
+      if (selectedMinerals.includes("yem_tuzu")) {
+        newRation.push({ feedId: "yem_tuzu", kg: 0.04 });
+      }
+
+      currentRation = newRation;
+      // Solver ile tam dengele
+      autoBalanceCurrentRation();
+
+      // 3. Besi Yol Haritası & Kesim Projeksiyon Raporunu Oluştur
+      let dailyCostTl = 0;
+      currentRation.forEach(item => {
+        const f = getFeedById(item.feedId);
+        if (f && item.kg > 0) dailyCostTl += item.kg * f.price;
+      });
+
+      const remainingKg = Math.max(0, targetBw - currBw);
+      const daysToFinish = targetAdg > 0 ? Math.ceil(remainingKg / targetAdg) : 0;
+      const monthsToFinish = (daysToFinish / 30).toFixed(1);
+      const totalFeedCostPerHead = Math.round(daysToFinish * dailyCostTl);
+      const meatPrice = parseFloat(document.getElementById("beef-meat-price").value) || 380;
+      const expectedCarcassKg = (targetBw * (yieldPct / 100)).toFixed(0);
+      const expectedGrossRev = Math.round(targetBw * (yieldPct / 100) * meatPrice);
+
+      const stageTitleMap = {
+        arrival: "Yeni Gelen Dana 21 Gün Alıştırma Dönemi",
+        grower: "Besi Geliştirme (Boy, İskelet & Kas Çatısı Büyütme) Dönemi",
+        finisher: "Yoğun Besi & Besibitirme (Et Doldurma & Randıman) Dönemi"
+      };
+
+      const reportBox = document.getElementById("beef-wizard-report");
+      if (reportBox) {
+        reportBox.style.display = "block";
+        reportBox.innerHTML = `
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px; border-bottom:2px solid var(--border); padding-bottom:8px; margin-bottom:10px;">
+            <strong style="font-size:0.95rem; font-weight:900;">SİHİRBAZ SONUCU: DANANIZA ÖZEL BESİ PLANI & KESİM PROJEKSİYONU</strong>
+            <span class="tag tag-solid">${stageTitleMap[stage]}</span>
+          </div>
+
+          <div class="grid-4" style="margin-bottom:10px;">
+            <div style="border:1.5px solid var(--border); border-radius:6px; padding:8px; text-align:center;">
+              <div style="font-size:0.7rem; font-weight:800; color:var(--text-muted);">BEKLENEN GÜNLÜK ARTIŞ</div>
+              <div style="font-size:1.05rem; font-weight:900;">+${targetAdg.toFixed(2)} kg/gün</div>
+            </div>
+            <div style="border:1.5px solid var(--border); border-radius:6px; padding:8px; text-align:center;">
+              <div style="font-size:0.7rem; font-weight:800; color:var(--text-muted);">KESİME KALAN SÜRE (${targetBw} kg)</div>
+              <div style="font-size:1.05rem; font-weight:900;">${daysToFinish} Gün (~${monthsToFinish} Ay)</div>
+            </div>
+            <div style="border:1.5px solid var(--border); border-radius:6px; padding:8px; text-align:center;">
+              <div style="font-size:0.7rem; font-weight:800; color:var(--text-muted);">KESİME KADAR 1 DANA YEMİ</div>
+              <div style="font-size:1.05rem; font-weight:900;">${totalFeedCostPerHead.toLocaleString('tr-TR')} ₺</div>
+            </div>
+            <div style="border:1.5px solid var(--border); border-radius:6px; padding:8px; text-align:center;">
+              <div style="font-size:0.7rem; font-weight:800; color:var(--text-muted);">HEDEF KARKAS ET (~%${yieldPct})</div>
+              <div style="font-size:1.05rem; font-weight:900;">${expectedCarcassKg} kg (${expectedGrossRev.toLocaleString('tr-TR')} ₺)</div>
+            </div>
+          </div>
+
+          <div style="font-size:0.8rem; line-height:1.5; background:var(--surface-alt); border:1.5px solid var(--border); border-radius:6px; padding:9px 11px;">
+            <strong>Adım Adım Besi Yol Haritanız (${startBw} kg Başlangıç → ${currBw} kg Güncel → ${targetBw} kg Kesim):</strong><br>
+            • <strong>Şu Anki Günlük Reçeteniz:</strong> Seçtiğiniz yemlerle 1 dana için günlük rasyon hemen aşağıdaki <strong>"Adım 3: Günlük Verilen Yemler"</strong> tablosuna yüklendi ve dengelendi.<br>
+            • <strong>Sonraki Geçiş Kuralı:</strong> ${currBw < 360 ? `Danalarınız <strong>360 - 380 kg</strong> canlı ağırlığa ulaştığında küspeyi %20 azaltıp arpa/mısır/besi yemini artırarak <em>Yoğun Besibitirme</em> dönemine geçin.` : `Danalarınız kesim öncesi son <strong>45-60 gün</strong> içinde olduğundan kaba yemi sabit tutup enerjisi yüksek tahıl/fabrika yemi ve Mermer Tozu + Soda ile randımanı koruyun.`}<br>
+            • <strong>Sürü Vagon Hesabı (${herdSize} Dana / Günde ${meals} Öğün):</strong> Alttaki <strong>"2. VAGON (TMR & Çuval)"</strong> sekmesine tıklayarak ${herdSize} danalık grubunuz için vagona tek seferde kaç kilo yem atacağınızı doğrudan görebilirsiniz.
+          </div>
+        `;
+      }
+
+      // Kullanıcıya rasyonun yüklendiğini göstermek için rasyon listesine yumuşak kaydır
+      const rationCard = document.getElementById("active-ration-list");
+      if (rationCard) {
+        rationCard.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
     }
 
     function populateAddFeedSelect() {
@@ -2839,7 +3430,7 @@
 
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {
-        navigator.serviceWorker.register("./sw.js?v=3").then((reg) => {
+        navigator.serviceWorker.register("./sw.js?v=4").then((reg) => {
           reg.update();
         }).catch(() => {});
       });
