@@ -13,7 +13,7 @@
     "loading_subtitle": "Hayvanına özel yem tarifin hazırlanıyor..."
   },
   "guides": {
-    "step0": "Merhaba bereketli olsun! Ben Veteriner Ayşe. Hiçbir karmaşık hesapla uğraşmadan, sana soracağım birkaç basit soruyla dananın en hızlı ve en ucuza nasıl kilo alacağını birlikte bulacağız.",
+    "step0": "Merhaba bereketli olsun! Ben Zooteknist Serdar. Hiçbir karmaşık hesapla uğraşmadan, sana soracağım birkaç basit soruyla dananın en hızlı ve en ucuza nasıl kilo alacağını birlikte bulacağız.",
     "step1": "Dananın kilosunu göz kararı da olsa seçebilirsin. Kaydırıcıyı sağa sola çekmen veya + / - tuşlarına dokunman yeterli.",
     "step2": "Genç danalar boy ve kemik uzatmak için daha çok proteine ihtiyaç duyar; iri danalar ise et doldurmak için enerji ister.",
     "step3": "Çoğu besicimiz günlük 1,2 kilo artışı seçiyor; hem işkembeyi yormaz hem de cebini korur.",
@@ -65,7 +65,7 @@
       "price_date_note": "Fiyatlar 12.10.2026 tarihine aittir."
     },
     "guides": {
-      "step0": "Merhaba bereketli olsun! Ben Veteriner Ayşe. İneğin günde kaç litre süt veriyorsa ve hangi dönemdeyse, süt yağını düşürmeden ve hayvanı hasta etmeden en kârlı yem tarifini birlikte hazırlayacağız.",
+      "step0": "Merhaba bereketli olsun! Ben Zooteknist Serdar. İneğin günde kaç litre süt veriyorsa ve hangi dönemdeyse, süt yağını düşürmeden ve hayvanı hasta etmeden en kârlı yem tarifini birlikte hazırlayacağız.",
       "donem": "İneğin şu an hangi dönemde? Doğum öncesi kuru dönem ile yeni doğum ve sağım dönemlerinin yemleri birbirinden tamamen farklıdır.",
       "kuru_gun": "Doğuma ne kadar kaldığı çok önemli. Son 3 haftada (yakın kuru dönem) doğum felcini önlemek için özel hazırlık yaparız.",
       "sut_hummasi_gecmis": "İnek daha önceki doğumlarında yatakta kaldıysa (süt humması geçirdiyse), kalsiyumu kısıp koruyucu acı tuz (anyonik tuz) öneririz.",
@@ -125,7 +125,7 @@
       "price_date_note": "Fiyatlar 12.10.2026 tarihine aittir."
     },
     "guides": {
-      "welcome": "Merhaba bereketli olsun! Ben Çoban Dede. Kuzularını idrar taşı ve bakır zehirlenmesinden koruyarak, en hızlı ve en ucuza nasıl besiye alacağını birlikte hazırlayacağız.",
+      "welcome": "Merhaba bereketli olsun! Ben Çoban Ercan. Kuzularını idrar taşı ve bakır zehirlenmesinden koruyarak, en hızlı ve en ucuza nasıl besiye alacağını birlikte hazırlayacağız.",
       "tip": "Hangi hayvanları besiye alacaksın? Kuzuda protein yüksek, tokluda dengeli, şişekte daha ekonomik yem kullanılır.",
       "anac_donem": "Anaç koyunlarda gebeliğin son 2 ayı ve emzirme dönemi çok kritiktir; kuzular içeride hızla büyürken koyunu aç bırakmamalıyız.",
       "anac_kuzu_sayisi": "İkiz veya üçüz kuzu bekleyen ya da emziren koyunların enerji ve protein ihtiyacı tek kuzuluya göre çok daha yüksektir.",
@@ -185,7 +185,7 @@
       "price_date_note": "Fiyatlar 12.10.2026 tarihine aittir."
     },
     "guides": {
-      "welcome": "Merhaba bereketli olsun! Ben Çoban Dede, yanımda da Veteriner Ayşe Kızım var. Koyunun günde kaç litre süt veriyorsa, süt yağını ve peynir randımanını düşürmeden, gebelik toksemisi ve bakır zehirlenmesinden koruyarak en kârlı yem tarifini birlikte hazırlayacağız.",
+      "welcome": "Merhaba bereketli olsun! Ben Çoban Ercan, yanımda da Zooteknist Serdar var. Koyunun günde kaç litre süt veriyorsa, süt yağını ve peynir randımanını düşürmeden, gebelik toksemisi ve bakır zehirlenmesinden koruyarak en kârlı yem tarifini birlikte hazırlayacağız.",
       "donem": "Koyunun şu an hangi dönemde? Süt koyununda kuru dönem, yeni doğum ve sağım dönemlerinin yemleri birbirinden tamamen farklıdır.",
       "kuru_detay": "Doğuma son 6 hafta kala kuzular anne karnında çok hızlı büyür. İkiz veya üçüz kuzu bekleyen koyunlarda 'Gebelik Toksemisi' (ikiz kuzu hastalığı) ve doğum sonrası 'Süt Ateşi' riskini önlemek için özel enerji ve mineral dengesi kuracağız.",
       "yeni_dogum_detay": "Doğum sonrası ilk 14 gün çok kritiktir! Koyun yem yemiyorsa Gebelik Toksemisi, ayağa kalkamıyorsa Süt Ateşi (hipokalsemi) acil müdahale gerektirir.",
