@@ -1,0 +1,2777 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <meta name="theme-color" content="#000000">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="Yem & Rasyon Hazırlama Rehberi - Süt sığırları, besi danaları ve koyunlar için uluslararası standartlarda (NASEM/NRC/CNCPS) yetiştirici diliyle rasyon hazırlama, en ucuz yem dengeleme ve TMR yem karma vagonu hesaplama uygulaması.">
+  <meta name="keywords" content="rasyon hazırlama programı, süt ineği rasyonu, besi danası rasyonu, koyun rasyonu, kuzu besi rasyonu, TMR yem karma vagonu hesabı, NASEM 2021, NRC rasyon, yem maliyet hesaplama, en ucuz rasyon">
+  <meta name="author" content="Dr. Mert Serman / Yem & Rasyon Hazırlama Rehberi">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <link rel="canonical" href="https://mserman90.github.io/rasyon-rehberi/">
+
+  <!-- Favicons & PWA Icons -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="manifest" href="manifest.json">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Rasyon Rehberi">
+  <meta name="application-name" content="Yem & Rasyon Hazırlama Rehberi">
+  <meta name="msapplication-TileColor" content="#000000">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mserman90.github.io/rasyon-rehberi/">
+  <meta property="og:title" content="Yem & Rasyon Hazırlama Rehberi - Süt, Besi ve Koyun Rasyon Motoru">
+  <meta property="og:description" content="Uluslararası NASEM/NRC/CNCPS standartlarında, yetiştirici diliyle %100 internetsiz çalışan süt sığırı, besi danası ve koyun rasyon hazırlama ve yem karma vagonu (TMR) programı.">
+  <meta property="og:image" content="https://mserman90.github.io/rasyon-rehberi/og-image.png">
+  <meta property="og:locale" content="tr_TR">
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Yem & Rasyon Hazırlama Rehberi",
+    "alternateName": "International Livestock Ration Formulator PWA",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "All",
+    "description": "Süt sığırları, besi sığırları ve koyunlar için uluslararası standartlarda (NASEM/NRC/CNCPS) yetiştirici diliyle rasyon hazırlama, otomatik maliyet optimizasyonu ve TMR vagon yükleme rehberi.",
+    "url": "https://mserman90.github.io/rasyon-rehberi/",
+    "inLanguage": "tr",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "TRY"
+    }
+  }
+  </script>
+
+  <title>Yem & Rasyon Hazırlama Rehberi - Süt, Besi ve Koyun Rasyon Motoru</title>
+
+  <style>
+    /* =========================================================================
+       MUTLAK YÜKSEK KONTRAST SİYAH-BEYAZ MONOKROM TASARIM SİSTEMİ
+       ========================================================================= */
+    html {
+      filter: grayscale(100%);
+      -webkit-filter: grayscale(100%);
+    }
+
+    :root {
+      --bg: #ffffff;
+      --card-bg: #ffffff;
+      --text: #000000;
+      --text-muted: #262626;
+      --border: #000000;
+      --surface-alt: #f5f5f5;
+      --radius: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100vh;
+      min-height: 100dvh;
+      padding-bottom: calc(84px + env(safe-area-inset-bottom, 0px));
+      padding-left: env(safe-area-inset-left, 0px);
+      padding-right: env(safe-area-inset-right, 0px);
+      overflow-x: hidden;
+    }
+
+    /* Üst Başlık */
+    header {
+      background: #000000 !important;
+      color: #ffffff !important;
+      padding: calc(10px + env(safe-area-inset-top, 0px)) 14px 10px 14px;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      border-bottom: 3px solid #000000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    header h1 {
+      color: #ffffff !important;
+      font-size: 1.05rem;
+      font-weight: 900;
+      letter-spacing: -0.01em;
+    }
+
+    .header-actions-group {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .header-btn {
+      background: #000000;
+      color: #ffffff;
+      border: 1.5px solid #ffffff;
+      padding: 7px 11px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 38px;
+      touch-action: manipulation;
+    }
+    .header-btn:hover {
+      background: #ffffff;
+      color: #000000;
+    }
+    .header-btn-invert {
+      background: #ffffff;
+      color: #000000;
+      border: 1.5px solid #ffffff;
+    }
+
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 14px;
+    }
+
+    /* Sekme Bölümleri */
+    .tab-section {
+      display: none;
+    }
+    .tab-section.active {
+      display: block;
+      animation: fadeIn 0.15s ease-in;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(3px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Kartlar */
+    .card {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px;
+      margin-bottom: 14px;
+    }
+    .card-title {
+      font-size: 1.02rem;
+      font-weight: 900;
+      color: var(--text);
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .card-subtitle {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    /* Izgaralar */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    @media (min-width: 680px) {
+      .grid-4 {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+    @media (max-width: 560px) {
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .stat-card {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 8px;
+      text-align: center;
+    }
+    .stat-val {
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: var(--text);
+      line-height: 1.2;
+    }
+    .stat-label {
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+
+    /* Form Elemanları */
+    label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 800;
+      margin-bottom: 4px;
+      color: var(--text);
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px 12px;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      background: var(--bg);
+      border: 2px solid var(--border);
+      border-radius: 6px;
+      margin-bottom: 10px;
+      min-height: 46px;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(0,0,0,0.2);
+    }
+
+    /* Butonlar */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      width: 100%;
+      min-height: 46px;
+      padding: 10px 14px;
+      font-size: 0.92rem;
+      font-weight: 800;
+      border-radius: 6px;
+      border: 2px solid var(--border);
+      cursor: pointer;
+      text-align: center;
+      touch-action: manipulation;
+      user-select: none;
+      transition: transform 0.1s ease, opacity 0.15s ease;
+    }
+    .btn:active {
+      transform: scale(0.98);
+    }
+    .btn-primary {
+      background: var(--border);
+      color: var(--bg);
+    }
+    .btn-outline {
+      background: var(--bg);
+      color: var(--text);
+    }
+    .btn-sm {
+      min-height: 36px;
+      padding: 6px 10px;
+      font-size: 0.78rem;
+      width: auto;
+    }
+
+    /* Tür Seçim Butonları (Süt / Besi / Koyun) */
+    .species-selector-bar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .species-tab-btn {
+      background: var(--bg);
+      color: var(--text);
+      border: 2.5px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 6px;
+      font-size: 0.9rem;
+      font-weight: 900;
+      cursor: pointer;
+      text-align: center;
+      touch-action: manipulation;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+    }
+    .species-tab-btn small {
+      font-size: 0.7rem;
+      font-weight: 700;
+      opacity: 0.85;
+    }
+    .species-tab-btn.active {
+      background: var(--border);
+      color: var(--bg);
+    }
+    .species-tab-btn.active small {
+      color: var(--bg);
+    }
+
+    /* Besin Dengesi Çubukları (Progress Bars) */
+    .nutrient-meter-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    @media (min-width: 680px) {
+      .nutrient-meter-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    .nutrient-box {
+      border: 2px solid var(--border);
+      border-radius: 6px;
+      padding: 10px 12px;
+      background: var(--bg);
+    }
+    .nutrient-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 4px;
+      gap: 6px;
+    }
+    .nutrient-title {
+      font-size: 0.85rem;
+      font-weight: 900;
+    }
+    .nutrient-values {
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+    .meter-track {
+      width: 100%;
+      height: 12px;
+      background: var(--surface-alt);
+      border: 1.5px solid var(--border);
+      border-radius: 99px;
+      overflow: hidden;
+      margin: 6px 0;
+    }
+    .meter-fill {
+      height: 100%;
+      background: var(--border);
+      transition: width 0.2s ease;
+    }
+    .nutrient-status-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    /* Rozetler (Tags) */
+    .tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 900;
+      padding: 2px 7px;
+      border-radius: 4px;
+      border: 1.5px solid var(--border);
+    }
+    .tag-solid {
+      background: var(--border);
+      color: var(--bg);
+    }
+    .tag-outline {
+      background: var(--bg);
+      color: var(--text);
+    }
+    .tag-dashed {
+      background: var(--surface-alt);
+      color: var(--text);
+      border-style: dashed;
+    }
+
+    /* Rasyon Kalemi Satırı */
+    .ration-item-row {
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      background: var(--bg);
+    }
+    .ration-item-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+    .ration-item-name {
+      font-size: 0.94rem;
+      font-weight: 900;
+    }
+    .ration-item-meta {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+    .ration-item-controls {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+      align-items: center;
+    }
+    .step-btn-group {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .step-btn {
+      min-width: 40px;
+      min-height: 40px;
+      padding: 4px 8px;
+      font-size: 0.9rem;
+      font-weight: 900;
+      background: var(--bg);
+      color: var(--text);
+      border: 2px solid var(--border);
+      border-radius: 6px;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+    .step-btn:active {
+      background: var(--border);
+      color: var(--bg);
+    }
+    .kg-input-inline {
+      width: 82px !important;
+      min-height: 40px !important;
+      margin-bottom: 0 !important;
+      padding: 6px 8px !important;
+      text-align: center;
+      font-size: 0.98rem !important;
+      font-weight: 900 !important;
+    }
+
+    /* Uyarı Kutuları */
+    .alert-box {
+      border: 2px solid var(--border);
+      border-left: 7px solid var(--border);
+      border-radius: 6px;
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      background: var(--bg);
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+    .alert-box strong {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 900;
+      margin-bottom: 2px;
+    }
+
+    /* Tablolar */
+    .table-container {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      border: 2px solid var(--border);
+      border-radius: 6px;
+      margin-top: 8px;
+    }
+    table {
+      width: 100%;
+      min-width: 540px;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+    }
+    th, td {
+      padding: 9px 10px;
+      border-bottom: 1.5px solid var(--border);
+      text-align: left;
+    }
+    th {
+      background: var(--border);
+      color: var(--bg);
+      font-weight: 900;
+      white-space: nowrap;
+    }
+    td {
+      background: var(--bg);
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    /* Alt Gezinme Çubuğu (Bottom Navigation) */
+    nav.bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--bg);
+      border-top: 2.5px solid var(--border);
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      z-index: 200;
+      max-width: 980px;
+      margin: 0 auto;
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+      height: calc(62px + env(safe-area-inset-bottom, 0px));
+    }
+    .nav-item {
+      border: none;
+      border-right: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 0.73rem;
+      font-weight: 800;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      cursor: pointer;
+      touch-action: manipulation;
+      padding: 4px 2px;
+      text-align: center;
+    }
+    .nav-item:last-child {
+      border-right: none;
+    }
+    .nav-item.active {
+      background: var(--border);
+      color: var(--bg);
+    }
+    .nav-item-num {
+      font-size: 0.68rem;
+      font-weight: 900;
+      opacity: 0.8;
+    }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.75);
+      z-index: 500;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+    }
+    .modal-card {
+      background: var(--bg);
+      color: var(--text);
+      border: 3px solid var(--border);
+      border-radius: 10px;
+      width: 100%;
+      max-width: 640px;
+      max-height: 90dvh;
+      overflow-y: auto;
+      padding: 16px;
+    }
+
+    /* Koyu Mod (Dark Mode) */
+    body.dark-mode {
+      --bg: #000000;
+      --card-bg: #121212;
+      --text: #ffffff;
+      --text-muted: #d4d4d4;
+      --border: #ffffff;
+      --surface-alt: #262626;
+    }
+    body.dark-mode header {
+      background: #141414 !important;
+      border-bottom: 2.5px solid #ffffff;
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: calc(8px + env(safe-area-inset-top, 0px)) 10px 8px 10px;
+      }
+      header h1 {
+        font-size: 0.94rem;
+      }
+      .header-btn {
+        padding: 5px 8px;
+        font-size: 0.74rem;
+        min-height: 34px;
+      }
+      .species-tab-btn {
+        padding: 9px 4px;
+        font-size: 0.8rem;
+      }
+      .stat-val {
+        font-size: 1.12rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Üst Başlık -->
+  <header>
+    <div style="display:flex; align-items:center; gap:8px;">
+      <h1>Yem & Rasyon Hazırlama Rehberi</h1>
+    </div>
+    <div class="header-actions-group">
+      <button id="pwa-install-btn" class="header-btn header-btn-invert" onclick="triggerPwaInstall()" style="display:none;" title="Uygulamayı Telefona Yükle">Yükle</button>
+      <a href="../" class="header-btn" title="Tosun Paşa Çiftliği Portalı">Portal</a>
+      <button class="header-btn" onclick="openGuideModal()">Kılavuz</button>
+      <button id="theme-toggle-btn" class="header-btn" onclick="toggleTheme()">Gece Modu</button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ================= SEKME 1: RASYON HAZIRLAMA MOTORU ================= -->
+    <section id="tab-formulator" class="tab-section active">
+
+      <!-- Tür Seçim Çubuğu -->
+      <div class="species-selector-bar" role="tablist" aria-label="Hayvan Türü Seçimi">
+        <button id="species-btn-dairy" class="species-tab-btn active" onclick="selectSpecies('dairy')">
+          <span>1. SÜT SIĞIRI</span>
+          <small>Sağmal & Kuru İnek</small>
+        </button>
+        <button id="species-btn-beef" class="species-tab-btn" onclick="selectSpecies('beef')">
+          <span>2. BESİ SIĞIRI</span>
+          <small>Besi Danası & Düve</small>
+        </button>
+        <button id="species-btn-sheep" class="species-tab-btn" onclick="selectSpecies('sheep')">
+          <span>3. KOYUN & KUZU</span>
+          <small>Anaç Koyun & Toklu</small>
+        </button>
+      </div>
+
+      <!-- ADIM 1: HAYVAN PROFİLİ VE HEDEF VERİM -->
+      <div class="card">
+        <div class="card-title">
+          <span id="profile-card-title">Adım 1: Süt İneği Bilgileri & Hedef Süt Verimi</span>
+          <span class="tag tag-outline" id="standard-badge-label">Standart: NASEM 2021 / CNCPS</span>
+        </div>
+        <p class="card-subtitle">Hayvanın canlı kilosunu ve beklediğiniz verimi girin; sistem uluslararası formüllerle günlük enerji, protein, lif ve mineral ihtiyacını otomatik hesaplar.</p>
+
+        <!-- SÜT SIĞIRI GİRİŞLERİ -->
+        <div id="inputs-dairy">
+          <div class="grid-2">
+            <div>
+              <label for="dairy-stage">Hayvan Grubu / Dönemi:</label>
+              <select id="dairy-stage" onchange="onAnimalProfileChange()">
+                <option value="early">Erken Sağım / Pik Dönemi (Doğum sonrası 1-90. gün)</option>
+                <option value="mid" selected>Orta Sağım Dönemi (90-200. gün)</option>
+                <option value="late">Geç Sağım Dönemi (200+ gün / Gebe)</option>
+                <option value="dry">Kuru Dönem İneği (Doğuma son 60 gün - Dinlenme)</option>
+                <option value="heifer">Damızlık Gebe Düve (Büyüme + Gebelik)</option>
+              </select>
+            </div>
+            <div>
+              <label for="dairy-bw">Canlı Ağırlık (kg):</label>
+              <input type="number" id="dairy-bw" value="620" min="250" max="950" step="10" oninput="onAnimalProfileChange()">
+            </div>
+          </div>
+          <div class="grid-3" id="dairy-milk-inputs-row">
+            <div>
+              <label for="dairy-milk">Günlük Süt Verimi (Litre/gün):</label>
+              <input type="number" id="dairy-milk" value="28" min="0" max="65" step="1" oninput="onAnimalProfileChange()">
+            </div>
+            <div>
+              <label for="dairy-fat">Süt Yağ Oranı (%):</label>
+              <input type="number" id="dairy-fat" value="3.8" min="2.5" max="6.0" step="0.1" oninput="onAnimalProfileChange()">
+            </div>
+            <div>
+              <label for="dairy-price">Çiğ Süt Satış Fiyatı (₺/Litre):</label>
+              <input type="number" id="dairy-price" value="16.5" min="1" max="200" step="0.5" oninput="onAnimalProfileChange()">
+            </div>
+          </div>
+        </div>
+
+        <!-- BESİ SIĞIRI GİRİŞLERİ -->
+        <div id="inputs-beef" style="display:none;">
+          <div class="grid-2">
+            <div>
+              <label for="beef-stage">Besi Dönemi / Grubu:</label>
+              <select id="beef-stage" onchange="onAnimalProfileChange()">
+                <option value="arrival">Yeni Gelen Dana Alıştırma (İlk 21 Gün - Yüksek Ot)</option>
+                <option value="grower">Besi Geliştirme Dönemi (200 - 350 kg Kemik/Kas)</option>
+                <option value="finisher" selected>Besibitirme / Semirtme Dönemi (350 - 650+ kg Yoğun Besi)</option>
+              </select>
+            </div>
+            <div>
+              <label for="beef-bw">Canlı Ağırlık (kg):</label>
+              <input type="number" id="beef-bw" value="420" min="120" max="850" step="10" oninput="onAnimalProfileChange()">
+            </div>
+          </div>
+          <div class="grid-3">
+            <div>
+              <label for="beef-adg">Hedef Günlük Kilo Alımı (kg/gün):</label>
+              <input type="number" id="beef-adg" value="1.40" min="0.3" max="2.2" step="0.05" oninput="onAnimalProfileChange()">
+            </div>
+            <div>
+              <label for="beef-yield">Karkas Et Randımanı (%):</label>
+              <input type="number" id="beef-yield" value="58" min="45" max="68" step="1" oninput="onAnimalProfileChange()">
+            </div>
+            <div>
+              <label for="beef-meat-price">Karkas Et Kesim Fiyatı (₺/kg):</label>
+              <input type="number" id="beef-meat-price" value="380" min="50" max="2000" step="5" oninput="onAnimalProfileChange()">
+            </div>
+          </div>
+        </div>
+
+        <!-- KOYUN & KUZU GİRİŞLERİ -->
+        <div id="inputs-sheep" style="display:none;">
+          <div class="grid-2">
+            <div>
+              <label for="sheep-stage">Koyun / Kuzu Grubu:</label>
+              <select id="sheep-stage" onchange="onAnimalProfileChange()">
+                <option value="maintenance">Boş / Kuru Anaç Koyun (Mera / Ağıl Yaşama Payı)</option>
+                <option value="flushing">Koç Katımı Hazırlığı (Flushing - İkizlik Artırma)</option>
+                <option value="late_twin" selected>Son 6 Hafta Gebe Koyun (İkiz Gebe - Gebelik Zehirlenmesi Korumalı)</option>
+                <option value="lactating">Emziren / Sağmal Koyun (İkiz Kuzu Emziren)</option>
+                <option value="lamb_fattening">Yoğun Kuzu / Toklu Besisi (Hızlı Kilo Alımı)</option>
+              </select>
+            </div>
+            <div>
+              <label for="sheep-bw">Canlı Ağırlık (kg):</label>
+              <input type="number" id="sheep-bw" value="65" min="15" max="130" step="1" oninput="onAnimalProfileChange()">
+            </div>
+          </div>
+          <div class="grid-2">
+            <div>
+              <label for="sheep-target">Hedef Verim (Günlük Süt L veya Kuzu Artış gr/gün):</label>
+              <input type="number" id="sheep-target" value="2.0" min="0" max="500" step="0.1" oninput="onAnimalProfileChange()">
+            </div>
+            <div>
+              <label for="sheep-product-price">Ürün Satış Fiyatı (Süt ₺/L veya Canlı Baskül ₺/kg):</label>
+              <input type="number" id="sheep-product-price" value="35" min="1" max="1000" step="1" oninput="onAnimalProfileChange()">
+            </div>
+          </div>
+        </div>
+
+        <!-- HESAPLANAN GÜNLÜK HEDEF İHTİYAÇ ÖZETİ -->
+        <div style="background:var(--surface-alt); border:2px solid var(--border); border-radius:6px; padding:10px 12px; margin-top:4px;">
+          <div style="font-size:0.8rem; font-weight:900; margin-bottom:6px; display:flex; justify-content:space-between; flex-wrap:wrap;">
+            <span>HAYVANIN GÜNLÜK BİLİMSEL BESİN İHTİYACI (HEDEF):</span>
+            <span id="req-summary-subtitle" style="font-weight:800;"></span>
+          </div>
+          <div class="grid-4" style="margin-bottom:0;">
+            <div style="background:var(--bg); border:1.5px solid var(--border); border-radius:4px; padding:6px; text-align:center;">
+              <div style="font-size:0.7rem; font-weight:800; color:var(--text-muted);">KURU MADDE (İştah)</div>
+              <div style="font-size:1rem; font-weight:900;" id="req-dmi-val">0.0 kg</div>
+            </div>
+            <div style="background:var(--bg); border:1.5px solid var(--border); border-radius:4px; padding:6px; text-align:center;">
+              <div style="font-size:0.7rem; font-weight:800; color:var(--text-muted);">HAM PROTEİN (HP)</div>
+              <div style="font-size:1rem; font-weight:900;" id="req-cp-val">%0.0</div>
+            </div>
+            <div style="background:var(--bg); border:1.5px solid var(--border); border-radius:4px; padding:6px; text-align:center;">
+              <div style="font-size:0.7rem; font-weight:800; color:var(--text-muted);">ENERJİ (ME / NEL)</div>
+              <div style="font-size:1rem; font-weight:900;" id="req-energy-val">0.0 Mcal</div>
+            </div>
+            <div style="background:var(--bg); border:1.5px solid var(--border); border-radius:4px; padding:6px; text-align:center;">
+              <div style="font-size:0.7rem; font-weight:800; color:var(--text-muted);">MİN. ETKİLİ LİF (peNDF)</div>
+              <div style="font-size:1rem; font-weight:900;" id="req-pendf-val">%0</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ADIM 2: HAZIR ŞABLONLAR VEYA TEK TIKLA OTOMATİK DENGELEME -->
+      <div class="card">
+        <div class="card-title">
+          <span>Adım 2: Hazır Rasyon Şablonu Seç veya Otomatik Dengele</span>
+          <span class="tag tag-solid">Akıllı Rasyon Motoru</span>
+        </div>
+        <p class="card-subtitle">Elinizdeki kaba yem durumuna göre hazır şablon yükleyebilir veya <strong>"Otomatik Dengele & En Ucuz Yap"</strong> butonuyla rasyonu tek tıkla hedefe oturtabilirsiniz.</p>
+
+        <div class="grid-2" style="margin-bottom:8px;">
+          <div>
+            <label for="preset-select">Bölgesel / Saha Hazır Rasyon Şablonu:</label>
+            <select id="preset-select" onchange="applySelectedPreset()" style="margin-bottom:0;"></select>
+          </div>
+          <div style="display:flex; align-items:flex-end; gap:6px;">
+            <button class="btn btn-primary" onclick="autoBalanceCurrentRation()">Otomatik Dengele & En Ucuz Yap</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ADIM 3: YEMLİĞE GİREN YEMLER (KG / HAYVAN / GÜN) -->
+      <div class="card">
+        <div class="card-title">
+          <span>Adım 3: Günlük Verilen Yemler (1 Hayvan / Günlük Yaş Kilo)</span>
+          <button class="btn btn-outline btn-sm" onclick="clearAllRationItems()">Sıfırla</button>
+        </div>
+        <p class="card-subtitle">Her yemden 1 hayvana günde kaç kilo (yaş/natural ağırlık olarak) verdiğinizi <strong>- / +</strong> butonlarıyla veya kutuya yazarak ayarlayın.</p>
+
+        <!-- Yem Ekleme Çubuğu -->
+        <div style="display:grid; grid-template-columns: 1fr auto; gap:8px; margin-bottom:14px; background:var(--surface-alt); padding:10px; border:2px solid var(--border); border-radius:6px;">
+          <div>
+            <label for="add-feed-select">Rasyona Yeni Yem Maddesi Ekle (40+ Yem Kütüphanesi):</label>
+            <select id="add-feed-select" style="margin-bottom:0;"></select>
+          </div>
+          <div style="display:flex; align-items:flex-end;">
+            <button class="btn btn-primary" style="width:auto; padding:0 16px;" onclick="addFeedToRation()">+ Yemi Ekle</button>
+          </div>
+        </div>
+
+        <!-- Aktif Rasyon Yem Listesi -->
+        <div id="active-ration-list"></div>
+      </div>
+
+      <!-- ADIM 4: CANLI RASYON ANALİZİ VE YETİŞTİRİCİ UYARILARI -->
+      <div class="card">
+        <div class="card-title">
+          <span>Adım 4: Uluslararası Rasyon Karne & İşkembe Sağlığı Analizi</span>
+          <span id="overall-ration-badge" class="tag tag-solid">Hesaplanıyor</span>
+        </div>
+
+        <!-- Özet İstatistik Kartları -->
+        <div class="grid-4">
+          <div class="stat-card">
+            <div class="stat-val" id="stat-total-asfed">0.0 kg</div>
+            <div class="stat-label">Toplam Yaş Yem (Yemliğe Giren)</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val" id="stat-total-dm">0.0 kg</div>
+            <div class="stat-label">Toplam Kuru Madde (Susuz Net Yem)</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val" id="stat-forage-ratio">%0 / %0</div>
+            <div class="stat-label">Kaba Ot / Fabrika-Tahıl Oranı</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val" id="stat-daily-cost">0.00 ₺</div>
+            <div class="stat-label">Günlük 1 Hayvan Yem Maliyeti</div>
+          </div>
+        </div>
+
+        <!-- Besin Parametreleri Bar Göstergeleri -->
+        <div class="nutrient-meter-grid" id="nutrient-meters-container"></div>
+
+        <!-- Yetiştirici Dilinde Sağlık & Metabolik Uyarılar -->
+        <div style="margin-top:14px;">
+          <h4 style="font-size:0.92rem; font-weight:900; margin-bottom:8px; border-bottom:1.5px solid var(--border); padding-bottom:4px;">
+            Yetiştirici Dilinde Rasyon Teşhisi & İşkembe Uyarıları:
+          </h4>
+          <div id="breeder-warnings-container"></div>
+        </div>
+
+        <!-- Ekonomik Karlılık (IOFC) Özeti -->
+        <div id="economic-summary-box" style="margin-top:12px; background:var(--surface-alt); border:2px solid var(--border); border-radius:6px; padding:12px;"></div>
+
+        <!-- Hızlı Aksiyon Butonları -->
+        <div class="grid-2" style="margin-top:12px; margin-bottom:0;">
+          <button class="btn btn-primary" onclick="switchTab('tmr')">Yem Karma Vagonu (TMR) Hesabına Aktar</button>
+          <button class="btn btn-outline" onclick="saveCurrentRationToStore()">Bu Rasyonu Deftere Kaydet</button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ================= SEKME 2: YEM KARMA VAGONU (TMR) & ÇUVAL HESABI ================= -->
+    <section id="tab-tmr" class="tab-section">
+      <div class="card">
+        <div class="card-title">
+          <span>Yem Karma Vagonu (TMR) & Günlük Öğün Dağıtım Hesaplayıcı</span>
+          <span class="tag tag-solid">Traktör / Kantar Ekranı</span>
+        </div>
+        <p class="card-subtitle">Hazırladığınız 1 hayvanlık rasyonu sürüdeki hayvan sayısına ve günlük yemleme öğününe çarpar. Yem karma makinesinin kantarına hangi sırayla kaç kilo atılacağını gösterir.</p>
+
+        <div class="grid-3">
+          <div>
+            <label for="tmr-animal-count">Gruptaki Hayvan Sayısı (Baş):</label>
+            <input type="number" id="tmr-animal-count" value="50" min="1" max="5000" step="1" oninput="renderTmrMixerTable()">
+          </div>
+          <div>
+            <label for="tmr-meals-per-day">Günlük Yemleme Öğün Sayısı:</label>
+            <select id="tmr-meals-per-day" onchange="renderTmrMixerTable()">
+              <option value="1">Günde 1 Öğün (Tek Seferde Karma)</option>
+              <option value="2" selected>Günde 2 Öğün (Sabah %50 - Akşam %50)</option>
+              <option value="3">Günde 3 Öğün (Sabah - Öğle - Akşam)</option>
+            </select>
+          </div>
+          <div>
+            <label for="tmr-bunk-allowance">Yemlik Payı / Fire Ekstra (%):</label>
+            <select id="tmr-bunk-allowance" onchange="renderTmrMixerTable()">
+              <option value="0" selected>%0 (Tam Hesap - Sıyırma Yemlik)</option>
+              <option value="2">+%2 Yemlik Bolluk Payı (İdeal Sağmal)</option>
+              <option value="5">+%5 Yemlik Bolluk Payı (Serbest Grup)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid-3" id="tmr-summary-cards"></div>
+
+        <h4 style="font-size:0.92rem; font-weight:900; margin:12px 0 6px 0;">
+          Yem Karma Vagonuna Atılış Sırası ve Kantar Kümülatif Listesi (1 Öğün İçin):
+        </h4>
+        <p style="font-size:0.78rem; color:var(--text-muted); margin-bottom:8px; font-weight:600;">
+          * Kural: Vagona önce kuru ot/saman (kıyım için), sonra kesif yem/arpa/küspe, ardından silaj ve en son su/melas eklenir. <strong>"Kantar Toplamı"</strong> sütunu, vagonun dijital ekranında görmeniz gereken üst üste toplam kilodur.
+        </p>
+
+        <div class="table-container">
+          <table id="tmr-loading-table">
+            <thead>
+              <tr>
+                <th>Sıra</th>
+                <th>Yem Adı</th>
+                <th>Atılış Kuralı</th>
+                <th>1 Hayvan (Gün)</th>
+                <th>1 Öğün Vagon (kg)</th>
+                <th>Vagon Kantar Toplamı</th>
+                <th>Günlük Toplam (kg)</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- KENDİ FABRİKA YEMİNİ (KESİF YEM)1 TONLUK KARIŞIM YAPMA -->
+      <div class="card">
+        <div class="card-title">
+          <span>1.000 kg (1 Ton) Kendi Kesif Yem Karışımım & Çuval Hesabı</span>
+          <span class="tag tag-outline">Çiftlik Yem Üretimi</span>
+        </div>
+        <p class="card-subtitle">Rasyonunuzdaki sadece kesif yemleri (tahıllar, küspeler, kepek, mermer tozu, karbonat, tuz) kendi yem kırma-karıştırma makinenizde <strong>1 Tonluk (1.000 kg)</strong> parti halinde hazırlamak isterseniz gereken miktarlar:</p>
+        <div class="table-container">
+          <table id="concentrate-mix-table">
+            <thead>
+              <tr>
+                <th>Kesif Yem / Katkı</th>
+                <th>1 Ton İçindeki Oranı (%)</th>
+                <th>1 Ton (1.000 kg) Karışım İçin</th>
+                <th>50 kg'lık Çuval Karşılığı</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SEKME 3: PEARSON KARESİ & HIZLI PRATİK HESAPLAYICILAR ================= -->
+    <section id="tab-pearson" class="tab-section">
+      <div class="card">
+        <div class="card-title">
+          <span>Pearson Karesi (İki Yemi Hedef Proteine Göre Karıştırma)</span>
+          <span class="tag tag-solid">Klasik Zootekni Aracı</span>
+        </div>
+        <p class="card-subtitle">Örneğin elinizdeki <strong>Arpa (%11.5 Protein)</strong> ile <strong>Ayçiçek Küspesi (%36 Protein)</strong> veya <strong>Soya Küspesi (%46 Protein)</strong> yemlerini karıştırarak <strong>%18 Proteinli</strong> 100 kg veya 1.000 kg yem yapmak için kaçar kilo karıştırmanız gerektiğini saniyesinde hesaplar.</p>
+
+        <div class="grid-3">
+          <div>
+            <label for="ps-feed1-select">1. Yem (Düşük Proteinli Tahıl/Enerji):</label>
+            <select id="ps-feed1-select" onchange="onPearsonFeedSelect(1)"></select>
+            <label for="ps-feed1-cp">1. Yem Ham Protein (%):</label>
+            <input type="number" id="ps-feed1-cp" value="11.5" step="0.1" oninput="calculatePearsonSquare()">
+          </div>
+          <div>
+            <label for="ps-feed2-select">2. Yem (Yüksek Proteinli Küspe):</label>
+            <select id="ps-feed2-select" onchange="onPearsonFeedSelect(2)"></select>
+            <label for="ps-feed2-cp">2. Yem Ham Protein (%):</label>
+            <input type="number" id="ps-feed2-cp" value="36.0" step="0.1" oninput="calculatePearsonSquare()">
+          </div>
+          <div>
+            <label for="ps-target-cp">Hedeflenen Karışım Proteini (%):</label>
+            <input type="number" id="ps-target-cp" value="18.0" step="0.5" oninput="calculatePearsonSquare()">
+            <label for="ps-batch-kg">Toplam Karıştırılacak Miktar (kg):</label>
+            <input type="number" id="ps-batch-kg" value="1000" step="50" oninput="calculatePearsonSquare()">
+          </div>
+        </div>
+
+        <div id="pearson-result-box" class="alert-box" style="margin-top:6px;"></div>
+      </div>
+
+      <!-- SİLAJ / YAŞ PANCAR POSASI KURU MADDE VE FİYAT KARŞILAŞTIRMA -->
+      <div class="card">
+        <div class="card-title">
+          <span>Yemlerin Gerçek Ucuzluk Kıyaslayıcısı (1 kg Kuru Madde & Protein Maliyeti)</span>
+          <span class="tag tag-outline">Satın Alma Rehberi</span>
+        </div>
+        <p class="card-subtitle">Yaş pancar posası veya mısır silajının ton fiyatı ucuz görünür ama içinde %70-85 su vardır! Hangi yemin <strong>1 kg susuz net besin (Kuru Madde)</strong> ve <strong>1 kg Protein</strong> bazında gerçekten daha ucuz olduğunu karşılaştırın.</p>
+        <div class="table-container">
+          <table id="feed-value-comparison-table">
+            <thead>
+              <tr>
+                <th>Yem Adı</th>
+                <th>Yaş Ton / Kg Fiyatı</th>
+                <th>Kuru Madde (%)</th>
+                <th>1 kg Susuz Kuru Yem Maliyeti</th>
+                <th>1 kg Saf Protein Maliyeti</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SEKME 4: YEM KÜTÜPHANESİ & FİYAT GÜNCELLEME ================= -->
+    <section id="tab-feeds" class="tab-section">
+      <div class="card">
+        <div class="card-title">
+          <span>Uluslararası & Türkiye Yem Kütüphanesi (NASEM / NRC Değerleri)</span>
+          <button class="btn btn-outline btn-sm" onclick="resetFeedLibraryDefaults()">Varsayılan Fiyatlara Dön</button>
+        </div>
+        <p class="card-subtitle">Kullandığınız yemlerin bulunduğunuz bölgedeki güncel <strong>TL/kg</strong> fiyatlarını veya laboratuvar kuru madde (%KM) ve ham protein (%HP) analiz değerlerini buradan değiştirebilirsiniz. Tüm rasyon hesapları anında güncellenir.</p>
+
+        <div style="display:flex; gap:8px; margin-bottom:12px; flex-wrap:wrap;">
+          <input type="text" id="feed-search-input" placeholder="Yem ara (Örn: yonca, silaj, arpa, ATK, soya, mermer...)" oninput="renderFeedLibraryTable()" style="margin-bottom:0; flex:1; min-width:200px;">
+          <select id="feed-category-filter" onchange="renderFeedLibraryTable()" style="margin-bottom:0; width:auto; min-width:160px;">
+            <option value="all">Tüm Yem Grupları</option>
+            <option value="forage">Kaba Yemler (Ot, Silaj, Saman)</option>
+            <option value="energy">Enerji Yemleri (Tahıllar, Kepek)</option>
+            <option value="protein">Protein Yemleri (Küspeler)</option>
+            <option value="mineral">Mineral, Tampon & Katkılar</option>
+          </select>
+        </div>
+
+        <div class="table-container">
+          <table id="feed-library-table">
+            <thead>
+              <tr>
+                <th>Yem Adı</th>
+                <th>Grup</th>
+                <th>Birim Fiyat (₺/kg)</th>
+                <th>KM (%)</th>
+                <th>Protein (%KM)</th>
+                <th>Enerji (ME Mcal)</th>
+                <th>NDF Lif (%)</th>
+                <th>Nişasta (%)</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Yeni Özel Yem Ekleme -->
+      <div class="card">
+        <div class="card-title">
+          <span>Çiftliğe Özel Yeni Yem veya Fabrika Yemi Ekle</span>
+        </div>
+        <div class="grid-3">
+          <div>
+            <label for="custom-feed-name">Yem Adı (Örn: Özel 20 HP Süt Yemi):</label>
+            <input type="text" id="custom-feed-name" placeholder="Özel Yem Adı">
+          </div>
+          <div>
+            <label for="custom-feed-cat">Yem Grubu:</label>
+            <select id="custom-feed-cat">
+              <option value="forage">Kaba Yem (Ot / Silaj)</option>
+              <option value="energy">Kesif Enerji / Fabrika Yemi</option>
+              <option value="protein">Protein Küspesi</option>
+              <option value="mineral">Mineral / Tampon Katkı</option>
+            </select>
+          </div>
+          <div>
+            <label for="custom-feed-price">Fiyatı (₺/kg):</label>
+            <input type="number" id="custom-feed-price" value="12.5" step="0.5">
+          </div>
+        </div>
+        <div class="grid-4">
+          <div>
+            <label for="custom-feed-dm">Kuru Madde (%):</label>
+            <input type="number" id="custom-feed-dm" value="89" min="10" max="100">
+          </div>
+          <div>
+            <label for="custom-feed-cp">Ham Protein (%KM):</label>
+            <input type="number" id="custom-feed-cp" value="20" min="0" max="290" step="0.5">
+          </div>
+          <div>
+            <label for="custom-feed-me">Enerji ME (Mcal/kg KM):</label>
+            <input type="number" id="custom-feed-me" value="2.75" min="0" max="4.5" step="0.05">
+          </div>
+          <div>
+            <label for="custom-feed-ndf">NDF Lif (%KM):</label>
+            <input type="number" id="custom-feed-ndf" value="24" min="0" max="90">
+          </div>
+        </div>
+        <button class="btn btn-primary" onclick="saveCustomFeedToLibrary()">+ Kütüphaneye Kaydet</button>
+      </div>
+    </section>
+
+    <!-- ================= SEKME 5: KAYITLI RASYON DEFTERİ & YEDEKLEME ================= -->
+    <section id="tab-saved" class="tab-section">
+      <div class="card">
+        <div class="card-title">
+          <span>Kayıtlı Çiftlik Rasyonları Defteri</span>
+          <span class="tag tag-solid">%100 Çevrimdışı Hafıza</span>
+        </div>
+        <p class="card-subtitle">Kaydettiğiniz süt, besi ve koyun rasyonlarını buradan tek tıkla geri yükleyebilir veya karşılaştırabilirsiniz.</p>
+        <div id="saved-rations-list"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <span>Verileri Yedekle / Başka Telefona Aktar (JSON)</span>
+        </div>
+        <p class="card-subtitle">Tüm yem fiyatlarınızı ve kayıtlı rasyonlarınızı dosya olarak indirebilir veya başka bir cihaza yükleyebilirsiniz.</p>
+        <div class="grid-2" style="margin-bottom:0;">
+          <button class="btn btn-outline" onclick="exportRationBackup()">Rasyon Yedeğini İndir</button>
+          <label class="btn btn-outline" style="margin-bottom:0; cursor:pointer;">
+            Yedek Dosyası Yükle
+            <input type="file" accept=".json" onchange="importRationBackup(event)" style="display:none;">
+          </label>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Alt Gezinme Çubuğu (Bottom Nav) -->
+  <nav class="bottom-nav" aria-label="Ana Gezinme">
+    <button class="nav-item active" id="nav-formulator" onclick="switchTab('formulator')">
+      <span class="nav-item-num">1. ADIM</span>
+      <span>Rasyon Kur</span>
+    </button>
+    <button class="nav-item" id="nav-tmr" onclick="switchTab('tmr')">
+      <span class="nav-item-num">2. VAGON</span>
+      <span>TMR & Çuval</span>
+    </button>
+    <button class="nav-item" id="nav-pearson" onclick="switchTab('pearson')">
+      <span class="nav-item-num">3. PRATİK</span>
+      <span>Pearson & Kıyas</span>
+    </button>
+    <button class="nav-item" id="nav-feeds" onclick="switchTab('feeds')">
+      <span class="nav-item-num">4. YEMLER</span>
+      <span>Yem & Fiyat</span>
+    </button>
+    <button class="nav-item" id="nav-saved" onclick="switchTab('saved')">
+      <span class="nav-item-num">5. DEFTER</span>
+      <span>Kayıtlılar</span>
+    </button>
+  </nav>
+
+  <!-- KULLANIM KILAVUZU MODALI -->
+  <div id="modal-guide" class="modal-overlay" onclick="if(event.target===this)closeGuideModal()">
+    <div class="modal-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid var(--border); padding-bottom:8px; margin-bottom:12px;">
+        <h3 style="font-size:1.05rem; font-weight:900;">Yetiştirici Rasyon Hazırlama Kılavuzu</h3>
+        <button class="btn btn-outline btn-sm" onclick="closeGuideModal()">Kapat</button>
+      </div>
+      <div style="font-size:0.85rem; line-height:1.55; display:flex; flex-direction:column; gap:10px;">
+        <div class="alert-box">
+          <strong>1. Neden Uluslararası Standart (NASEM / NRC / CNCPS)?</strong>
+          Hayvanlara sadece "göz kararı" arpa, saman veya fabrika yemi dökmek ya gizli işkembe ekşimesine (asidoz / döl tutmama / ayak yanması) ya da gereksiz yem israfına yol açar. Bu uygulama uluslararası rasyon yazılımlarının kullandığı Kuru Madde (KM), Net Enerji (NEL/NEM/NEG), Ham Protein (HP), Fiziksel Etkili Lif (peNDF), Nişasta ve Kalsiyum/Fosfor denklemlerini arka planda çalıştırır, sonuçları ise doğrudan yetiştirici dilinde sunar.
+        </div>
+        <div class="alert-box">
+          <strong>2. Yaş Kilo ile Kuru Madde (KM) Farkı Nedir?</strong>
+          Örneğin 20 kg Mısır Silajı verdiğinizde hayvanın kursağına 20 kg kuru yem girmez; silajın %68'i sudur, yani net <strong>6.4 kg Kuru Madde</strong> girer. Siz ekranda her zaman yemliğe döktüğünüz <strong>Yaş Kiloyu (kg)</strong> girersiniz; program içindeki suyu otomatik düşerek gerçek besin dengesini hesaplar.
+        </div>
+        <div class="alert-box">
+          <strong>3. İşkembe Sağlığı İçin Altın Kurallar:</strong>
+          • <strong>Sağmal Süt İneği:</strong> Etkili lif (peNDF) en az %21 olmalı (yoksa süt yağı düşer ve tırnaklar yanar). Nişasta + şeker toplamı %28'i geçmemeli.<br>
+          • <strong>Besi Danası:</strong> Besibitirmede bile geviş için en az %12-15 kaba ot/saman bulunmalı; kalsiyum fosforun en az 1.5 - 2 katı olmalı (sidik zoru / idrar taşını önlemek için).<br>
+          • <strong>Gebe Koyun (Son 6 Hafta):</strong> Karnındaki ikiz kuzular işkembeyi sıkıştırdığı için saman azaltılmalı, enerjisi yüksek arpa/mısır ve yonca ile "Gebelik Zehirlenmesi (İkiz Koması)" önlenmelidir.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* =========================================================================
+       1. ULUSLARARASI YEM KÜTÜPHANESİ (NASEM 2021 / NRC / TÜRKİYE SAHA DEĞERLERİ)
+       Tüm besin değerleri %100 Kuru Madde (KM) bazındadır; fiyatlar Yaş (Natural) ₺/kg'dır.
+       ========================================================================= */
+    const DEFAULT_FEEDS = [
+      // KABA YEMLER (FORAGES)
+      { id: "misir_silaji", name: "Mısır Silajı (İyi Daneli %32 KM)", cat: "forage", dm: 32, cp: 8.2, me: 2.60, nel: 1.62, ndf: 44, pendf: 36, starch: 28, ca: 0.25, p: 0.22, price: 2.60 },
+      { id: "yonca_kuru", name: "Yonca Kuru Otu (Çiçeklenme Başlangıcı)", cat: "forage", dm: 89, cp: 18.0, me: 2.25, nel: 1.38, ndf: 42, pendf: 38, starch: 3, ca: 1.40, p: 0.26, price: 7.50 },
+      { id: "bugday_samani", name: "Buğday Samanı", cat: "forage", dm: 91, cp: 3.8, me: 1.55, nel: 0.90, ndf: 76, pendf: 70, starch: 1, ca: 0.18, p: 0.08, price: 3.20 },
+      { id: "cayir_otu", name: "Çayır Kuru Otu / Mera Otu", cat: "forage", dm: 89, cp: 10.5, me: 2.05, nel: 1.25, ndf: 58, pendf: 52, starch: 2, ca: 0.55, p: 0.22, price: 5.50 },
+      { id: "fig_yulaf_otu", name: "Fiğ - Yulaf Kuru Otu Karışımı", cat: "forage", dm: 89, cp: 13.5, me: 2.15, nel: 1.32, ndf: 52, pendf: 46, starch: 5, ca: 0.75, p: 0.25, price: 6.20 },
+      { id: "reygras_silaji", name: "İtalyan Çimi (Reygras) Silajı (%35 KM)", cat: "forage", dm: 35, cp: 14.0, me: 2.35, nel: 1.45, ndf: 48, pendf: 40, starch: 2, ca: 0.60, p: 0.30, price: 3.10 },
+      { id: "yas_pancar_posasi", name: "Yaş Şeker Pancarı Posası (%22 KM)", cat: "forage", dm: 22, cp: 9.5, me: 2.55, nel: 1.60, ndf: 44, pendf: 22, starch: 2, ca: 0.65, p: 0.10, price: 1.40 },
+
+      // ENERJİ YEMLERİ & FABRİKA YEMLERİ (ENERGY / CONCENTRATES)
+      { id: "arpa_ezmesi", name: "Arpa Ezmesi / Kırması", cat: "energy", dm: 89, cp: 11.5, me: 3.04, nel: 1.92, ndf: 19, pendf: 6, starch: 57, ca: 0.06, p: 0.38, price: 8.80 },
+      { id: "misir_kirmasi", name: "Mısır Kırması / Flake", cat: "energy", dm: 88, cp: 9.0, me: 3.25, nel: 2.05, ndf: 10, pendf: 3, starch: 70, ca: 0.03, p: 0.30, price: 9.20 },
+      { id: "bugday_kepegi", name: "Buğday Kepeği / Razmol", cat: "energy", dm: 89, cp: 16.0, me: 2.55, nel: 1.60, ndf: 42, pendf: 10, starch: 20, ca: 0.13, p: 1.15, price: 7.20 },
+      { id: "kuru_pancar_posasi", name: "Kuru Pancar Posası (Pelet)", cat: "energy", dm: 90, cp: 9.5, me: 2.65, nel: 1.66, ndf: 44, pendf: 18, starch: 2, ca: 0.70, p: 0.10, price: 8.50 },
+      { id: "melas", name: "Şeker Pancarı Melası", cat: "energy", dm: 76, cp: 8.5, me: 2.85, nel: 1.80, ndf: 0, pendf: 0, starch: 48, ca: 0.80, p: 0.08, price: 7.00 },
+      { id: "sut_yemi_19", name: "Süt Fabrika Yemi (19 HP - 2700 ME)", cat: "energy", dm: 89, cp: 21.3, me: 2.85, nel: 1.80, ndf: 25, pendf: 5, starch: 34, ca: 1.00, p: 0.65, price: 11.20 },
+      { id: "sut_yemi_21", name: "Yüksek Verim Süt Yemi (21 HP - 2800 ME)", cat: "energy", dm: 89, cp: 23.6, me: 2.95, nel: 1.86, ndf: 22, pendf: 5, starch: 36, ca: 1.10, p: 0.70, price: 12.00 },
+      { id: "besi_yemi_14", name: "Besi Geliştirme / Bitirme Yemi (14-15 HP)", cat: "energy", dm: 89, cp: 16.5, me: 2.90, nel: 1.82, ndf: 24, pendf: 5, starch: 42, ca: 0.95, p: 0.55, price: 10.60 },
+      { id: "kuzu_besi_yemi", name: "Kuzu / Koyun Fabrika Yemi (16 HP)", cat: "energy", dm: 89, cp: 18.0, me: 2.92, nel: 1.84, ndf: 22, pendf: 5, starch: 40, ca: 1.00, p: 0.50, price: 11.40 },
+      { id: "bypass_yag", name: "Korunmuş (Bypass) Yağ (%84 Yağ)", cat: "energy", dm: 99, cp: 0.0, me: 5.60, nel: 4.50, ndf: 0, pendf: 0, starch: 0, ca: 9.00, p: 0.00, price: 42.00 },
+
+      // PROTEİN KÜSPELERİ (PROTEIN SUPPLEMENTS)
+      { id: "atk_36", name: "Ayçiçek Tohumu Küspesi (ATK - %36 HP)", cat: "protein", dm: 90, cp: 38.0, me: 2.35, nel: 1.46, ndf: 36, pendf: 8, starch: 4, ca: 0.40, p: 1.10, price: 10.80 },
+      { id: "atk_28", name: "Ayçiçek Küspesi (ATK Kabuklu - %28 HP)", cat: "protein", dm: 90, cp: 30.5, me: 2.05, nel: 1.25, ndf: 44, pendf: 12, starch: 3, ca: 0.38, p: 0.95, price: 8.90 },
+      { id: "soya_46", name: "Soya Fasulyesi Küspesi (SFK - %46 HP)", cat: "protein", dm: 89, cp: 51.0, me: 3.15, nel: 2.00, ndf: 12, pendf: 3, starch: 6, ca: 0.35, p: 0.70, price: 19.50 },
+      { id: "pamuk_tohumu_kuspesi", name: "Pamuk Tohumu Küspesi (PTK - %32 HP)", cat: "protein", dm: 90, cp: 35.5, me: 2.50, nel: 1.56, ndf: 34, pendf: 10, starch: 3, ca: 0.22, p: 1.05, price: 11.80 },
+      { id: "kanola_kuspesi", name: "Kanola Küspesi (%36 HP)", cat: "protein", dm: 90, cp: 39.5, me: 2.75, nel: 1.72, ndf: 28, pendf: 7, starch: 5, ca: 0.70, p: 1.15, price: 13.00 },
+      { id: "ddgs_misir", name: "Mısır DDGS (Damıtık Tahıl - %28 HP)", cat: "protein", dm: 90, cp: 30.5, me: 3.10, nel: 1.96, ndf: 32, pendf: 8, starch: 6, ca: 0.08, p: 0.85, price: 12.20 },
+      { id: "yemlik_ure", name: "Yemlik Üre (%287 Eşdeğer HP - Yavaş Salınım/NPN)", cat: "protein", dm: 99, cp: 281.0, me: 0.0, nel: 0.0, ndf: 0, pendf: 0, starch: 0, ca: 0.0, p: 0.0, price: 24.00 },
+
+      // MİNERAL, TAMPON VE KATKILAR (MINERALS & BUFFERS)
+      { id: "mermer_tozu", name: "Mermer Tozu (Kalsiyum Karbonat %38 Ca)", cat: "mineral", dm: 99, cp: 0, me: 0, nel: 0, ndf: 0, pendf: 0, starch: 0, ca: 38.0, p: 0.0, price: 3.50 },
+      { id: "dcp_fosfor", name: "DCP (Dikalsiyum Fosfat - %22 Ca / %18 P)", cat: "mineral", dm: 99, cp: 0, me: 0, nel: 0, ndf: 0, pendf: 0, starch: 0, ca: 22.0, p: 18.0, price: 32.00 },
+      { id: "karbonat_tampon", name: "Yemlik Karbonat (Sodyum Bikarbonat - Asidoz Önleyici)", cat: "mineral", dm: 99, cp: 0, me: 0, nel: 0, ndf: 0, pendf: 0, starch: 0, ca: 0.0, p: 0.0, price: 18.00 },
+      { id: "yem_tuzu", name: "Yemlik Tuz (Sodyum Klorür)", cat: "mineral", dm: 99, cp: 0, me: 0, nel: 0, ndf: 0, pendf: 0, starch: 0, ca: 0.0, p: 0.0, price: 5.00 },
+      { id: "vit_min_premiks", name: "Vitamin & İz Mineral Premiksi (AD3E + Selenyum + Çinko)", cat: "mineral", dm: 99, cp: 0, me: 0, nel: 0, ndf: 0, pendf: 0, starch: 0, ca: 12.0, p: 4.0, price: 55.00 }
+    ];
+
+    /* =========================================================================
+       2. HAZIR RASYON ŞABLONLARI (SÜT, BESİ, KOYUN)
+       ========================================================================= */
+    const RATION_PRESETS = {
+      dairy: [
+        {
+          id: "dairy_28l_silage",
+          name: "28 Litre Sağmal İnek (Mısır Silajı + Yonca + Arpa + Süt Yemi)",
+          stage: "mid", bw: 620, milk: 28, fat: 3.8,
+          items: [
+            { feedId: "misir_silaji", kg: 24.0 },
+            { feedId: "yonca_kuru", kg: 4.5 },
+            { feedId: "bugday_samani", kg: 1.0 },
+            { feedId: "arpa_ezmesi", kg: 3.0 },
+            { feedId: "sut_yemi_19", kg: 6.5 },
+            { feedId: "atk_36", kg: 1.2 },
+            { feedId: "karbonat_tampon", kg: 0.15 },
+            { feedId: "mermer_tozu", kg: 0.12 },
+            { feedId: "vit_min_premiks", kg: 0.10 }
+          ]
+        },
+        {
+          id: "dairy_36l_high",
+          name: "36 Litre Yüksek Verimli Pik İneği (Silaj + Yonca + Mısır + Soya + Süt Yemi)",
+          stage: "early", bw: 650, milk: 36, fat: 3.7,
+          items: [
+            { feedId: "misir_silaji", kg: 26.0 },
+            { feedId: "yonca_kuru", kg: 5.5 },
+            { feedId: "arpa_ezmesi", kg: 3.5 },
+            { feedId: "misir_kirmasi", kg: 2.5 },
+            { feedId: "sut_yemi_21", kg: 6.0 },
+            { feedId: "soya_46", kg: 1.8 },
+            { feedId: "bypass_yag", kg: 0.35 },
+            { feedId: "karbonat_tampon", kg: 0.20 },
+            { feedId: "mermer_tozu", kg: 0.15 },
+            { feedId: "vit_min_premiks", kg: 0.10 }
+          ]
+        },
+        {
+          id: "dairy_20l_nosilage",
+          name: "20 Litre Sağmal İnek - Silaj Yok (Çayır Otu + Yonca + Saman + Arpa + Süt Yemi)",
+          stage: "mid", bw: 580, milk: 20, fat: 3.9,
+          items: [
+            { feedId: "yonca_kuru", kg: 4.5 },
+            { feedId: "cayir_otu", kg: 4.0 },
+            { feedId: "bugday_samani", kg: 2.0 },
+            { feedId: "arpa_ezmesi", kg: 3.0 },
+            { feedId: "sut_yemi_19", kg: 5.0 },
+            { feedId: "bugday_kepegi", kg: 1.2 },
+            { feedId: "karbonat_tampon", kg: 0.12 },
+            { feedId: "mermer_tozu", kg: 0.10 },
+            { feedId: "vit_min_premiks", kg: 0.10 }
+          ]
+        },
+        {
+          id: "dairy_dry_cow",
+          name: "Kuru Dönem İneği (Doğuma Son 60 Gün - Süt Humması Korumalı Düşük Kalsiyum)",
+          stage: "dry", bw: 650, milk: 0, fat: 3.8,
+          items: [
+            { feedId: "bugday_samani", kg: 5.5 },
+            { feedId: "misir_silaji", kg: 12.0 },
+            { feedId: "cayir_otu", kg: 2.5 },
+            { feedId: "bugday_kepegi", kg: 1.2 },
+            { feedId: "atk_36", kg: 1.2 },
+            { feedId: "vit_min_premiks", kg: 0.10 }
+          ]
+        }
+      ],
+      beef: [
+        {
+          id: "beef_finisher_420",
+          name: "420 kg Besibitirme Danası (+1.40 kg/gün Artış - Silaj + Saman + Arpa + Besi Yemi)",
+          stage: "finisher", bw: 420, adg: 1.40,
+          items: [
+            { feedId: "misir_silaji", kg: 8.0 },
+            { feedId: "bugday_samani", kg: 1.5 },
+            { feedId: "arpa_ezmesi", kg: 4.2 },
+            { feedId: "besi_yemi_14", kg: 3.2 },
+            { feedId: "atk_36", kg: 0.7 },
+            { feedId: "mermer_tozu", kg: 0.14 },
+            { feedId: "karbonat_tampon", kg: 0.08 },
+            { feedId: "yem_tuzu", kg: 0.05 }
+          ]
+        },
+        {
+          id: "beef_grower_280",
+          name: "280 kg Besi Geliştirme Danası (+1.25 kg/gün Kemik & Kas Büyütme)",
+          stage: "grower", bw: 280, adg: 1.25,
+          items: [
+            { feedId: "misir_silaji", kg: 7.0 },
+            { feedId: "yonca_kuru", kg: 1.5 },
+            { feedId: "bugday_samani", kg: 1.2 },
+            { feedId: "arpa_ezmesi", kg: 2.2 },
+            { feedId: "besi_yemi_14", kg: 2.0 },
+            { feedId: "atk_36", kg: 0.8 },
+            { feedId: "mermer_tozu", kg: 0.10 },
+            { feedId: "vit_min_premiks", kg: 0.06 }
+          ]
+        },
+        {
+          id: "beef_arrival_21d",
+          name: "Yeni Gelen Dana 21 Gün Alıştırma Rasyonu (Asidoz & Nakliye Humması Önleyici)",
+          stage: "arrival", bw: 250, adg: 0.85,
+          items: [
+            { feedId: "cayir_otu", kg: 3.0 },
+            { feedId: "yonca_kuru", kg: 1.5 },
+            { feedId: "bugday_samani", kg: 1.0 },
+            { feedId: "arpa_ezmesi", kg: 1.0 },
+            { feedId: "bugday_kepegi", kg: 0.8 },
+            { feedId: "atk_36", kg: 0.4 },
+            { feedId: "karbonat_tampon", kg: 0.05 },
+            { feedId: "vit_min_premiks", kg: 0.05 }
+          ]
+        }
+      ],
+      sheep: [
+        {
+          id: "sheep_late_twin",
+          name: "Son 6 Hafta İkiz Gebe Koyun (İkiz Koması / Gebelik Zehirlenmesi Korumalı)",
+          stage: "late_twin", bw: 65, target: 2.0,
+          items: [
+            { feedId: "yonca_kuru", kg: 0.80 },
+            { feedId: "cayir_otu", kg: 0.50 },
+            { feedId: "arpa_ezmesi", kg: 0.55 },
+            { feedId: "misir_kirmasi", kg: 0.25 },
+            { feedId: "atk_36", kg: 0.15 },
+            { feedId: "mermer_tozu", kg: 0.02 },
+            { feedId: "vit_min_premiks", kg: 0.01 }
+          ]
+        },
+        {
+          id: "sheep_lactating",
+          name: "Emziren / Sağmal Koyun (İkiz Kuzu Emziren - Yüksek Süt ve Kondisyon)",
+          stage: "lactating", bw: 65, target: 2.2,
+          items: [
+            { feedId: "yonca_kuru", kg: 1.10 },
+            { feedId: "misir_silaji", kg: 1.50 },
+            { feedId: "bugday_samani", kg: 0.30 },
+            { feedId: "arpa_ezmesi", kg: 0.60 },
+            { feedId: "kuzu_besi_yemi", kg: 0.50 },
+            { feedId: "atk_36", kg: 0.20 },
+            { feedId: "karbonat_tampon", kg: 0.02 },
+            { feedId: "mermer_tozu", kg: 0.02 }
+          ]
+        },
+        {
+          id: "sheep_lamb_fattening",
+          name: "35 kg Yoğun Besi Kuzusu / Toklu (+320 gr/gün Artış - İdrar Taşı Korumalı)",
+          stage: "lamb_fattening", bw: 35, target: 320,
+          items: [
+            { feedId: "yonca_kuru", kg: 0.35 },
+            { feedId: "arpa_ezmesi", kg: 0.65 },
+            { feedId: "kuzu_besi_yemi", kg: 0.55 },
+            { feedId: "mermer_tozu", kg: 0.025 },
+            { feedId: "yem_tuzu", kg: 0.015 },
+            { feedId: "karbonat_tampon", kg: 0.015 }
+          ]
+        }
+      ]
+    };
+
+    /* =========================================================================
+       3. UYGULAMA DURUMU (STATE) VE DEPOLAMA
+       ========================================================================= */
+    let currentSpecies = "dairy"; // 'dairy', 'beef', 'sheep'
+    let feedLibrary = [];
+    let currentRation = []; // [{ feedId, kg }]
+    let savedRations = [];
+
+    function loadAppState() {
+      try {
+        const storedFeeds = localStorage.getItem("rasyon_feeds_v1");
+        if (storedFeeds) {
+          feedLibrary = JSON.parse(storedFeeds);
+        } else {
+          feedLibrary = JSON.parse(JSON.stringify(DEFAULT_FEEDS));
+        }
+      } catch (e) {
+        feedLibrary = JSON.parse(JSON.stringify(DEFAULT_FEEDS));
+      }
+
+      try {
+        const storedSaved = localStorage.getItem("rasyon_saved_v1");
+        savedRations = storedSaved ? JSON.parse(storedSaved) : [];
+      } catch (e) {
+        savedRations = [];
+      }
+
+      const savedTheme = localStorage.getItem("rasyon_theme");
+      if (savedTheme === "dark") {
+        document.body.classList.add("dark-mode");
+        const btn = document.getElementById("theme-toggle-btn");
+        if (btn) btn.textContent = "Gündüz Modu";
+      }
+    }
+
+    function saveFeedLibrary() {
+      localStorage.setItem("rasyon_feeds_v1", JSON.stringify(feedLibrary));
+    }
+
+    function getFeedById(id) {
+      return feedLibrary.find(f => f.id === id) || null;
+    }
+
+    /* =========================================================================
+       4. ULUSLARARASI BESİN İHTİYACI HESAPLAMA MOTORU (NASEM / NRC / CNCPS)
+       ========================================================================= */
+    function calculateNutrientRequirements() {
+      if (currentSpecies === "dairy") {
+        const stage = document.getElementById("dairy-stage").value;
+        const bw = parseFloat(document.getElementById("dairy-bw").value) || 620;
+        const milkRow = document.getElementById("dairy-milk-inputs-row");
+        if (milkRow) {
+          milkRow.style.display = (stage === "dry" || stage === "heifer") ? "none" : "grid";
+        }
+        const milk = (stage === "dry" || stage === "heifer") ? 0 : (parseFloat(document.getElementById("dairy-milk").value) || 0);
+        const fat = parseFloat(document.getElementById("dairy-fat").value) || 3.8;
+
+        // 4% Yağa Düzeltilmiş Süt (FCM)
+        const fcm = 0.4 * milk + 15 * milk * (fat / 100);
+        let dmiTarget = 0;
+        let cpTargetPct = 16.0;
+        let nelTargetMcal = 0;
+        let pendfMinPct = 21;
+        let starchMaxPct = 28;
+        let caTargetGr = 0;
+        let pTargetGr = 0;
+
+        if (stage === "dry") {
+          dmiTarget = bw * 0.019;
+          cpTargetPct = 12.5;
+          nelTargetMcal = dmiTarget * 1.32;
+          pendfMinPct = 30;
+          starchMaxPct = 16;
+          caTargetGr = 48; // Kuru dönemde süt hummasını önlemek için düşük Ca
+          pTargetGr = 35;
+        } else if (stage === "heifer") {
+          dmiTarget = bw * 0.022;
+          cpTargetPct = 14.2;
+          nelTargetMcal = dmiTarget * 1.45;
+          pendfMinPct = 26;
+          starchMaxPct = 22;
+          caTargetGr = 55;
+          pTargetGr = 34;
+        } else {
+          // NASEM 2021 Sağmal İnek Kuru Madde Tüketimi (DMI)
+          dmiTarget = (0.0185 * bw) + (0.305 * fcm);
+          if (stage === "early") dmiTarget *= 0.94; // Erken laktasyon iştah kısıtı
+          const nelMaint = 0.080 * Math.pow(bw, 0.75);
+          const nelMilk = milk * (0.36 + 0.0969 * fat);
+          nelTargetMcal = nelMaint + nelMilk;
+          cpTargetPct = milk >= 32 ? 17.5 : (milk >= 22 ? 16.2 : 15.0);
+          pendfMinPct = 21;
+          starchMaxPct = 28;
+          caTargetGr = (0.04 * bw) + (1.22 * milk);
+          pTargetGr = (0.025 * bw) + (0.90 * milk);
+        }
+
+        const meTargetMcal = nelTargetMcal / 0.64;
+
+        return {
+          speciesLabel: "Süt Sığırı (NASEM 2021)",
+          dmiTarget: dmiTarget,
+          cpTargetPct: cpTargetPct,
+          cpTargetGr: dmiTarget * (cpTargetPct / 100) * 1000,
+          meTargetMcal: meTargetMcal,
+          nelTargetMcal: nelTargetMcal,
+          energyLabel: `${nelTargetMcal.toFixed(1)} Mcal NEL`,
+          pendfMinPct: pendfMinPct,
+          starchMaxPct: starchMaxPct,
+          caTargetGr: caTargetGr,
+          pTargetGr: pTargetGr,
+          minForagePct: stage === "dry" ? 70 : 40
+        };
+      }
+
+      if (currentSpecies === "beef") {
+        const stage = document.getElementById("beef-stage").value;
+        const bw = parseFloat(document.getElementById("beef-bw").value) || 420;
+        const adg = parseFloat(document.getElementById("beef-adg").value) || 1.35;
+
+        // NASEM Beef Cattle DMI & ME
+        let dmiFactor = stage === "arrival" ? 0.022 : (stage === "grower" ? 0.025 : 0.0235);
+        const dmiTarget = bw * dmiFactor;
+        const meMaint = 0.115 * Math.pow(bw, 0.75);
+        const meGain = adg * (2.6 + (bw / 180));
+        const meTargetMcal = meMaint + meGain;
+
+        let cpTargetPct = stage === "grower" ? 14.5 : (stage === "arrival" ? 13.8 : 13.0);
+        if (bw < 300 && adg > 1.3) cpTargetPct = 15.2;
+
+        const pendfMinPct = stage === "finisher" ? 13 : (stage === "grower" ? 18 : 26);
+        const starchMaxPct = stage === "finisher" ? 42 : (stage === "grower" ? 32 : 22);
+        const caTargetGr = 18 + (adg * 26);
+        const pTargetGr = 12 + (adg * 12);
+
+        return {
+          speciesLabel: "Besi Sığırı (NASEM Beef)",
+          dmiTarget: dmiTarget,
+          cpTargetPct: cpTargetPct,
+          cpTargetGr: dmiTarget * (cpTargetPct / 100) * 1000,
+          meTargetMcal: meTargetMcal,
+          nelTargetMcal: meTargetMcal * 0.63,
+          energyLabel: `${meTargetMcal.toFixed(1)} Mcal ME`,
+          pendfMinPct: pendfMinPct,
+          starchMaxPct: starchMaxPct,
+          caTargetGr: caTargetGr,
+          pTargetGr: pTargetGr,
+          minForagePct: stage === "finisher" ? 15 : 30
+        };
+      }
+
+      // KOYUN & KUZU (NRC Small Ruminants)
+      const stage = document.getElementById("sheep-stage").value;
+      const bw = parseFloat(document.getElementById("sheep-bw").value) || 65;
+      const targetVal = parseFloat(document.getElementById("sheep-target").value) || 2.0;
+
+      let dmiTarget = bw * 0.022;
+      let cpTargetPct = 11.0;
+      let meTargetMcal = 2.4;
+      let pendfMinPct = 22;
+      let starchMaxPct = 28;
+      let minForagePct = 50;
+
+      if (stage === "maintenance") {
+        dmiTarget = bw * 0.020;
+        cpTargetPct = 10.0;
+        meTargetMcal = dmiTarget * 2.05;
+        pendfMinPct = 28;
+        starchMaxPct = 20;
+        minForagePct = 70;
+      } else if (stage === "flushing") {
+        dmiTarget = bw * 0.026;
+        cpTargetPct = 13.0;
+        meTargetMcal = dmiTarget * 2.45;
+        pendfMinPct = 22;
+        starchMaxPct = 28;
+        minForagePct = 50;
+      } else if (stage === "late_twin") {
+        dmiTarget = bw * 0.028;
+        cpTargetPct = 14.5;
+        meTargetMcal = dmiTarget * 2.65;
+        pendfMinPct = 20;
+        starchMaxPct = 30;
+        minForagePct = 45;
+      } else if (stage === "lactating") {
+        dmiTarget = (bw * 0.030) + (targetVal * 0.35);
+        cpTargetPct = 16.0;
+        meTargetMcal = dmiTarget * 2.70;
+        pendfMinPct = 20;
+        starchMaxPct = 30;
+        minForagePct = 45;
+      } else if (stage === "lamb_fattening") {
+        dmiTarget = bw * 0.038;
+        cpTargetPct = 16.5;
+        meTargetMcal = dmiTarget * 2.85;
+        pendfMinPct = 14;
+        starchMaxPct = 38;
+        minForagePct = 20;
+      }
+
+      const caTargetGr = dmiTarget * 6.5;
+      const pTargetGr = dmiTarget * 3.2;
+
+      return {
+        speciesLabel: "Koyun & Kuzu (NRC Küçükbaş)",
+        dmiTarget: dmiTarget,
+        cpTargetPct: cpTargetPct,
+        cpTargetGr: dmiTarget * (cpTargetPct / 100) * 1000,
+        meTargetMcal: meTargetMcal,
+        nelTargetMcal: meTargetMcal * 0.62,
+        energyLabel: `${meTargetMcal.toFixed(2)} Mcal ME`,
+        pendfMinPct: pendfMinPct,
+        starchMaxPct: starchMaxPct,
+        caTargetGr: caTargetGr,
+        pTargetGr: pTargetGr,
+        minForagePct: minForagePct
+      };
+    }
+
+    /* =========================================================================
+       5. RASYON HESAPLAMA, ANALİZ VE KARNE MOTORU
+       ========================================================================= */
+    function analyzeCurrentRation() {
+      const req = calculateNutrientRequirements();
+
+      // Üst özet kutusunu güncelle
+      document.getElementById("req-dmi-val").textContent = `${req.dmiTarget.toFixed(1)} kg KM`;
+      document.getElementById("req-cp-val").textContent = `%${req.cpTargetPct.toFixed(1)} (${Math.round(req.cpTargetGr)} gr)`;
+      document.getElementById("req-energy-val").textContent = req.energyLabel;
+      document.getElementById("req-pendf-val").textContent = `En Az %${req.pendfMinPct}`;
+      document.getElementById("req-summary-subtitle").textContent = req.speciesLabel;
+
+      let totalAsFedKg = 0;
+      let totalDmKg = 0;
+      let forageDmKg = 0;
+      let concDmKg = 0;
+      let totalCpGr = 0;
+      let totalMeMcal = 0;
+      let totalNelMcal = 0;
+      let totalNdfGr = 0;
+      let totalPeNdfGr = 0;
+      let totalStarchGr = 0;
+      let totalCaGr = 0;
+      let totalPGr = 0;
+      let totalDailyCostTl = 0;
+      let ureaAsFedGr = 0;
+
+      currentRation.forEach(item => {
+        const feed = getFeedById(item.feedId);
+        if (!feed || item.kg <= 0) return;
+
+        const asFed = parseFloat(item.kg) || 0;
+        const dmKg = asFed * (feed.dm / 100);
+
+        totalAsFedKg += asFed;
+        totalDmKg += dmKg;
+
+        if (feed.cat === "forage") {
+          forageDmKg += dmKg;
+        } else {
+          concDmKg += dmKg;
+        }
+
+        totalCpGr += dmKg * (feed.cp / 100) * 1000;
+        totalMeMcal += dmKg * feed.me;
+        totalNelMcal += dmKg * feed.nel;
+        totalNdfGr += dmKg * (feed.ndf / 100) * 1000;
+        totalPeNdfGr += dmKg * (feed.pendf / 100) * 1000;
+        totalStarchGr += dmKg * (feed.starch / 100) * 1000;
+        totalCaGr += dmKg * (feed.ca / 100) * 1000;
+        totalPGr += dmKg * (feed.p / 100) * 1000;
+        totalDailyCostTl += asFed * feed.price;
+
+        if (feed.id === "yemlik_ure") {
+          ureaAsFedGr += asFed * 1000;
+        }
+      });
+
+      const dmSafe = totalDmKg > 0 ? totalDmKg : 0.0001;
+      const cpPctDm = (totalCpGr / (dmSafe * 1000)) * 100;
+      const ndfPctDm = (totalNdfGr / (dmSafe * 1000)) * 100;
+      const pendfPctDm = (totalPeNdfGr / (dmSafe * 1000)) * 100;
+      const starchPctDm = (totalStarchGr / (dmSafe * 1000)) * 100;
+      const foragePctDm = totalDmKg > 0 ? Math.round((forageDmKg / totalDmKg) * 100) : 0;
+      const concPctDm = totalDmKg > 0 ? (100 - foragePctDm) : 0;
+      const caPRatio = totalPGr > 0 ? (totalCaGr / totalPGr) : 0;
+
+      // Üst İstatistik Kartları
+      document.getElementById("stat-total-asfed").textContent = `${totalAsFedKg.toFixed(2)} kg`;
+      document.getElementById("stat-total-dm").textContent = `${totalDmKg.toFixed(2)} kg`;
+      document.getElementById("stat-forage-ratio").textContent = `%${foragePctDm} / %${concPctDm}`;
+      document.getElementById("stat-daily-cost").textContent = `${totalDailyCostTl.toFixed(2)} ₺`;
+
+      // Besin Barlarını Çiz
+      renderNutrientMeters({
+        req,
+        totalDmKg,
+        cpPctDm,
+        totalCpGr,
+        totalMeMcal,
+        totalNelMcal,
+        pendfPctDm,
+        starchPctDm,
+        totalCaGr,
+        totalPGr,
+        caPRatio
+      });
+
+      // Yetiştirici Uyarılarını Çiz
+      renderBreederWarnings({
+        req,
+        totalDmKg,
+        cpPctDm,
+        totalMeMcal,
+        totalNelMcal,
+        pendfPctDm,
+        starchPctDm,
+        foragePctDm,
+        caPRatio,
+        ureaAsFedGr
+      });
+
+      // Ekonomik Karlılık (IOFC) Özeti
+      renderEconomicSummary(totalDailyCostTl, totalDmKg);
+    }
+
+    function renderNutrientMeters(data) {
+      const { req, totalDmKg, cpPctDm, totalCpGr, totalMeMcal, totalNelMcal, pendfPctDm, starchPctDm, totalCaGr, totalPGr, caPRatio } = data;
+      const container = document.getElementById("nutrient-meters-container");
+      if (!container) return;
+
+      const energySupplied = currentSpecies === "dairy" ? totalNelMcal : totalMeMcal;
+      const energyTarget = currentSpecies === "dairy" ? req.nelTargetMcal : req.meTargetMcal;
+      const energyUnit = currentSpecies === "dairy" ? "Mcal NEL" : "Mcal ME";
+
+      const meters = [
+        {
+          title: "1. Kuru Madde (Hayvanın İştah Kapasitesi)",
+          valText: `${totalDmKg.toFixed(2)} / ${req.dmiTarget.toFixed(2)} kg KM`,
+          pct: Math.min(130, Math.round((totalDmKg / req.dmiTarget) * 100)),
+          status: getRangeStatus(totalDmKg, req.dmiTarget * 0.93, req.dmiTarget * 1.07, "Düşük (Aç Kalır)", "TAM İDEAL", "Aşırı (Yemlikte Artar)")
+        },
+        {
+          title: "2. Enerji Dengesi (Süt ve Kilo Yapan Güç)",
+          valText: `${energySupplied.toFixed(1)} / ${energyTarget.toFixed(1)} ${energyUnit}`,
+          pct: Math.min(130, Math.round((energySupplied / energyTarget) * 100)),
+          status: getRangeStatus(energySupplied, energyTarget * 0.94, energyTarget * 1.08, "Enerji Eksik (Zayıflar)", "TAM DENGELİ", "Enerji Yüksek (Yağlanır)")
+        },
+        {
+          title: "3. Ham Protein (Süt, Kas ve Döl Verimi)",
+          valText: `%${cpPctDm.toFixed(1)} (Hedef: %${req.cpTargetPct.toFixed(1)})`,
+          pct: Math.min(130, Math.round((cpPctDm / req.cpTargetPct) * 100)),
+          status: getRangeStatus(cpPctDm, req.cpTargetPct - 0.8, req.cpTargetPct + 1.2, "Protein Eksik (Verim Düşer)", "TAM DENGELİ", "Protein Fazla (Pahalı & Üre Yükü)")
+        },
+        {
+          title: "4. Fiziksel Etkili Lif - peNDF (Geviş & İşkembe Kalkanı)",
+          valText: `%${pendfPctDm.toFixed(1)} (Alt Sınır: %${req.pendfMinPct})`,
+          pct: Math.min(130, Math.round((pendfPctDm / req.pendfMinPct) * 100)),
+          status: pendfPctDm < req.pendfMinPct
+            ? { label: "TEHLİKE: Lif Az (Asidoz / Tırnak Yanması!)", cls: "tag-solid" }
+            : (pendfPctDm > req.pendfMinPct + 18 ? { label: "Çok Sert Ot (Sindirimi Yavaşlatır)", cls: "tag-dashed" } : { label: "GÜVENLİ GEVİŞ SEVİYESİ", cls: "tag-outline" })
+        },
+        {
+          title: "5. Nişasta & Şeker (Tahıl/Arpa Yükü)",
+          valText: `%${starchPctDm.toFixed(1)} (Üst Sınır: %${req.starchMaxPct})`,
+          pct: Math.min(130, Math.round((starchPctDm / req.starchMaxPct) * 100)),
+          status: starchPctDm > req.starchMaxPct
+            ? { label: "TEHLİKE: Nişasta Yüksek (İşkembe Ekşimesi!)", cls: "tag-solid" }
+            : (starchPctDm < 12 && req.starchMaxPct > 20 ? { label: "Nişasta Düşük (Enerji Yetmeyebilir)", cls: "tag-dashed" } : { label: "GÜVENLİ TAHIL SINIRI", cls: "tag-outline" })
+        },
+        {
+          title: "6. Kalsiyum / Fosfor Oranı (Kemik, Süt Humması & İdrar Taşı)",
+          valText: `${caPRatio.toFixed(2)} : 1 (Ca: ${Math.round(totalCaGr)}g / P: ${Math.round(totalPGr)}g)`,
+          pct: Math.min(130, Math.round((caPRatio / 1.8) * 100)),
+          status: caPRatio < 1.3
+            ? { label: "TEHLİKE: Ca/P Düşük (İdrar Taşı & Kemik Erimesi!)", cls: "tag-solid" }
+            : (caPRatio > 3.2 ? { label: "Kalsiyum Çok Yüksek", cls: "tag-dashed" } : { label: "İDEAL MİNERAL DENGESİ (1.5 - 2.5 : 1)", cls: "tag-outline" })
+        }
+      ];
+
+      container.innerHTML = meters.map(m => `
+        <div class="nutrient-box">
+          <div class="nutrient-header">
+            <span class="nutrient-title">${m.title}</span>
+            <span class="nutrient-values">${m.valText}</span>
+          </div>
+          <div class="meter-track">
+            <div class="meter-fill" style="width:${Math.max(4, Math.min(100, m.pct))}%;"></div>
+          </div>
+          <div class="nutrient-status-line">
+            <span>Karşılama: %${m.pct}</span>
+            <span class="tag ${m.status.cls}">${m.status.label}</span>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function getRangeStatus(val, minOk, maxOk, lowText, okText, highText) {
+      if (val < minOk) return { label: lowText, cls: "tag-solid" };
+      if (val > maxOk) return { label: highText, cls: "tag-dashed" };
+      return { label: okText, cls: "tag-outline" };
+    }
+
+    function renderBreederWarnings(data) {
+      const { req, totalDmKg, cpPctDm, totalMeMcal, totalNelMcal, pendfPctDm, starchPctDm, foragePctDm, caPRatio, ureaAsFedGr } = data;
+      const box = document.getElementById("breeder-warnings-container");
+      const badge = document.getElementById("overall-ration-badge");
+      if (!box) return;
+
+      const warnings = [];
+      let criticalCount = 0;
+
+      if (totalDmKg <= 0.1) {
+        box.innerHTML = `<div class="alert-box"><strong>Rasyonda Yem Yok</strong>Lütfen yukarıdan bir hazır şablon seçin veya yem ekleyin.</div>`;
+        if (badge) badge.textContent = "Yem Girilmedi";
+        return;
+      }
+
+      // 1. Kuru Madde Kontrolü
+      if (totalDmKg < req.dmiTarget * 0.90) {
+        criticalCount++;
+        const eksikKm = (req.dmiTarget - totalDmKg).toFixed(1);
+        warnings.push(`
+          <div class="alert-box">
+            <strong>1. Hayvan Aç Kalıyor (Kuru Madde Eksik: -${eksikKm} kg KM)</strong>
+            Verdiğiniz yemlerin içindeki su düşüldüğünde hayvana günde <strong>${totalDmKg.toFixed(1)} kg</strong> susuz net yem gidiyor, oysa bu hayvanın doyması için <strong>${req.dmiTarget.toFixed(1)} kg</strong> gerekiyor. Kaba ot, silaj veya fabrika yemini artırın.
+          </div>
+        `);
+      } else if (totalDmKg > req.dmiTarget * 1.10) {
+        const fazlaKm = (totalDmKg - req.dmiTarget).toFixed(1);
+        warnings.push(`
+          <div class="alert-box">
+            <strong>1. Yemlik Kapasitesi Aşıldı (+${fazlaKm} kg KM Fazla)</strong>
+            Hayvanın günlük yiyebileceği üst sınırın üzerinde yem yazdınız. Hayvan bu kadar yemi bitiremez, yemlikte kalır, kızışır ve çöpe gider. Su oranı yüksek yemleri veya samanı biraz azaltın.
+          </div>
+        `);
+      }
+
+      // 2. Asidoz / Lif / Nişasta Kontrolü
+      if (pendfPctDm < req.pendfMinPct || starchPctDm > req.starchMaxPct) {
+        criticalCount++;
+        warnings.push(`
+          <div class="alert-box">
+            <strong>2. İŞKEMBE EKŞİMESİ (ASİDOZ) VE ARPA VURMASI RİSKİ!</strong>
+            Rasyonda fiziksel etkili lif (<strong>%${pendfPctDm.toFixed(1)}</strong>) sınırın altında veya nişasta (<strong>%${starchPctDm.toFixed(1)}</strong>) çok yüksek! Bu rasyon işkembede asit üretir, gevişi durdurur, süt yağını düşürür ve hayvanın tırnaklarına vurur (topallık/laminitis).<br>
+            • <strong>Çözüm:</strong> Arpa/mısır kırmasını 0.5 - 1.0 kg azaltın, yerine 0.5 - 1.0 kg <strong>Buğday Samanı / Yonca Otu</strong> ve günlük <strong>100-150 gr Yemlik Karbonat</strong> ekleyin.
+          </div>
+        `);
+      }
+
+      // 3. Protein Dengesi
+      if (cpPctDm < req.cpTargetPct - 0.9) {
+        criticalCount++;
+        warnings.push(`
+          <div class="alert-box">
+            <strong>3. Protein Yetersiz (%${cpPctDm.toFixed(1)} HP — Hedef: %${req.cpTargetPct.toFixed(1)})</strong>
+            Rasyondaki protein düşük. Süt ineklerinde sütü derhal düşürür, besi danası ve kuzularda boy-kas gelişimini durdurur.<br>
+            • <strong>Çözüm:</strong> Rasyona <strong>Ayçiçek Küspesi (ATK)</strong>, <strong>Soya Küspesi</strong> veya <strong>Yonca Kuru Otu</strong> ekleyin.
+          </div>
+        `);
+      } else if (cpPctDm > req.cpTargetPct + 1.8) {
+        warnings.push(`
+          <div class="alert-box">
+            <strong>3. Protein Fazlası (%${cpPctDm.toFixed(1)} HP — Maliyet ve Döl Tutmama Riski)</strong>
+            Hedefin üzerinde protein veriyorsunuz. Fazla protein işkembede amonyağa dönüşür, karaciğeri yorar, ineklerde rahim ortamını bozup <strong>döl tutmamaya (tohum tutmamaya)</strong> yol açar ve yem paranızı boşa harcar. Küspeyi azaltıp arpa/mısırla dengeleyin.
+          </div>
+        `);
+      }
+
+      // 4. Enerji Dengesi
+      const energySupplied = currentSpecies === "dairy" ? totalNelMcal : totalMeMcal;
+      const energyTarget = currentSpecies === "dairy" ? req.nelTargetMcal : req.meTargetMcal;
+      if (energySupplied < energyTarget * 0.92) {
+        criticalCount++;
+        warnings.push(`
+          <div class="alert-box">
+            <strong>4. Enerji Açığı Var (Hedefin %${Math.round((1 - energySupplied / energyTarget) * 100)} Altında)</strong>
+            Hayvan hedeflediğiniz süt verimi veya günlük kilo alımı için gereken enerjiyi alamıyor. İneklerde doğum sonrası ketozise (zayıflama), gebe koyunlarda <strong>gebelik zehirlenmesine (ikiz koması)</strong> yol açar.<br>
+            • <strong>Çözüm:</strong> Samanı azaltıp <strong>Arpa Ezmesi, Mısır Flake veya Mısır Silajı</strong> miktarını artırın.
+          </div>
+        `);
+      }
+
+      // 5. Kalsiyum / Fosfor ve İdrar Taşı Kontrolü
+      if (caPRatio < 1.3) {
+        criticalCount++;
+        warnings.push(`
+          <div class="alert-box">
+            <strong>5. İDRAR TAŞI (SİDİK ZORU) VE KEMİK ERİMESİ TEHLİKESİ! (Ca/P: ${caPRatio.toFixed(2)})</strong>
+            Tahıl ve kepek ağırlıklı rasyonlarda fosfor yükselip kalsiyum düşük kaldığında özellikle besi danaları ve erkek kuzularda <strong>idrar yolları taşla tıkanır (sidik zoru)</strong> ve mesane patlar!<br>
+            • <strong>Çözüm:</strong> Rasyona derhal <strong>Mermer Tozu (Kalsiyum Karbonat)</strong> ekleyerek Ca/P oranını en az 1.5 - 2.0 seviyesine çıkarın.
+          </div>
+        `);
+      }
+
+      // 6. Yemlik Üre Güvenlik Sınırı
+      const maxUreaGr = currentSpecies === "sheep" ? 18 : 130;
+      if (ureaAsFedGr > maxUreaGr) {
+        criticalCount++;
+        warnings.push(`
+          <div class="alert-box">
+            <strong>6. HAYATİ TEHLİKE: YEMLİK ÜRE DOZU AŞILDI (${Math.round(ureaAsFedGr)} gr/gün)!</strong>
+            Sığırlarda günde en fazla 100-130 gr, koyunlarda en fazla 15-18 gr yemlik üre verilebilir. Fazlası ani <strong>amonyak/üre zehirlenmesi</strong> ile hayvanı 30 dakikada öldürür! Derhal üre miktarını düşürün.
+          </div>
+        `);
+      }
+
+      if (warnings.length === 0) {
+        box.innerHTML = `
+          <div class="alert-box">
+            <strong>TAM DENGELİ ULUSLARARASI STANDART RASYON</strong>
+            Tebrikler! Hazırladığınız rasyon hayvanın Kuru Madde iştahını, Enerji ve Protein ihtiyacını, İşkembe Geviş Lifini (peNDF) ve Kalsiyum/Fosfor dengesini eksiksiz karşılıyor. Güvenle yem karma vagonuna (TMR) aktarabilirsiniz.
+          </div>
+        `;
+        if (badge) badge.textContent = "TAM DENGELİ RASYON";
+      } else {
+        box.innerHTML = warnings.join("");
+        if (badge) badge.textContent = criticalCount > 0 ? `${criticalCount} Kritik Düzeltme Gerekli` : "Ufak İyileştirme Önerisi";
+      }
+    }
+
+    function renderEconomicSummary(dailyCostTl, totalDmKg) {
+      const box = document.getElementById("economic-summary-box");
+      if (!box) return;
+
+      const dmCostPerKg = totalDmKg > 0 ? (dailyCostTl / totalDmKg) : 0;
+
+      if (currentSpecies === "dairy") {
+        const milk = parseFloat(document.getElementById("dairy-milk").value) || 0;
+        const milkPrice = parseFloat(document.getElementById("dairy-price").value) || 16.5;
+        const grossMilkRev = milk * milkPrice;
+        const iofc = grossMilkRev - dailyCostTl; // Yem Üzeri Kâr (Income Over Feed Cost)
+        const feedCostRatio = grossMilkRev > 0 ? Math.round((dailyCostTl / grossMilkRev) * 100) : 0;
+
+        box.innerHTML = `
+          <div style="font-size:0.84rem; font-weight:900; margin-bottom:6px;">EKONOMİK KARLILIK ANALİZİ (YEM ÜZERİ SÜT KÂRI - IOFC):</div>
+          <div class="grid-4" style="margin-bottom:0;">
+            <div><small>Günlük Süt Geliri:</small><br><strong style="font-size:1.05rem;">${grossMilkRev.toFixed(2)} ₺</strong></div>
+            <div><small>Günlük Yem Gideri:</small><br><strong style="font-size:1.05rem;">${dailyCostTl.toFixed(2)} ₺</strong></div>
+            <div><small>1 İnek Günlük Net Bıraktığı:</small><br><strong style="font-size:1.05rem;">${iofc >= 0 ? '+' : ''}${iofc.toFixed(2)} ₺/gün</strong></div>
+            <div><small>Yem Giderinin Süt Gelirine Oranı:</small><br><strong style="font-size:1.05rem;">%${feedCostRatio}</strong> <small>(İdeal: <%55)</small></div>
+          </div>
+        `;
+      } else if (currentSpecies === "beef") {
+        const adg = parseFloat(document.getElementById("beef-adg").value) || 1.4;
+        const yieldPct = parseFloat(document.getElementById("beef-yield").value) || 58;
+        const meatPrice = parseFloat(document.getElementById("beef-meat-price").value) || 380;
+        const dailyCarcassKg = adg * (yieldPct / 100);
+        const dailyRev = dailyCarcassKg * meatPrice;
+        const netMargin = dailyRev - dailyCostTl;
+        const costPerKgLiveGain = adg > 0 ? (dailyCostTl / adg) : 0;
+
+        box.innerHTML = `
+          <div style="font-size:0.84rem; font-weight:900; margin-bottom:6px;">BESİ EKONOMİSİ & 1 KG CANLI AĞIRLIK MALİYETİ:</div>
+          <div class="grid-4" style="margin-bottom:0;">
+            <div><small>Günlük Karkas Et Değeri:</small><br><strong style="font-size:1.05rem;">${dailyRev.toFixed(2)} ₺/gün</strong></div>
+            <div><small>Günlük Yem Gideri:</small><br><strong style="font-size:1.05rem;">${dailyCostTl.toFixed(2)} ₺/gün</strong></div>
+            <div><small>1 Dana Günlük Yem Üzeri Kâr:</small><br><strong style="font-size:1.05rem;">${netMargin >= 0 ? '+' : ''}${netMargin.toFixed(2)} ₺/gün</strong></div>
+            <div><small>1 kg Canlı Kilo Alımı Yem Maliyeti:</small><br><strong style="font-size:1.05rem;">${costPerKgLiveGain.toFixed(2)} ₺/kg</strong></div>
+          </div>
+        `;
+      } else {
+        box.innerHTML = `
+          <div style="font-size:0.84rem; font-weight:900; margin-bottom:6px;">KÜÇÜKBAŞ SÜRÜ YEM MALİYET ÖZETİ:</div>
+          <div class="grid-3" style="margin-bottom:0;">
+            <div><small>1 Koyun/Kuzu Günlük Maliyet:</small><br><strong style="font-size:1.05rem;">${dailyCostTl.toFixed(2)} ₺/gün</strong></div>
+            <div><small>100 Başlık Sürü Günlük Yem:</small><br><strong style="font-size:1.05rem;">${(dailyCostTl * 100).toLocaleString('tr-TR', {maximumFractionDigits:0})} ₺/gün</strong></div>
+            <div><small>1 kg Kuru Madde Birim Maliyeti:</small><br><strong style="font-size:1.05rem;">${dmCostPerKg.toFixed(2)} ₺/kg KM</strong></div>
+          </div>
+        `;
+      }
+    }
+
+    /* =========================================================================
+       6. RASYON LİSTESİ RENDER VE KONTROLLERİ
+       ========================================================================= */
+    function renderActiveRationList() {
+      const container = document.getElementById("active-ration-list");
+      if (!container) return;
+
+      if (currentRation.length === 0) {
+        container.innerHTML = `<div class="alert-box">Henüz yem eklenmedi. Yukarıdan hazır şablon seçin veya yem ekleyin.</div>`;
+        analyzeCurrentRation();
+        return;
+      }
+
+      container.innerHTML = currentRation.map((item, idx) => {
+        const feed = getFeedById(item.feedId);
+        if (!feed) return "";
+        const dmKg = (item.kg * (feed.dm / 100)).toFixed(2);
+        const itemCost = (item.kg * feed.price).toFixed(2);
+        const stepSize = feed.cat === "mineral" ? 0.02 : (currentSpecies === "sheep" ? 0.05 : 0.25);
+        const catBadge = feed.cat === "forage" ? "Kaba Yem" : (feed.cat === "energy" ? "Enerji/Kesif" : (feed.cat === "protein" ? "Protein Küspesi" : "Mineral/Tampon"));
+
+        return `
+          <div class="ration-item-row">
+            <div class="ration-item-top">
+              <div>
+                <span class="ration-item-name">${feed.name}</span>
+                <span class="tag tag-outline" style="margin-left:4px;">${catBadge}</span>
+              </div>
+              <div class="ration-item-meta">
+                Net KM: <strong>${dmKg} kg</strong> • HP: %${feed.cp} • Tutar: <strong>${itemCost} ₺</strong>
+              </div>
+            </div>
+            <div class="ration-item-controls">
+              <div class="step-btn-group">
+                <button class="step-btn" onclick="adjustFeedKg(${idx}, -${stepSize})" title="Azalt">−</button>
+                <input type="number" class="kg-input-inline" value="${item.kg}" min="0" max="60" step="${stepSize}" oninput="setFeedKg(${idx}, this.value)">
+                <button class="step-btn" onclick="adjustFeedKg(${idx}, ${stepSize})" title="Artır">+</button>
+                <span style="font-size:0.8rem; font-weight:800; margin-left:4px;">kg/gün</span>
+              </div>
+              <button class="btn btn-outline btn-sm" onclick="removeFeedFromRation(${idx})">Çıkar</button>
+            </div>
+          </div>
+        `;
+      }).join("");
+
+      analyzeCurrentRation();
+    }
+
+    function adjustFeedKg(index, delta) {
+      if (!currentRation[index]) return;
+      let nextVal = (parseFloat(currentRation[index].kg) || 0) + delta;
+      if (nextVal < 0) nextVal = 0;
+      const feed = getFeedById(currentRation[index].feedId);
+      const decimals = (feed && feed.cat === "mineral") ? 3 : 2;
+      currentRation[index].kg = parseFloat(nextVal.toFixed(decimals));
+      renderActiveRationList();
+    }
+
+    function setFeedKg(index, val) {
+      if (!currentRation[index]) return;
+      let parsed = parseFloat(val);
+      if (isNaN(parsed) || parsed < 0) parsed = 0;
+      currentRation[index].kg = parsed;
+      analyzeCurrentRation();
+    }
+
+    function removeFeedFromRation(index) {
+      currentRation.splice(index, 1);
+      renderActiveRationList();
+    }
+
+    function clearAllRationItems() {
+      currentRation = [];
+      renderActiveRationList();
+    }
+
+    function addFeedToRation() {
+      const sel = document.getElementById("add-feed-select");
+      if (!sel || !sel.value) return;
+      const feedId = sel.value;
+      const existing = currentRation.find(r => r.feedId === feedId);
+      if (existing) {
+        const feed = getFeedById(feedId);
+        existing.kg = parseFloat((existing.kg + (feed && feed.cat === "mineral" ? 0.05 : 0.5)).toFixed(2));
+      } else {
+        const feed = getFeedById(feedId);
+        const defaultKg = feed.cat === "mineral" ? 0.08 : (currentSpecies === "sheep" ? 0.25 : 1.5);
+        currentRation.push({ feedId, kg: defaultKg });
+      }
+      renderActiveRationList();
+    }
+
+    /* =========================================================================
+       7. OTOMATİK EN UCUZ RASYON DENGELEME MOTORU (AUTO-BALANCER SOLVER)
+       Mevcut rasyondaki kaba yem, enerji yemi, protein yemi ve mermer tozunu
+       hedef Kuru Madde, Enerji, Protein ve Lif sınırlarına göre optimize eder.
+       ========================================================================= */
+    function autoBalanceCurrentRation() {
+      const req = calculateNutrientRequirements();
+
+      // Eğer rasyon boşsa önce seçili şablonu yükle
+      if (currentRation.length === 0) {
+        applySelectedPreset();
+      }
+
+      // Rasyonda protein kaynağı yoksa en uygun fiyatlı olanı (ATK 36) ekle
+      const hasProtein = currentRation.some(i => {
+        const f = getFeedById(i.feedId);
+        return f && (f.cat === "protein" || f.cp >= 22);
+      });
+      if (!hasProtein) {
+        currentRation.push({ feedId: "atk_36", kg: currentSpecies === "sheep" ? 0.15 : 1.0 });
+      }
+
+      // Rasyonda enerji kaynağı yoksa Arpa Ezmesi ekle
+      const hasEnergy = currentRation.some(i => {
+        const f = getFeedById(i.feedId);
+        return f && f.cat === "energy";
+      });
+      if (!hasEnergy) {
+        currentRation.push({ feedId: "arpa_ezmesi", kg: currentSpecies === "sheep" ? 0.4 : 2.5 });
+      }
+
+      // Mermer tozu yoksa ekle
+      if (!currentRation.some(i => i.feedId === "mermer_tozu")) {
+        currentRation.push({ feedId: "mermer_tozu", kg: currentSpecies === "sheep" ? 0.02 : 0.12 });
+      }
+
+      // 80 adımlı iteratif doğrusal olmayan dengeleyici (DMI, CP, ME/NEL, peNDF, Ca/P)
+      for (let step = 0; step < 80; step++) {
+        let totalDm = 0, totalCpGr = 0, totalMe = 0, totalNel = 0, totalPeNdfGr = 0, totalCaGr = 0, totalPGr = 0;
+
+        currentRation.forEach(item => {
+          const f = getFeedById(item.feedId);
+          if (!f || item.kg <= 0) return;
+          const dm = item.kg * (f.dm / 100);
+          totalDm += dm;
+          totalCpGr += dm * (f.cp / 100) * 1000;
+          totalMe += dm * f.me;
+          totalNel += dm * f.nel;
+          totalPeNdfGr += dm * (f.pendf / 100) * 1000;
+          totalCaGr += dm * (f.ca / 100) * 1000;
+          totalPGr += dm * (f.p / 100) * 1000;
+        });
+
+        if (totalDm <= 0) break;
+
+        // 1. Toplam Kuru Maddeyi Hedefe Ölçekle (Mineraller hariç)
+        const dmRatio = req.dmiTarget / totalDm;
+        if (Math.abs(1 - dmRatio) > 0.01) {
+          currentRation.forEach(item => {
+            const f = getFeedById(item.feedId);
+            if (f && f.cat !== "mineral") {
+              item.kg = Math.max(0.05, item.kg * (1 + (dmRatio - 1) * 0.6));
+            }
+          });
+        }
+
+        // 2. Lif (peNDF) düşükse kaba yemi artır, kesif yemi azalt
+        const pendfPct = (totalPeNdfGr / (totalDm * 1000)) * 100;
+        if (pendfPct < req.pendfMinPct) {
+          currentRation.forEach(item => {
+            const f = getFeedById(item.feedId);
+            if (!f) return;
+            if (f.cat === "forage") item.kg *= 1.04;
+            if (f.cat === "energy") item.kg *= 0.96;
+          });
+        }
+
+        // 3. Enerji düşükse enerji yemini artır, yüksek lifli samanı azalt
+        const energySupplied = currentSpecies === "dairy" ? totalNel : totalMe;
+        const energyTarget = currentSpecies === "dairy" ? req.nelTargetMcal : req.meTargetMcal;
+        if (energySupplied < energyTarget * 0.98 && pendfPct > req.pendfMinPct + 1.5) {
+          currentRation.forEach(item => {
+            const f = getFeedById(item.feedId);
+            if (!f) return;
+            if (f.cat === "energy") item.kg *= 1.035;
+            if (f.cat === "forage" && f.me < 2.2) item.kg *= 0.95;
+          });
+        }
+
+        // 4. Protein Dengesi: Eksikse küspeyi artır, fazlaysa azalt
+        const cpPct = (totalCpGr / (totalDm * 1000)) * 100;
+        if (cpPct < req.cpTargetPct - 0.15) {
+          currentRation.forEach(item => {
+            const f = getFeedById(item.feedId);
+            if (!f) return;
+            if (f.cat === "protein" && f.id !== "yemlik_ure") item.kg *= 1.05;
+            else if (f.cat === "energy" && f.cp < 14) item.kg *= 0.98;
+          });
+        } else if (cpPct > req.cpTargetPct + 0.35) {
+          currentRation.forEach(item => {
+            const f = getFeedById(item.feedId);
+            if (!f) return;
+            if (f.cat === "protein") item.kg *= 0.94;
+            else if (f.cat === "energy") item.kg *= 1.02;
+          });
+        }
+
+        // 5. Kalsiyum / Fosfor Dengesi (Mermer Tozu Ayarı)
+        const caPRatio = totalPGr > 0 ? (totalCaGr / totalPGr) : 2.0;
+        const mermerItem = currentRation.find(i => i.feedId === "mermer_tozu");
+        if (mermerItem && caPRatio < 1.65) {
+          mermerItem.kg += (currentSpecies === "sheep" ? 0.002 : 0.01);
+        }
+      }
+
+      // Yuvarlama
+      currentRation.forEach(item => {
+        const f = getFeedById(item.feedId);
+        const dec = (f && f.cat === "mineral") ? 2 : (currentSpecies === "sheep" ? 2 : 1);
+        item.kg = parseFloat(item.kg.toFixed(dec));
+      });
+
+      renderActiveRationList();
+    }
+
+    /* =========================================================================
+       8. TÜR VE ŞABLON YÖNETİMİ
+       ========================================================================= */
+    function selectSpecies(sp) {
+      currentSpecies = sp;
+      ["dairy", "beef", "sheep"].forEach(s => {
+        const btn = document.getElementById("species-btn-" + s);
+        const inp = document.getElementById("inputs-" + s);
+        if (btn) btn.classList.toggle("active", s === sp);
+        if (inp) inp.style.display = (s === sp) ? "block" : "none";
+      });
+
+      const titleMap = {
+        dairy: "Adım 1: Süt İneği Bilgileri & Hedef Süt Verimi",
+        beef: "Adım 1: Besi Danası Bilgileri & Hedef Günlük Kilo Alımı",
+        sheep: "Adım 1: Koyun / Kuzu Bilgileri & Üretim Dönemi"
+      };
+      const badgeMap = {
+        dairy: "Standart: NASEM 2021 / CNCPS",
+        beef: "Standart: NASEM Beef Cattle",
+        sheep: "Standart: NRC Small Ruminants"
+      };
+      document.getElementById("profile-card-title").textContent = titleMap[sp];
+      document.getElementById("standard-badge-label").textContent = badgeMap[sp];
+
+      populatePresetSelect();
+      applySelectedPreset();
+    }
+
+    function populatePresetSelect() {
+      const sel = document.getElementById("preset-select");
+      if (!sel) return;
+      const list = RATION_PRESETS[currentSpecies] || [];
+      sel.innerHTML = list.map(p => `<option value="${p.id}">${p.name}</option>`).join("");
+    }
+
+    function applySelectedPreset() {
+      const sel = document.getElementById("preset-select");
+      if (!sel) return;
+      const list = RATION_PRESETS[currentSpecies] || [];
+      const preset = list.find(p => p.id === sel.value) || list[0];
+      if (!preset) return;
+
+      if (currentSpecies === "dairy") {
+        document.getElementById("dairy-stage").value = preset.stage;
+        document.getElementById("dairy-bw").value = preset.bw;
+        document.getElementById("dairy-milk").value = preset.milk;
+        document.getElementById("dairy-fat").value = preset.fat;
+      } else if (currentSpecies === "beef") {
+        document.getElementById("beef-stage").value = preset.stage;
+        document.getElementById("beef-bw").value = preset.bw;
+        document.getElementById("beef-adg").value = preset.adg;
+      } else if (currentSpecies === "sheep") {
+        document.getElementById("sheep-stage").value = preset.stage;
+        document.getElementById("sheep-bw").value = preset.bw;
+        document.getElementById("sheep-target").value = preset.target;
+      }
+
+      currentRation = JSON.parse(JSON.stringify(preset.items));
+      renderActiveRationList();
+    }
+
+    function onAnimalProfileChange() {
+      analyzeCurrentRation();
+    }
+
+    function populateAddFeedSelect() {
+      const sel = document.getElementById("add-feed-select");
+      if (!sel) return;
+      const groups = [
+        { key: "forage", label: "Kaba Yemler (Ot, Silaj, Saman)" },
+        { key: "energy", label: "Enerji & Fabrika Yemleri" },
+        { key: "protein", label: "Protein Küspeleri" },
+        { key: "mineral", label: "Mineral, Tampon & Katkılar" }
+      ];
+      sel.innerHTML = groups.map(g => {
+        const opts = feedLibrary
+          .filter(f => f.cat === g.key)
+          .map(f => `<option value="${f.id}">${f.name} (%${f.cp} HP - ${f.price} ₺/kg)</option>`)
+          .join("");
+        return `<optgroup label="${g.label}">${opts}</optgroup>`;
+      }).join("");
+    }
+
+    /* =========================================================================
+       9. YEM KARMA VAGONU (TMR) VE 1 TON KESİF YEM KARIŞIM HESABI
+       ========================================================================= */
+    function renderTmrMixerTable() {
+      const count = parseInt(document.getElementById("tmr-animal-count").value) || 50;
+      const meals = parseInt(document.getElementById("tmr-meals-per-day").value) || 2;
+      const allowancePct = parseFloat(document.getElementById("tmr-bunk-allowance").value) || 0;
+      const factor = 1 + (allowancePct / 100);
+
+      // Vagona atılış sırası: 1. Kuru Kaba Ot (kıyım), 2. Kesif/Protein/Mineral, 3. Silaj/Yaş Posa
+      const getOrderPriority = (feed) => {
+        if (!feed) return 99;
+        if (feed.cat === "forage" && feed.dm >= 75) return 1; // Kuru ot / Saman
+        if (feed.cat === "energy" || feed.cat === "protein" || feed.cat === "mineral") return 2; // Kesif & Mineral
+        return 3; // Silaj & Yaş posa
+      };
+
+      const sortedItems = [...currentRation]
+        .filter(i => i.kg > 0 && getFeedById(i.feedId))
+        .sort((a, b) => getOrderPriority(getFeedById(a.feedId)) - getOrderPriority(getFeedById(b.feedId)));
+
+      let cumulativeMealKg = 0;
+      let totalDailyHerdKg = 0;
+      let totalDailyHerdCost = 0;
+
+      const tbody = document.querySelector("#tmr-loading-table tbody");
+      if (tbody) {
+        tbody.innerHTML = sortedItems.map((item, idx) => {
+          const feed = getFeedById(item.feedId);
+          const dailyHerdKg = item.kg * count * factor;
+          const mealKg = dailyHerdKg / meals;
+          cumulativeMealKg += mealKg;
+          totalDailyHerdKg += dailyHerdKg;
+          totalDailyHerdCost += dailyHerdKg * feed.price;
+
+          const ruleText = (feed.cat === "forage" && feed.dm >= 75)
+            ? "1. Önce Kuru Ot (5 dk Kıyım)"
+            : ((feed.cat === "forage" && feed.dm < 75) ? "3. Sonra Silaj / Yaş Yem" : "2. Kesif Yem & Mineral");
+
+          return `
+            <tr>
+              <td><strong>${idx + 1}.</strong></td>
+              <td><strong>${feed.name}</strong></td>
+              <td>${ruleText}</td>
+              <td>${item.kg.toFixed(2)} kg</td>
+              <td><strong>${mealKg.toFixed(1)} kg</strong></td>
+              <td><span class="tag tag-solid" style="font-size:0.82rem;">${cumulativeMealKg.toFixed(0)} kg</span></td>
+              <td>${dailyHerdKg.toFixed(1)} kg</td>
+            </tr>
+          `;
+        }).join("");
+      }
+
+      const summaryCards = document.getElementById("tmr-summary-cards");
+      if (summaryCards) {
+        summaryCards.innerHTML = `
+          <div class="stat-card">
+            <div class="stat-val">${cumulativeMealKg.toFixed(0)} kg</div>
+            <div class="stat-label">1 Öğünde Vagona Girecek Toplam</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val">${totalDailyHerdKg.toFixed(0)} kg</div>
+            <div class="stat-label">${count} Hayvan Günlük Toplam Yem</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val">${totalDailyHerdCost.toLocaleString('tr-TR', {maximumFractionDigits:0})} ₺</div>
+            <div class="stat-label">Sürü Günlük Toplam Yem Maliyeti</div>
+          </div>
+        `;
+      }
+
+      // 1 Ton (1.000 kg) Kesif Yem Karışım Tablosu
+      const concItems = currentRation.filter(i => {
+        const f = getFeedById(i.feedId);
+        return f && f.cat !== "forage" && i.kg > 0;
+      });
+      const totalConcKg = concItems.reduce((acc, i) => acc + i.kg, 0);
+      const concTbody = document.querySelector("#concentrate-mix-table tbody");
+      if (concTbody) {
+        if (totalConcKg <= 0) {
+          concTbody.innerHTML = `<tr><td colspan="4">Rasyonda kesif yem bulunmuyor.</td></tr>`;
+        } else {
+          concTbody.innerHTML = concItems.map(item => {
+            const f = getFeedById(item.feedId);
+            const ratioPct = (item.kg / totalConcKg) * 100;
+            const perTonKg = ratioPct * 10;
+            const bags50 = perTonKg / 50;
+            return `
+              <tr>
+                <td><strong>${f.name}</strong></td>
+                <td>%${ratioPct.toFixed(1)}</td>
+                <td><strong>${perTonKg.toFixed(1)} kg</strong></td>
+                <td>${bags50.toFixed(1)} Çuval (50 kg)</td>
+              </tr>
+            `;
+          }).join("");
+        }
+      }
+    }
+
+    /* =========================================================================
+       10. PEARSON KARESİ VE SATIN ALMA KIYASLAYICI
+       ========================================================================= */
+    function initPearsonSelects() {
+      const s1 = document.getElementById("ps-feed1-select");
+      const s2 = document.getElementById("ps-feed2-select");
+      if (!s1 || !s2) return;
+
+      s1.innerHTML = feedLibrary.map(f => `<option value="${f.id}" ${f.id === "arpa_ezmesi" ? "selected" : ""}>${f.name} (%${f.cp} HP)</option>`).join("");
+      s2.innerHTML = feedLibrary.map(f => `<option value="${f.id}" ${f.id === "atk_36" ? "selected" : ""}>${f.name} (%${f.cp} HP)</option>`).join("");
+      onPearsonFeedSelect(1);
+      onPearsonFeedSelect(2);
+    }
+
+    function onPearsonFeedSelect(num) {
+      const sel = document.getElementById(`ps-feed${num}-select`);
+      const inp = document.getElementById(`ps-feed${num}-cp`);
+      if (sel && inp) {
+        const feed = getFeedById(sel.value);
+        if (feed) inp.value = feed.cp;
+      }
+      calculatePearsonSquare();
+    }
+
+    function calculatePearsonSquare() {
+      const cp1 = parseFloat(document.getElementById("ps-feed1-cp").value) || 0;
+      const cp2 = parseFloat(document.getElementById("ps-feed2-cp").value) || 0;
+      const target = parseFloat(document.getElementById("ps-target-cp").value) || 18;
+      const batchKg = parseFloat(document.getElementById("ps-batch-kg").value) || 1000;
+      const box = document.getElementById("pearson-result-box");
+      if (!box) return;
+
+      const minCp = Math.min(cp1, cp2);
+      const maxCp = Math.max(cp1, cp2);
+      if (target <= minCp || target >= maxCp || cp1 === cp2) {
+        box.innerHTML = `<strong>Hesaplanamadı:</strong> Hedef protein (%${target}), seçilen iki yemin protein değerleri (%${minCp} ile %${maxCp}) arasında olmalıdır!`;
+        return;
+      }
+
+      const part1 = Math.abs(cp2 - target);
+      const part2 = Math.abs(target - cp1);
+      const totalParts = part1 + part2;
+
+      const pct1 = (part1 / totalParts) * 100;
+      const pct2 = (part2 / totalParts) * 100;
+      const kg1 = (batchKg * pct1) / 100;
+      const kg2 = (batchKg * pct2) / 100;
+
+      const f1Name = document.getElementById("ps-feed1-select").selectedOptions[0]?.text.split(" (")[0] || "1. Yem";
+      const f2Name = document.getElementById("ps-feed2-select").selectedOptions[0]?.text.split(" (")[0] || "2. Yem";
+
+      box.innerHTML = `
+        <strong>%${target} Proteinli ${batchKg} kg Karışım Reçetesi:</strong>
+        • <strong>${f1Name}:</strong> <strong>${kg1.toFixed(1)} kg</strong> (%${pct1.toFixed(1)})<br>
+        • <strong>${f2Name}:</strong> <strong>${kg2.toFixed(1)} kg</strong> (%${pct2.toFixed(1)})<br>
+        • <strong>Toplam Karışım:</strong> <strong>${batchKg} kg</strong> (Tam %${target.toFixed(1)} Ham Protein)
+      `;
+    }
+
+    function renderFeedComparisonTable() {
+      const tbody = document.querySelector("#feed-value-comparison-table tbody");
+      if (!tbody) return;
+
+      const sorted = [...feedLibrary]
+        .filter(f => f.cat !== "mineral")
+        .sort((a, b) => (a.price / (a.dm / 100)) - (b.price / (b.dm / 100)));
+
+      tbody.innerHTML = sorted.map(f => {
+        const dmCost = f.price / (f.dm / 100);
+        const cpCost = f.cp > 0 ? (dmCost / (f.cp / 100)) : 0;
+        return `
+          <tr>
+            <td><strong>${f.name}</strong></td>
+            <td>${f.price.toFixed(2)} ₺/kg <small>(${(f.price * 1000).toLocaleString('tr-TR')} ₺/ton)</small></td>
+            <td>%${f.dm}</td>
+            <td><strong>${dmCost.toFixed(2)} ₺ / kg KM</strong></td>
+            <td>${cpCost > 0 ? cpCost.toFixed(2) + " ₺ / kg Protein" : "-"}</td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    /* =========================================================================
+       11. YEM KÜTÜPHANESİ DÜZENLEME VE KAYITLI RASYONLAR
+       ========================================================================= */
+    function renderFeedLibraryTable() {
+      const tbody = document.querySelector("#feed-library-table tbody");
+      if (!tbody) return;
+
+      const q = (document.getElementById("feed-search-input")?.value || "").toLowerCase().trim();
+      const cat = document.getElementById("feed-category-filter")?.value || "all";
+
+      const filtered = feedLibrary.filter(f => {
+        if (cat !== "all" && f.cat !== cat) return false;
+        if (q && !f.name.toLowerCase().includes(q)) return false;
+        return true;
+      });
+
+      const catNames = { forage: "Kaba Yem", energy: "Enerji/Kesif", protein: "Protein", mineral: "Mineral/Tampon" };
+
+      tbody.innerHTML = filtered.map(f => `
+        <tr>
+          <td><strong>${f.name}</strong></td>
+          <td><span class="tag tag-outline">${catNames[f.cat] || f.cat}</span></td>
+          <td>
+            <input type="number" value="${f.price}" step="0.25" min="0" style="width:85px; min-height:36px; margin:0; padding:4px 6px;" onchange="updateFeedLibraryField('${f.id}', 'price', this.value)">
+          </td>
+          <td>
+            <input type="number" value="${f.dm}" step="1" min="5" max="100" style="width:68px; min-height:36px; margin:0; padding:4px 6px;" onchange="updateFeedLibraryField('${f.id}', 'dm', this.value)">
+          </td>
+          <td>
+            <input type="number" value="${f.cp}" step="0.5" min="0" max="290" style="width:68px; min-height:36px; margin:0; padding:4px 6px;" onchange="updateFeedLibraryField('${f.id}', 'cp', this.value)">
+          </td>
+          <td>${f.me} Mcal</td>
+          <td>%${f.ndf}</td>
+          <td>%${f.starch}</td>
+        </tr>
+      `).join("");
+    }
+
+    function updateFeedLibraryField(feedId, field, value) {
+      const feed = getFeedById(feedId);
+      if (!feed) return;
+      const num = parseFloat(value);
+      if (!isNaN(num) && num >= 0) {
+        feed[field] = num;
+        saveFeedLibrary();
+        populateAddFeedSelect();
+        renderActiveRationList();
+        renderFeedComparisonTable();
+      }
+    }
+
+    function resetFeedLibraryDefaults() {
+      if (!confirm("Tüm yem fiyatlarını ve besin değerlerini fabrika varsayılanlarına döndürmek istiyor musunuz?")) return;
+      feedLibrary = JSON.parse(JSON.stringify(DEFAULT_FEEDS));
+      saveFeedLibrary();
+      populateAddFeedSelect();
+      renderFeedLibraryTable();
+      renderActiveRationList();
+      renderFeedComparisonTable();
+    }
+
+    function saveCustomFeedToLibrary() {
+      const name = document.getElementById("custom-feed-name").value.trim();
+      if (!name) {
+        alert("Lütfen yem adını yazın.");
+        return;
+      }
+      const cat = document.getElementById("custom-feed-cat").value;
+      const price = parseFloat(document.getElementById("custom-feed-price").value) || 10;
+      const dm = parseFloat(document.getElementById("custom-feed-dm").value) || 89;
+      const cp = parseFloat(document.getElementById("custom-feed-cp").value) || 16;
+      const me = parseFloat(document.getElementById("custom-feed-me").value) || 2.7;
+      const ndf = parseFloat(document.getElementById("custom-feed-ndf").value) || 25;
+
+      const newFeed = {
+        id: "custom_" + Date.now(),
+        name,
+        cat,
+        dm,
+        cp,
+        me,
+        nel: parseFloat((me * 0.63).toFixed(2)),
+        ndf,
+        pendf: cat === "forage" ? Math.round(ndf * 0.85) : Math.round(ndf * 0.25),
+        starch: cat === "energy" ? 35 : 5,
+        ca: 0.6,
+        p: 0.4,
+        price
+      };
+
+      feedLibrary.unshift(newFeed);
+      saveFeedLibrary();
+      populateAddFeedSelect();
+      renderFeedLibraryTable();
+      renderFeedComparisonTable();
+      document.getElementById("custom-feed-name").value = "";
+      alert(`${name} yem kütüphanesine başarıyla eklendi!`);
+    }
+
+    function saveCurrentRationToStore() {
+      const defaultName = `${currentSpecies === "dairy" ? "Süt İneği" : (currentSpecies === "beef" ? "Besi Danası" : "Koyun/Kuzu")} Rasyonu (${new Date().toLocaleDateString('tr-TR')})`;
+      const name = prompt("Kaydedilecek rasyonun adını girin:", defaultName);
+      if (!name) return;
+
+      const record = {
+        id: Date.now(),
+        name: name.trim(),
+        date: new Date().toLocaleDateString('tr-TR'),
+        species: currentSpecies,
+        items: JSON.parse(JSON.stringify(currentRation)),
+        dailyCost: document.getElementById("stat-daily-cost").textContent,
+        totalDm: document.getElementById("stat-total-dm").textContent
+      };
+
+      savedRations.unshift(record);
+      localStorage.setItem("rasyon_saved_v1", JSON.stringify(savedRations));
+      renderSavedRationsList();
+      alert("Rasyon deftere kaydedildi!");
+    }
+
+    function renderSavedRationsList() {
+      const box = document.getElementById("saved-rations-list");
+      if (!box) return;
+
+      if (savedRations.length === 0) {
+        box.innerHTML = `<div class="alert-box">Henüz kayıtlı rasyonunuz yok. "Rasyon Kur" ekranından "Bu Rasyonu Deftere Kaydet" butonuna basarak kaydedebilirsiniz.</div>`;
+        return;
+      }
+
+      box.innerHTML = savedRations.map(r => `
+        <div class="ration-item-row">
+          <div class="ration-item-top">
+            <div>
+              <span class="ration-item-name">${r.name}</span>
+              <span class="tag tag-outline">${r.date}</span>
+            </div>
+            <div class="ration-item-meta">
+              Kuru Madde: <strong>${r.totalDm}</strong> • Maliyet: <strong>${r.dailyCost}/gün</strong>
+            </div>
+          </div>
+          <div style="display:flex; gap:8px; margin-top:6px;">
+            <button class="btn btn-primary btn-sm" onclick="loadSavedRation(${r.id})">Bu Rasyonu Yükle & Aç</button>
+            <button class="btn btn-outline btn-sm" onclick="deleteSavedRation(${r.id})">Sil</button>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function loadSavedRation(id) {
+      const rec = savedRations.find(r => r.id === id);
+      if (!rec) return;
+      selectSpecies(rec.species);
+      currentRation = JSON.parse(JSON.stringify(rec.items));
+      renderActiveRationList();
+      switchTab("formulator");
+    }
+
+    function deleteSavedRation(id) {
+      savedRations = savedRations.filter(r => r.id !== id);
+      localStorage.setItem("rasyon_saved_v1", JSON.stringify(savedRations));
+      renderSavedRationsList();
+    }
+
+    function exportRationBackup() {
+      const payload = {
+        app: "rasyon-rehberi",
+        exportedAt: new Date().toISOString(),
+        feedLibrary,
+        savedRations
+      };
+      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `ciftlik-rasyon-yedek-${new Date().toISOString().slice(0,10)}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function importRationBackup(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const data = JSON.parse(e.target.result);
+          if (Array.isArray(data.feedLibrary)) {
+            feedLibrary = data.feedLibrary;
+            saveFeedLibrary();
+          }
+          if (Array.isArray(data.savedRations)) {
+            savedRations = data.savedRations;
+            localStorage.setItem("rasyon_saved_v1", JSON.stringify(savedRations));
+          }
+          populateAddFeedSelect();
+          renderFeedLibraryTable();
+          renderSavedRationsList();
+          renderActiveRationList();
+          alert("Rasyon ve yem yedeği başarıyla yüklendi!");
+        } catch (err) {
+          alert("Geçersiz yedek dosyası!");
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    /* =========================================================================
+       12. GEZİNME, TEMA VE PWA KURULUM YÖNETİCİSİ
+       ========================================================================= */
+    function switchTab(tabId) {
+      document.querySelectorAll(".tab-section").forEach(s => s.classList.remove("active"));
+      document.querySelectorAll(".nav-item").forEach(b => b.classList.remove("active"));
+
+      const sec = document.getElementById("tab-" + tabId);
+      const nav = document.getElementById("nav-" + tabId);
+      if (sec) sec.classList.add("active");
+      if (nav) nav.classList.add("active");
+
+      window.scrollTo(0, 0);
+      if (tabId === "tmr") renderTmrMixerTable();
+      if (tabId === "pearson") { calculatePearsonSquare(); renderFeedComparisonTable(); }
+      if (tabId === "feeds") renderFeedLibraryTable();
+      if (tabId === "saved") renderSavedRationsList();
+    }
+
+    function toggleTheme() {
+      const isDark = document.body.classList.toggle("dark-mode");
+      localStorage.setItem("rasyon_theme", isDark ? "dark" : "light");
+      const btn = document.getElementById("theme-toggle-btn");
+      if (btn) btn.textContent = isDark ? "Gündüz Modu" : "Gece Modu";
+    }
+
+    function openGuideModal() {
+      document.getElementById("modal-guide").style.display = "flex";
+    }
+    function closeGuideModal() {
+      document.getElementById("modal-guide").style.display = "none";
+    }
+
+    // PWA Kurulum & Hash Yönlendirme
+    let deferredPwaPrompt = null;
+    const pwaInstallBtn = document.getElementById("pwa-install-btn");
+
+    function isStandaloneApp() {
+      return window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
+    }
+    function isIosDevice() {
+      return /iphone|ipad|ipod/i.test(window.navigator.userAgent);
+    }
+
+    window.addEventListener("beforeinstallprompt", (e) => {
+      e.preventDefault();
+      deferredPwaPrompt = e;
+      if (pwaInstallBtn && !isStandaloneApp()) {
+        pwaInstallBtn.style.display = "inline-flex";
+      }
+    });
+
+    window.addEventListener("appinstalled", () => {
+      deferredPwaPrompt = null;
+      if (pwaInstallBtn) pwaInstallBtn.style.display = "none";
+    });
+
+    if (isIosDevice() && !isStandaloneApp() && pwaInstallBtn) {
+      pwaInstallBtn.style.display = "inline-flex";
+    }
+
+    async function triggerPwaInstall() {
+      if (deferredPwaPrompt) {
+        deferredPwaPrompt.prompt();
+        const { outcome } = await deferredPwaPrompt.userChoice;
+        if (outcome === "accepted" && pwaInstallBtn) {
+          pwaInstallBtn.style.display = "none";
+        }
+        deferredPwaPrompt = null;
+      } else if (isIosDevice()) {
+        alert("iPhone / iPad'de Ana Ekrana Eklemek İçin:\n\n1. Safari alt menüsündeki 'Paylaş' simgesine dokunun.\n2. Listeden 'Ana Ekrana Ekle' seçeneğine dokunun.");
+      } else {
+        openGuideModal();
+      }
+    }
+
+    function handleHashRouting() {
+      const hash = (window.location.hash || "").replace("#", "").trim();
+      if (hash === "dairy" || hash === "beef" || hash === "sheep") {
+        switchTab("formulator");
+        selectSpecies(hash);
+      } else if (hash && document.getElementById("tab-" + hash)) {
+        switchTab(hash);
+      }
+    }
+
+    window.addEventListener("hashchange", handleHashRouting);
+
+    window.addEventListener("DOMContentLoaded", () => {
+      loadAppState();
+      populateAddFeedSelect();
+      initPearsonSelects();
+      selectSpecies("dairy");
+      handleHashRouting();
+    });
+
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./sw.js?v=1").then((reg) => {
+          reg.update();
+        }).catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>
