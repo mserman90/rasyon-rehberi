@@ -1,4 +1,4 @@
-const CACHE_NAME = 'rasyonsys-offline-v5';
+const CACHE_NAME = 'rasyonsys-offline-v6';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -15,8 +15,10 @@ const ASSETS_TO_CACHE = [
   './README.md',
   './i18n/tr.json',
   './lib/ration-engine/nrc-2016-tables.json',
+  './lib/ration-engine/nrc-2021-dairy-tables.json',
   './lib/ration-engine/feeds-db.json',
   './lib/ration-engine/beef-engine.js',
+  './lib/ration-engine/dairy-engine.js',
   './lib/ration-engine/README.md'
 ];
 

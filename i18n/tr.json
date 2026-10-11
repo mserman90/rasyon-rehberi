@@ -47,5 +47,65 @@
       "2. Yemi aniden değiştirme; yeni tarife 7 günde azar azar alıştır.",
       "3. Kaya tuzu, mermer tozu ve vitamin-mineral premiksini asla ihmal etme."
     ]
+  },
+  "sut_ustasi": {
+    "app": {
+      "title": "Süt Ustası — Sağmal Rehberim",
+      "subtitle": "İneğinin sütüne göre yem tarifini 5 dakikada hazırlıyorum.",
+      "start_button": "Hadi Başlayalım",
+      "resume_title": "Yarıda Bıraktığın Bir Süt Tarifi Var!",
+      "resume_button": "Kaldığın Yerden Devam Et",
+      "restart_button": "Sıfırdan Başla",
+      "loading_title": "Süt sağılıyor... 🥛",
+      "loading_subtitle": "İneğinin yem tarifi hazırlanıyor...",
+      "loading_micro": [
+        "Enerji hesaplanıyor...",
+        "Protein dengeleniyor...",
+        "Süt yağı kontrol ediliyor..."
+      ],
+      "price_date_note": "Fiyatlar 12.10.2026 tarihine aittir."
+    },
+    "guides": {
+      "step0": "Merhaba bereketli olsun! Ben Veteriner Ayşe. İneğin günde kaç litre süt veriyorsa ve hangi dönemdeyse, süt yağını düşürmeden ve hayvanı hasta etmeden en kârlı yem tarifini birlikte hazırlayacağız.",
+      "donem": "İneğin şu an hangi dönemde? Doğum öncesi kuru dönem ile yeni doğum ve sağım dönemlerinin yemleri birbirinden tamamen farklıdır.",
+      "kuru_gun": "Doğuma ne kadar kaldığı çok önemli. Son 3 haftada (yakın kuru dönem) doğum felcini önlemek için özel hazırlık yaparız.",
+      "sut_hummasi_gecmis": "İnek daha önceki doğumlarında yatakta kaldıysa (süt humması geçirdiyse), kalsiyumu kısıp koruyucu acı tuz (anyonik tuz) öneririz.",
+      "sut_litre": "İneğin günde kaç litre süt veriyor? Emin değilsen akşam sağımını 2 ile çarp, yaklaşık çıkar.",
+      "sut_yag": "Süt yağı, hayvanın enerji ve lif durumunu gösterir. Düşerse işkembe asitleniyor veya enerji yetmiyor demektir.",
+      "sut_protein": "Sütün protein oranını biliyorsan seçebilirsin; bilmiyorsan hiç dert etme, ortalamayı kullanırım.",
+      "buzagi_sayisi": "İlk buzağısını doğuran genç inekler hem süt verir hem de kendi boyunu büyütmeye devam eder; onlara ekstra enerji veririz.",
+      "kilo": "İneğin canlı kilosunu kaydırıcıyla veya + / - tuşlarıyla seç. Emin değilsen ırkına göre tahmin girebilirsin.",
+      "irk": "Holstein inekler bol süt verir, Simmental ve Montofonların sütü daha yağlıdır, Yerli ve Melez ırklar ise daha dayanıklıdır.",
+      "vks": "İneğin bel ve sağrı kemiklerine bakarak vücut durumunu seç. Çok zayıf inek döl tutmaz, çok yağlı inek ise doğumda zorlanır.",
+      "kaba_yem": "Kaba yem (silaj, yonca, kuru ot, saman) süt yağını koruyan ana kalkandır. Ahırında hangileri varsa işaretle.",
+      "kesif_yem": "Kesif yemler (arpa, mısır, küspe, fabrika süt yemi) süt litresini artıran enerji ve protein kaynaklarıdır.",
+      "katki": "Karbonat (yemek sodası) süt yağının düşmesini önler, vitamin-mineral ve tuz ise döl tutmayı ve ayak sağlığını korur.",
+      "fiyat": "Yem fiyatlarını biliyorsan + / - tuşlarıyla ayarlayabilirsin. Bilmiyorsan güncel piyasa ortalamasını kullanırım.",
+      "serbest": "Önünde sürekli karışım yem (TMR) duran inekler gün boyu azar azar yer, işkembesi ekşimez ve sütü artar.",
+      "saglik": "İnekte şu an topallık, meme iltihabı (mastitis) veya iştahsızlık (ketozis) varsa işaretle; yemini ona göre koruyucu ayarlayalım.",
+      "barinma_sagim": "Açık ahırda soğukta kalan inekler ısınmak için daha çok yer; günde 3 sağım yapılan inekler ise %5-10 daha fazla süt verir."
+    },
+    "did_you_know": {
+      "fact1": "💡 Biliyor muydun? Sağmal bir inek günde 100 litreye kadar temiz su içebilir! Sütün %87'si sudur; su azalırsa süt hemen düşer.",
+      "fact2": "💡 Biliyor muydun? Süt yağının düşmesinin 1 numaralı sebebi kaba otun az, arpa/tahılın fazla olmasıdır. İnek günde en az 8 saat geviş getirmelidir!",
+      "fact3": "💡 Biliyor muydun? Doğuma 3 hafta kala ineğe fazla yonca ve kalsiyum verirsen vücut tembelleşir ve doğumda süt humması (doğum felci) olur!",
+      "fact4": "💡 Biliyor muydun? Günde 150 gram yemek sodası (sodyum bikarbonat) işkembe asidini dengeler ve süt yağını korur!"
+    },
+    "terms": {
+      "kuru_donem": "Kuru Dönem (doğumdan önceki 2 ay, inek sağılmaz, dinlenir ve buzağı büyütür)",
+      "kuru_madde": "Kuru Madde (yemdeki suyu çıkardığımızda kalan net besin kısmı)",
+      "nel": "Süt Enerjisi - NEL (ineğin hem yaşaması hem de süt üretmesi için gereken net enerji)",
+      "mp_hp": "Protein - HP / MP (sütün içindeki proteini ve memeyi besleyen yapı taşı)",
+      "ndf": "Geviş Lifi - NDF (ineğin geviş getirmesini sağlayan, işkembe ekşimesini ve süt yağı düşmesini önleyen lif)",
+      "dcad": "Anyonik Tuz Dengesi - DCAD (doğum öncesi kanda kalsiyum emilimini hazırlayarak süt humması / doğum felcini önleyen mineral dengesi)",
+      "rup": "Korunmuş Protein - RUP (işkembede bozulmadan doğrudan bağırsağa ve süte geçen kaliteli protein)"
+    },
+    "poster_reminders": [
+      "Su her zaman önünde olsun, günde 100 L içebilir.",
+      "Yemi 7 günde alıştır, ani değiştirme.",
+      "Süt yağı düşerse ilk iş silajı azalt, yoncayı artır.",
+      "Kuru dönemde tuz ve minerali aksatma.",
+      "Doğum sonrası ilk 2 hafta ketozis belirtilerini izle."
+    ]
   }
 }
