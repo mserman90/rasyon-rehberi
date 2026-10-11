@@ -12,6 +12,7 @@
   <link rel="canonical" href="https://mserman90.github.io/rasyon-rehberi/">
 
   <!-- Favicons & PWA Icons -->
+  <link rel="icon" type="image/svg+xml" href="noto-ration.svg">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
@@ -56,13 +57,8 @@
 
   <style>
     /* =========================================================================
-       MUTLAK YÜKSEK KONTRAST SİYAH-BEYAZ MONOKROM TASARIM SİSTEMİ
+       YÜKSEK KONTRAST TASARIM SİSTEMİ + YEM BİTKİLERİ İKONU
        ========================================================================= */
-    html {
-      filter: grayscale(100%);
-      -webkit-filter: grayscale(100%);
-    }
-
     :root {
       --bg: #ffffff;
       --card-bg: #ffffff;
@@ -646,12 +642,13 @@
   <!-- Üst Başlık -->
   <header>
     <div style="display:flex; align-items:center; gap:8px;">
+      <img src="./noto-ration.svg" alt="Yem Bitkileri Simgesi" style="width:30px; height:30px; flex-shrink:0;">
       <h1>Yem & Rasyon Hazırlama Rehberi</h1>
     </div>
     <div class="header-actions-group">
       <button id="pwa-install-btn" class="header-btn header-btn-invert" onclick="triggerPwaInstall()" style="display:none;" title="Uygulamayı Telefona Yükle">Yükle</button>
       <a href="../" class="header-btn" title="Tosun Paşa Çiftliği Portalı">Portal</a>
-      <button class="header-btn" onclick="openGuideModal()">Kılavuz</button>
+      <button class="header-btn header-btn-invert" onclick="openGuideModal()">Nasıl Kullanılır? (Kılavuz)</button>
       <button id="theme-toggle-btn" class="header-btn" onclick="toggleTheme()">Gece Modu</button>
     </div>
   </header>
@@ -660,6 +657,36 @@
 
     <!-- ================= SEKME 1: RASYON HAZIRLAMA MOTORU ================= -->
     <section id="tab-formulator" class="tab-section active">
+
+      <!-- İlk Defa Kullanacak Yetiştiriciler İçin Yol Haritası Kutusu -->
+      <div class="card" id="beginner-roadmap-box" style="padding:12px 14px; margin-bottom:14px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <img src="./noto-ration.svg" alt="Yem Bitkileri" style="width:26px; height:26px; flex-shrink:0;">
+            <strong style="font-size:0.92rem; font-weight:900;">İlk Defa mı Kullanıyorsunuz? "Şimdi Nereden Başlamalıyım, Sonra Ne Yapmalıyım?"</strong>
+          </div>
+          <div style="display:flex; gap:6px;">
+            <button type="button" class="btn btn-primary btn-sm" onclick="openGuideModal()">Adım Adım Kılavuzu Aç</button>
+            <button type="button" class="btn btn-outline btn-sm" onclick="toggleBeginnerSteps()" id="toggle-steps-btn">Gizle</button>
+          </div>
+        </div>
+        <div id="beginner-steps-content" style="margin-top:10px; padding-top:10px; border-top:1.5px dashed var(--border); font-size:0.82rem; line-height:1.5;">
+          <div class="grid-2" style="gap:8px; margin-bottom:0;">
+            <div style="border:1.5px solid var(--border); border-radius:6px; padding:8px 10px;">
+              <strong>1. ŞİMDİ NEREDEN BAŞLAMALIYIM?</strong><br>
+              • Hemen aşağıdaki <strong>1. Süt Sığırı</strong>, <strong>2. Besi Sığırı</strong> veya <strong>3. Koyun & Kuzu</strong> sekmesinden hayvanınızı seçin.<br>
+              • Hayvanın <strong>canlı kilosunu</strong> ve beklediğiniz <strong>günlük süt (litre)</strong> veya <strong>günlük kilo artışını</strong> girin.<br>
+              • En kolayı: <strong>"Hazır Bölgesel Şablonlar"</strong> kutusundan size en yakın hazır reçeteyi seçin!
+            </div>
+            <div style="border:1.5px solid var(--border); border-radius:6px; padding:8px 10px;">
+              <strong>2. SONRA NE YAPMALIYIM?</strong><br>
+              • Listede elinizde olmayan yemi <strong>"Sil"</strong> ile çıkarın, deponuzdaki yemi <strong>"+ Rasyona Yem Ekle"</strong> ile listeye katın.<br>
+              • <strong>"⚡ OTOMATİK DENGELE"</strong> butonuna basın; program kiloları kendi ayarlasın ve tüm çubuklar <strong>[ DENGELİ ]</strong> olsun.<br>
+              • Son olarak alttaki <strong>"2. VAGON (TMR & Çuval)"</strong> sekmesine geçip yem karma vagonuna kaç kilo atacağınızı görün!
+            </div>
+          </div>
+        </div>
+      </div>
 
       <!-- Tür Seçim Çubuğu -->
       <div class="species-selector-bar" role="tablist" aria-label="Hayvan Türü Seçimi">
@@ -1176,28 +1203,80 @@
     </button>
   </nav>
 
-  <!-- KULLANIM KILAVUZU MODALI -->
+  <!-- KULLANIM KILAVUZU MODALI (İLK DEFA KULLANACAK YETİŞTİRİCİ REHBERİ) -->
   <div id="modal-guide" class="modal-overlay" onclick="if(event.target===this)closeGuideModal()">
-    <div class="modal-card">
-      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid var(--border); padding-bottom:8px; margin-bottom:12px;">
-        <h3 style="font-size:1.05rem; font-weight:900;">Yetiştirici Rasyon Hazırlama Kılavuzu</h3>
+    <div class="modal-card" style="max-width:740px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2.5px solid var(--border); padding-bottom:10px; margin-bottom:14px; gap:8px;">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <img src="./noto-ration.svg" alt="Yem Bitkileri" style="width:28px; height:28px; flex-shrink:0;">
+          <div>
+            <h3 style="font-size:1.08rem; font-weight:900; line-height:1.2;">Yetiştirici Başlangıç Kılavuzu</h3>
+            <p style="font-size:0.76rem; font-weight:700; color:var(--text-muted);">"Şimdi Nereden Başlamalıyım? Sonra Ne Yapmalıyım?" Adım Adım Rehber</p>
+          </div>
+        </div>
         <button class="btn btn-outline btn-sm" onclick="closeGuideModal()">Kapat</button>
       </div>
-      <div style="font-size:0.85rem; line-height:1.55; display:flex; flex-direction:column; gap:10px;">
-        <div class="alert-box">
-          <strong>1. Neden Uluslararası Standart (NASEM / NRC / CNCPS)?</strong>
-          Hayvanlara sadece "göz kararı" arpa, saman veya fabrika yemi dökmek ya gizli işkembe ekşimesine (asidoz / döl tutmama / ayak yanması) ya da gereksiz yem israfına yol açar. Bu uygulama uluslararası rasyon yazılımlarının kullandığı Kuru Madde (KM), Net Enerji (NEL/NEM/NEG), Ham Protein (HP), Fiziksel Etkili Lif (peNDF), Nişasta ve Kalsiyum/Fosfor denklemlerini arka planda çalıştırır, sonuçları ise doğrudan yetiştirici dilinde sunar.
+
+      <div style="font-size:0.84rem; line-height:1.58; display:flex; flex-direction:column; gap:12px;">
+
+        <div class="alert-box alert-solid">
+          <strong>HOŞ GELDİNİZ! İLK DEFA MI RASYON HAZIRLAYACAKSINIZ?</strong>
+          Hiçbir karmaşık formül bilmenize gerek yoktur. Bu program, dünyadaki en gelişmiş rasyon yazılımlarının (NASEM 2021 / NRC / CNCPS) yaptığı tüm hesaplamaları arka planda otomatik yapar. Siz sadece aşağıdaki <strong>5 sırayı</strong> takip edin:
         </div>
+
         <div class="alert-box">
-          <strong>2. Yaş Kilo ile Kuru Madde (KM) Farkı Nedir?</strong>
-          Örneğin 20 kg Mısır Silajı verdiğinizde hayvanın kursağına 20 kg kuru yem girmez; silajın %68'i sudur, yani net <strong>6.4 kg Kuru Madde</strong> girer. Siz ekranda her zaman yemliğe döktüğünüz <strong>Yaş Kiloyu (kg)</strong> girersiniz; program içindeki suyu otomatik düşerek gerçek besin dengesini hesaplar.
+          <strong>1. ADIM: ŞİMDİ NEREDEN BAŞLAMALIYIM? (Hayvanınızı ve Hedefinizi Seçin)</strong>
+          • Ana ekrandaki <strong>"1. Rasyon Kur"</strong> sekmesinde en üstten hayvan türünüzü seçin: <strong>1. Süt Sığırı</strong>, <strong>2. Besi Sığırı</strong> veya <strong>3. Koyun & Kuzu</strong>.<br>
+          • Hemen altındaki kutulara hayvanınızın <strong>ortalama canlı kilosunu</strong> (Örn: 600 kg inek veya 400 kg besi danası) ve beklediğiniz <strong>günlük süt verimini (litre)</strong> veya <strong>günlük canlı ağırlık artışını (kg/gün)</strong> yazın.<br>
+          • <strong>En Kolay Başlangıç İpucu:</strong> Sıfırdan yem aramak yerine <strong>"Hazır Bölgesel Şablonlar"</strong> açılır listesinden kendi işletmenize en yakın şablonu (Örn: <em>"28 Lt Süt İneği - Mısır Silajlı"</em> veya <em>"20 Lt Süt İneği - Silaj Yok / Saman & Yoncalı"</em>) seçin!
         </div>
+
         <div class="alert-box">
-          <strong>3. İşkembe Sağlığı İçin Altın Kurallar:</strong>
-          • <strong>Sağmal Süt İneği:</strong> Etkili lif (peNDF) en az %21 olmalı (yoksa süt yağı düşer ve tırnaklar yanar). Nişasta + şeker toplamı %28'i geçmemeli.<br>
-          • <strong>Besi Danası:</strong> Besibitirmede bile geviş için en az %12-15 kaba ot/saman bulunmalı; kalsiyum fosforun en az 1.5 - 2 katı olmalı (sidik zoru / idrar taşını önlemek için).<br>
-          • <strong>Gebe Koyun (Son 6 Hafta):</strong> Karnındaki ikiz kuzular işkembeyi sıkıştırdığı için saman azaltılmalı, enerjisi yüksek arpa/mısır ve yonca ile "Gebelik Zehirlenmesi (İkiz Koması)" önlenmelidir.
+          <strong>2. ADIM: SONRA NE YAPMALIYIM? (Elimde Olmayan Yemi Çıkarıp Depomdakini Ekleme)</strong>
+          • Şablon yüklendiğinde aşağıda yem listesini göreceksiniz. Eğer listede <strong>deponuzda olmayan bir yem varsa</strong> (mesela elinizde <em>Yaş Pancar Posası</em> veya <em>Mısır Silajı</em> yoksa), o yemin satırındaki <strong>"Sil"</strong> butonuna basıp rasyondan çıkarın.<br>
+          • Listenin hemen altındaki <strong>"+ Rasyona Yem Ekle"</strong> kutusuna tıklayın; elinizde hangi ot, saman, arpa, mısır, küspe veya fabrika yemi varsa seçip <strong>"+ Ekle"</strong> butonuna basın.<br>
+          • <strong>Not:</strong> Ekranda yazdığınız tüm kilolar hayvanın önüne döktüğünüz <strong>Gerçek Yaş Kilo (Natural kg)</strong> değeridir. Yemlerin içindeki suyu program otomatik düşer.
         </div>
+
+        <div class="alert-box">
+          <strong>3. ADIM: KİLOLARI NASIL TUTTURACAĞIM? ("⚡ Otomatik Dengele" Butonu)</strong>
+          • Depodaki yemlerinizi listeye ekledikten sonra <strong>"⚡ OTOMATİK DENGELE (İHTİYACA GÖRE)"</strong> butonuna bir kez basın.<br>
+          • Program elinizdeki kaba yem, enerji yemi, protein yemi ve minerallerin kilolarını hayvanın işkembe kapasitesine, enerji ve protein ihtiyacına göre <strong>otomatik olarak ayarlar!</strong><br>
+          • İsterseniz her yemin yanındaki <strong>"-0.5"</strong> ve <strong>"+0.5"</strong> butonlarıyla kiloları kendi elinizle de ince ayar yapabilirsiniz.
+        </div>
+
+        <div class="alert-box">
+          <strong>4. ADIM: GÖSTERGE ÇUBUKLARINDA "EKSİK" VEYA "TEHLİKE" YAZARSA NE YAPMALIYIM?</strong>
+          Rasyonun altındaki <strong>6 Besin Dengesi Çubuğu</strong> size rasyonun karnesini verir. Hepsi <strong>[ DENGELİ / UYGUN ]</strong> olana kadar şu pratik kuralları uygulayın:<br><br>
+          • <strong>1. Kuru Madde (KMT) "EKSİK" ise:</strong> Hayvanın karnı doymuyor demektir; kaba yem veya fabrika yemini artırın. <strong>"FAZLA" ise:</strong> Hayvan bu kadar yemi yiyemez, yemlikte yem artar; kiloları biraz düşürün.<br>
+          • <strong>2. Enerji (NE_L / ME) "EKSİK" ise:</strong> Süt düşer, hayvan zayıflar veya gebe koyunlarda <em>İkiz Gebelik Zehirlenmesi</em> olur. <strong>Arpa, Mısır, Fabrika Yemi veya Mısır Silajını</strong> artırın, kuru samanı azaltın.<br>
+          • <strong>3. Ham Protein (HP) "EKSİK" ise:</strong> Süt ve et verimi düşer. <strong>Soya Küspesi, Pamuk Küspesi, Ayçiçek Küspesi veya Yonca Otunu</strong> artırın. <strong>"FAZLA (>%19)" ise:</strong> İneklerde döl tutmama (rahimde amonyak artışı) yapar ve cebinizden boşa para çıkar; küspeyi azaltın.<br>
+          • <strong>4. Etkili Lif (peNDF) "TEHLİKE / DÜŞÜK" ise:</strong> Hayvan geviş getiremez, işkembe ekşir, süt yağı düşer ve tırnak vurması (laminitis) başlar! Hemen <strong>Yonca, Çayır Otu veya Samanı +1 kg</strong> artırın.<br>
+          • <strong>5. Nişasta & Şeker "TEHLİKE / YÜKSEK" ise:</strong> Arpa, buğday veya mısır fazla kaçmıştır (İşkembe Asidozu riski!). Tahılları biraz kısıp rasyona <strong>Yemek Sodası (Tampon)</strong> ekleyin.<br>
+          • <strong>6. Kalsiyum / Fosfor (Ca:P) "TEHLİKE (<1.5)" ise:</strong> Besi danaları ve erkek kuzularda <strong>İdrar Taşı (Sidik Zoru)</strong>, süt ineklerinde <strong>Doğum Felci (Süt Humması)</strong> tehlikesi vardır! Rasyona hemen <strong>0.10 - 0.15 kg (100-150 gr) Mermer Tozu</strong> ekleyin.
+        </div>
+
+        <div class="alert-box">
+          <strong>5. ADIM: RASYONU KURDUM, ŞİMDİ AHIRDA YEM KARMA VAGONUNA (TMR) NASIL DÖKECEĞİM?</strong>
+          • Rasyonunuz dengelendikten sonra ekranın en altındaki menüden <strong>"2. VAGON (TMR & Çuval)"</strong> sekmesine dokunun.<br>
+          • <strong>Sürüdeki Hayvan Sayısını</strong> (Örn: 40 baş) ve <strong>Günlük Öğün Sayısını</strong> (Örn: Sabah-Akşam 2 öğün) girin.<br>
+          • Program size: <strong>(1) Vagona yemleri hangi sırayla atacağınızı</strong>, <strong>(2) Her öğünde kaç kilo atacağınızı</strong> ve <strong>(3) Vagonun dijital kantarında sırasıyla hangi rakamı görmeniz gerektiğini</strong> hazır liste olarak verir!<br>
+          • Eğer kendi kesif yeminizi çiftlikte kırıp karıştırıyorsanız, aynı sayfanın altındaki <strong>"1.000 kg (1 Ton) ve 50 kg Çuval Kesif Yem Reçetesi"</strong> tablosunu kullanın.
+        </div>
+
+        <div class="alert-box">
+          <strong>6. ADIM: YEM FİYATLARINI GÜNCELLEME, KIYASLAMA VE KAYDETME</strong>
+          • <strong>4. YEMLER Sekmesi:</strong> Bölgenizdeki güncel yem fiyatlarını (₺/kg) buradan değiştirin; eğer özel bir fabrika yeminiz varsa etiket değerlerini girip kütüphaneye ekleyin.<br>
+          • <strong>3. PRATİK (Pearson & Kıyas) Sekmesi:</strong> <em>"Sulu ucuz yem mi, kuru pahalı yem mi daha hesaplı?"</em> sorusunun cevabını görmek için yemlerin suyunu ayıklayan <strong>Gerçek Kuru Madde ve Protein Maliyet Kıyaslama</strong> tablosuna bakın.<br>
+          • <strong>5. DEFTER Sekmesi:</strong> Hazırladığınız rasyonu isim vererek kaydedin; istediğiniz zaman geri yükleyin veya <strong>"Yazdır / PDF"</strong> butonuyla kağıda döküp ahır duvarına asın.
+        </div>
+
+        <div style="display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; pt:4px;">
+          <button type="button" class="btn btn-outline btn-sm" onclick="closeGuideModal(); switchTab('feeds');">Yem Fiyatlarını Güncelle (4. Sekme)</button>
+          <button type="button" class="btn btn-outline btn-sm" onclick="closeGuideModal(); switchTab('tmr');">TMR Vagon Hesabına Git (2. Sekme)</button>
+          <button type="button" class="btn btn-primary btn-sm" onclick="closeGuideModal(); switchTab('formulator');">Şimdi Rasyon Hazırlamaya Başla</button>
+        </div>
+
       </div>
     </div>
   </div>
@@ -2701,6 +2780,14 @@
     function closeGuideModal() {
       document.getElementById("modal-guide").style.display = "none";
     }
+    function toggleBeginnerSteps() {
+      const box = document.getElementById("beginner-steps-content");
+      const btn = document.getElementById("toggle-steps-btn");
+      if (!box) return;
+      const isHidden = box.style.display === "none";
+      box.style.display = isHidden ? "block" : "none";
+      if (btn) btn.textContent = isHidden ? "Gizle" : "Göster";
+    }
 
     // PWA Kurulum & Hash Yönlendirme
     let deferredPwaPrompt = null;
@@ -2767,7 +2854,7 @@
 
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {
-        navigator.serviceWorker.register("./sw.js?v=1").then((reg) => {
+        navigator.serviceWorker.register("./sw.js?v=2").then((reg) => {
           reg.update();
         }).catch(() => {});
       });
