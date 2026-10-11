@@ -70,13 +70,33 @@ Bu modül, **Süt Ustası (Sağmal & Kuru İnek)** ve **Rasyon Ustası (Besi Sı
    - $\text{NDF } \%25 - \%45\text{ KM}$, Kaba yem $\ge \%30\text{ KM}$ (Tokluda $\%50 - \%60\text{ KM}$)
    - Pamuk tohumu küspesi $\le \%10\text{ KM}$ (gossypol sınırı), 0–6 ay kuzularda yemlik üre yasak.
 
+## 4. "Sağmal Koyun Ustası" — Süt Koyunu Rasyonu Motoru (`dairy-sheep-engine.js`)
+
+### 4.1 Bilimsel Standartlar (`nrc-2007-dairy-sheep-tables.json`)
+- **NRC 2007 (*Nutrient Requirements of Small Ruminants*) + INRA 2018 (*Feeding of Sheep*) + AFRC 1993 + CSIRO 2007 + ICARDA:**
+  - **Yaşama Payı Enerjisi ($\text{ME}_m$):** $\text{ME}_m = 0.056 \times \text{SBW}^{0.75}$ (+ sağım/hareket payı, açık ağılda $+\%12$, merada $+\%15$).
+  - **Koyun Sütü Enerjisi ve Proteini:** Koyun sütü inek sütünden 2 kat yağlı ($\%6–8$) ve 2 kat proteinlidir ($\%5.5$):
+    - $\%6.5$ yağlı süt: $1.32\text{ Mcal ME/kg süt}$
+    - $\%7.5$ yağlı süt: $1.42\text{ Mcal ME/kg süt}$
+    - $\%8.5$ yağlı süt: $1.52\text{ Mcal ME/kg süt}$
+    - $\%5.5$ proteinli süt: $55\text{ g MP/kg süt}$ ($\%6.5$ proteinde $65\text{ g MP/kg süt}$)
+  - **Peynir Randımanı Hesabı:** $1\text{ L}$ koyun sütünden $\sim 180–200\text{ g}$ beyaz peynir ($5.4\text{ L süt} \approx 1\text{ kg peynir}$) elde edilir.
+  - **Gebelik ve İlk Doğum Büyüme Payı:** İkiz gebelikte $+\%35$, üçüz gebelikte $+\%55$ gebelik enerjisi; ilk doğumunu yapan genç koyunlarda (şişek) $+0.8\text{ Mcal ME/gün}$ büyüme payı.
+
+### 4.2 Üç Görünmez Zorunlu Kısıt ve Sert Kurallar
+1. **Bakır ($\text{Cu}$) Zehirlenmesi Koruması:** $\text{Cu} \le 15\text{ mg/kg KM}$, $\text{Mo} \ge 0.5\text{ mg/kg KM}$. Sığır mineral premiksi (`sigir_premiksi`) ve sığır süt yemi (`sigir_sut_yemi`, `sut_yemi_19`, `sut_yemi_21`) seçildiğinde otomatik engellenir ve bakırsız `koyun_premiksi` / `koyun_sut_yemi` ile değiştirilir.
+2. **Gebelik Toksemisi (Ketozis) Koruması:** Son 6 hafta gebelik ve ilk 6 hafta laktasyonda kontrol edilir. $\text{VKS} > 3.75$ (yağlı koyun) veya yeni doğumda iştahsızlık durumunda kırmızı acil uyarı üretilir; rasyona $\text{Magnezyum Oksit}$ ($\text{Mg} \ge \%0.25\text{ KM}$) eklenir.
+3. **Süt Ateşi (Hipokalsemi) ve Mastitis Koruması:** Sağmal dönemde $\text{Ca:P} = 2.0:1 - 2.5:1$ tutulur; yakın kuru dönemde yüksek kalsiyumlu mermer tozu kesilir. Yeni doğumda ayağa kalkamama durumunda acil hipokalsemi uyarısı verilir.
+4. **Rumen ve Yem Sınırları:** $\text{NDF } \%30 - \%42\text{ KM}$, Kaba yem sağmalda $\ge \%40\text{ KM}$ (kuru dönemde $\ge \%70\text{ KM}$), kesif yemde tahıl $\le \%50$, pamuk küspesi $\le \%10\text{ KM}$, korunmuş yağ $\le \%5\text{ KM}$, tuz $\ge \%0.4\text{ KM}$.
+
 ---
 
-## 4. Birim Testleri (86 Test)
+## 5. Birim Testleri (122 Test)
 
 ```bash
-node --test lib/ration-engine/sheep-engine.test.mjs lib/ration-engine/dairy-engine.test.mjs lib/ration-engine/beef-engine.test.mjs
+node --test lib/ration-engine/dairy-sheep-engine.test.mjs lib/ration-engine/sheep-engine.test.mjs lib/ration-engine/dairy-engine.test.mjs lib/ration-engine/beef-engine.test.mjs
 ```
+- `dairy-sheep-engine.test.mjs`: **36 birim testi** ($55\text{ kg}$ İvesi $1.5\text{ L}$ süt NRC 2007 $\pm\%5$ doğrulaması, bakır $\le 15\text{ mg/kg KM}$, sığır premiksi/süt yemi engeli, gebelik toksemisi, süt ateşi, peynir randımanı ve 6 hazır senaryo).
 - `sheep-engine.test.mjs`: **32 birim testi** (NRC 2007 $\pm\%5$ doğrulaması, bakır $\le 15\text{ mg/kg KM}$, erkek kuzu idrar taşı koruması, sığır premiksi engeli, gebe/emziren anaç koyun ve 5 örnek senaryo).
 - `dairy-engine.test.mjs`: **32 birim testi** (NRC 2021 $\pm\%5$ doğrulaması, 5 örnek senaryo, kuru dönem DCAD, yeni doğum ketozis ve tüm sert kısıtlar).
 - `beef-engine.test.mjs`: **22 birim testi** (NRC 2016 $\pm\%5$ doğrulaması ve besi kısıtları).

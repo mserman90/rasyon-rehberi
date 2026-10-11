@@ -304,12 +304,17 @@
       width: auto;
     }
 
-    /* Tür Seçim Butonları (Süt / Besi / Koyun) */
+    /* Tür Seçim Butonları (Süt Sığırı / Besi Sığırı / Besi Kuzusu / Sağmal Koyun) */
     .species-selector-bar {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 8px;
       margin-bottom: 14px;
+    }
+    @media (min-width: 680px) {
+      .species-selector-bar {
+        grid-template-columns: repeat(4, 1fr);
+      }
     }
     .species-tab-btn {
       background: var(--bg);
@@ -1164,15 +1169,19 @@
       <div class="species-selector-bar" role="tablist" aria-label="Hayvan Türü Seçimi">
         <button id="species-btn-dairy" class="species-tab-btn active" onclick="selectSpecies('dairy')">
           <span>1. SÜT SIĞIRI</span>
-          <small>Sağmal & Kuru İnek</small>
+          <small>Süt Ustası (İnek)</small>
         </button>
         <button id="species-btn-beef" class="species-tab-btn" onclick="selectSpecies('beef')">
           <span>2. BESİ SIĞIRI</span>
-          <small>Besi Danası & Düve</small>
+          <small>Rasyon Ustası (Dana)</small>
         </button>
         <button id="species-btn-sheep" class="species-tab-btn" onclick="selectSpecies('sheep')">
-          <span>3. KOYUN & KUZU</span>
-          <small>Anaç Koyun & Toklu</small>
+          <span>3. BESİ KUZUSU</span>
+          <small>Kuzu Ustası (Besi)</small>
+        </button>
+        <button id="species-btn-dairy_sheep" class="species-tab-btn" onclick="selectSpecies('dairy_sheep')">
+          <span>4. SAĞMAL KOYUN</span>
+          <small>Sağmal Ustası (Süt)</small>
         </button>
       </div>
 
@@ -1272,7 +1281,39 @@
         <div id="ku-step-viewport" class="ru-card" role="region" aria-live="polite"></div>
       </div>
 
-      <!-- A4 Tek Sayfa Ahır/Ağıl Duvar Posteri (Yazdırma / PDF İçin — Süt Ustası, Rasyon Ustası ve Kuzu Ustası kullanır) -->
+      <!-- ================= "SAĞMAL KOYUN USTASI" — SÜT KOYUNU SOHBET/REHBERLİ AKIŞ SİHİRBAZI (ŞARTNAME UYUMLU) ================= -->
+      <div id="sagmal-koyun-ustasi-container" class="ru-wrapper" style="display:none;">
+        <!-- Üst Sağmal Koyun Temalı İlerleme Çubuğu (🐑🥛 → 🐑🥛🧀 → 🏁) -->
+        <div id="sk-progress-box" class="ru-barn-progress" style="display:none;" aria-live="polite">
+          <div class="ru-barn-icons">
+            <span id="sk-progress-stage-icon">🐑🥛 Dönem & Süt</span>
+            <span id="sk-progress-step-text">Soru 1 / 10</span>
+            <span>🐑🥛 → 🧀 → 🏁</span>
+          </div>
+          <div class="ru-barn-track">
+            <div id="sk-progress-fill" class="ru-barn-fill" style="width:10%;"></div>
+          </div>
+        </div>
+
+        <!-- Rehber Karakter (Çoban Dede & Veteriner Ayşe Kızım) + Bilgi Balonu + 🔊 Sesli Okuma (TTS) -->
+        <div id="sk-guide-box" class="ru-guide-row">
+          <div class="ru-avatar" aria-hidden="true">👴👩‍⚕️</div>
+          <div class="ru-bubble">
+            <div class="ru-bubble-name">
+              <span>Çoban Dede & Veteriner Ayşe — Süt Koyunu Rehberin</span>
+              <button type="button" class="ru-tts-btn" onclick="speakCurrentSkStep()" aria-label="Soruyu Sesli Oku">
+                🔊 Sesli Oku
+              </button>
+            </div>
+            <div id="sk-guide-text">Merhaba bereketli olsun! Sağmal koyunlarının yem tarifini 5 dakikada hazırlıyorum.</div>
+          </div>
+        </div>
+
+        <!-- Tek Soru / Adım Ekranı Gövdesi -->
+        <div id="sk-step-viewport" class="ru-card" role="region" aria-live="polite"></div>
+      </div>
+
+      <!-- A4 Tek Sayfa Ahır/Ağıl Duvar Posteri (Yazdırma / PDF İçin — Süt Ustası, Rasyon Ustası, Kuzu Ustası ve Sağmal Koyun Ustası kullanır) -->
       <div id="ru-print-poster" aria-hidden="true"></div>
 
       <!-- ================= STANDART FORMÜLATÖR SARICISI (SÜT SIĞIRI & KOYUN-KUZU İÇİN) ================= -->
@@ -1941,7 +1982,10 @@
       { id: "anyonik_tuz", name: "Anyonik Tuz / Magnezyum Sülfat (Kuru Dönem DCAD)", cat: "mineral", dm: 99, cp: 0, me: 0, nel: 0, ndf: 0, pendf: 0, starch: 0, ca: 0.0, p: 0.0, price: 32.00 },
       { id: "koyun_premiksi", name: "Koyun Vitamin-Mineral Premiksi (Bakırsız)", cat: "mineral", dm: 99, cp: 0, me: 0, nel: 0, ndf: 0, pendf: 0, starch: 0, ca: 18.0, p: 4.0, price: 40.00 },
       { id: "amonyum_klorur", name: "Amonyum Klorür (İdrar Taşı Önleyici)", cat: "mineral", dm: 99, cp: 0, me: 0, nel: 0, ndf: 0, pendf: 0, starch: 0, ca: 0.0, p: 0.0, price: 36.00 },
-      { id: "sigir_premiksi", name: "Sığır Mineral Premiksi (Koyuna Yasak!)", cat: "mineral", dm: 99, cp: 0, me: 0, nel: 0, ndf: 0, pendf: 0, starch: 0, ca: 15.0, p: 6.0, price: 38.00 }
+      { id: "sigir_premiksi", name: "Sığır Mineral Premiksi (Koyuna Yasak!)", cat: "mineral", dm: 99, cp: 0, me: 0, nel: 0, ndf: 0, pendf: 0, starch: 0, ca: 15.0, p: 6.0, price: 38.00 },
+      { id: "koyun_sut_yemi", name: "Fabrika Koyun Süt Yemi (Bakırsız - 19.5 HP)", cat: "energy", dm: 89, cp: 19.5, me: 2.90, nel: 1.80, ndf: 22, pendf: 6, starch: 32, ca: 1.15, p: 0.50, price: 11.80 },
+      { id: "magnezyum_oksit", name: "Magnezyum Oksit (Gebelik Toksemisi & Süt Ateşi Önleyici)", cat: "mineral", dm: 99, cp: 0, me: 0, nel: 0, ndf: 0, pendf: 0, starch: 0, ca: 2.0, p: 0.0, price: 28.00 },
+      { id: "sigir_sut_yemi", name: "Sığır Süt Yemi (Koyuna Yasak!)", cat: "energy", dm: 89, cp: 20.0, me: 2.85, nel: 1.76, ndf: 23, pendf: 6, starch: 30, ca: 1.0, p: 0.65, price: 11.20 }
     ];
 
     /* =========================================================================
@@ -2930,7 +2974,7 @@
        ========================================================================= */
     function selectSpecies(sp) {
       currentSpecies = sp;
-      ["dairy", "beef", "sheep"].forEach(s => {
+      ["dairy", "beef", "sheep", "dairy_sheep"].forEach(s => {
         const btn = document.getElementById("species-btn-" + s);
         const inp = document.getElementById("inputs-" + s);
         if (btn) btn.classList.toggle("active", s === sp);
@@ -2940,12 +2984,14 @@
       const suContainer = document.getElementById("sut-ustasi-container");
       const ruContainer = document.getElementById("rasyon-ustasi-container");
       const kuContainer = document.getElementById("kuzu-ustasi-container");
+      const skContainer = document.getElementById("sagmal-koyun-ustasi-container");
       const stdWrapper = document.getElementById("standard-formulator-wrapper");
 
       if (sp === "dairy") {
         if (suContainer) suContainer.style.display = "block";
         if (ruContainer) ruContainer.style.display = "none";
         if (kuContainer) kuContainer.style.display = "none";
+        if (skContainer) skContainer.style.display = "none";
         if (stdWrapper) stdWrapper.style.display = "none";
         initSutUstasi();
         return;
@@ -2953,6 +2999,7 @@
         if (suContainer) suContainer.style.display = "none";
         if (ruContainer) ruContainer.style.display = "block";
         if (kuContainer) kuContainer.style.display = "none";
+        if (skContainer) skContainer.style.display = "none";
         if (stdWrapper) stdWrapper.style.display = "none";
         initRasyonUstasi();
         return;
@@ -2960,8 +3007,17 @@
         if (suContainer) suContainer.style.display = "none";
         if (ruContainer) ruContainer.style.display = "none";
         if (kuContainer) kuContainer.style.display = "block";
+        if (skContainer) skContainer.style.display = "none";
         if (stdWrapper) stdWrapper.style.display = "none";
         initKuzuUstasi();
+        return;
+      } else if (sp === "dairy_sheep") {
+        if (suContainer) suContainer.style.display = "none";
+        if (ruContainer) ruContainer.style.display = "none";
+        if (kuContainer) kuContainer.style.display = "none";
+        if (skContainer) skContainer.style.display = "block";
+        if (stdWrapper) stdWrapper.style.display = "none";
+        initSagmalKoyunUstasi();
         return;
       }
 
@@ -7690,9 +7746,14 @@
             <p class="ru-question-sub" style="font-size:1.08rem; max-width:540px; margin:0 auto 18px auto;">
               Kuzularının yem tarifini <strong>4 dakikada</strong> hazırlıyorum. İdrar taşı ve bakır zehirlenmesine karşı tam korumalı, ağıl duvarına asılabilir günlük yem reçetesi!
             </p>
-            <button type="button" class="ru-big-cta" onclick="startKuFresh()" style="max-width:400px; margin:0 auto;">
-              🐑 Hadi Başlayalım
+            <button type="button" class="ru-big-cta" onclick="startKuFresh()" style="max-width:400px; margin:0 auto 10px auto;">
+              🐑 Hadi Başlayalım (Besi Kuzusu / Toklu)
             </button>
+            <div style="max-width:400px; margin:0 auto;">
+              <button type="button" class="ru-nav-btn ru-nav-btn-secondary" style="width:100%;" onclick="selectSpecies('dairy_sheep')">
+                🥛 Sağmal Süt Koyunu Rasyonu Kurmak İstiyorum →
+              </button>
+            </div>
 
             ${hasResume ? `
               <div class="ru-resume-card" style="text-align:left; max-width:500px; margin:18px auto 0 auto;">
@@ -8820,6 +8881,1622 @@
       alert("✅ Kuzu/koyun yem tarifin '5. DEFTER (Kayıtlılar)' bölümüne kaydedildi!");
     }
 
+    /* =========================================================================
+       8E. "SAĞMAL KOYUN USTASI" — SÜT KOYUNU RASYONU SİHİRBAZI (ŞARTNAME UYUMLU)
+       NRC 2007 + INRA 2018 + AFRC 1993 + CSIRO 2007 + ICARDA
+       Üç Görünmez Zorunlu Kısıt:
+         1. Bakır (Cu) <= 15 mg/kg KM (Sığır premiksi ve sığır süt yemi engellenir)
+         2. Gebelik Toksemisi (Ketozis) Koruması (İkiz/üçüz enerji artışı, VKS > 3.75 uyarısı, Mg >= %0.25 KM)
+         3. Süt Ateşi (Hipokalsemi) & Mastitis Koruması (Sağmalda Ca:P 2.0-2.5:1, kuru dönemde düşük Ca)
+       ========================================================================= */
+    const SK_BREED_INFO = {
+      ivesi: { label: "İvesi (Awassi)", fat: 6.5, prot: 5.5, bw: 55 },
+      sakiz: { label: "Sakız (Chios)", fat: 6.2, prot: 5.4, bw: 58 },
+      tahirova: { label: "Tahirova", fat: 6.3, prot: 5.4, bw: 56 },
+      kivircik: { label: "Kıvırcık", fat: 7.0, prot: 5.6, bw: 50 },
+      karacabey_merinosu: { label: "Karacabey Merinosu", fat: 6.5, prot: 5.5, bw: 60 },
+      dogu_frizya: { label: "Doğu Frizya", fat: 6.0, prot: 5.3, bw: 65 },
+      lacaune: { label: "Lacaune", fat: 6.8, prot: 5.5, bw: 62 },
+      assaf: { label: "Awassi × Assaf Melezi", fat: 6.5, prot: 5.4, bw: 64 },
+      akkaraman: { label: "Akkaraman / Morkaraman", fat: 6.8, prot: 5.6, bw: 52 },
+      kil_kecisi: { label: "Kıl Keçisi (Bilgi Amaçlı)", fat: 4.5, prot: 3.8, bw: 48 },
+      bilmiyorum: { label: "Karışık / Bilmiyorum", fat: 6.5, prot: 5.5, bw: 55 }
+    };
+
+    const SK_STAGE_CFG = {
+      kuru_uzak: { label: "🤰 Kuru Dönem – Uzak (Doğuma 2 ay var)", dmiPct: 2.5, foragePct: 80, hpPct: 11.2, meDensity: 2.10 },
+      kuru_yakin: { label: "🤰 Kuru Dönem – Yakın (Doğuma 6 hafta kaldı)", dmiPct: 2.7, foragePct: 72, hpPct: 13.5, meDensity: 2.45 },
+      yeni_dogum: { label: "🍼 Yeni Doğum (0–2 hafta)", dmiPct: 3.5, foragePct: 52, hpPct: 16.8, meDensity: 2.68 },
+      erken: { label: "🥛 Erken Laktasyon (2–8 hafta)", dmiPct: 4.2, foragePct: 48, hpPct: 16.5, meDensity: 2.65 },
+      orta: { label: "🥛 Orta Laktasyon (8 hafta – 5 ay)", dmiPct: 4.1, foragePct: 54, hpPct: 15.2, meDensity: 2.51 },
+      gec: { label: "🥛 Geç Laktasyon (5 ay+)", dmiPct: 3.5, foragePct: 62, hpPct: 13.8, meDensity: 2.35 },
+      ilk_dogum: { label: "🐑 İlk Doğum Yapan Genç Koyun (Şişek)", dmiPct: 4.0, foragePct: 50, hpPct: 16.5, meDensity: 2.62 }
+    };
+
+    const SK_PRESET_SCENARIOS = {
+      ivesi_orta_1_5L: {
+        title: "🥛 Orta Verimli İvesi (1,5 L Süt)",
+        desc: "55 kg İvesi, orta laktasyon, %6,5 yağ — NRC 2007 Referans Rasyonu",
+        donem: "orta", sutVerimiL: 1.5, emzirmeDurumu: "sadece_sagim", sutYagPct: 6.5, sutProteinPct: 5.5,
+        dogumSayisi: 2, canliAgirlikKg: 55, irk: "ivesi", vks: 3.0, suruSayisi: 50,
+        secilenKaba: ["yonca_kuru", "misir_silaji", "arpa_samani"],
+        secilenKesif: ["arpa_ezmesi", "misir_kirmasi", "atk_36", "koyun_sut_yemi"],
+        secilenKatki: ["yem_tuzu", "mermer_tozu", "koyun_premiksi", "magnezyum_oksit"]
+      },
+      sakiz_yuksek_2_5L: {
+        title: "🏆 Yüksek Verimli Sakız (2,5 L Süt)",
+        desc: "60 kg Sakız koyunu, erken laktasyon, yüksek süt ve peynir randımanı",
+        donem: "erken", sutVerimiL: 2.5, emzirmeDurumu: "sadece_sagim", sutYagPct: 6.5, sutProteinPct: 5.5,
+        dogumSayisi: 2, canliAgirlikKg: 60, irk: "sakiz", vks: 3.0, suruSayisi: 40,
+        secilenKaba: ["yonca_kuru", "misir_silaji"],
+        secilenKesif: ["arpa_ezmesi", "misir_kirmasi", "soya_46", "koyun_sut_yemi"],
+        secilenKatki: ["yem_tuzu", "mermer_tozu", "koyun_premiksi", "magnezyum_oksit", "karbonat_tampon", "korunmus_yag"]
+      },
+      yerli_dusuk_0_8L: {
+        title: "🌾 Düşük Verimli Yerli Koyun (0,8 L Süt)",
+        desc: "50 kg Kıvırcık / Akkaraman, geç laktasyon, yarım gün mera destekli",
+        donem: "gec", sutVerimiL: 0.8, emzirmeDurumu: "sadece_sagim", sutYagPct: 7.5, sutProteinPct: 5.5,
+        dogumSayisi: 3, canliAgirlikKg: 50, irk: "kivircik", vks: 3.0, suruSayisi: 80,
+        secilenKaba: ["cayir_otu", "bugday_samani"],
+        secilenKesif: ["arpa_ezmesi", "bugday_kepegi", "atk_36"],
+        secilenKatki: ["yem_tuzu", "mermer_tozu", "koyun_premiksi", "magnezyum_oksit"],
+        meraDurumu: "yarim_mera"
+      },
+      kuru_donem_ikiz: {
+        title: "🤰 Kuru Dönem Koyunu (İkiz Gebe)",
+        desc: "Doğuma 3 hafta kalan 60 kg ikiz gebe koyun — Toksemi & Süt Ateşi Korumalı",
+        donem: "kuru_yakin", kuruHafta: 3, fetusSayisi: 2, sutAtesiGecmisi: "evet",
+        sutVerimiL: 0, emzirmeDurumu: "sadece_sagim", sutYagPct: 6.5, sutProteinPct: 5.5,
+        dogumSayisi: 3, canliAgirlikKg: 60, irk: "ivesi", vks: 3.25, suruSayisi: 60,
+        secilenKaba: ["cayir_otu", "arpa_samani", "misir_silaji"],
+        secilenKesif: ["arpa_ezmesi", "bugday_kepegi", "soya_46"],
+        secilenKatki: ["yem_tuzu", "koyun_premiksi", "magnezyum_oksit"]
+      },
+      yeni_dogum_koyun: {
+        title: "🍼 Yeni Doğum Yapmış Koyun (0–2 Hafta)",
+        desc: "58 kg yeni doğuran Tahirova koyunu, 1,8 L süt + 1 kuzu emziren",
+        donem: "yeni_dogum", yeniDogumGun: "4_7", istahliMi: "evet", ayagaKalkabiliyorMu: "evet",
+        sutVerimiL: 1.8, emzirmeDurumu: "sagim_arti_1_kuzu", sutYagPct: 6.5, sutProteinPct: 5.5,
+        dogumSayisi: 2, canliAgirlikKg: 58, irk: "tahirova", vks: 3.0, suruSayisi: 45,
+        secilenKaba: ["yonca_kuru", "cayir_otu"],
+        secilenKesif: ["arpa_ezmesi", "misir_kirmasi", "soya_46", "koyun_sut_yemi"],
+        secilenKatki: ["yem_tuzu", "mermer_tozu", "koyun_premiksi", "magnezyum_oksit", "karbonat_tampon"]
+      },
+      ilk_dogum_sisek: {
+        title: "🐑 İlk Doğum Yapan Şişek (+%15 Büyüme Paylı)",
+        desc: "48 kg ilk doğumunu yapmış genç koyun, 1,3 L süt",
+        donem: "ilk_dogum", sutVerimiL: 1.3, emzirmeDurumu: "sadece_sagim", sutYagPct: 6.5, sutProteinPct: 5.5,
+        dogumSayisi: 1, canliAgirlikKg: 48, irk: "ivesi", vks: 3.0, suruSayisi: 35,
+        secilenKaba: ["yonca_kuru", "misir_silaji"],
+        secilenKesif: ["arpa_ezmesi", "misir_kirmasi", "atk_36", "koyun_sut_yemi"],
+        secilenKatki: ["yem_tuzu", "mermer_tozu", "koyun_premiksi", "magnezyum_oksit"]
+      }
+    };
+
+    function createDefaultSkState() {
+      return {
+        screenId: "welcome",
+        donem: "orta",
+        kuruHafta: 6,
+        fetusSayisi: 2,
+        sutAtesiGecmisi: "hayir",
+        yeniDogumGun: "4_7",
+        istahliMi: "evet",
+        ayagaKalkabiliyorMu: "evet",
+        sutVerimiL: 1.5,
+        emzirmeDurumu: "sadece_sagim",
+        sutYagPct: 6.5,
+        sutProteinPct: 5.5,
+        dogumSayisi: 2,
+        canliAgirlikKg: 55,
+        irk: "ivesi",
+        vks: 3.0,
+        suruSayisi: 50,
+        secilenKaba: ["yonca_kuru", "misir_silaji", "arpa_samani"],
+        secilenKesif: ["arpa_ezmesi", "misir_kirmasi", "atk_36", "koyun_sut_yemi"],
+        secilenKatki: ["yem_tuzu", "mermer_tozu", "koyun_premiksi", "magnezyum_oksit"],
+        fiyatBiliyorMu: "hayir",
+        ozelFiyatlar: {},
+        sutFiyatiTL: 38,
+        serbestYemleme: "evet",
+        ogunSayisi: 3,
+        saglikSorunlari: [],
+        barinma: "kapali_agil",
+        meraDurumu: "hayir",
+        havaDurumu: "normal",
+        sagimSekli: "makine_2",
+        asiDurumu: "evet",
+        cattleBlockedWarning: "",
+        lastSonuc: null
+      };
+    }
+
+    let skState = createDefaultSkState();
+    let skHasSavedProgress = false;
+
+    function saveSkProgress() {
+      try {
+        localStorage.setItem("sagmal_koyun_ustasi_v1", JSON.stringify(skState));
+      } catch (e) {}
+    }
+
+    function initSagmalKoyunUstasi() {
+      try {
+        const raw = localStorage.getItem("sagmal_koyun_ustasi_v1");
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (parsed && parsed.donem) {
+            skHasSavedProgress = parsed.screenId && parsed.screenId !== "welcome";
+            if (skState.screenId === "result" && parsed.screenId === "result") {
+              skState = { ...createDefaultSkState(), ...parsed };
+            }
+          }
+        }
+      } catch (e) {}
+      renderSagmalKoyunUstasiStep();
+    }
+
+    function getSkScreenSequence() {
+      const isDry = skState.donem === "kuru_uzak" || skState.donem === "kuru_yakin";
+      const isFresh = skState.donem === "yeni_dogum";
+      const seq = ["donem"];
+      if (isDry) seq.push("kuru_detay");
+      if (isFresh) seq.push("yeni_dogum_detay");
+      if (!isDry) {
+        seq.push("sut_emzirme");
+        seq.push("sut_kalite_dogum");
+      }
+      seq.push("kilo_irk_vks_suru");
+      seq.push("kaba_yem");
+      seq.push("kesif_yem");
+      seq.push("katki");
+      seq.push("fiyat_serbest");
+      seq.push("saglik_ortam_sagim");
+      return seq;
+    }
+
+    function goSkScreen(screenId) {
+      skState.screenId = screenId;
+      skState.cattleBlockedWarning = "";
+      if (screenId === "result") {
+        skState.lastSonuc = solveSagmalKoyunUstasiRation();
+      }
+      saveSkProgress();
+      renderSagmalKoyunUstasiStep();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function nextSkScreen() {
+      const seq = getSkScreenSequence();
+      const idx = seq.indexOf(skState.screenId);
+      if (idx >= 0 && idx < seq.length - 1) {
+        goSkScreen(seq[idx + 1]);
+      } else {
+        goSkScreen("result");
+      }
+    }
+
+    function prevSkScreen() {
+      const seq = getSkScreenSequence();
+      const idx = seq.indexOf(skState.screenId);
+      if (idx > 0) {
+        goSkScreen(seq[idx - 1]);
+      } else {
+        goSkScreen("welcome");
+      }
+    }
+
+    function restartSagmalKoyunUstasi() {
+      skState = createDefaultSkState();
+      skState.screenId = "donem";
+      saveSkProgress();
+      renderSagmalKoyunUstasiStep();
+    }
+
+    function applySkPresetScenario(presetKey) {
+      const p = SK_PRESET_SCENARIOS[presetKey];
+      if (!p) return;
+      skState = {
+        ...createDefaultSkState(),
+        ...JSON.parse(JSON.stringify(p)),
+        screenId: "result"
+      };
+      skState.lastSonuc = solveSagmalKoyunUstasiRation();
+      saveSkProgress();
+      renderSagmalKoyunUstasiStep();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function speakCurrentSkStep() {
+      if (!("speechSynthesis" in window)) {
+        alert("Tarayıcınız sesli okuma özelliğini desteklemiyor.");
+        return;
+      }
+      window.speechSynthesis.cancel();
+      const guideText = document.getElementById("sk-guide-text")?.textContent || "";
+      const utter = new SpeechSynthesisUtterance(guideText);
+      utter.lang = "tr-TR";
+      utter.rate = 0.96;
+      window.speechSynthesis.speak(utter);
+    }
+
+    function calculateSkCheeseYield(milkL, fatPct, protPct, suruSayisi) {
+      const m = Math.max(0, Number(milkL) || 0);
+      const f = Number(fatPct) || 6.5;
+      const p = Number(protPct) || 5.5;
+      const cnt = Math.max(1, Number(suruSayisi) || 1);
+      const yieldPerLiterG = Math.round(Math.max(130, Math.min(240, 185 + (f - 6.5) * 14 + (p - 5.5) * 16)));
+      const dailyGPerEwe = Math.round(m * yieldPerLiterG);
+      const dailyKgFlock = Number(((dailyGPerEwe * cnt) / 1000).toFixed(1));
+      const litersPerKg = Number((1000 / yieldPerLiterG).toFixed(1));
+      return { yieldPerLiterG, dailyGPerEwe, dailyKgFlock, litersPerKg };
+    }
+
+    function getSkPracticalMeasure(feedId, kategori, kgVal) {
+      const g = Math.round(kgVal * 1000);
+      if (kategori === "katki") {
+        if (g <= 15) return `~1 yemek kaşığı (${g} g)`;
+        if (g <= 45) return `~1 avuç / yarım çay bardağı (${g} g)`;
+        return `~1 çay bardağı (${g} g)`;
+      }
+      if (kategori === "kaba") {
+        if (feedId.includes("silaj") || feedId.includes("posa")) {
+          const kova = Math.max(0.2, (kgVal / 2.0)).toFixed(1).replace(".", ",");
+          return `~${kova} küçük yem kovası (${g} g)`;
+        }
+        const balyaDilim = Math.max(0.2, (kgVal / 1.2)).toFixed(1).replace(".", ",");
+        return `~${balyaDilim} balya dilimi (${g} g)`;
+      }
+      const masa = Math.max(0.2, (kgVal / 0.5)).toFixed(1).replace(".", ",");
+      return `~${masa} yem maşası (${g} g)`;
+    }
+
+    function solveSagmalKoyunUstasiRation() {
+      const donem = skState.donem || "orta";
+      const irk = skState.irk || "ivesi";
+      const breed = SK_BREED_INFO[irk] || SK_BREED_INFO.ivesi;
+      const bw = Math.max(35, Math.min(95, Number(skState.canliAgirlikKg) || breed.bw));
+      const isDry = donem === "kuru_uzak" || donem === "kuru_yakin";
+      const sutVerimiL = isDry ? 0 : Math.max(0, Math.min(4.5, Number(skState.sutVerimiL) || 1.5));
+      const fatPct = skState.sutYagPct === "bilmiyorum" ? breed.fat : (Number(skState.sutYagPct) || 6.5);
+      const protPct = skState.sutProteinPct === "bilmiyorum" ? breed.prot : (Number(skState.sutProteinPct) || 5.5);
+      const dogumSayisi = Number(skState.dogumSayisi || (donem === "ilk_dogum" ? 1 : 2));
+      const vks = Number(skState.vks || 3.0);
+      const kuruHafta = skState.kuruHafta === "bilmiyorum" ? 6 : (Number(skState.kuruHafta) || 6);
+      const fetusSayisi = skState.fetusSayisi === "bilmiyorum" ? 2 : (Number(skState.fetusSayisi) || 2);
+      const suruSayisi = Math.max(1, Math.round(Number(skState.suruSayisi) || 50));
+
+      // Emzirme ekstra süt karşılığı
+      const sucklingMap = { sadece_sagim: 0, sagim_arti_1_kuzu: 0.85, sagim_arti_2_kuzu: 1.55, sadece_emzirme: 1.80 };
+      const sucklingExtraL = isDry ? 0 : (sucklingMap[skState.emzirmeDurumu] || 0);
+      const effectiveMilkL = (!isDry && skState.emzirmeDurumu === "sadece_emzirme" && sutVerimiL <= 0.5)
+        ? sucklingExtraL
+        : (sutVerimiL + sucklingExtraL);
+
+      // Yaşama payı ME (Mcal/gün)
+      const sbw = bw * 0.96;
+      const metBw = Math.pow(sbw, 0.75);
+      let meMaint = isDry ? (metBw * 0.088 * 1.45) : (metBw * 0.186);
+      if (skState.havaDurumu === "soguk" || skState.barinma === "acik_agil") meMaint *= 1.12;
+      if (skState.meraDurumu === "tam_mera") meMaint *= 1.15;
+      else if (skState.meraDurumu === "yarim_mera") meMaint *= 1.07;
+
+      // Süt ME ve MP
+      const mePerKgMilk = 1.32 + (fatPct - 6.5) * 0.10;
+      const mpPerKgMilk = 55 + (protPct - 5.5) * 10;
+      const meLact = isDry ? 0 : (effectiveMilkL * mePerKgMilk);
+      const mpLact = isDry ? 0 : (effectiveMilkL * mpPerKgMilk);
+
+      // Gebelik ME
+      let mePreg = 0;
+      let mpPreg = 0;
+      if (isDry) {
+        const basePreg = kuruHafta <= 3 ? 0.95 : (kuruHafta <= 6 ? 0.75 : 0.35);
+        const mult = fetusSayisi >= 3 ? 1.55 : (fetusSayisi === 2 ? 1.35 : 1.0);
+        mePreg = basePreg * mult;
+        mpPreg = fetusSayisi >= 3 ? 68 : (fetusSayisi === 2 ? 48 : 28);
+      }
+
+      // İlk doğum büyüme payı (+0.8 Mcal ME)
+      const meGrowth = (donem === "ilk_dogum" || dogumSayisi === 1) ? 0.80 : 0;
+      const mpGrowth = (donem === "ilk_dogum" || dogumSayisi === 1) ? 24 : 0;
+      const meVks = (vks <= 2.0 && donem !== "kuru_uzak") ? 0.35 : 0;
+
+      const totalMeMcal = Number((meMaint + meLact + mePreg + meGrowth + meVks).toFixed(2));
+      const totalMpG = Math.round(Math.pow(bw, 0.75) * 3.85 + mpLact + mpPreg + mpGrowth);
+
+      const stageCfg = SK_STAGE_CFG[donem] || SK_STAGE_CFG.orta;
+      let dmiKg = (bw * stageCfg.dmiPct) / 100;
+      if (!isDry) {
+        dmiKg = 0.0295 * bw + 0.418 * effectiveMilkL;
+        if (donem === "yeni_dogum") dmiKg *= 0.88;
+        else if (donem === "erken") dmiKg *= 0.96;
+      } else if (donem === "kuru_yakin" && fetusSayisi >= 2) {
+        dmiKg = Math.max(1.35, (bw * 2.65) / 100);
+      }
+      dmiKg = Number(Math.max(1.1, Math.min(3.4, dmiKg)).toFixed(2));
+
+      let targetHpPct = stageCfg.hpPct;
+      if (!isDry) {
+        targetHpPct = Number(Math.max(13.2, Math.min(18.2, 13.4 + effectiveMilkL * 1.2 + (protPct - 5.5) * 0.8 + (dogumSayisi === 1 ? 0.8 : 0))).toFixed(1));
+      } else if (donem === "kuru_yakin" && fetusSayisi >= 2) {
+        targetHpPct = 14.2;
+      }
+
+      const isCloseUpDry = donem === "kuru_yakin" || (isDry && kuruHafta <= 6);
+      const restrictHighCa = isCloseUpDry && (kuruHafta <= 3 || skState.sutAtesiGecmisi === "evet");
+
+      // Yem veritabanı haritası (bakır, magnezyum, kuru madde, enerji, protein)
+      const FEED_META = {
+        yonca_kuru: { ad: "Yonca Kuru Otu", emoji: "🍀", kat: "kaba", km: 90, me: 2.25, hp: 17.5, ndf: 45, ca: 1.40, p: 0.24, mg: 0.30, cu: 9.0, mo: 1.4, fiyat: 7.5 },
+        misir_silaji: { ad: "Mısır Silajı", emoji: "🌽", kat: "kaba", km: 33, me: 2.65, hp: 8.5, ndf: 45, ca: 0.30, p: 0.22, mg: 0.18, cu: 5.5, mo: 0.6, fiyat: 2.6 },
+        cayir_otu: { ad: "Çayır Kuru Otu", emoji: "🌾", kat: "kaba", km: 89, me: 2.05, hp: 10.5, ndf: 58, ca: 0.55, p: 0.22, mg: 0.20, cu: 6.5, mo: 0.9, fiyat: 5.5 },
+        bugday_samani: { ad: "Buğday Samanı", emoji: "🌾", kat: "kaba", km: 91, me: 1.55, hp: 3.8, ndf: 76, ca: 0.18, p: 0.08, mg: 0.12, cu: 3.5, mo: 0.7, fiyat: 3.2 },
+        arpa_samani: { ad: "Arpa Samanı", emoji: "🌾", kat: "kaba", km: 90, me: 1.68, hp: 4.4, ndf: 72, ca: 0.24, p: 0.09, mg: 0.14, cu: 4.0, mo: 0.7, fiyat: 3.4 },
+        fig_yulaf_otu: { ad: "Fiğ Kuru Otu", emoji: "🥬", kat: "kaba", km: 89, me: 2.15, hp: 14.5, ndf: 50, ca: 0.85, p: 0.26, mg: 0.25, cu: 8.2, mo: 1.2, fiyat: 6.2 },
+        korunga_otu: { ad: "Korunga Kuru Otu", emoji: "🌿", kat: "kaba", km: 89, me: 2.18, hp: 15.5, ndf: 45, ca: 1.15, p: 0.25, mg: 0.28, cu: 8.5, mo: 1.3, fiyat: 6.8 },
+        mercimek_samani: { ad: "Mercimek Samanı", emoji: "🌾", kat: "kaba", km: 90, me: 1.85, hp: 7.5, ndf: 58, ca: 1.10, p: 0.14, mg: 0.22, cu: 6.8, mo: 1.1, fiyat: 4.8 },
+        yas_pancar_posasi: { ad: "Yaş Şeker Pancarı Posası", emoji: "🌱", kat: "kaba", km: 22, me: 2.55, hp: 9.5, ndf: 44, ca: 0.65, p: 0.10, mg: 0.26, cu: 8.0, mo: 0.6, fiyat: 1.4 },
+        arpa_ezmesi: { ad: "Arpa (Ezme / Kırma)", emoji: "🟡", kat: "kesif", grup: "tahil", km: 89, me: 3.04, hp: 11.5, ndf: 19, ca: 0.06, p: 0.38, mg: 0.14, cu: 5.0, mo: 0.6, fiyat: 8.8 },
+        misir_kirmasi: { ad: "Mısır Kırması", emoji: "🌽", kat: "kesif", grup: "tahil", km: 88, me: 3.25, hp: 9.0, ndf: 10, ca: 0.03, p: 0.30, mg: 0.12, cu: 3.5, mo: 0.5, fiyat: 9.2 },
+        bugday_kepegi: { ad: "Buğday Kepeği", emoji: "🌾", kat: "kesif", grup: "yan", km: 89, me: 2.55, hp: 16.0, ndf: 42, ca: 0.13, p: 1.15, mg: 0.55, cu: 11.0, mo: 1.1, fiyat: 7.2 },
+        kuru_pancar_posasi: { ad: "Kuru Pancar Posası", emoji: "📦", kat: "kesif", grup: "yan", km: 90, me: 2.65, hp: 9.5, ndf: 44, ca: 0.70, p: 0.10, mg: 0.28, cu: 8.5, mo: 0.7, fiyat: 8.5 },
+        koyun_sut_yemi: { ad: "Fabrika Koyun Süt Yemi (Bakırsız)", emoji: "🏭", kat: "kesif", grup: "fabrika", km: 89, me: 2.90, hp: 19.5, ndf: 22, ca: 1.15, p: 0.50, mg: 0.32, cu: 6.5, mo: 1.2, fiyat: 11.8 },
+        atk_36: { ad: "Ayçiçek Küspesi (%36 HP)", emoji: "🌻", kat: "kesif", grup: "protein", km: 90, me: 2.35, hp: 36.0, ndf: 36, ca: 0.40, p: 1.10, mg: 0.55, cu: 12.0, mo: 1.2, fiyat: 10.8 },
+        soya_46: { ad: "Soya Küspesi (%46 HP)", emoji: "🫘", kat: "kesif", grup: "protein", km: 89, me: 3.15, hp: 48.0, ndf: 12, ca: 0.35, p: 0.70, mg: 0.30, cu: 12.5, mo: 2.2, fiyat: 19.5 },
+        pamuk_tohumu_kuspesi: { ad: "Pamuk Tohumu Küspesi", emoji: "🥜", kat: "kesif", grup: "protein", km: 90, me: 2.50, hp: 33.5, ndf: 34, ca: 0.22, p: 1.05, mg: 0.58, cu: 11.5, mo: 1.0, fiyat: 11.8 },
+        korunmus_yag: { ad: "Korunmuş Yağ (Bypass Yağ)", emoji: "🧀", kat: "katki", km: 99, me: 5.60, hp: 0, ndf: 0, ca: 9.0, p: 0, mg: 0, cu: 0, mo: 0, fiyat: 44.0 },
+        karbonat_tampon: { ad: "Sodyum Bikarbonat (Karbonat)", emoji: "⚗️", kat: "katki", km: 99, me: 0, hp: 0, ndf: 0, ca: 0, p: 0, mg: 0, cu: 0, mo: 0, fiyat: 18.0 },
+        magnezyum_oksit: { ad: "Magnezyum Oksit (Toksemi & Süt Ateşi Önleyici)", emoji: "🛡️", kat: "katki", km: 99, me: 0, hp: 0, ndf: 0, ca: 2.0, p: 0, mg: 54.0, cu: 0, mo: 0, fiyat: 28.0 },
+        mermer_tozu: { ad: "Mermer Tozu (Kalsiyum)", emoji: "🪨", kat: "katki", km: 99, me: 0, hp: 0, ndf: 0, ca: 38.0, p: 0, mg: 0.5, cu: 1.0, mo: 0.1, fiyat: 3.5 },
+        koyun_premiksi: { ad: "Koyun Vitamin-Mineral Premiksi (Bakırsız)", emoji: "🧪", kat: "katki", km: 99, me: 0, hp: 0, ndf: 0, ca: 18.0, p: 4.0, mg: 4.5, cu: 0, mo: 15.0, fiyat: 40.0 },
+        yem_tuzu: { ad: "Tuz (Yemlik Tuz)", emoji: "🧂", kat: "katki", km: 99, me: 0, hp: 0, ndf: 0, ca: 0, p: 0, mg: 0, cu: 0, mo: 0, fiyat: 4.5 },
+        melas: { ad: "Melas", emoji: "🍬", kat: "katki", km: 76, me: 2.85, hp: 8.5, ndf: 0, ca: 0.80, p: 0.08, mg: 0.42, cu: 12.0, mo: 0.8, fiyat: 7.0 }
+      };
+
+      let kabaIds = (skState.secilenKaba || []).filter(id => FEED_META[id]);
+      let kesifIds = (skState.secilenKesif || []).filter(id => FEED_META[id]);
+      if (kabaIds.length === 0) kabaIds = ["yonca_kuru", "arpa_samani"];
+      if (kesifIds.length === 0) kesifIds = ["arpa_ezmesi", "koyun_sut_yemi"];
+
+      if (restrictHighCa && !kabaIds.some(id => id !== "yonca_kuru")) {
+        kabaIds.push("cayir_otu", "arpa_samani");
+      }
+      if (!isDry && !kesifIds.some(id => FEED_META[id].hp >= 19)) {
+        kesifIds.push("koyun_sut_yemi");
+      }
+
+      const saltPct = 0.50;
+      const premixPct = 0.65;
+      const mgoPct = 0.35;
+      const bicarbPct = (!isDry && (effectiveMilkL >= 2.0 || skState.secilenKatki.includes("karbonat_tampon") || skState.saglikSorunlari.includes("sut_yagi_dusuk"))) ? 0.65 : 0;
+      const fatPctAdd = (!isDry && (effectiveMilkL >= 2.2 || skState.secilenKatki.includes("korunmus_yag"))) ? 1.50 : 0;
+      let limestonePct = restrictHighCa ? 0 : 0.95;
+
+      const fixedAddPct = saltPct + premixPct + mgoPct + bicarbPct + fatPctAdd + limestonePct;
+      const targetForagePct = Math.max(isDry ? 70 : 40, Math.min(80, stageCfg.foragePct));
+      const targetConcPct = Math.max(12, 100 - targetForagePct - fixedAddPct);
+
+      const shares = {};
+      if (restrictHighCa) {
+        const nonLeg = kabaIds.filter(id => id !== "yonca_kuru");
+        const leg = kabaIds.filter(id => id === "yonca_kuru");
+        const legShare = leg.length > 0 ? 10 : 0;
+        leg.forEach(id => { shares[id] = legShare / leg.length; });
+        nonLeg.forEach(id => { shares[id] = (targetForagePct - legShare) / nonLeg.length; });
+      } else {
+        const straws = kabaIds.filter(id => id.includes("samani"));
+        const quals = kabaIds.filter(id => !id.includes("samani"));
+        if (quals.length > 0 && straws.length > 0) {
+          const strawTotal = isDry ? targetForagePct * 0.35 : targetForagePct * 0.16;
+          const qualTotal = targetForagePct - strawTotal;
+          straws.forEach(id => { shares[id] = strawTotal / straws.length; });
+          quals.forEach(id => { shares[id] = qualTotal / quals.length; });
+        } else {
+          kabaIds.forEach(id => { shares[id] = targetForagePct / kabaIds.length; });
+        }
+      }
+
+      const grains = kesifIds.filter(id => FEED_META[id].grup === "tahil");
+      const nonGrains = kesifIds.filter(id => FEED_META[id].grup !== "tahil");
+      if (grains.length > 0 && nonGrains.length === 0) {
+        nonGrains.push("koyun_sut_yemi");
+      }
+
+      const grainShareTotal = grains.length > 0 ? Math.min(targetConcPct * 0.46, targetConcPct) : 0;
+      const nonGrainTotal = Math.max(0, targetConcPct - grainShareTotal);
+      grains.forEach(id => { shares[id] = grainShareTotal / grains.length; });
+      nonGrains.forEach(id => {
+        let sh = nonGrainTotal / nonGrains.length;
+        if (id === "pamuk_tohumu_kuspesi") sh = Math.min(sh, 9.0);
+        shares[id] = sh;
+      });
+
+      if (fatPctAdd > 0) shares["korunmus_yag"] = fatPctAdd;
+      if (bicarbPct > 0) shares["karbonat_tampon"] = bicarbPct;
+      if (limestonePct > 0) shares["mermer_tozu"] = limestonePct;
+      shares["magnezyum_oksit"] = mgoPct;
+      shares["koyun_premiksi"] = premixPct;
+      shares["yem_tuzu"] = saltPct;
+
+      const totalShare = Object.values(shares).reduce((a, b) => a + b, 0) || 100;
+      const ogunSayisi = skState.serbestYemleme === "evet" ? 3 : (Number(skState.ogunSayisi) || 3);
+
+      const kalemler = Object.entries(shares)
+        .filter(([, pct]) => pct > 0.05)
+        .map(([id, pct]) => {
+          const m = FEED_META[id];
+          const normPct = (pct / totalShare) * 100;
+          const dmKg = (dmiKg * normPct) / 100;
+          const asFedKg = dmKg / (m.km / 100);
+          const libFeed = getFeedById(id) || DEFAULT_FEEDS.find(f => f.id === id);
+          const birimFiyat = typeof skState.ozelFiyatlar[id] === "number"
+            ? skState.ozelFiyatlar[id]
+            : (libFeed ? libFeed.price : m.fiyat);
+          const tutarTL = asFedKg * birimFiyat;
+
+          return {
+            id,
+            ad: m.ad,
+            emoji: m.emoji,
+            kategori: m.kat,
+            dmPct: Number(normPct.toFixed(1)),
+            dmKg: Number(dmKg.toFixed(3)),
+            miktarKg: Number(asFedKg.toFixed(3)),
+            miktarG: Math.round(asFedKg * 1000),
+            suruMiktarKg: Number((asFedKg * suruSayisi).toFixed(1)),
+            ogunKg: Number((asFedKg / ogunSayisi).toFixed(3)),
+            pratikOlcu: getSkPracticalMeasure(id, m.kat, asFedKg),
+            birimFiyat: Number(birimFiyat.toFixed(2)),
+            tutarTL: Number(tutarTL.toFixed(2)),
+            meta: m
+          };
+        });
+
+      const toplamKm = kalemler.reduce((s, x) => s + x.dmKg, 0) || dmiKg;
+      const toplamYasKg = kalemler.reduce((s, x) => s + x.miktarKg, 0);
+      const gunlukTekTL = kalemler.reduce((s, x) => s + x.tutarTL, 0);
+      const suppliedMe = kalemler.reduce((s, x) => s + x.dmKg * x.meta.me, 0);
+      const hpPctDm = kalemler.reduce((s, x) => s + x.dmKg * x.meta.hp, 0) / toplamKm;
+      const ndfPctDm = Math.max(30.5, Math.min(41.5, kalemler.reduce((s, x) => s + x.dmKg * x.meta.ndf, 0) / toplamKm));
+      const caPctDm = kalemler.reduce((s, x) => s + x.dmKg * x.meta.ca, 0) / toplamKm;
+      const pPctDm = kalemler.reduce((s, x) => s + x.dmKg * x.meta.p, 0) / toplamKm;
+      const mgPctDm = kalemler.reduce((s, x) => s + x.dmKg * x.meta.mg, 0) / toplamKm;
+      const cuMgKgDm = kalemler.reduce((s, x) => s + x.dmKg * x.meta.cu, 0) / toplamKm;
+      const moMgKgDm = kalemler.reduce((s, x) => s + x.dmKg * x.meta.mo, 0) / toplamKm;
+      const kabaPctDm = (kalemler.filter(x => x.kategori === "kaba").reduce((s, x) => s + x.dmKg, 0) / toplamKm) * 100;
+      const caPRatio = pPctDm > 0 ? (caPctDm / pPctDm) : 2.15;
+
+      const sutFiyatiTL = Number(skState.sutFiyatiTL) || 38;
+      const gunlukSutGeliriTekTL = sutVerimiL * sutFiyatiTL;
+      const gunlukNetKarTekTL = gunlukSutGeliriTekTL - gunlukTekTL;
+      const litreMaliyetiTL = sutVerimiL > 0 ? (gunlukTekTL / sutVerimiL) : 0;
+      const cheese = calculateSkCheeseYield(sutVerimiL, fatPct, protPct, suruSayisi);
+
+      return {
+        donem,
+        stageLabel: stageCfg.label,
+        irkLabel: breed.label,
+        canliAgirlikKg: bw,
+        sutVerimiL,
+        effectiveMilkL: Number(effectiveMilkL.toFixed(2)),
+        sutYagPct: fatPct,
+        sutProteinPct: protPct,
+        vks,
+        fetusSayisi,
+        kuruHafta,
+        isDry,
+        isCloseUpDry,
+        suruSayisi,
+        ogunSayisi,
+        dmiKg: Number(toplamKm.toFixed(2)),
+        toplamYasKg: Number(toplamYasKg.toFixed(2)),
+        suppliedMe: Number(suppliedMe.toFixed(2)),
+        requiredMe: totalMeMcal,
+        mePct: Math.min(100, Math.round((suppliedMe / Math.max(1, totalMeMcal)) * 100)),
+        hpPctDm: Number(hpPctDm.toFixed(1)),
+        targetHpPct,
+        hpPctAdequacy: Math.min(100, Math.round((hpPctDm / Math.max(1, targetHpPct)) * 100)),
+        ndfPctDm: Number(ndfPctDm.toFixed(1)),
+        kabaPctDm: Number(kabaPctDm.toFixed(1)),
+        caPRatio: Number(caPRatio.toFixed(2)),
+        mgPctDm: Number(mgPctDm.toFixed(2)),
+        cuMgKgDm: Number(cuMgKgDm.toFixed(1)),
+        moMgKgDm: Number(moMgKgDm.toFixed(2)),
+        kalemler,
+        cheese,
+        ekonomi: {
+          sutFiyatiTL,
+          gunlukTekTL: Number(gunlukTekTL.toFixed(2)),
+          gunlukSuruTL: Math.round(gunlukTekTL * suruSayisi),
+          gunlukSutGeliriTekTL: Number(gunlukSutGeliriTekTL.toFixed(2)),
+          gunlukSutGeliriSuruTL: Math.round(gunlukSutGeliriTekTL * suruSayisi),
+          gunlukNetKarTekTL: Number(gunlukNetKarTekTL.toFixed(2)),
+          gunlukNetKarSuruTL: Math.round(gunlukNetKarTekTL * suruSayisi),
+          litreMaliyetiTL: Number(litreMaliyetiTL.toFixed(2))
+        }
+      };
+    }
+
+    function renderSagmalKoyunUstasiStep() {
+      const vp = document.getElementById("sk-step-viewport");
+      const progBox = document.getElementById("sk-progress-box");
+      const guideText = document.getElementById("sk-guide-text");
+      if (!vp) return;
+
+      const scr = skState.screenId || "welcome";
+      const seq = getSkScreenSequence();
+      const idx = seq.indexOf(scr);
+
+      if (scr === "welcome" || scr === "result") {
+        if (progBox) progBox.style.display = "none";
+      } else if (progBox) {
+        progBox.style.display = "block";
+        const stepNum = Math.max(1, idx + 1);
+        const totalSteps = seq.length;
+        const pct = Math.round((stepNum / totalSteps) * 100);
+        document.getElementById("sk-progress-step-text").textContent = `Adım ${stepNum} / ${totalSteps}`;
+        document.getElementById("sk-progress-fill").style.width = `${pct}%`;
+        const stageIconEl = document.getElementById("sk-progress-stage-icon");
+        if (stageIconEl) {
+          stageIconEl.textContent = stepNum <= 4 ? "🐑🥛 Dönem & Süt" : (stepNum <= 8 ? "🌾 Yem & Katkılar" : "🏥 Sağlık & Sağım");
+        }
+      }
+
+      const guideMessages = {
+        welcome: "Merhaba bereketli olsun! Ben Çoban Dede, yanımda da Veteriner Ayşe Kızım var. Koyunun günde kaç litre süt veriyorsa, süt yağını ve peynir randımanını düşürmeden, gebelik toksemisi ve bakır zehirlenmesinden koruyarak en kârlı yem tarifini birlikte hazırlayacağız.",
+        donem: "İlk ve en önemli sorumuz: Koyunların şu an hangi dönemde? Doğum öncesi kuru dönem ile yeni doğum ve sağım dönemlerinin yemleri birbirinden tamamen farklıdır.",
+        kuru_detay: "Doğuma son 6 hafta kala kuzular anne karnında çok hızlı büyür. İkiz veya üçüz kuzu bekleyen koyunlarda 'Gebelik Toksemisi' (ikiz kuzu hastalığı) ve doğum sonrası 'Süt Ateşi' riskini önlemek için özel enerji ve mineral dengesi kuracağız.",
+        yeni_dogum_detay: "Doğum sonrası ilk 14 gün çok kritiktir! Koyun yem yemiyorsa Gebelik Toksemisi, ayağa kalkamıyorsa Süt Ateşi (hipokalsemi) acil müdahale gerektirir.",
+        sut_emzirme: "Koyunun günde kaç litre süt veriyor? Koyun sütü inek sütünden 2 kat yağlı ve 2 kat proteinlidir; 1 litre koyun sütünden ~185 gram peynir çıkar!",
+        sut_kalite_dogum: "Sütün yağ ve protein oranını biliyorsan seç; bilmiyorsan ırkına göre ortalamayı otomatik kullanırım. İlk doğumunu yapan genç koyunlara +%15 büyüme payı ekleriz.",
+        kilo_irk_vks_suru: "Koyunun ortalama kilosunu, ırkını, bel dolgunluğunu (VKS) ve sürüdeki sağmal koyun sayısını seç. Gebelik sonunda çok yağlı (VKS > 3,75) koyunlarda gebelik toksemisi riski yüksektir!",
+        kaba_yem: "Ağılda hangi kaba yemler (yonca, kuru ot, saman, silaj) varsa işaretle. Kaliteli kaba yem koyun sütünün yağını ve peynir randımanını koruyan ana kalkandır.",
+        kesif_yem: "Arpa, mısır, küspe ve fabrika koyun süt yemi süt litresini artıran güç kaynaklarıdır. DİKKAT: Sığır süt yemi yüksek bakır içerdiği için koyuna verilmez!",
+        katki: "Koyunlarda ASLA sığır premiksi kullanılmaz (bakır zehirler)! Gebelik toksemisi ve süt ateşini önlemek için Magnezyum Oksit ve Bakırsız Koyun Premiksi kullanılır.",
+        fiyat_serbest: "Yem fiyatlarını ve süt satış fiyatını biliyorsan + / - tuşlarıyla düzeltebilirsin. Koyunlar günde 3 öğün veya serbest yemlendiğinde işkembesi ekşimez.",
+        saglik_ortam_sagim: "Koyunlarda meme şişliği (mastitis), doğum sonrası yatma (süt ateşi), iştahsızlık (toksemi) veya topallık varsa işaretle; merada otlayan koyunlar için yürüme enerjisini de hesaba katalım.",
+        result: "İşte sağmal koyunların için uluslararası standartlarda (NRC 2007 & INRA 2018), bakır ve gebelik toksemisi korumalı günlük yem tarifin ve peynir randımanı hesabın!"
+      };
+      if (guideText) guideText.textContent = guideMessages[scr] || guideMessages.welcome;
+
+      if (scr === "welcome") {
+        vp.innerHTML = `
+          <div style="text-align:center; padding:8px 4px;">
+            <div style="font-size:3rem; line-height:1.1; margin-bottom:8px;">🐑🥛🧀</div>
+            <h2 style="font-size:1.5rem; font-weight:900; margin-bottom:6px;">Sağmal Koyun Ustası — Süt Koyunu Rehberim</h2>
+            <p style="font-size:1.02rem; font-weight:700; color:var(--text-muted); margin-bottom:14px;">
+              Sağmal ve gebe koyunlarının yem tarifini <strong>5 dakikada</strong>, gebelik toksemisi, süt ateşi ve bakır zehirlenmesine karşı tam korumalı olarak hazırlıyorum.
+            </p>
+            <div style="background:var(--surface-alt); border:2.5px solid var(--border); border-radius:12px; padding:12px; margin-bottom:16px; text-align:left; font-size:0.95rem; font-weight:800;">
+              💡 <strong>Biliyor muydun?</strong> Koyun sütü inek sütünden <strong>2 kat yağlı (%6–8)</strong> ve <strong>2 kat proteinlidir (%5,5)</strong>! 5,4 litre koyun sütünden <strong>1 kg beyaz peynir</strong> çıkar.
+            </div>
+
+            <button type="button" class="ru-nav-btn ru-nav-btn-primary" style="width:100%; font-size:1.2rem; min-height:60px; margin-bottom:10px;" onclick="goSkScreen('donem')">
+              🚀 Hadi Başlayalım (Adım Adım Kur)
+            </button>
+
+            ${skHasSavedProgress ? `
+              <button type="button" class="ru-nav-btn ru-nav-btn-secondary" style="width:100%; margin-bottom:10px;" onclick="goSkScreen('${skState.screenId || "donem"}')">
+                🔄 Kaldığın Yerden Devam Et
+              </button>
+            ` : ""}
+
+            <button type="button" class="ru-nav-btn ru-nav-btn-secondary" style="width:100%; margin-bottom:18px;" onclick="selectSpecies('sheep')">
+              🐑 Besi Kuzusu / Toklu Rasyonu Kurmak İstiyorum (Kuzu Ustası'na Geç) →
+            </button>
+
+            <div style="text-align:left; border-top:2.5px solid var(--border); padding-top:14px;">
+              <div style="font-size:1.05rem; font-weight:900; margin-bottom:10px;">⚡ Veya Tek Dokunuşla Hazır Süt Koyunu Senaryosu Seç:</div>
+              <div class="grid-2">
+                ${Object.entries(SK_PRESET_SCENARIOS).map(([k, p]) => `
+                  <button type="button" class="ru-choice-btn" style="text-align:left; align-items:flex-start; flex-direction:column; gap:4px;" onclick="applySkPresetScenario('${k}')">
+                    <div style="font-size:1.02rem; font-weight:900;">${p.title}</div>
+                    <div style="font-size:0.84rem; font-weight:700; opacity:0.85;">${p.desc}</div>
+                  </button>
+                `).join("")}
+              </div>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      if (scr === "donem") {
+        const opts = [
+          { id: "kuru_uzak", title: "🤰 Doğuma 2 ay var (Kuru Dönem – Uzak)", sub: "Koyun sağılmaz, memesi dinlenir, karnındaki kuzuyu büyütür." },
+          { id: "kuru_yakin", title: "🤰 Doğuma 6 hafta kaldı (Kuru Dönem – Yakın)", sub: "İkiz kuzu hastalığı (gebelik toksemisi) ve süt ateşi için en kritik dönem!" },
+          { id: "yeni_dogum", title: "🍼 Yeni doğum yaptı (0–2 hafta)", sub: "Doğum sonrası ilk 14 gün; süt ateşi, iştah ve kolostrum dönemi." },
+          { id: "erken", title: "🥛 Erken Laktasyon (2 hafta – 8 hafta)", sub: "Sütün en yüksek olduğu (pik) dönem; yüksek enerji ve protein gerekir." },
+          { id: "orta", title: "🥛 Orta Laktasyon (8 hafta – 5 ay)", sub: "Süt verimi dengeli devam eder; peynir randımanı ve mera/ağıl dengesi." },
+          { id: "gec", title: "🥛 Geç Laktasyon (5 ay+)", sub: "Süt azalır, koyun bir sonraki gebeliğe ve kondisyona hazırlanır." },
+          { id: "ilk_dogum", title: "🐑 İlk Doğum Yapan Genç Koyun (Şişek / Düve)", sub: "Hem süt verir hem kendi boyunu büyütür (+%15 büyüme enerjisi eklenir)." }
+        ];
+        vp.innerHTML = `
+          <h3 style="font-size:1.25rem; font-weight:900; margin-bottom:12px;">Soru 1: Koyunların şu an hangi dönemde?</h3>
+          <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:16px;">
+            ${opts.map(o => `
+              <button type="button" class="ru-choice-btn ${skState.donem === o.id ? "selected" : ""}" style="flex-direction:column; align-items:flex-start; text-align:left; gap:4px;" onclick="skState.donem='${o.id}'; if('${o.id}'==='ilk_dogum'){skState.dogumSayisi=1;} saveSkProgress(); renderSagmalKoyunUstasiStep();">
+                <div style="font-size:1.05rem; font-weight:900;">${o.title}</div>
+                <div style="font-size:0.86rem; font-weight:700; opacity:0.88;">${o.sub}</div>
+              </button>
+            `).join("")}
+          </div>
+          <div class="ru-nav-row">
+            <button type="button" class="ru-nav-btn ru-nav-btn-secondary" onclick="prevSkScreen()">← Başa Dön</button>
+            <button type="button" class="ru-nav-btn ru-nav-btn-primary" onclick="nextSkScreen()">Devam Et →</button>
+          </div>
+        `;
+        return;
+      }
+
+      if (scr === "kuru_detay") {
+        vp.innerHTML = `
+          <h3 style="font-size:1.22rem; font-weight:900; margin-bottom:10px;">🤰 Kuru Dönem Özel Soruları (Gebelik Toksemisi & Süt Ateşi Koruması)</h3>
+
+          <div style="margin-bottom:14px;">
+            <label style="font-size:1rem; font-weight:900; margin-bottom:6px;">K1. Doğuma kaç hafta kaldı?</label>
+            <div class="grid-2">
+              ${[
+                { v: 8, l: "🗓️ 8 Hafta (~2 ay)" },
+                { v: 6, l: "🗓️ 6 Hafta (Son 1,5 ay)" },
+                { v: 3, l: "🚨 3 Hafta (Çok Yakın!)" },
+                { v: "bilmiyorum", l: "❓ Bilmiyorum (Güvenli Mod)" }
+              ].map(x => `
+                <button type="button" class="ru-choice-btn ${String(skState.kuruHafta) === String(x.v) ? "selected" : ""}" onclick="skState.kuruHafta=${typeof x.v === 'number' ? x.v : `'${x.v}'`}; saveSkProgress(); renderSagmalKoyunUstasiStep();">
+                  ${x.l}
+                </button>
+              `).join("")}
+            </div>
+          </div>
+
+          <div style="margin-bottom:14px;">
+            <label style="font-size:1rem; font-weight:900; margin-bottom:6px;">K2. Karnında kaç kuzu var? (Ultrason yapıldı mı?)</label>
+            <div class="grid-2">
+              ${[
+                { v: 1, l: "🐑 1 Kuzu (Tek)" },
+                { v: 2, l: "🐑🐑 2 Kuzu (İkiz: +%35 Enerji)" },
+                { v: 3, l: "🐑🐑🐑 3+ Kuzu (Üçüz: +%55 Enerji)" },
+                { v: "bilmiyorum", l: "❓ Bilmiyorum (İkiz Varsayılır)" }
+              ].map(x => `
+                <button type="button" class="ru-choice-btn ${String(skState.fetusSayisi) === String(x.v) ? "selected" : ""}" onclick="skState.fetusSayisi=${typeof x.v === 'number' ? x.v : `'${x.v}'`}; saveSkProgress(); renderSagmalKoyunUstasiStep();">
+                  ${x.l}
+                </button>
+              `).join("")}
+            </div>
+          </div>
+
+          <div style="margin-bottom:16px;">
+            <label style="font-size:1rem; font-weight:900; margin-bottom:6px;">K3. Önceki doğumlarında doğum sonrası yatan (Süt Ateşi geçiren) koyun oldu mu?</label>
+            <div class="grid-3">
+              ${[
+                { v: "hayir", l: "✅ Hayır Olmadı" },
+                { v: "evet", l: "⚠️ Evet Oldu (Kalsiyumu Kıs)" },
+                { v: "bilmiyorum", l: "❓ Bilmiyorum" }
+              ].map(x => `
+                <button type="button" class="ru-choice-btn ${skState.sutAtesiGecmisi === x.v ? "selected" : ""}" onclick="skState.sutAtesiGecmisi='${x.v}'; saveSkProgress(); renderSagmalKoyunUstasiStep();">
+                  ${x.l}
+                </button>
+              `).join("")}
+            </div>
+          </div>
+
+          <div class="ru-nav-row">
+            <button type="button" class="ru-nav-btn ru-nav-btn-secondary" onclick="prevSkScreen()">← Geri Dön</button>
+            <button type="button" class="ru-nav-btn ru-nav-btn-primary" onclick="nextSkScreen()">Devam Et →</button>
+          </div>
+        `;
+        return;
+      }
+
+      if (scr === "yeni_dogum_detay") {
+        vp.innerHTML = `
+          <h3 style="font-size:1.22rem; font-weight:900; margin-bottom:10px;">🍼 Yeni Doğum (0–2 Hafta) Kritik Sağlık Kontrolü</h3>
+
+          <div style="margin-bottom:14px;">
+            <label style="font-size:1rem; font-weight:900; margin-bottom:6px;">Y1. Koyun doğum yapalı kaç gün oldu?</label>
+            <div class="grid-3">
+              ${[
+                { v: "1_3", l: "🍼 1–3 Gün (Ağız Sütü)" },
+                { v: "4_7", l: "🥛 4–7 Gün (İlk Hafta)" },
+                { v: "8_14", l: "🥛 8–14 Gün (İkinci Hafta)" }
+              ].map(x => `
+                <button type="button" class="ru-choice-btn ${skState.yeniDogumGun === x.v ? "selected" : ""}" onclick="skState.yeniDogumGun='${x.v}'; saveSkProgress(); renderSagmalKoyunUstasiStep();">
+                  ${x.l}
+                </button>
+              `).join("")}
+            </div>
+          </div>
+
+          <div style="margin-bottom:14px;">
+            <label style="font-size:1rem; font-weight:900; margin-bottom:6px;">Y2. Koyun iştahlı mı, yem yiyor mu?</label>
+            <div class="grid-2">
+              <button type="button" class="ru-choice-btn ${skState.istahliMi === "evet" ? "selected" : ""}" onclick="skState.istahliMi='evet'; saveSkProgress(); renderSagmalKoyunUstasiStep();">
+                ✅ Evet, iştahı yerinde
+              </button>
+              <button type="button" class="ru-choice-btn ${skState.istahliMi === "hayir" ? "selected" : ""}" onclick="skState.istahliMi='hayir'; saveSkProgress(); renderSagmalKoyunUstasiStep();">
+                🚨 Hayır, az yiyor veya yemiyor
+              </button>
+            </div>
+            ${skState.istahliMi === "hayir" ? `
+              <div style="background:#fee2e2; color:#7f1d1d; border:3px solid #b91c1c; border-radius:12px; padding:12px; margin-top:8px; font-weight:900;">
+                🚨 DİKKAT: Doğum sonrası yem yemeyen koyunda <strong>"Gebelik Toksemisi" (ikiz kuzu hastalığı)</strong> olabilir! Hemen <strong>propilen glikol</strong> (günde 2 kez 60 ml ağızdan) ver ve veteriner çağır. Bu hastalık 24 saatte öldürür!
+              </div>
+            ` : ""}
+          </div>
+
+          <div style="margin-bottom:16px;">
+            <label style="font-size:1rem; font-weight:900; margin-bottom:6px;">Y3. Koyun ayağa kalkabiliyor mu, yürümesinde sorun var mı?</label>
+            <div class="grid-2">
+              <button type="button" class="ru-choice-btn ${skState.ayagaKalkabiliyorMu === "evet" ? "selected" : ""}" onclick="skState.ayagaKalkabiliyorMu='evet'; saveSkProgress(); renderSagmalKoyunUstasiStep();">
+                ✅ Evet, rahat kalkıyor
+              </button>
+              <button type="button" class="ru-choice-btn ${skState.ayagaKalkabiliyorMu === "hayir" ? "selected" : ""}" onclick="skState.ayagaKalkabiliyorMu='hayir'; saveSkProgress(); renderSagmalKoyunUstasiStep();">
+                🚨 Hayır, yatıyor veya sallanıyor
+              </button>
+            </div>
+            ${skState.ayagaKalkabiliyorMu === "hayir" ? `
+              <div style="background:#fee2e2; color:#7f1d1d; border:3px solid #b91c1c; border-radius:12px; padding:12px; margin-top:8px; font-weight:900;">
+                🚨 ACİL: Bu <strong>"Süt Ateşi" (hipokalsemi)</strong> belirtisi! Hemen veteriner çağır, damar içi kalsiyum gerekiyor. Beklersen koyun birkaç saat içinde ölür!
+              </div>
+            ` : ""}
+          </div>
+
+          <div class="ru-nav-row">
+            <button type="button" class="ru-nav-btn ru-nav-btn-secondary" onclick="prevSkScreen()">← Geri Dön</button>
+            <button type="button" class="ru-nav-btn ru-nav-btn-primary" onclick="nextSkScreen()">Devam Et →</button>
+          </div>
+        `;
+        return;
+      }
+
+      if (scr === "sut_emzirme") {
+        const milkVal = Number(skState.sutVerimiL) || 1.5;
+        const bucketPct = Math.min(100, Math.round((milkVal / 3.5) * 100));
+        const cheesePreview = calculateSkCheeseYield(milkVal, skState.sutYagPct, skState.sutProteinPct, skState.suruSayisi);
+        vp.innerHTML = `
+          <h3 style="font-size:1.22rem; font-weight:900; margin-bottom:8px;">Soru 2: Koyunun günde kaç litre süt veriyor?</h3>
+          <p style="font-size:0.9rem; font-weight:700; color:var(--text-muted); margin-bottom:10px;">
+            💡 İpucu: Emin değilsen akşam sağımını 2 ile çarp, yaklaşık çıkar.
+          </p>
+
+          <div class="su-bucket-wrap" aria-hidden="true">
+            <div class="su-bucket-fill" style="height:${bucketPct}%;"></div>
+          </div>
+          <div style="text-align:center; font-size:1.75rem; font-weight:900; margin-bottom:4px;" id="sk-milk-val-disp">
+            ${milkVal.toFixed(1).replace(".", ",")} Litre / Gün
+          </div>
+          <div style="text-align:center; font-size:0.92rem; font-weight:800; color:#166534; margin-bottom:10px;">
+            🧀 Bu sütten 1 koyundan günde <strong>~${cheesePreview.dailyGPerEwe} gram</strong> koyun peyniri çıkar!
+          </div>
+
+          <input type="range" class="ru-slider" min="0.3" max="4.0" step="0.1" value="${milkVal}" oninput="skState.sutVerimiL=Number(this.value); saveSkProgress(); renderSagmalKoyunUstasiStep();">
+
+          <div class="ru-stepper-row" style="margin-bottom:10px;">
+            <button type="button" class="ru-step-big-btn" onclick="skState.sutVerimiL=Math.max(0.3, Number((skState.sutVerimiL-0.2).toFixed(1))); saveSkProgress(); renderSagmalKoyunUstasiStep();">− 0,2 Litre</button>
+            <button type="button" class="ru-step-big-btn" onclick="skState.sutVerimiL=Math.min(4.0, Number((skState.sutVerimiL+0.2).toFixed(1))); saveSkProgress(); renderSagmalKoyunUstasiStep();">+ 0,2 Litre</button>
+          </div>
+
+          <div class="grid-3" style="margin-bottom:16px;">
+            ${[
+              { v: 0.5, l: "0,5 L (Az)" },
+              { v: 1.0, l: "1,0 L (Orta-Az)" },
+              { v: 1.5, l: "1,5 L (Orta)" },
+              { v: 2.0, l: "2,0 L (İyi)" },
+              { v: 2.5, l: "2,5 L (Yüksek)" },
+              { v: 3.0, l: "3,0 L (Çok Yüksek)" }
+            ].map(x => `
+              <button type="button" class="ru-choice-btn ${Math.abs(milkVal - x.v) < 0.05 ? "selected" : ""}" onclick="skState.sutVerimiL=${x.v}; saveSkProgress(); renderSagmalKoyunUstasiStep();">
+                ${x.l}
+              </button>
+            `).join("")}
+          </div>
+
+          <div style="border-top:2px solid var(--border); padding-top:12px; margin-bottom:16px;">
+            <label style="font-size:1.05rem; font-weight:900; margin-bottom:8px;">Koyun aynı zamanda kuzu emziriyor mu?</label>
+            <div class="grid-2">
+              ${[
+                { id: "sadece_sagim", l: "🥛 Sadece sağılıyor (kuzu sütten kesildi)" },
+                { id: "sagim_arti_1_kuzu", l: "🐑🥛 Hem sağılıyor hem 1 kuzu emziriyor" },
+                { id: "sagim_arti_2_kuzu", l: "🐑🐑🥛 Hem sağılıyor hem 2 kuzu emziriyor" },
+                { id: "sadece_emzirme", l: "🐑 Sadece kuzu emziriyor (sağılmıyor)" }
+              ].map(o => `
+                <button type="button" class="ru-choice-btn ${skState.emzirmeDurumu === o.id ? "selected" : ""}" onclick="skState.emzirmeDurumu='${o.id}'; saveSkProgress(); renderSagmalKoyunUstasiStep();">
+                  ${o.l}
+                </button>
+              `).join("")}
+            </div>
+            ${skState.emzirmeDurumu === "sadece_emzirme" ? `
+              <div style="background:var(--surface-alt); border:2px solid var(--border); border-radius:10px; padding:10px; margin-top:8px; font-size:0.9rem; font-weight:800;">
+                🐑 Emziren anaç koyun rasyonunu burada hazırlayabilir veya emzirilen kuzuların kendi yemi için <a href="#sheep" onclick="selectSpecies('sheep'); return false;" style="text-decoration:underline; font-weight:900;">Kuzu Ustası</a>'na geçebilirsin.
+              </div>
+            ` : ""}
+          </div>
+
+          <div class="ru-nav-row">
+            <button type="button" class="ru-nav-btn ru-nav-btn-secondary" onclick="prevSkScreen()">← Geri Dön</button>
+            <button type="button" class="ru-nav-btn ru-nav-btn-primary" onclick="nextSkScreen()">Devam Et →</button>
+          </div>
+        `;
+        return;
+      }
+
+      if (scr === "sut_kalite_dogum") {
+        vp.innerHTML = `
+          <h3 style="font-size:1.22rem; font-weight:900; margin-bottom:10px;">Soru 3: Sütün Yağ, Protein Oranı ve Doğum Sayısı</h3>
+
+          <div style="margin-bottom:14px;">
+            <label style="font-size:1rem; font-weight:900; margin-bottom:6px;">Sütün yağ oranını biliyor musun? (Koyun sütü ortalama %6,5 yağlıdır)</label>
+            <div class="grid-3">
+              ${[
+                { v: 5.5, l: "%5,5 (Düşük)" },
+                { v: 6.5, l: "%6,5 (Normal)" },
+                { v: 7.5, l: "%7,5 (Yüksek)" },
+                { v: 8.5, l: "%8,5 (Çok Yağlı)" },
+                { v: "bilmiyorum", l: "❓ Bilmiyorum (%6,5 Al)" }
+              ].map(x => `
+                <button type="button" class="ru-choice-btn ${String(skState.sutYagPct) === String(x.v) ? "selected" : ""}" onclick="skState.sutYagPct=${typeof x.v === 'number' ? x.v : `'${x.v}'`}; saveSkProgress(); renderSagmalKoyunUstasiStep();">
+                  ${x.l}
+                </button>
+              `).join("")}
+            </div>
+          </div>
+
+          <div style="margin-bottom:14px;">
+            <label style="font-size:1rem; font-weight:900; margin-bottom:6px;">Sütün protein oranını biliyor musun? (Peynir randımanı için önemli)</label>
+            <div class="grid-2">
+              ${[
+                { v: 4.8, l: "%4,8 (Düşük)" },
+                { v: 5.5, l: "%5,5 (Normal)" },
+                { v: 6.5, l: "%6,5 (Yüksek)" },
+                { v: "bilmiyorum", l: "❓ Bilmiyorum (%5,5 Al)" }
+              ].map(x => `
+                <button type="button" class="ru-choice-btn ${String(skState.sutProteinPct) === String(x.v) ? "selected" : ""}" onclick="skState.sutProteinPct=${typeof x.v === 'number' ? x.v : `'${x.v}'`}; saveSkProgress(); renderSagmalKoyunUstasiStep();">
+                  ${x.l}
+                </button>
+              `).join("")}
+            </div>
+          </div>
+
+          <div style="margin-bottom:16px;">
+            <label style="font-size:1rem; font-weight:900; margin-bottom:6px;">Bu koyunun kaçıncı doğumu (kaçıncı kuzusu)?</label>
+            <div class="grid-3">
+              ${[
+                { v: 1, l: "1. Doğum (İlk Kuzusu: +%15 Büyüme Payı)" },
+                { v: 2, l: "2. Doğum" },
+                { v: 3, l: "3 ve Üzeri Doğum" }
+              ].map(x => `
+                <button type="button" class="ru-choice-btn ${Number(skState.dogumSayisi) === x.v ? "selected" : ""}" onclick="skState.dogumSayisi=${x.v}; saveSkProgress(); renderSagmalKoyunUstasiStep();">
+                  ${x.l}
+                </button>
+              `).join("")}
+            </div>
+          </div>
+
+          <div class="ru-nav-row">
+            <button type="button" class="ru-nav-btn ru-nav-btn-secondary" onclick="prevSkScreen()">← Geri Dön</button>
+            <button type="button" class="ru-nav-btn ru-nav-btn-primary" onclick="nextSkScreen()">Devam Et →</button>
+          </div>
+        `;
+        return;
+      }
+
+      if (scr === "kilo_irk_vks_suru") {
+        const bw = Number(skState.canliAgirlikKg) || 55;
+        const cnt = Number(skState.suruSayisi) || 50;
+        vp.innerHTML = `
+          <h3 style="font-size:1.22rem; font-weight:900; margin-bottom:10px;">Soru 4: Koyunun Kilosu, Irkı, Vücut Durumu ve Sürü Sayısı</h3>
+
+          <div style="margin-bottom:14px;">
+            <label style="font-size:1rem; font-weight:900;">Koyunun ortalama canlı kilosu: <strong style="font-size:1.35rem;">${bw} kg</strong></label>
+            <input type="range" class="ru-slider" min="35" max="90" step="1" value="${bw}" oninput="skState.canliAgirlikKg=Number(this.value); saveSkProgress(); renderSagmalKoyunUstasiStep();">
+            <div class="grid-4">
+              ${[
+                { v: 45, l: "45 kg (Küçük)" },
+                { v: 55, l: "55 kg (Orta)" },
+                { v: 65, l: "65 kg (İri)" },
+                { v: 75, l: "75 kg (Çok İri)" }
+              ].map(x => `
+                <button type="button" class="ru-choice-btn ${bw === x.v ? "selected" : ""}" onclick="skState.canliAgirlikKg=${x.v}; saveSkProgress(); renderSagmalKoyunUstasiStep();">
+                  ${x.l}
+                </button>
+              `).join("")}
+            </div>
+          </div>
+
+          <div style="margin-bottom:14px;">
+            <label style="font-size:1rem; font-weight:900; margin-bottom:6px;">Koyunun ırkı nedir?</label>
+            <div class="grid-3">
+              ${Object.entries(SK_BREED_INFO).map(([k, b]) => `
+                <button type="button" class="ru-choice-btn ${skState.irk === k ? "selected" : ""}" onclick="skState.irk='${k}'; saveSkProgress(); renderSagmalKoyunUstasiStep();">
+                  🐑 ${b.label}
+                </button>
+              `).join("")}
+            </div>
+          </div>
+
+          <div style="margin-bottom:14px;">
+            <label style="font-size:1rem; font-weight:900; margin-bottom:6px;">Vücut Kondisyon Skoru (VKS — Bel kemiğini elinle yokladığında):</label>
+            <div class="grid-2">
+              ${[
+                { v: 2.0, l: "🦴 Zayıf (VKS 2,0 — Kemikler batıyor, enerji ekle)" },
+                { v: 3.0, l: "✅ Normal / İdeal (VKS 3,0 — Hafif baskıyla hissediliyor)" },
+                { v: 3.5, l: "💪 Dolgun (VKS 3,5 — Kuru dönem için ideal)" },
+                { v: 4.2, l: "⚠️ Yağlı (VKS 4,0+ — Gebelik Toksemisi Riski!)" }
+              ].map(x => `
+                <button type="button" class="ru-choice-btn ${Math.abs(Number(skState.vks) - x.v) < 0.2 ? "selected" : ""}" onclick="skState.vks=${x.v}; saveSkProgress(); renderSagmalKoyunUstasiStep();">
+                  ${x.l}
+                </button>
+              `).join("")}
+            </div>
+            ${Number(skState.vks) >= 4.0 ? `
+              <div style="background:#fee2e2; color:#7f1d1d; border:2.5px solid #b91c1c; border-radius:10px; padding:10px; margin-top:8px; font-weight:800;">
+                🚨 UYARI: Yağlı koyunda (VKS > 3,75) doğum öncesi ve sonrası <strong>Gebelik Toksemisi</strong> riski çok yüksektir! Koyunu ani diyete sokup aç bırakma, öğünleri 3'e böl.
+              </div>
+            ` : ""}
+          </div>
+
+          <div style="margin-bottom:16px;">
+            <label style="font-size:1rem; font-weight:900;">Sürüde kaç sağmal koyun var? <strong style="font-size:1.35rem;">${cnt} Koyun</strong></label>
+            <input type="range" class="ru-slider" min="1" max="300" step="1" value="${cnt}" oninput="skState.suruSayisi=Number(this.value); saveSkProgress(); renderSagmalKoyunUstasiStep();">
+            <div class="grid-4">
+              ${[10, 25, 50, 100, 150, 200].map(n => `
+                <button type="button" class="ru-choice-btn ${cnt === n ? "selected" : ""}" onclick="skState.suruSayisi=${n}; saveSkProgress(); renderSagmalKoyunUstasiStep();">
+                  ${n} Koyun
+                </button>
+              `).join("")}
+            </div>
+          </div>
+
+          <div class="ru-nav-row">
+            <button type="button" class="ru-nav-btn ru-nav-btn-secondary" onclick="prevSkScreen()">← Geri Dön</button>
+            <button type="button" class="ru-nav-btn ru-nav-btn-primary" onclick="nextSkScreen()">Devam Et →</button>
+          </div>
+        `;
+        return;
+      }
+
+      if (scr === "kaba_yem") {
+        const kabaList = [
+          { id: "yonca_kuru", ad: "Yonca Kuru Otu", emoji: "🍀", sub: "Yüksek protein & kalsiyum" },
+          { id: "misir_silaji", ad: "Mısır Silajı", emoji: "🌽", sub: "Enerji ve sulu lif" },
+          { id: "cayir_otu", ad: "Çayır Kuru Otu", emoji: "🌾", sub: "Güvenli geviş otu" },
+          { id: "bugday_samani", ad: "Buğday Samanı", emoji: "🌾", sub: "Dolgu ve geviş lifi" },
+          { id: "arpa_samani", ad: "Arpa Samanı", emoji: "🌾", sub: "Yumuşak saman" },
+          { id: "fig_yulaf_otu", ad: "Fiğ / Yulaf Kuru Otu", emoji: "🥬", sub: "Süt artırıcı kuru ot" },
+          { id: "korunga_otu", ad: "Korunga Kuru Otu", emoji: "🌿", sub: "Şişkinlik yapmayan baklagil" },
+          { id: "mercimek_samani", ad: "Mercimek Samanı", emoji: "🌾", sub: "Lezzetli baklagil samanı" },
+          { id: "yas_pancar_posasi", ad: "Yaş Pancar Posası", emoji: "🌱", sub: "Süt yağı dostu sulu posa" }
+        ];
+        vp.innerHTML = `
+          <h3 style="font-size:1.22rem; font-weight:900; margin-bottom:8px;">Soru 5: Elinizde hangi KABA YEMLER (ot, saman, silaj) var?</h3>
+          <p style="font-size:0.9rem; font-weight:700; color:var(--text-muted); margin-bottom:12px;">
+            Birden fazla seçebilirsin. Kaba yem sağmal koyunda süt yağını ve gevişi korur (en az %40 KM).
+          </p>
+          <div class="ru-feed-grid">
+            ${kabaList.map(f => {
+              const sel = (skState.secilenKaba || []).includes(f.id);
+              return `
+                <button type="button" class="ru-feed-card ${sel ? "selected" : ""}" onclick="toggleSkFeed('kaba','${f.id}')">
+                  <span class="ru-feed-card-emoji">${f.emoji}</span>
+                  <span>${f.ad}</span>
+                  <small style="font-size:0.75rem; opacity:0.85;">${f.sub}</small>
+                </button>
+              `;
+            }).join("")}
+          </div>
+          <div class="ru-nav-row">
+            <button type="button" class="ru-nav-btn ru-nav-btn-secondary" onclick="prevSkScreen()">← Geri Dön</button>
+            <button type="button" class="ru-nav-btn ru-nav-btn-primary" onclick="nextSkScreen()">Devam Et →</button>
+          </div>
+        `;
+        return;
+      }
+
+      if (scr === "kesif_yem") {
+        const kesifList = [
+          { id: "arpa_ezmesi", ad: "Arpa (Ezme / Kırma)", emoji: "🟡", sub: "Temel enerji tahılı" },
+          { id: "misir_kirmasi", ad: "Mısır Kırması", emoji: "🌽", sub: "Yüksek süt enerjisi" },
+          { id: "bugday_kepegi", ad: "Buğday Kepeği", emoji: "🌾", sub: "Anne koyun dostu lifli yem" },
+          { id: "koyun_sut_yemi", ad: "Fabrika Koyun Süt Yemi (Bakırsız)", emoji: "🏭", sub: "Sağmal koyuna özel pelet" },
+          { id: "atk_36", ad: "Ayçiçek Küspesi (%36 HP)", emoji: "🌻", sub: "Ekonomik protein" },
+          { id: "soya_46", ad: "Soya Küspesi (%46 HP)", emoji: "🫘", sub: "Yüksek süt proteini" },
+          { id: "pamuk_tohumu_kuspesi", ad: "Pamuk Tohumu Küspesi", emoji: "🥜", sub: "Süt yağı destekleyici (Maks %10)" },
+          { id: "kuru_pancar_posasi", ad: "Kuru Pancar Posası", emoji: "📦", sub: "Sindirilebilir lif" },
+          { id: "sigir_sut_yemi", ad: "Sığır Süt Yemi (Koyuna Yasak!)", emoji: "🚫", sub: "Yüksek bakır içerir! Seçilirse uyarır" }
+        ];
+        vp.innerHTML = `
+          <h3 style="font-size:1.22rem; font-weight:900; margin-bottom:8px;">Soru 6: Elinizde hangi KESİF YEMLER (tahıl, küspe, fabrika yemi) var?</h3>
+          ${skState.cattleBlockedWarning ? `
+            <div style="background:#fee2e2; color:#7f1d1d; border:3px solid #b91c1c; border-radius:12px; padding:12px; margin-bottom:12px; font-weight:900;">
+              ${skState.cattleBlockedWarning}
+            </div>
+          ` : ""}
+          <div class="ru-feed-grid">
+            ${kesifList.map(f => {
+              const sel = (skState.secilenKesif || []).includes(f.id);
+              return `
+                <button type="button" class="ru-feed-card ${sel ? "selected" : ""}" onclick="toggleSkFeed('kesif','${f.id}')">
+                  <span class="ru-feed-card-emoji">${f.emoji}</span>
+                  <span>${f.ad}</span>
+                  <small style="font-size:0.75rem; opacity:0.85;">${f.sub}</small>
+                </button>
+              `;
+            }).join("")}
+          </div>
+          <div class="ru-nav-row">
+            <button type="button" class="ru-nav-btn ru-nav-btn-secondary" onclick="prevSkScreen()">← Geri Dön</button>
+            <button type="button" class="ru-nav-btn ru-nav-btn-primary" onclick="nextSkScreen()">Devam Et →</button>
+          </div>
+        `;
+        return;
+      }
+
+      if (scr === "katki") {
+        const katkiList = [
+          { id: "yem_tuzu", ad: "Tuz (Yemlik Tuz)", emoji: "🧂", sub: "Zorunlu (Min %0,4 KM)" },
+          { id: "mermer_tozu", ad: "Mermer Tozu (Kalsiyum)", emoji: "🪨", sub: "Süt kalsiyumu (Ca:P 2:1)" },
+          { id: "koyun_premiksi", ad: "Koyun Premiksi (Bakırsız)", emoji: "🧪", sub: "E vit + Selenyum, bakırsız!" },
+          { id: "magnezyum_oksit", ad: "Magnezyum Oksit", emoji: "🛡️", sub: "Toksemi & Süt Ateşi Önleyici" },
+          { id: "karbonat_tampon", ad: "Sodyum Bikarbonat (Karbonat)", emoji: "⚗️", sub: "Süt yağı ve işkembe koruyucu" },
+          { id: "korunmus_yag", ad: "Korunmuş Yağ (Bypass Yağ)", emoji: "🧀", sub: "2 L+ süt veren koyuna enerji" },
+          { id: "melas", ad: "Melas", emoji: "🍬", sub: "Lezzet ve enerji (Gebelik toksemisi önler)" },
+          { id: "sigir_premiksi", ad: "Sığır Mineral Premiksi (Koyuna Yasak!)", emoji: "🚫", sub: "Bakır zehirlenmesi yapar!" }
+        ];
+        vp.innerHTML = `
+          <h3 style="font-size:1.22rem; font-weight:900; margin-bottom:8px;">Soru 7: Mineral ve Koruyucu Katkılar</h3>
+          <p style="font-size:0.9rem; font-weight:700; color:var(--text-muted); margin-bottom:10px;">
+            Koyunlar bakıra sığırdan 10 kat daha duyarlıdır; sığır premiksi asla kullanılmaz!
+          </p>
+          ${skState.cattleBlockedWarning ? `
+            <div style="background:#fee2e2; color:#7f1d1d; border:3px solid #b91c1c; border-radius:12px; padding:12px; margin-bottom:12px; font-weight:900;">
+              ${skState.cattleBlockedWarning}
+            </div>
+          ` : ""}
+          <div class="ru-feed-grid">
+            ${katkiList.map(f => {
+              const sel = (skState.secilenKatki || []).includes(f.id);
+              return `
+                <button type="button" class="ru-feed-card ${sel ? "selected" : ""}" onclick="toggleSkFeed('katki','${f.id}')">
+                  <span class="ru-feed-card-emoji">${f.emoji}</span>
+                  <span>${f.ad}</span>
+                  <small style="font-size:0.75rem; opacity:0.85;">${f.sub}</small>
+                </button>
+              `;
+            }).join("")}
+          </div>
+          <div class="ru-nav-row">
+            <button type="button" class="ru-nav-btn ru-nav-btn-secondary" onclick="prevSkScreen()">← Geri Dön</button>
+            <button type="button" class="ru-nav-btn ru-nav-btn-primary" onclick="nextSkScreen()">Devam Et →</button>
+          </div>
+        `;
+        return;
+      }
+
+      if (scr === "fiyat_serbest") {
+        const allIds = Array.from(new Set([...(skState.secilenKaba || []), ...(skState.secilenKesif || []), ...(skState.secilenKatki || [])]));
+        vp.innerHTML = `
+          <h3 style="font-size:1.22rem; font-weight:900; margin-bottom:10px;">Soru 8: Yem & Süt Fiyatları ve Öğün Düzeni</h3>
+
+          <div style="margin-bottom:14px;">
+            <label style="font-size:1rem; font-weight:900;">1 Litre Koyun Sütü Satış Fiyatın: <strong style="font-size:1.3rem;">${skState.sutFiyatiTL} ₺/Litre</strong></label>
+            <div class="ru-stepper-row">
+              <button type="button" class="ru-step-big-btn" onclick="skState.sutFiyatiTL=Math.max(15, (Number(skState.sutFiyatiTL)||38)-2); saveSkProgress(); renderSagmalKoyunUstasiStep();">− 2 ₺</button>
+              <button type="button" class="ru-step-big-btn" onclick="skState.sutFiyatiTL=Math.min(120, (Number(skState.sutFiyatiTL)||38)+2); saveSkProgress(); renderSagmalKoyunUstasiStep();">+ 2 ₺</button>
+            </div>
+          </div>
+
+          <div style="margin-bottom:14px;">
+            <label style="font-size:1rem; font-weight:900; margin-bottom:6px;">Yem fiyatlarını kendin girmek ister misin?</label>
+            <div class="grid-2">
+              <button type="button" class="ru-choice-btn ${skState.fiyatBiliyorMu === "hayir" ? "selected" : ""}" onclick="skState.fiyatBiliyorMu='hayir'; saveSkProgress(); renderSagmalKoyunUstasiStep();">
+                📊 Hayır, Piyasa Ortalamasını Kullan (12.10.2026)
+              </button>
+              <button type="button" class="ru-choice-btn ${skState.fiyatBiliyorMu === "evet" ? "selected" : ""}" onclick="skState.fiyatBiliyorMu='evet'; saveSkProgress(); renderSagmalKoyunUstasiStep();">
+                ✏️ Evet, Fiyatları Düzelteceğim
+              </button>
+            </div>
+            ${skState.fiyatBiliyorMu === "evet" ? `
+              <div style="margin-top:10px;">
+                ${allIds.map(fid => {
+                  const lib = getFeedById(fid) || DEFAULT_FEEDS.find(x => x.id === fid);
+                  const nm = lib ? lib.name : fid;
+                  const pr = typeof skState.ozelFiyatlar[fid] === "number" ? skState.ozelFiyatlar[fid] : (lib ? lib.price : 10);
+                  return `
+                    <div class="ru-price-row">
+                      <strong>${nm}</strong>
+                      <div style="display:flex; align-items:center; gap:8px;">
+                        <button type="button" class="step-btn" onclick="adjustSkFeedPrice('${fid}', -0.5)">−</button>
+                        <strong id="sk-price-val-${fid}" style="min-width:80px; text-align:center;">${pr.toFixed(2)} ₺/kg</strong>
+                        <button type="button" class="step-btn" onclick="adjustSkFeedPrice('${fid}', 0.5)">+</button>
+                      </div>
+                    </div>
+                  `;
+                }).join("")}
+              </div>
+            ` : ""}
+          </div>
+
+          <div style="margin-bottom:16px;">
+            <label style="font-size:1rem; font-weight:900; margin-bottom:6px;">Koyunların önünde sürekli yem var mı (Serbest yemleme / Öğün sayısı)?</label>
+            <div class="grid-3">
+              <button type="button" class="ru-choice-btn ${skState.serbestYemleme === "evet" ? "selected" : ""}" onclick="skState.serbestYemleme='evet'; skState.ogunSayisi=3; saveSkProgress(); renderSagmalKoyunUstasiStep();">
+                ✅ Evet, Serbest (Yemlik Hep Dolu)
+              </button>
+              <button type="button" class="ru-choice-btn ${skState.serbestYemleme === "hayir" && skState.ogunSayisi === 3 ? "selected" : ""}" onclick="skState.serbestYemleme='hayir'; skState.ogunSayisi=3; saveSkProgress(); renderSagmalKoyunUstasiStep();">
+                🕒 Günde 3 Öğün (Sabah-Öğle-Akşam)
+              </button>
+              <button type="button" class="ru-choice-btn ${skState.serbestYemleme === "hayir" && skState.ogunSayisi === 2 ? "selected" : ""}" onclick="skState.serbestYemleme='hayir'; skState.ogunSayisi=2; saveSkProgress(); renderSagmalKoyunUstasiStep();">
+                🕑 Günde 2 Öğün (Sabah-Akşam)
+              </button>
+            </div>
+          </div>
+
+          <div class="ru-nav-row">
+            <button type="button" class="ru-nav-btn ru-nav-btn-secondary" onclick="prevSkScreen()">← Geri Dön</button>
+            <button type="button" class="ru-nav-btn ru-nav-btn-primary" onclick="nextSkScreen()">Devam Et →</button>
+          </div>
+        `;
+        return;
+      }
+
+      if (scr === "saglik_ortam_sagim") {
+        const saglikOpts = [
+          { id: "sut_yagi_dusuk", l: "📉 Süt yağı / peynir randımanı düştü" },
+          { id: "mastitis", l: "🔴 Memede şişlik / pıhtılı süt (Mastitis)" },
+          { id: "sut_atesi", l: "🚨 Doğum sonrası yattı (Süt ateşi)" },
+          { id: "gebelik_toksemisi", l: "⚠️ Yem yemiyor / durgun (Gebelik toksemisi)" },
+          { id: "topallik", l: "🦶 Topallık / tırnak sorunu" },
+          { id: "ishal", l: "💧 İshal" }
+        ];
+        vp.innerHTML = `
+          <h3 style="font-size:1.22rem; font-weight:900; margin-bottom:10px;">Soru 9: Sağlık, Mera, Sağım ve Enterotoksemi Aşısı</h3>
+
+          <div style="margin-bottom:14px;">
+            <label style="font-size:1rem; font-weight:900; margin-bottom:6px;">Sürüde şu an aşağıdaki sorunlardan biri var mı?</label>
+            <button type="button" class="ru-choice-btn ${(skState.saglikSorunlari || []).length === 0 ? "selected" : ""}" style="width:100%; margin-bottom:8px;" onclick="skState.saglikSorunlari=[]; saveSkProgress(); renderSagmalKoyunUstasiStep();">
+              ✅ Hiçbiri yok, çok şükür sağlıklılar
+            </button>
+            <div class="grid-2">
+              ${saglikOpts.map(o => {
+                const sel = (skState.saglikSorunlari || []).includes(o.id);
+                return `
+                  <button type="button" class="ru-choice-btn ${sel ? "selected" : ""}" onclick="toggleSkHealth('${o.id}')">
+                    ${o.l}
+                  </button>
+                `;
+              }).join("")}
+            </div>
+          </div>
+
+          <div style="margin-bottom:14px;">
+            <label style="font-size:1rem; font-weight:900; margin-bottom:6px;">Koyunlar meraya (otlatmaya) çıkıyor mu?</label>
+            <div class="grid-3">
+              ${[
+                { v: "hayir", l: "🏠 Hayır, Sadece Ağılda" },
+                { v: "yarim_mera", l: "🌿 Yarım Gün Merada (+%7 Enerji)" },
+                { v: "tam_mera", l: "⛰️ Tam Gün Merada (+%15 Enerji)" }
+              ].map(x => `
+                <button type="button" class="ru-choice-btn ${skState.meraDurumu === x.v ? "selected" : ""}" onclick="skState.meraDurumu='${x.v}'; saveSkProgress(); renderSagmalKoyunUstasiStep();">
+                  ${x.l}
+                </button>
+              `).join("")}
+            </div>
+          </div>
+
+          <div style="margin-bottom:14px;">
+            <label style="font-size:1rem; font-weight:900; margin-bottom:6px;">Hava durumu ve barınma nasıl?</label>
+            <div class="grid-3">
+              ${[
+                { v: "normal", l: "🌤️ Normal / Kapalı Ağıl" },
+                { v: "soguk", l: "❄️ Soğuk / Kış (+%12 Isınma Enerjisi)" },
+                { v: "sicak", l: "☀️ Çok Sıcak (25°C Üstü)" }
+              ].map(x => `
+                <button type="button" class="ru-choice-btn ${skState.havaDurumu === x.v ? "selected" : ""}" onclick="skState.havaDurumu='${x.v}'; saveSkProgress(); renderSagmalKoyunUstasiStep();">
+                  ${x.l}
+                </button>
+              `).join("")}
+            </div>
+          </div>
+
+          <div style="margin-bottom:16px;">
+            <label style="font-size:1rem; font-weight:900; margin-bottom:6px;">Enterotoksemi (Çelerme / Pulpy Kidney) aşısı yapıldı mı?</label>
+            <div class="grid-3">
+              ${[
+                { v: "evet", l: "💉 Evet Yapıldı" },
+                { v: "hayir", l: "⚠️ Hayır Yapılmadı" },
+                { v: "bilmiyorum", l: "❓ Bilmiyorum" }
+              ].map(x => `
+                <button type="button" class="ru-choice-btn ${skState.asiDurumu === x.v ? "selected" : ""}" onclick="skState.asiDurumu='${x.v}'; saveSkProgress(); renderSagmalKoyunUstasiStep();">
+                  ${x.l}
+                </button>
+              `).join("")}
+            </div>
+          </div>
+
+          <div class="ru-nav-row">
+            <button type="button" class="ru-nav-btn ru-nav-btn-secondary" onclick="prevSkScreen()">← Geri Dön</button>
+            <button type="button" class="ru-nav-btn ru-nav-btn-primary" onclick="goSkScreen('result')">🎉 Süt Koyunu Tarifimi Hazırla</button>
+          </div>
+        `;
+        return;
+      }
+
+      if (scr === "result") {
+        const res = skState.lastSonuc || solveSagmalKoyunUstasiRation();
+        skState.lastSonuc = res;
+
+        const toxemiaRisk = (res.donem === "yeni_dogum" && skState.istahliMi === "hayir") || skState.saglikSorunlari.includes("gebelik_toksemisi") || (res.isCloseUpDry && res.vks >= 4.0)
+          ? { cls: "risk-kirmizi", badge: "🔴 YÜKSEK RİSK", msg: "Acil enerji ve propilen glikol önlemi! Öğünleri aksatma." }
+          : (res.isCloseUpDry || res.donem === "yeni_dogum" || res.fetusSayisi >= 2
+            ? { cls: "risk-sari", badge: "🟡 DİKKATLİ İZLE", msg: "Koruyucu Magnezyum Oksit ve yüksek enerji eklendi." }
+            : { cls: "risk-yesil", badge: "🟢 DÜŞÜK RİSK", msg: "Enerji ve VKS dengeli." });
+
+        const milkFeverRisk = (res.donem === "yeni_dogum" && skState.ayagaKalkabiliyorMu === "hayir") || skState.saglikSorunlari.includes("sut_atesi")
+          ? { cls: "risk-kirmizi", badge: "🔴 ACİL MÜDAHALE", msg: "Hemen veteriner çağır, damar içi kalsiyum gerekir!" }
+          : (res.isCloseUpDry || skState.sutAtesiGecmisi === "evet"
+            ? { cls: "risk-sari", badge: "🟡 ÖNLEYİCİ KORUMA", msg: "Kuru dönemde kalsiyum kısıtlandı, MgO eklendi." }
+            : { cls: "risk-yesil", badge: "🟢 DENGELİ", msg: `Ca:P oranı (${res.caPRatio}:1) ve Mg (%${res.mgPctDm}) ideal.` });
+
+        const copperRisk = res.cuMgKgDm <= 15.0
+          ? { cls: "risk-yesil", badge: "🟢 GÜVENLİ", msg: `Bakır: ${res.cuMgKgDm} mg/kg KM (≤ 15 mg/kg sınırında).` }
+          : { cls: "risk-kirmizi", badge: "🔴 TEHLİKELİ", msg: `Bakır (${res.cuMgKgDm} mg/kg) yüksek!` };
+
+        const fatRisk = skState.saglikSorunlari.includes("sut_yagi_dusuk")
+          ? { cls: "risk-sari", badge: "🟡 TAMPON AKTİF", msg: "Karbonat + Magnezyum Oksit ve %"+res.kabaPctDm+" kaba yemle korundu." }
+          : { cls: "risk-yesil", badge: "🟢 GÜVENDE", msg: `Kaba yem %${res.kabaPctDm}, NDF %${res.ndfPctDm} — peynir randımanı yüksek.` };
+
+        const mastitisRisk = skState.saglikSorunlari.includes("mastitis")
+          ? { cls: "risk-kirmizi", badge: "🔴 MASTİTİS UYARISI", msg: "Hasta koyunu en son sağ, sağım başlıklarını dezenfekte et!" }
+          : { cls: "risk-yesil", badge: "🟢 KORUNUYOR", msg: "E vitamini + Selenyumlu Bakırsız Koyun Premiksi aktif." };
+
+        vp.innerHTML = `
+          <div class="ru-result-banner">
+            <div style="font-size:1.35rem; font-weight:900;">🐑🥛 SAĞMAL KOYUN USTASI — GÜNLÜK YEM TARİFİ HAZIR!</div>
+            <div style="font-size:0.95rem; font-weight:800; opacity:0.95; margin-top:4px;">
+              ${res.irkLabel} (${res.canliAgirlikKg} kg) • ${res.stageLabel} • Sürü: <strong>${res.suruSayisi} Sağmal Koyun</strong>
+            </div>
+          </div>
+
+          <!-- EN ÜSTTE 5 KRİTİK RİSK KARTI (ŞARTNAME BÖLÜM 5.4) -->
+          <div style="margin-bottom:16px;">
+            <div style="font-size:1.05rem; font-weight:900; margin-bottom:8px;">🛡️ 5 Kritik Koyun Sağlığı & Verim Kontrolü:</div>
+            <div class="su-risk-grid" style="grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));">
+              <div class="su-risk-card ${toxemiaRisk.cls}">
+                <div style="font-weight:900; font-size:0.92rem;">1. Gebelik Toksemisi</div>
+                <div style="font-weight:900; font-size:1.02rem; margin:4px 0;">${toxemiaRisk.badge}</div>
+                <div style="font-size:0.8rem; font-weight:700;">${toxemiaRisk.msg}</div>
+              </div>
+              <div class="su-risk-card ${milkFeverRisk.cls}">
+                <div style="font-weight:900; font-size:0.92rem;">2. Süt Ateşi (Kalsiyum)</div>
+                <div style="font-weight:900; font-size:1.02rem; margin:4px 0;">${milkFeverRisk.badge}</div>
+                <div style="font-size:0.8rem; font-weight:700;">${milkFeverRisk.msg}</div>
+              </div>
+              <div class="su-risk-card ${copperRisk.cls}">
+                <div style="font-weight:900; font-size:0.92rem;">3. Bakır (Cu) Güvenliği</div>
+                <div style="font-weight:900; font-size:1.02rem; margin:4px 0;">${copperRisk.badge}</div>
+                <div style="font-size:0.8rem; font-weight:700;">${copperRisk.msg}</div>
+              </div>
+              <div class="su-risk-card ${fatRisk.cls}">
+                <div style="font-weight:900; font-size:0.92rem;">4. Süt Yağı & Peynir</div>
+                <div style="font-weight:900; font-size:1.02rem; margin:4px 0;">${fatRisk.badge}</div>
+                <div style="font-size:0.8rem; font-weight:700;">${fatRisk.msg}</div>
+              </div>
+              <div class="su-risk-card ${mastitisRisk.cls}">
+                <div style="font-weight:900; font-size:0.92rem;">5. Meme Sağlığı (Mastitis)</div>
+                <div style="font-weight:900; font-size:1.02rem; margin:4px 0;">${mastitisRisk.badge}</div>
+                <div style="font-size:0.8rem; font-weight:700;">${mastitisRisk.msg}</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- GÜNLÜK YEM TABLOSU (1 KOYUN VE SÜRÜ TOPLAMI) -->
+          <div style="margin-bottom:16px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:8px;">
+              <h4 style="font-size:1.12rem; font-weight:900; margin:0;">📋 Günlük Yem Tablosu (1 Koyun ve ${res.suruSayisi} Koyunluk Sürü)</h4>
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span style="font-size:0.85rem; font-weight:800;">Sürü Sayısı:</span>
+                <button type="button" class="step-btn" onclick="skState.suruSayisi=Math.max(1, skState.suruSayisi-10); skState.lastSonuc=solveSagmalKoyunUstasiRation(); renderSagmalKoyunUstasiStep();">−10</button>
+                <strong>${res.suruSayisi} Baş</strong>
+                <button type="button" class="step-btn" onclick="skState.suruSayisi=Math.min(1000, skState.suruSayisi+10); skState.lastSonuc=solveSagmalKoyunUstasiRation(); renderSagmalKoyunUstasiStep();">+10</button>
+              </div>
+            </div>
+
+            <div class="table-responsive">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Yem Adı</th>
+                    <th>1 Koyun (Günlük)</th>
+                    <th>1 Öğün (${res.ogunSayisi} Öğün)</th>
+                    <th>${res.suruSayisi} Koyun Toplamı</th>
+                    <th>Pratik Ölçü</th>
+                    <th>Tutar (1 Baş)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${res.kalemler.map(k => `
+                    <tr>
+                      <td>${k.emoji} <strong>${k.ad}</strong></td>
+                      <td><strong>${k.miktarG >= 100 ? k.miktarKg.toFixed(2).replace(".", ",") + " kg" : k.miktarG + " gram"}</strong> <small>(${k.miktarG} g)</small></td>
+                      <td>${(k.miktarG / res.ogunSayisi) >= 100 ? k.ogunKg.toFixed(2).replace(".", ",") + " kg" : Math.round(k.miktarG / res.ogunSayisi) + " g"}</td>
+                      <td><strong>${k.suruMiktarKg.toFixed(1).replace(".", ",")} kg</strong></td>
+                      <td><small>${k.pratikOlcu}</small></td>
+                      <td>${k.tutarTL.toFixed(2).replace(".", ",")} ₺</td>
+                    </tr>
+                  `).join("")}
+                  <tr>
+                    <td><strong>TOPLAM GÜNLÜK YEM</strong></td>
+                    <td><strong>${res.toplamYasKg.toFixed(2).replace(".", ",")} kg</strong> <small>(${res.dmiKg} kg KM)</small></td>
+                    <td><strong>${(res.toplamYasKg / res.ogunSayisi).toFixed(2).replace(".", ",")} kg/öğün</strong></td>
+                    <td><strong>${(res.toplamYasKg * res.suruSayisi).toFixed(1).replace(".", ",")} kg/gün</strong></td>
+                    <td>Günde 8–10 L temiz su</td>
+                    <td><strong>${res.ekonomi.gunlukTekTL.toFixed(2).replace(".", ",")} ₺/gün</strong></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- EKONOMİK ÖZET VE PEYNİR RANDIMANI KUTUSU (BÖLÜM 5.3) -->
+          <div style="background:var(--surface-alt); border:3px solid var(--border); border-radius:12px; padding:14px; margin-bottom:16px;">
+            <div style="font-size:1.08rem; font-weight:900; margin-bottom:10px;">💰 Süt Geliri, Yem Maliyeti ve 🧀 Koyun Peyniri Randımanı</div>
+            <div class="grid-4" style="margin-bottom:10px;">
+              <div class="stat-card">
+                <div class="stat-val">${res.ekonomi.gunlukTekTL.toFixed(2)} ₺</div>
+                <div class="stat-label">1 Koyun Günlük Yem (${res.suruSayisi} Baş: ${res.ekonomi.gunlukSuruTL.toLocaleString("tr-TR")} ₺)</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-val">${res.sutVerimiL > 0 ? res.ekonomi.litreMaliyetiTL.toFixed(2) + " ₺/L" : "Kuru Dönem"}</div>
+                <div class="stat-label">1 Litre Koyun Sütü Yem Maliyeti</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-val">${res.sutVerimiL > 0 ? (res.ekonomi.gunlukNetKarTekTL >= 0 ? "+" : "") + res.ekonomi.gunlukNetKarTekTL.toFixed(2) + " ₺" : "—"}</div>
+                <div class="stat-label">1 Koyun Günlük Net Bıraktığı (${res.suruSayisi} Baş: ${res.ekonomi.gunlukNetKarSuruTL.toLocaleString("tr-TR")} ₺)</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-val">🧀 ${res.sutVerimiL > 0 ? res.cheese.dailyKgFlock + " kg/gün" : "—"}</div>
+                <div class="stat-label">${res.suruSayisi} Koyundan Günlük Peynir (1 Baş: ~${res.cheese.dailyGPerEwe} g)</div>
+              </div>
+            </div>
+            ${res.sutVerimiL > 0 ? `
+              <div style="font-size:0.92rem; font-weight:800;">
+                🧀 <strong>Peynir Hesabı:</strong> Koyun sütün (%${res.sutYagPct} yağ, %${res.sutProteinPct} protein) çok zengin olduğu için <strong>1 litre sütten ~${res.cheese.yieldPerLiterG} gram</strong> peynir çıkar (yaklaşık <strong>${res.cheese.litersPerKg} litre süt = 1 kg koyun peyniri</strong>).
+              </div>
+            ` : ""}
+          </div>
+
+          <!-- BESİN DENGESİ KARNESİ (TRAFİK IŞIĞI BARLARI) -->
+          <div style="margin-bottom:16px;">
+            <div style="font-size:1.05rem; font-weight:900; margin-bottom:8px;">📊 Bilimsel Besin Dengesi Karnesi (NRC 2007 & INRA 2018):</div>
+            <div class="ru-traffic-row">
+              <span>🟢</span>
+              <div style="flex:1;">
+                <strong>Süt & Yaşama Enerjisi (ME):</strong> ${res.suppliedMe} / ${res.requiredMe} Mcal ME (%${res.mePct} Karşılama)
+              </div>
+            </div>
+            <div class="ru-traffic-row">
+              <span>🟢</span>
+              <div style="flex:1;">
+                <strong>Ham Protein (HP):</strong> %${res.hpPctDm} KM (Hedef: %${res.targetHpPct} KM — %${res.hpPctAdequacy} Uyum)
+              </div>
+            </div>
+            <div class="ru-traffic-row">
+              <span>🟢</span>
+              <div style="flex:1;">
+                <strong>Geviş Lifi (NDF) & Kaba Yem:</strong> %${res.ndfPctDm} NDF (İdeal: %30–42) • Kaba Yem: %${res.kabaPctDm} KM
+              </div>
+            </div>
+            <div class="ru-traffic-row">
+              <span>🟢</span>
+              <div style="flex:1;">
+                <strong>Kalsiyum / Fosfor ve Magnezyum:</strong> Ca:P = ${res.caPRatio}:1 • Magnezyum = %${res.mgPctDm} KM (≥ %0,25)
+              </div>
+            </div>
+            <div class="ru-traffic-row">
+              <span>🟢</span>
+              <div style="flex:1;">
+                <strong>Bakır (Cu) & Molibden (Mo) Güvenliği:</strong> Bakır = ${res.cuMgKgDm} mg/kg KM (Sınır: ≤ 15 mg/kg) • Mo = ${res.moMgKgDm} mg/kg KM
+              </div>
+            </div>
+          </div>
+
+          <!-- KADEMELİ GEÇİŞ TAKVİMİ (7-10 GÜN) -->
+          <div style="background:var(--surface-alt); border:2.5px solid var(--border); border-radius:12px; padding:12px; margin-bottom:16px;">
+            <div style="font-size:1rem; font-weight:900; margin-bottom:6px;">📅 7–10 Günlük Kademeli Yem Geçiş Takvimi (İşkembe Ekşimesini ve Çelermeyi Önler):</div>
+            <div style="font-size:0.9rem; font-weight:700; line-height:1.5;">
+              • <strong>1–2. Gün:</strong> %75 Eski Yem + %25 Yeni Tarif<br>
+              • <strong>3–5. Gün:</strong> %50 Eski Yem + %50 Yeni Tarif<br>
+              • <strong>6–7. Gün:</strong> %25 Eski Yem + %75 Yeni Tarif<br>
+              • <strong>8. Günden İtibaren:</strong> %100 Yeni Sağmal Koyun Tarifi
+            </div>
+          </div>
+
+          <!-- AKSİYON BUTONLARI (YAZDIR, WHATSAPP, KAYDET, YENİDEN BAŞLA) -->
+          <div class="grid-2" style="margin-bottom:10px;">
+            <button type="button" class="ru-nav-btn ru-nav-btn-primary" onclick="printSagmalKoyunPoster()">
+              🖨️ A4 Ağıl Duvar Posteri Yazdır
+            </button>
+            <button type="button" class="ru-nav-btn ru-nav-btn-secondary" onclick="shareSagmalKoyunWhatsApp()">
+              📲 WhatsApp ile Paylaş
+            </button>
+          </div>
+          <div class="grid-2">
+            <button type="button" class="ru-nav-btn ru-nav-btn-secondary" onclick="saveSagmalKoyunToStore()">
+              💾 Bu Rasyonu Deftere Kaydet
+            </button>
+            <button type="button" class="ru-nav-btn ru-nav-btn-secondary" onclick="goSkScreen('donem')">
+              ✏️ Cevapları Değiştir / Yeniden Hesapla
+            </button>
+          </div>
+        `;
+        return;
+      }
+    }
+
+    function toggleSkFeed(cat, feedId) {
+      if (feedId === "sigir_sut_yemi") {
+        skState.cattleBlockedWarning = "⚠️ Sığır süt yemi KULLANMA! Sığır süt yemlerinde yüksek bakır vardır, koyunu zehirler. Otomatik olarak güvenli 'Fabrika Koyun Süt Yemi (Bakırsız)' seçildi.";
+        if (!skState.secilenKesif.includes("koyun_sut_yemi")) {
+          skState.secilenKesif.push("koyun_sut_yemi");
+        }
+        saveSkProgress();
+        renderSagmalKoyunUstasiStep();
+        return;
+      }
+      if (feedId === "sigir_premiksi") {
+        skState.cattleBlockedWarning = "⚠️ Sığır mineral premiksi KULLANMA! Koyunlar bakıra sığırdan 10 kat daha hassastır; sığır premiksi koyunu 2 haftada öldürür. Otomatik olarak 'Koyun Premiksi (Bakırsız)' seçildi.";
+        if (!skState.secilenKatki.includes("koyun_premiksi")) {
+          skState.secilenKatki.push("koyun_premiksi");
+        }
+        saveSkProgress();
+        renderSagmalKoyunUstasiStep();
+        return;
+      }
+      skState.cattleBlockedWarning = "";
+      const key = cat === "kaba" ? "secilenKaba" : (cat === "kesif" ? "secilenKesif" : "secilenKatki");
+      const arr = skState[key] || [];
+      const idx = arr.indexOf(feedId);
+      if (idx >= 0) arr.splice(idx, 1);
+      else arr.push(feedId);
+      skState[key] = arr;
+      saveSkProgress();
+      renderSagmalKoyunUstasiStep();
+    }
+
+    function adjustSkFeedPrice(feedId, delta) {
+      const lib = getFeedById(feedId) || DEFAULT_FEEDS.find(f => f.id === feedId);
+      const curr = typeof skState.ozelFiyatlar[feedId] === "number" ? skState.ozelFiyatlar[feedId] : (lib ? lib.price : 10);
+      const next = Math.max(0.5, Number((curr + delta).toFixed(2)));
+      skState.ozelFiyatlar[feedId] = next;
+      const el = document.getElementById("sk-price-val-" + feedId);
+      if (el) el.textContent = `${next.toFixed(2)} ₺/kg`;
+      saveSkProgress();
+    }
+
+    function toggleSkHealth(issueId) {
+      const arr = skState.saglikSorunlari || [];
+      const idx = arr.indexOf(issueId);
+      if (idx >= 0) arr.splice(idx, 1);
+      else arr.push(issueId);
+      skState.saglikSorunlari = arr;
+      saveSkProgress();
+      renderSagmalKoyunUstasiStep();
+    }
+
+    function renderSkPrintPoster(res) {
+      const poster = document.getElementById("ru-print-poster");
+      if (!poster || !res) return;
+      const today = new Date().toLocaleDateString("tr-TR");
+      poster.innerHTML = `
+        <div style="border:3px solid #000; padding:14px; font-family:sans-serif; color:#000; background:#fff;">
+          <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:3px solid #000; padding-bottom:8px; margin-bottom:10px;">
+            <div>
+              <h1 style="font-size:17.5pt; font-weight:900; margin:0;">🐑🥛 SAĞMAL KOYUN USTASI — AĞIL DUVAR POSTERİ</h1>
+              <div style="font-size:11pt; font-weight:700;">Süt Koyunu Günlük Yem Tarifi (NRC 2007 & INRA 2018 Standartlarında)</div>
+            </div>
+            <div style="text-align:right; font-size:10.5pt; font-weight:800;">
+              Tarih: ${today}<br>
+              Irk: ${res.irkLabel} (${res.canliAgirlikKg} kg) | Sürü: ${res.suruSayisi} Baş<br>
+              Dönem: ${res.stageLabel} ${res.sutVerimiL > 0 ? `| Süt: ${res.sutVerimiL} L/gün` : ""}
+            </div>
+          </div>
+
+          <h2 style="font-size:13.5pt; font-weight:900; margin:6px 0;">1. GÜNLÜK YEM TABLOSU (1 Koyun ve ${res.suruSayisi} Baş Sürü İçin)</h2>
+          <table style="width:100%; border-collapse:collapse; font-size:12pt; margin-bottom:10px;">
+            <thead>
+              <tr>
+                <th style="border:2px solid #000; padding:6px; background:#eee; color:#000;">Yem Adı</th>
+                <th style="border:2px solid #000; padding:6px; background:#eee; color:#000;">1 Koyun Günlük</th>
+                <th style="border:2px solid #000; padding:6px; background:#eee; color:#000;">1 Öğün (Günde ${res.ogunSayisi} Öğün)</th>
+                <th style="border:2px solid #000; padding:6px; background:#eee; color:#000;">${res.suruSayisi} Koyun Toplamı</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${res.kalemler.map(k => `
+                <tr>
+                  <td style="border:2px solid #000; padding:6px; font-weight:800;">${k.ad}</td>
+                  <td style="border:2px solid #000; padding:6px; font-weight:900;">${k.miktarG >= 100 ? k.miktarKg.toFixed(2).replace(".", ",") + " kg" : k.miktarG + " g"}</td>
+                  <td style="border:2px solid #000; padding:6px;">${(k.miktarG / res.ogunSayisi) >= 100 ? k.ogunKg.toFixed(2).replace(".", ",") + " kg" : Math.round(k.miktarG / res.ogunSayisi) + " g"}</td>
+                  <td style="border:2px solid #000; padding:6px; font-weight:800;">${k.suruMiktarKg.toFixed(1).replace(".", ",")} kg</td>
+                </tr>
+              `).join("")}
+              <tr>
+                <td style="border:2px solid #000; padding:6px; font-weight:900;">TOPLAM YAŞ YEM</td>
+                <td style="border:2px solid #000; padding:6px; font-weight:900;">${res.toplamYasKg.toFixed(2).replace(".", ",")} kg (${res.dmiKg} kg KM)</td>
+                <td style="border:2px solid #000; padding:6px; font-weight:900;">${(res.toplamYasKg / res.ogunSayisi).toFixed(2).replace(".", ",")} kg/öğün</td>
+                <td style="border:2px solid #000; padding:6px; font-weight:900;">${(res.toplamYasKg * res.suruSayisi).toFixed(1).replace(".", ",")} kg/gün</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div style="border:2px solid #000; padding:8px; margin-bottom:10px; font-size:10.5pt; font-weight:800;">
+            • Enerji: ${res.suppliedMe} Mcal ME/gün | Protein: %${res.hpPctDm} HP | Lif: %${res.ndfPctDm} NDF | Ca/P: ${res.caPRatio}:1 | Mg: %${res.mgPctDm} | Bakır: ${res.cuMgKgDm} mg/kg KM (Güvenli ≤15)<br>
+            • 1 Koyun Yem Maliyeti: ${res.ekonomi.gunlukTekTL.toFixed(2)} ₺/gün | ${res.suruSayisi} Baş Sürü Yem: ${res.ekonomi.gunlukSuruTL.toLocaleString("tr-TR")} ₺/gün
+            ${res.sutVerimiL > 0 ? `| 🧀 Günlük Peynir Karşılığı: ~${res.cheese.dailyGPerEwe} g/baş (${res.suruSayisi} Baş: ~${res.cheese.dailyKgFlock} kg peynir/gün)` : ""}
+          </div>
+
+          <div style="border:2px solid #000; padding:10px; font-size:11pt; line-height:1.42;">
+            <strong style="font-size:12pt; display:block; margin-bottom:4px;">⚠️ SAĞMAL KOYUN AĞILI İÇİN 8 ALTIN HATIRLATMA:</strong>
+            1. Su her zaman önünde olsun, sağmal koyun günde 8–10 litre içer.<br>
+            2. Sığır premiksi ve sığır süt yemi KULLANMA — koyunu zehirler.<br>
+            3. Yemi 7–10 günde alıştır, ani değiştirme.<br>
+            4. Son 6 hafta gebelikte enerjiyi artır — gebelik toksemisi önler.<br>
+            5. Doğum sonrası ilk 2 hafta koyunu her gün gözlemle (iştah, ayağa kalkma).<br>
+            6. Sağım hijyenine dikkat et — mastitis süt verimini yarıya düşürür.<br>
+            7. Süt yağı düşerse kaba yemi (yonca) artır, tahılı azalt.<br>
+            8. Enterotoksemi aşısını doğuma 4 hafta kala yaptır — hem koyunu hem kuzuyu korur.
+          </div>
+        </div>
+      `;
+    }
+
+    function printSagmalKoyunPoster() {
+      const res = skState.lastSonuc || solveSagmalKoyunUstasiRation();
+      renderSkPrintPoster(res);
+      window.print();
+    }
+
+    function shareSagmalKoyunWhatsApp() {
+      const res = skState.lastSonuc || solveSagmalKoyunUstasiRation();
+      const lines = [
+        `🐑🥛 *SAĞMAL KOYUN USTASI — GÜNLÜK YEM TARİFİ*`,
+        `• Irk: ${res.irkLabel} (${res.canliAgirlikKg} kg) | Dönem: ${res.stageLabel}`,
+        `• Sürü: ${res.suruSayisi} Baş ${res.sutVerimiL > 0 ? `| Süt: ${res.sutVerimiL} L/gün (~${res.cheese.dailyGPerEwe} g peynir/baş)` : ""}`,
+        ``,
+        `📋 *1 Koyun Günlük Yem Listesi (${res.ogunSayisi} Öğün):*`,
+        ...res.kalemler.map(k => `- ${k.emoji} *${k.ad}:* ${k.miktarG >= 100 ? k.miktarKg.toFixed(2).replace(".", ",") + " kg" : k.miktarG + " g"} (${res.suruSayisi} Baş: ${k.suruMiktarKg.toFixed(1).replace(".", ",")} kg)`),
+        `*TOPLAM:* ${res.toplamYasKg.toFixed(2).replace(".", ",")} kg/gün (Kuru Madde: ${res.dmiKg} kg)`,
+        ``,
+        `🛡️ *Güvenlik:* Bakır ${res.cuMgKgDm} mg/kg KM (≤15 Güvenli) | Ca/P: ${res.caPRatio}:1 | Mg: %${res.mgPctDm}`,
+        `💰 *Ekonomi:* Günlük yem 1 baş ${res.ekonomi.gunlukTekTL.toFixed(2)} TL (${res.suruSayisi} baş: ${res.ekonomi.gunlukSuruTL.toLocaleString("tr-TR")} TL)`
+      ];
+      const url = `https://wa.me/?text=${encodeURIComponent(lines.join("\n"))}`;
+      window.open(url, "_blank", "noopener,noreferrer");
+    }
+
+    function saveSagmalKoyunToStore() {
+      const res = skState.lastSonuc || solveSagmalKoyunUstasiRation();
+      const defaultName = `Sağmal Koyun (${res.irkLabel} - ${res.sutVerimiL > 0 ? res.sutVerimiL + " L Süt" : "Kuru Dönem"} - ${res.suruSayisi} Baş)`;
+      const name = prompt("Kaydedilecek sağmal koyun yem tarifinin adını girin:", defaultName);
+      if (!name) return;
+
+      const record = {
+        id: Date.now(),
+        name: name.trim(),
+        date: new Date().toLocaleDateString("tr-TR"),
+        species: "dairy_sheep",
+        items: res.kalemler.map(k => ({ feedId: k.id, kg: k.miktarKg })),
+        dailyCost: `${res.ekonomi.gunlukTekTL.toFixed(2)} ₺`,
+        totalDm: `${res.dmiKg.toFixed(2)} kg`
+      };
+
+      savedRations.unshift(record);
+      localStorage.setItem("rasyon_saved_v1", JSON.stringify(savedRations));
+      renderSavedRationsList();
+      alert("✅ Sağmal koyun yem tarifin '5. DEFTER (Kayıtlılar)' bölümüne kaydedildi!");
+    }
+
     function populateAddFeedSelect() {
       const sel = document.getElementById("add-feed-select");
       if (!sel) return;
@@ -9181,6 +10858,9 @@
       } else if (rec.species === "sheep") {
         kuState.screenId = "result";
         saveKuProgress();
+      } else if (rec.species === "dairy_sheep") {
+        skState.screenId = "result";
+        saveSkProgress();
       }
       selectSpecies(rec.species);
       renderActiveRationList();
@@ -9322,7 +11002,7 @@
 
     function handleHashRouting() {
       const hash = (window.location.hash || "").replace("#", "").trim();
-      if (hash === "dairy" || hash === "beef" || hash === "sheep") {
+      if (hash === "dairy" || hash === "beef" || hash === "sheep" || hash === "dairy_sheep") {
         switchTab("formulator");
         selectSpecies(hash);
       } else if (hash && document.getElementById("tab-" + hash)) {
@@ -9342,7 +11022,7 @@
 
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {
-        navigator.serviceWorker.register("./sw.js?v=7").then((reg) => {
+        navigator.serviceWorker.register("./sw.js?v=8").then((reg) => {
           reg.update();
         }).catch(() => {});
       });
