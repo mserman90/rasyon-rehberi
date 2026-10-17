@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
   <meta name="theme-color" content="#008069">
   <meta name="color-scheme" content="light dark">
-  <meta name="description" content="Rasyon Asistanı - Süt sığırları, besi danaları ve koyunlar için uluslararası NASEM/NRC standartlarında çalışan etkileşimli diyalog tabanlı rasyon hazırlama, en ucuz yem dengeleme ve TMR yem karma vagonu asistanı.">
-  <meta name="keywords" content="rasyon asistanı, rasyon hazırlama robotu, süt ineği rasyonu, besi danası rasyonu, koyun rasyonu, TMR vagon kantar hesabı, NASEM 2021 rasyon, NRC yem dengeleme, en ucuz rasyon, asidoz korumalı rasyon">
-  <meta name="author" content="Dr. Mert Serman / Rasyon Asistanı">
+  <meta name="description" content="Rasyon Rehberi - Süt sığırları, besi danaları ve koyunlar için uluslararası NASEM/NRC standartlarında çalışan etkileşimli diyalog tabanlı rasyon hazırlama, en ucuz yem dengeleme ve TMR yem karma vagonu asistanı.">
+  <meta name="keywords" content="Rasyon Rehberi, rasyon hazırlama robotu, süt ineği rasyonu, besi danası rasyonu, koyun rasyonu, TMR vagon kantar hesabı, NASEM 2021 rasyon, NRC yem dengeleme, en ucuz rasyon, asidoz korumalı rasyon">
+  <meta name="author" content="Dr. Mert Serman / Rasyon Rehberi">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="canonical" href="https://mserman90.github.io/rasyon-rehberi/">
 
@@ -21,25 +21,25 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Rasyon Asistanı">
-  <meta name="application-name" content="Rasyon Asistanı">
+  <meta name="apple-mobile-web-app-title" content="Rasyon Rehberi">
+  <meta name="application-name" content="Rasyon Rehberi">
   <meta name="msapplication-TileColor" content="#008069">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://mserman90.github.io/rasyon-rehberi/">
-  <meta property="og:title" content="Rasyon Asistanı - Akıllı Diyalog Tabanlı Yem & TMR Rasyon Hazırlama">
+  <meta property="og:title" content="Rasyon Rehberi - Akıllı Diyalog Tabanlı Yem & TMR Rasyon Hazırlama">
   <meta property="og:description" content="Uluslararası NASEM/NRC standartlarında süt ineği, besi danası ve koyun için etkileşimli sohbet akışıyla rasyon hazırlama ve TMR vagonu kantar programı.">
   <meta property="og:image" content="https://mserman90.github.io/rasyon-rehberi/og-image.png">
   <meta property="og:locale" content="tr_TR">
-  <meta property="og:site_name" content="Rasyon Asistanı">
+  <meta property="og:site_name" content="Rasyon Rehberi">
 
   <!-- Schema.org JSON-LD -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": "Rasyon Asistanı",
+    "name": "Rasyon Rehberi",
     "alternateName": "Interactive Livestock Ration & TMR Formulator PWA",
     "applicationCategory": "BusinessApplication",
     "operatingSystem": "All",
@@ -49,7 +49,7 @@
   }
   </script>
 
-  <title>Rasyon Asistanı | Akıllı Sohbet Akışıyla Yem & TMR Rasyon Hazırlama</title>
+  <title>Rasyon Rehberi | Akıllı Sohbet Akışıyla Yem & TMR Rasyon Hazırlama</title>
 
   <style>
     /* =========================================================================
@@ -671,24 +671,55 @@
       gap: 8px;
     }
 
-    /* MOBİL VE ALT ÇEKMECE (BOTTOM SHEET) ERGONOMİSİ */
-    @media (max-width: 640px) {
-      .modal-overlay {
-        padding: 0;
-        align-items: flex-end;
-      }
-      .modal-box {
+    /* =========================================================================
+       TAM RESPONSİF TASARIM (MOBİL, TABLET, KATLANABİLİR, GENİŞ EKRAN)
+       ========================================================================= */
+    @media (max-width: 768px) {
+      .app-wrapper {
         max-width: 100%;
-        max-height: 94dvh;
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
+        height: 100vh;
+        height: 100dvh;
+        box-shadow: none;
       }
-      .wa-hdr-btn span {
-        display: none;
+      .wa-header {
+        padding: calc(6px + env(safe-area-inset-top, 0px)) 8px 6px 8px;
+        gap: 6px;
       }
+      .wa-actions {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        max-width: 65%;
+        padding-bottom: 2px;
+      }
+      .wa-actions::-webkit-scrollbar { display: none; }
       .wa-hdr-btn {
+        flex-shrink: 0;
+        white-space: nowrap;
         padding: 0 8px;
+        font-size: 0.78rem;
       }
+      .wa-name { font-size: 0.94rem; }
+      .wa-status { font-size: 0.7rem; }
+      .modal-overlay { padding: 0; align-items: flex-end; }
+      .modal-box { max-width: 100%; max-height: 94dvh; border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-top-left-radius: 20px; border-top-right-radius: 20px; }
+      .msg-row { max-width: 95%; }
+    }
+
+    @media (max-width: 480px) {
+      .wa-avatar { width: 38px; height: 38px; }
+      .wa-name { font-size: 0.88rem; max-width: 90px; }
+      .wa-hdr-btn span { display: inline-block; font-size: 0.74rem; }
+      .wa-choice-btn { padding: 8px 12px; font-size: 0.86rem; }
+      .recipe-card { padding: 12px 10px; }
+      .recipe-title { font-size: 1.05rem; }
+      .chat-input { font-size: 0.88rem; }
+    }
+
+    @media (max-width: 360px) {
+      .wa-hdr-btn:not(.portal-home-btn) span { display: none; }
+      .wa-hdr-btn { padding: 0 6px; }
+      .wa-name { font-size: 0.82rem; }
     }
   </style>
 </head>
@@ -703,13 +734,13 @@
           <svg class="lucide-icon icon-lg" viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
         </div>
         <div class="wa-info">
-          <div class="wa-name">Rasyon Asistanı</div>
+          <div class="wa-name">Rasyon Rehberi</div>
           <div class="wa-status" id="wa-online-status">çevrimiçi (NASEM / NRC Motoru)</div>
         </div>
       </div>
 
       <div class="wa-actions">
-        <a href="https://mserman90.github.io/" class="wa-hdr-btn" title="Ana Sayfa (Çiftlik Portalı)" style="background:#ffffff !important; color:#065f46 !important; font-weight:800 !important; text-decoration:none !important;">
+        <a href="https://mserman90.github.io/" class="wa-hdr-btn portal-home-btn" title="Ana Sayfa (Çiftlik Portalı)" style="background:#ffffff !important; color:#065f46 !important; font-weight:800 !important; text-decoration:none !important;">
           <svg class="lucide-icon" viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
           <span>Ana Sayfa</span>
         </a>
@@ -884,7 +915,7 @@
       <div class="modal-hdr">
         <div class="modal-title">
           <svg class="lucide-icon" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-          <span>Rasyon Asistanı Kullanım Kılavuzu</span>
+          <span>Rasyon Rehberi Kullanım Kılavuzu</span>
         </div>
         <button class="modal-close" onclick="closeGuideModal()" aria-label="Kapat">&times;</button>
       </div>
@@ -900,8 +931,12 @@
         • <strong>Nişasta Sınırı:</strong> Toplam rasyonda nişasta %28'i geçmemelidir (Fazlası işkembe asidozu ve tırnak iltihabı yapar).<br>
         • <strong>peNDF (Etkili Lif):</strong> Gevelemeyi sağlayan lif oranı en az %21 olmalıdır.</p>
       </div>
-      <div class="modal-ftr">
+      <div class="modal-ftr" style="display:flex; flex-direction:column; gap:8px;">
         <button class="btn-action-primary" onclick="closeGuideModal()" style="width:100%;">Anladım, Sohbete Dön</button>
+        <a href="https://mserman90.github.io/" style="display:inline-flex; align-items:center; justify-content:center; gap:6px; width:100%; padding:10px; border-radius:8px; border:1px solid #cbd5e1; background:#f8fafc; color:#0f172a; font-weight:700; text-decoration:none; font-size:0.85rem;">
+          <svg class="lucide-icon" viewBox="0 0 24 24" style="width:16px;height:16px;"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Ana Portala Dön (mserman90.github.io)
+        </a>
       </div>
     </div>
   </div>
@@ -1074,7 +1109,7 @@
 
       showTypingIndicator(() => {
         addIncomingMessage(
-          `Merhaba! Ben <strong>Rasyon Asistanı</strong>.<br><br>
+          `Merhaba! Ben <strong>Rasyon Rehberi</strong>.<br><br>
           Ahırındaki hayvanlar için uluslararası <strong>NASEM 2021 & NRC</strong> standartlarında, en düşük maliyetli ve asidoz korumalı TMR rasyonu adım adım hazırlayalım.<br><br>
           İlk olarak söyle bakalım, <strong>hangi hayvan grubuna rasyon hazırlayacağız?</strong>`,
           [
@@ -1689,7 +1724,7 @@
 
       const itemsList = ration.evaluatedItems.map(item => `• ${item.name}: ${item.freshKg} kg (${item.cost.toFixed(1)} TL)`).join("\n");
 
-      const message = `*Rasyon Asistanı Reçete Raporu*\n` +
+      const message = `*Rasyon Rehberi Reçete Raporu*\n` +
         `🐄 *Grup:* ${state.speciesName}\n` +
         `🎯 *Hedef:* ${state.targetLabel}\n` +
         `🌾 *Günlük Yem İhtiyacı (Hayvan Başı):*\n${itemsList}\n\n` +
@@ -1703,7 +1738,7 @@
 
       if (navigator.share) {
         navigator.share({
-          title: "Rasyon Asistanı Reçetesi",
+          title: "Rasyon Rehberi Reçetesi",
           text: message
         }).catch(() => {
           fallbackDirectShare(message);
