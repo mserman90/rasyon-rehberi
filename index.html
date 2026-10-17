@@ -3623,7 +3623,7 @@
         9: "İshal, topallık veya iştahsızlık varsa önce tedavi gerekir; yüksek enerjili besi yemi hasta hayvanı yorabilir.",
         10: "Açıkta veya soğuk sundurmada kalan hayvanlar vücutlarını ısıtmak için biraz daha fazla enerji harcar.",
         11: "Harika! Verdiğin bilgilere göre yemleri karıştırıyor ve en ekonomik tarifi hesaplıyorum...",
-        12: "İşte hayvanının günlük yem tarifi hazır! İstersen kağıda yazdırıp ahır duvarına asabilir veya WhatsApp'tan paylaşabilirsin."
+        12: "İşte hayvanının günlük yem tarifi hazır! İstersen kağıda yazdırıp ahır duvarına asabilir veya tek tıkla mesajla paylaşabilirsin."
       };
 
       if (guideText) {
@@ -4255,8 +4255,8 @@
             <button type="button" class="ru-nav-btn ru-nav-btn-primary" onclick="printRasyonUstasiPoster()">
               📄 PDF Olarak İndir / Yazdır (A4 Ahır Posteri)
             </button>
-            <button type="button" class="ru-nav-btn ru-nav-btn-secondary" onclick="shareRasyonUstasiWhatsApp()">
-              📱 WhatsApp'ta Paylaş
+            <button type="button" class="ru-nav-btn ru-nav-btn-secondary" onclick="shareRasyonUstasiDirect()">
+              📱 Raporu Paylaş
             </button>
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
               <button type="button" class="ru-nav-btn ru-nav-btn-secondary" onclick="saveRasyonUstasiToStore()">
@@ -4534,7 +4534,7 @@
       window.print();
     }
 
-    function shareRasyonUstasiWhatsApp() {
+    function shareRasyonUstasiDirect() {
       const res = ruState.lastSonuc || solveRasyonUstasiBeef();
       const lines = [
         `🐄 *RASYON USTASI — GÜNLÜK BESİ YEM TARİFİ*`,
@@ -6382,8 +6382,8 @@
             <button type="button" class="ru-nav-btn ru-nav-btn-primary" onclick="printSutUstasiPoster()">
               📄 PDF İndir / Yazdır (A4 Poster)
             </button>
-            <button type="button" class="ru-nav-btn ru-nav-btn-secondary" onclick="shareSutUstasiWhatsApp()">
-              📱 WhatsApp'ta Paylaş
+            <button type="button" class="ru-nav-btn ru-nav-btn-secondary" onclick="shareSutUstasiDirect()">
+              📱 Raporu Paylaş
             </button>
             <button type="button" class="ru-nav-btn ru-nav-btn-secondary" onclick="saveSutUstasiToStore()">
               💾 Tarifi Kaydet
@@ -6756,7 +6756,7 @@
       window.print();
     }
 
-    function shareSutUstasiWhatsApp() {
+    function shareSutUstasiDirect() {
       const res = suState.lastSonuc || solveSutUstasiDairy();
       const lines = [
         `🥛 *SÜT USTASI — GÜNLÜK SAĞMAL YEM TARİFİ*`,
@@ -8407,8 +8407,8 @@
           <button type="button" class="btn btn-primary" onclick="printKuzuUstasiPoster()">
             📄 PDF Olarak İndir / Yazdır (A4 Poster)
           </button>
-          <button type="button" class="btn btn-outline" onclick="shareKuzuUstasiWhatsApp()">
-            📱 WhatsApp'ta Paylaş
+          <button type="button" class="btn btn-outline" onclick="shareKuzuUstasiDirect()">
+            📱 Raporu Paylaş
           </button>
           <button type="button" class="btn btn-outline" onclick="saveKuzuUstasiToStore()">
             💾 Tarifi Deftere Kaydet
@@ -8781,7 +8781,7 @@
       window.print();
     }
 
-    function shareKuzuUstasiWhatsApp() {
+    function shareKuzuUstasiDirect() {
       const res = kuState.lastSonuc || solveKuzuUstasiSheep();
       const fmtKg = (k, val) => (k.kategori === "katki" && val < 0.1) ? val.toFixed(3).replace(".", ",") : val.toFixed(2).replace(".", ",");
       const lines = [
@@ -10240,13 +10240,13 @@
             </div>
           </div>
 
-          <!-- AKSİYON BUTONLARI (YAZDIR, WHATSAPP, KAYDET, YENİDEN BAŞLA) -->
+          <!-- AKSİYON BUTONLARI (YAZDIR, MESAJLA PAYLA�, KAYDET, YENİDEN BAŞLA) -->
           <div class="grid-2" style="margin-bottom:10px;">
             <button type="button" class="ru-nav-btn ru-nav-btn-primary" onclick="printSagmalKoyunPoster()">
               🖨️ A4 Ağıl Duvar Posteri Yazdır
             </button>
-            <button type="button" class="ru-nav-btn ru-nav-btn-secondary" onclick="shareSagmalKoyunWhatsApp()">
-              📲 WhatsApp ile Paylaş
+            <button type="button" class="ru-nav-btn ru-nav-btn-secondary" onclick="shareSagmalKoyunDirect()">
+              📲 Raporu Paylaş
             </button>
           </div>
           <div class="grid-2">
@@ -10385,7 +10385,7 @@
       window.print();
     }
 
-    function shareSagmalKoyunWhatsApp() {
+    function shareSagmalKoyunDirect() {
       const res = skState.lastSonuc || solveSagmalKoyunUstasiRation();
       const lines = [
         `🐑🥛 *SAĞMAL KOYUN USTASI — GÜNLÜK YEM TARİFİ*`,
